@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
 
@@ -23,9 +23,15 @@ useEffect(() => {
 setQuestion(data.question);
 }, []);
 
+// button for getting the question
+const getQuestion = () => {
+setQuestion(data.question);
+};
+
   return (
     <View style={styles.container}>
       <Text>Triviapeli</Text>
+      <Button title="Get question" onPress={getQuestion} />
       <Text>{question}</Text>
       <StatusBar style="auto" />
     </View>
