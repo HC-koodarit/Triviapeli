@@ -2,9 +2,19 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+
+fetch('https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple')
+.then((response) => response.json())
+.then((json) => {
+console.log(json);
+})
+.catch((error) => {
+console.error(error);
+});
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Triviapeli</Text>
       <StatusBar style="auto" />
     </View>
   );
