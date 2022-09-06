@@ -10,6 +10,8 @@ export default function App() {
   );
 }
 
+// Testikommentti gittiä varten
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
