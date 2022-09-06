@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
 
-fetch('https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple')
+fetch('https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple')
 .then((response) => response.json())
 .then((json) => {
 console.log(json);
