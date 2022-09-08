@@ -4,31 +4,25 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
 
-  // fetch data from api
-  fetch('https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple')
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      setData(json.results[0]);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
   // set data to state
   const [data, setData] = useState([]);
   const [question, setQuestion] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
 
-  useEffect(() => {
-    setQuestion(data.question);
-  }, []);
 
   // button for getting the question
   const getQuestion = () => {
-    setQuestion(data.question);
-  };
+    fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
+        .then(response => response.json())
+        .then(data => {
+            setQuestion(decodeURIComponent(data.results[0].question));
+            setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
+            console.log(question);
+            console.log(correctAnswer);
+        })
+        .catch(err => console.error(err))
+}
 
   return (
     <View style={styles.container}>
