@@ -55,7 +55,6 @@ export default function HomeScreen() {
             <Text>{correctAnswer}</Text>
             <Text>{incorrectAnswers}</Text>
             <Text>{allAnswers}</Text>
-            <Button title="vastausvaihtoehdot" onPress={mixAnswers}></Button>
             <StatusBar style="auto" />
         </View>
     );
