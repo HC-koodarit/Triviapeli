@@ -50,11 +50,13 @@ export default function HomeScreen() {
         <View style={styles.container} >
             <Text style={styles.header}>Trivia Game</Text>
             <Button title="Get question" onPress={getQuestion} />
-            <Text>{category}</Text>
-            <Text>{question}</Text>
-            <Text>{correctAnswer}</Text>
-            <Text>{incorrectAnswers}</Text>
-            <Text>{allAnswers}</Text>
+            <Text>Kategoria: {category}</Text>
+            <Text>Kysymys: {question}</Text>
+            <Text>Oikea vastaus: {correctAnswer}</Text>
+            <Text></Text>
+            <Text>Väärä vastaus: {incorrectAnswers}</Text>
+            <Text></Text>
+            <Text>Kaikki vastaukset: {allAnswers}</Text>
             <StatusBar style="auto" />
         </View>
     );
