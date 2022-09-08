@@ -48,7 +48,7 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.container} >
-            <Text>Triviapeli</Text>
+            <Text style={styles.header}>Trivia Game</Text>
             <Button title="Get question" onPress={getQuestion} />
             <Text>{category}</Text>
             <Text>{question}</Text>
@@ -68,5 +68,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    header: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
 });

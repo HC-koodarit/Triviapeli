@@ -13,11 +13,7 @@ export default function App() {
 
 
   return (
-
     <View style={{flex: 1}}>
-      
-
-
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -33,13 +29,11 @@ export default function App() {
               return <Ionicons name={iconName} size={size} color={color} />;
             },
           })}>
-            
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Rules" component={RulesScreen} />
         </Tab.Navigator>
     </NavigationContainer>
     </View>
-    
   );
 }
 
