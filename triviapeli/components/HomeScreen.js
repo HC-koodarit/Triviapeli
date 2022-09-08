@@ -44,7 +44,7 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.container} >
-            <Text style={styles.header}>Triviapeli</Text>
+            <Text style={styles.header}>Trivia Game</Text>
             <Button title="Get question" onPress={getQuestion} />
             <Text>{category}</Text>
             <Text>{question}</Text>
