@@ -27,6 +27,7 @@ export default function HomeScreen() {
                     answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
                 }
                 setIncorrectAnswers(answerArray);
+                answerArray.push(decodeURIComponent(data.results[0].correct_answer));
                 
                 //tämä lisää jostain syystä edellisen kysymyksen väärät vastaukset
                 setAllAnswers(answerArray);
