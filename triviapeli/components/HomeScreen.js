@@ -18,6 +18,7 @@ export default function HomeScreen() {
         fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
             .then(response => response.json())
             .then(data => {
+                setAllAnswers(['']);
                 setQuestion(decodeURIComponent(data.results[0].question));
                 setCategory(decodeURIComponent(data.results[0].category));
                 setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
@@ -26,12 +27,15 @@ export default function HomeScreen() {
                     answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
                 }
                 setIncorrectAnswers(answerArray);
+                
+                //tämä lisää jostain syystä edellisen kysymyksen väärät vastaukset
+                setAllAnswers(incorrectAnswers);
                 console.log(question);
                 console.log(correctAnswer);
                 console.log(incorrectAnswers);
-                setAllAnswers([]);
+                console.log(allAnswers);
             })
-            .catch(err => console.error(err))
+            .catch(err => console.error(err));
     }
 
     const mixAnswers = () => {
@@ -50,6 +54,7 @@ export default function HomeScreen() {
             <Text>{question}</Text>
             <Text>{correctAnswer}</Text>
             <Text>{incorrectAnswers}</Text>
+            <Text>{allAnswers}</Text>
             <Button title="vastausvaihtoehdot" onPress={mixAnswers}></Button>
             <StatusBar style="auto" />
         </View>
