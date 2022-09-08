@@ -21,17 +21,23 @@ export default function App() {
         setQuestion(decodeURIComponent(data.results[0].question));
         setCategory(decodeURIComponent(data.results[0].category));
         setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
-        setIncorrectAnswers(decodeURIComponent(data.results[0].incorrect_answers));
+        let answerArray = [];
+        for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
+          answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
+        }
+        setIncorrectAnswers(answerArray);
         console.log(question);
         console.log(correctAnswer);
-        //console.log(incorrectAnswers);
+        console.log(incorrectAnswers);
         setAllAnswers([]);
       })
       .catch(err => console.error(err))
   }
 
   const mixAnswers = () => {
-    allAnswers.push(incorrectAnswers);
+    for (let i = 0; i < incorrectAnswers.length; i++) {
+      allAnswers.push(incorrectAnswers[i]);
+    }
     allAnswers.push(correctAnswer);
     console.log(allAnswers);
   }
@@ -44,6 +50,8 @@ export default function App() {
       <Button title="Get question" onPress={getQuestion} />
       <Text>{category}</Text>
       <Text>{question}</Text>
+      <Text>{correctAnswer}</Text>
+      <Text>{incorrectAnswers}</Text>
       <Button title = "vastausvaihtoehdot" onPress={mixAnswers}></Button>
       <StatusBar style="auto" />
     </View>
