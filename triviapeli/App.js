@@ -54,14 +54,7 @@ export default function App() {
   return (
 
     <View style={styles.container}>
-      <Text>Triviapeli</Text>
-      <Button title="Get question" onPress={getQuestion} />
-      <Text>{category}</Text>
-      <Text>{question}</Text>
-      <Text>{correctAnswer}</Text>
-      <Text>{incorrectAnswers}</Text>
-      <Button title = "vastausvaihtoehdot" onPress={mixAnswers}></Button>
-      <StatusBar style="auto" />
+      
 
       <NavigationContainer>
         <Tab.Navigator
