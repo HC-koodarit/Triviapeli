@@ -30,10 +30,19 @@ export default function App() {
         setIncorrectAnswers(decodeURIComponent(data.results[0].incorrect_answers));
         console.log(question);
         console.log(correctAnswer);
-        console.log(incorrectAnswers);
+        //console.log(incorrectAnswers);
+        setAllAnswers([]);
       })
       .catch(err => console.error(err))
   }
+
+  const mixAnswers = () => {
+    allAnswers.push(incorrectAnswers);
+    allAnswers.push(correctAnswer);
+    console.log(allAnswers);
+  }
+
+
 
   return (
 
@@ -42,6 +51,7 @@ export default function App() {
       <Button title="Get question" onPress={getQuestion} />
       <Text>{category}</Text>
       <Text>{question}</Text>
+      <Button title = "vastausvaihtoehdot" onPress={mixAnswers}></Button>
       <StatusBar style="auto" />
 
       <NavigationContainer>
