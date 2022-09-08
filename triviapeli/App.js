@@ -11,61 +11,12 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
 
-  // set data to state
-  const [data, setData] = useState([]);
-  const [question, setQuestion] = useState('');
-  const [category, setCategory] = useState('');
-  const [correctAnswer, setCorrectAnswer] = useState('');
-  const [incorrectAnswers, setIncorrectAnswers] = useState([]);
-  const [allAnswers, setAllAnswers] = useState([]);
-
-
-  // button for getting the question
-  const getQuestion = () => {
-    fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
-      .then(response => response.json())
-      .then(data => {
-        setQuestion(decodeURIComponent(data.results[0].question));
-        setCategory(decodeURIComponent(data.results[0].category));
-        setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
-        let answerArray = [];
-        for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
-          answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
-        }
-        setIncorrectAnswers(answerArray);
-        console.log(question);
-        console.log(correctAnswer);
-        console.log(incorrectAnswers);
-        setAllAnswers([]);
-      })
-      .catch(err => console.error(err))
-  }
-
-  const mixAnswers = () => {
-    for (let i = 0; i < incorrectAnswers.length; i++) {
-      allAnswers.push(incorrectAnswers[i]);
-    }
-    allAnswers.push(correctAnswer);
-    console.log(allAnswers);
-  }
-
-
 
   return (
 
     <View style={{flex: 1}}>
-      <View style={{flex: 1}}>
-      <Text>Triviapeli</Text>
-      <Button title="Get question" onPress={getQuestion} />
-      </View><View style={{flex: 1}}>
-      <Text>{category}</Text>
-      <Text>{question}</Text>
-      <Text>{correctAnswer}</Text>
-      <Text>{incorrectAnswers}</Text>
-      <Button title = "vastausvaihtoehdot" onPress={mixAnswers}></Button>
-      </View>
-      <StatusBar style="auto" />
       
+
 
       <NavigationContainer>
         <Tab.Navigator
