@@ -65,6 +65,7 @@ export default function App() {
       <Button title = "vastausvaihtoehdot" onPress={mixAnswers}></Button>
       </View>
       <StatusBar style="auto" />
+      
 
       <NavigationContainer>
         <Tab.Navigator
