@@ -29,7 +29,7 @@ export default function HomeScreen() {
                 setIncorrectAnswers(answerArray);
                 
                 //tämä lisää jostain syystä edellisen kysymyksen väärät vastaukset
-                setAllAnswers(incorrectAnswers);
+                setAllAnswers(answerArray);
                 console.log(question);
                 console.log(correctAnswer);
                 console.log(incorrectAnswers);
