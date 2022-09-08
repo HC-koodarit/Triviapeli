@@ -53,14 +53,17 @@ export default function App() {
 
   return (
 
-    <View style={styles.container}>
+    <View style={{flex: 1}}>
+      <View style={{flex: 1}}>
       <Text>Triviapeli</Text>
       <Button title="Get question" onPress={getQuestion} />
+      </View><View style={{flex: 1}}>
       <Text>{category}</Text>
       <Text>{question}</Text>
       <Text>{correctAnswer}</Text>
       <Text>{incorrectAnswers}</Text>
       <Button title = "vastausvaihtoehdot" onPress={mixAnswers}></Button>
+      </View>
       <StatusBar style="auto" />
 
       <NavigationContainer>
@@ -91,7 +94,7 @@ export default function App() {
 // Style
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
