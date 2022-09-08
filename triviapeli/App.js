@@ -4,7 +4,8 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from'@react-navigation/native';
 import { createBottomTabNavigator } from'@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import HomeScreen from './components/HomeScreen';
+import RulesScreen from './components/RulesScreen';
 
 const Tab = createBottomTabNavigator();
 
