@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-
-
-
 export default function HomeScreen() {
 
     // set data to state
@@ -37,10 +34,10 @@ export default function HomeScreen() {
                     answerArray = answerArray.sort(() => Math.random() - 0.5);
 
                     setAllAnswers(answerArray);
-                    console.log(question);
-                    console.log(correctAnswer);
-                    console.log(incorrectAnswers);
-                    console.log(allAnswers);
+                    //console.log(question);
+                    console.log(decodeURIComponent(data.results[0].correct_answer));
+                    //console.log(incorrectAnswers);
+                    //console.log(allAnswers);
             })
             .catch(err => console.error(err));
     }
@@ -54,23 +51,6 @@ export default function HomeScreen() {
         }
         return buttons;
     }
-
-    // answer buttons with shuffle
-    /*
-    const answerButtons = () => {
-        let buttons = [];
-        for (let i = 0; i < allAnswers.length; i++) {
-            buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} />);
-        }
-        
-        let shuffled = buttons
-            .map(value => ({ value, sort: Math.random() }))
-            .sort((a, b) => a.sort - b.sort)
-            .map(({ value }) => value)
-        return shuffled;
-        
-    }
-    */
 
     // check if answer is correct
     const checkAnswer = (answer) => {
