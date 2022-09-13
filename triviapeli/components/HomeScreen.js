@@ -48,11 +48,7 @@ export default function HomeScreen() {
             buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} />);
         }
         
-        let shuffled = buttons
-            .map(value => ({ value, sort: Math.random() }))
-            .sort((a, b) => a.sort - b.sort)
-            .map(({ value }) => value)
-        return shuffled;
+
         
     }
 
@@ -156,7 +152,13 @@ export default function HomeScreen() {
         for (let i = 0; i < allAnswers.length; i++) {
             buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} />);
         }
-        return buttons;
+
+        /* vaihtoehtoinen tapa shufflata vaihtoehdot
+        let shuffled = buttons
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value)
+        return shuffled;
     }
 
     // check if answer is correct
