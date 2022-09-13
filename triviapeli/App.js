@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from'@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from './components/HomeScreen';
 import RulesScreen from './components/RulesScreen';
+import About from './components/About';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +25,8 @@ export default function App() {
                 iconName = 'md-home';
               } else if (route.name === 'Rules') {
                 iconName = 'book-sharp';
+              } else if (route.name === "About") {
+                iconName = 'book-sharp';
               }
 
               return <Ionicons name={iconName} size={size} color={color} />;
@@ -31,6 +34,7 @@ export default function App() {
           })}>
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Rules" component={RulesScreen} />
+            <Tab.Screen name="About" component={About} />
         </Tab.Navigator>
     </NavigationContainer>
     </View>
