@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
+
     // set data to state
     const [data, setData] = useState([]);
     const [question, setQuestion] = useState('');
@@ -11,6 +12,7 @@ export default function HomeScreen() {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
+
 
 
     // button for getting the question
@@ -28,7 +30,7 @@ export default function HomeScreen() {
                 }
                 setIncorrectAnswers(answerArray);
                 answerArray.push(decodeURIComponent(data.results[0].correct_answer));
-                
+
                 //tämä lisää jostain syystä edellisen kysymyksen väärät vastaukset
                 setAllAnswers(answerArray);
                 console.log(question);
@@ -37,6 +39,24 @@ export default function HomeScreen() {
                 console.log(allAnswers);
             })
             .catch(err => console.error(err));
+    }
+
+    // buttons for answers
+    const answerButtons = () => {
+        let buttons = [];
+        for (let i = 0; i < allAnswers.length; i++) {
+            buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} />);
+        }
+        return buttons;
+    }
+
+    // check if answer is correct
+    const checkAnswer = (answer) => {
+        if (answer === correctAnswer) {
+            alert("Correct!");
+        } else {
+            alert("Drink!!");
+        }
     }
 
     const mixAnswers = () => {
@@ -48,16 +68,12 @@ export default function HomeScreen() {
     }
 
     return (
-        <View style={styles.container} >
-            <Text style={styles.header}>Trivia Game</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Trivia</Text>
+            <Text style={styles.category}>{category}</Text>
+            <Text style={styles.question}>{question}</Text>
+            {answerButtons()}
             <Button title="Get question" onPress={getQuestion} />
-            <Text>Kategoria: {category}</Text>
-            <Text>Kysymys: {question}</Text>
-            <Text>Oikea vastaus: {correctAnswer}</Text>
-            <Text></Text>
-            <Text>Väärä vastaus: {incorrectAnswers}</Text>
-            <Text></Text>
-            <Text>Kaikki vastaukset: {allAnswers}</Text>
             <StatusBar style="auto" />
         </View>
     );
