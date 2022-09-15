@@ -65,8 +65,12 @@ export default function HomeScreen() {
         <View style={styles.container}>
             <Text style={styles.title}>Trivia</Text>
             <Text style={styles.category}>{category}</Text>
-            <Text style={styles.question}>{question}</Text>
-            {answerButtons()}
+            <View style={styles.question}>
+            <Text>{question}</Text>
+            </View>
+            <View style={styles.buttons}>
+                {answerButtons()}
+            </View>
             <Button title="Get question" onPress={getQuestion} />
             <StatusBar style="auto" />
         </View>
@@ -85,5 +89,24 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 20,
+    },
+    buttons: {
+        flexDirection: 'column',
+        marginBottom: 15,
+        marginTop: 15,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    category: {
+        fontSize: 14,
+        marginBottom: 5,
+    },
+    question: {
+        fontSize: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlignVertical: 'center',
     },
 });
