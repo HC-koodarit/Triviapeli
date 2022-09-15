@@ -56,8 +56,10 @@ export default function HomeScreen() {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             alert("Correct!");
+            {getQuestion()};
         } else {
-            alert("Drink!!");
+            alert("Wrong! The correct answer is " + correctAnswer);
+            {getQuestion()};
         }
     }
 
@@ -67,7 +69,6 @@ export default function HomeScreen() {
             <Text style={styles.category}>{category}</Text>
             <Text style={styles.question}>{question}</Text>
             {answerButtons()}
-            <Button title="Get question" onPress={getQuestion} />
             <StatusBar style="auto" />
         </View>
     );
