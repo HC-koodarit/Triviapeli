@@ -26,7 +26,7 @@ export default function App() {
               } else if (route.name === 'Rules') {
                 iconName = 'book-sharp';
               } else if (route.name === "About") {
-                iconName = 'book-sharp';
+                iconName = 'information-circle';
               }
 
               return <Ionicons name={iconName} size={size} color={color} />;
