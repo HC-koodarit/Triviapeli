@@ -41,6 +41,11 @@ export default function HomeScreen() {
             })
             .catch(err => console.error(err));
     }
+    
+    useEffect(() => {
+        getQuestion();
+    }, []);
+
 
     // buttons for answers
     const answerButtons = () => {
