@@ -41,6 +41,11 @@ export default function HomeScreen() {
             })
             .catch(err => console.error(err));
     }
+    
+    useEffect(() => {
+        getQuestion();
+    }, []);
+
 
     // buttons for answers
     const answerButtons = () => {
@@ -56,8 +61,10 @@ export default function HomeScreen() {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             alert("Correct!");
+            {getQuestion()};
         } else {
-            alert("Drink!!");
+            alert("Wrong! The correct answer is " + correctAnswer);
+            {getQuestion()};
         }
     }
 
@@ -65,13 +72,10 @@ export default function HomeScreen() {
         <View style={styles.container}>
             <Text style={styles.title}>Trivia</Text>
             <Text style={styles.category}>{category}</Text>
-            <View style={styles.question}>
-            <Text>{question}</Text>
-            </View>
+            <Text style={styles.question}>{question}</Text>
             <View style={styles.buttons}>
                 {answerButtons()}
             </View>
-            <Button title="Get question" onPress={getQuestion} />
             <StatusBar style="auto" />
         </View>
     );
@@ -92,21 +96,20 @@ const styles = StyleSheet.create({
     },
     buttons: {
         flexDirection: 'column',
-        marginBottom: 15,
-        marginTop: 15,
     },
     title: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 'bold'
     },
     category: {
         fontSize: 14,
-        marginBottom: 5,
+        marginBottom: 10,
     },
     question: {
         fontSize: 15,
         alignItems: 'center',
         justifyContent: 'center',
         textAlignVertical: 'center',
+        margin: 20,
     },
 });
