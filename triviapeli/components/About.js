@@ -6,6 +6,7 @@ export default function About() {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>About</Text>
+            <Text>This application uses data from The Open Trivia Database API for trivia questions and answers.</Text>
             <Text>All data provided by the API is available under the Creative Commons Attribution-ShareAlike 4.0 International License.</Text>
         </View>
     );
