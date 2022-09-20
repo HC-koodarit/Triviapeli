@@ -73,7 +73,9 @@ export default function HomeScreen() {
             <Text style={styles.title}>Trivia</Text>
             <Text style={styles.category}>{category}</Text>
             <Text style={styles.question}>{question}</Text>
-            {answerButtons()}
+            <View style={styles.buttons}>
+                {answerButtons()}
+            </View>
             <StatusBar style="auto" />
         </View>
     );
@@ -91,5 +93,23 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 20,
+    },
+    buttons: {
+        flexDirection: 'column',
+    },
+    title: {
+        fontSize: 25,
+        fontWeight: 'bold'
+    },
+    category: {
+        fontSize: 14,
+        marginBottom: 10,
+    },
+    question: {
+        fontSize: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlignVertical: 'center',
+        margin: 20,
     },
 });
