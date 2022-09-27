@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
-export default function HomeScreen() {
+export default function GameScreen() {
 
     // set data to state
     const [data, setData] = useState([]);
@@ -82,8 +82,12 @@ export default function HomeScreen() {
                 until={15}
                 onFinish={() => alert('Time is up!')}
                 onPress={() => alert('hello')}
+                timeToShow={['S']}
                 size={20}
-      />
+                digitTxtStyle={{color: 'black'}}
+                timeLabelStyle={{color: 'black', fontWeight: 'bold'}}
+                digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625'}}
+            />
         </View>
     );
 };
