@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, Alert } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
 export default function GameScreen() {
@@ -13,7 +13,7 @@ export default function GameScreen() {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
-
+    const [points, setPoints] = useState(0);
 
 
     // button for getting the question
@@ -63,11 +63,24 @@ export default function GameScreen() {
         if (answer === correctAnswer) {
             alert("Correct!");
             {getQuestion()};
+            setPoints(setPoints => setPoints + 1);
         } else {
             alert("Wrong! The correct answer is " + correctAnswer);
             {getQuestion()};
         }
     }
+
+    const timerAlert = () =>
+        Alert.alert(
+            "Alert Title",
+            "My Alert Msg",
+            [
+                {
+                text: "Ok",
+                onPress: (useEffect()),
+                },
+            ]
+    );
 
     return (
         <View style={styles.container}>
@@ -77,11 +90,11 @@ export default function GameScreen() {
             <View style={styles.buttons}>
                 {answerButtons()}
             </View>
+            <Text>Pointcount: {points}</Text>
             <StatusBar style="auto" />
             <CountDown
                 until={15}
-                onFinish={() => alert('Time is up!')}
-                onPress={() => alert('hello')}
+                onFinish={() => alert('finished')}
                 timeToShow={['S']}
                 size={20}
                 digitTxtStyle={{color: 'black'}}
