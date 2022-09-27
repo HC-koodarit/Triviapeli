@@ -32,4 +32,11 @@ export default StyleSheet.create({
         margin: 20,
         color: '#fff',
     },
+    addPlayers: {
+        fontSize: 18,
+        width: 120,
+        borderBottomWidth: 1.0,
+        marginBottom: 5,
+        color: '#fff',
+    }
 });

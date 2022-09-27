@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 import CountDown from 'react-native-countdown-component';
-import Styles from './Styles';
+import Styles from './Styles.js';
 
 export default function GameScreen() {
 
@@ -14,11 +14,13 @@ export default function GameScreen() {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
+
+    //Add player variables
     const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
-    const [points, setPoints] = useState(0);
+    const [playerNumber, setPlayerNumber] = useState(1);
 
-    let playerNumber = 1;
+    const [points, setPoints] = useState(0);
 
     // button for getting the question
     const getQuestion = () => {
@@ -76,8 +78,15 @@ export default function GameScreen() {
 
     const addPlayers = () => {
         let playerNameGenerator = "player" + playerNumber
-        playerNumber + 1;
-        setPlayerNames({playerNameGenerator: playerNameTemp});
+        //setPlayerNameGenerator("player" + playerNumber);
+        setPlayerNumber(playerNumber + 1);
+        //setPlayerNames({${playerNameGenerator}: playerNameTemp});
+        //setPlayerNameTemp('');
+        //console.log(playerNames);
+        const newList = playerNames.concat({ Name: playerNameTemp, id: playerNameGenerator });
+
+        setPlayerNames(newList);
+        setPlayerNameTemp('');
     }
 
     const timerAlert = () =>
@@ -93,9 +102,9 @@ export default function GameScreen() {
     );
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={Styles.container}>
             <Button
-                style={styles.buttons}
+                style={Styles.buttons}
                 title="Home"
                 onPress={() => navigation.navigate('Home')}
             />
@@ -118,7 +127,7 @@ export default function GameScreen() {
             />
             <View>
                 <TextInput
-                style={{fontSize: 18, width: 120, borderBottomWidth: 1.0, marginBottom: 5}}
+                style={Styles.addPlayers}
                 placeholder='Add player'
                 onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
                 value={playerNameTemp}/>
