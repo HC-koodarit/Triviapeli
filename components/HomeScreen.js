@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 
 export default function HomeScreen() {
 
@@ -77,6 +78,12 @@ export default function HomeScreen() {
                 {answerButtons()}
             </View>
             <StatusBar style="auto" />
+            <CountDown
+                until={15}
+                onFinish={() => alert('Time is up!')}
+                onPress={() => alert('hello')}
+                size={20}
+      />
         </View>
     );
 };
