@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import Styles from './Styles';
 
@@ -15,7 +14,7 @@ export default function HomeScreen( { navigation }) {
             <Button
                 style={Styles.buttons}
                 title="Quickplay"
-                onPress={() => navigation.navigate('Questions')}
+                onPress={() => navigation.navigate('Quickplay')}
             />
             <Button
                 style={Styles.buttons}
