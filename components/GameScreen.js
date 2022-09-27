@@ -5,6 +5,7 @@ import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from '
 import CountDown from 'react-native-countdown-component';
 import Styles from './Styles';
 
+
 export default function GameScreen() {
 
     // set data to state
@@ -43,12 +44,15 @@ export default function GameScreen() {
                     console.log(decodeURIComponent(data.results[0].correct_answer));
                     //console.log(incorrectAnswers);
                     //console.log(allAnswers);
+                    
             })
             .catch(err => console.error(err));
+            
     }
     
     useEffect(() => {
         getQuestion();
+        TimerForQuestions();
     }, []);
 
 
@@ -79,6 +83,7 @@ export default function GameScreen() {
         setPlayerNames({playerNameGenerator: playerNameTemp});
     }
 
+    /*
     const timerAlert = () =>
         Alert.alert(
             "Alert Title",
@@ -90,11 +95,26 @@ export default function GameScreen() {
                 },
             ]
     );
+    */
 
+    // Timer that sets the time in which the player has to answer 
+    const TimerForQuestions = () => (
+        <CountDown
+            isPlaying
+            until={15}
+            onFinish={() => alert('Time is up!')}
+            timeToShow={['S']}
+            size={20}
+            digitTxtStyle={{color: 'black'}}
+            timeLabelStyle={{color: 'black', fontWeight: 'bold'}}
+            digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625'}}
+    />
+    )
+ 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={Styles.container}>
             <Button
-                style={styles.buttons}
+                style={Styles.buttons}
                 title="Home"
                 onPress={() => navigation.navigate('Home')}
             />
@@ -102,19 +122,15 @@ export default function GameScreen() {
             <Text style={Styles.title}>Trivia</Text>
             <Text style={Styles.category}>{category}</Text>
             <Text style={Styles.question}>{question}</Text>
+
             <View style={Styles.buttons}>
                 {answerButtons()}
             </View>
+            <View>
+                {TimerForQuestions()}
+            </View>
             <Text>Pointcount: {points}</Text>
-            <CountDown
-                until={15}
-                onFinish={() => alert('finished')}
-                timeToShow={['S']}
-                size={20}
-                digitTxtStyle={{color: 'black'}}
-                timeLabelStyle={{color: 'black', fontWeight: 'bold'}}
-                digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625'}}
-            />
+
             <View>
                 <TextInput
                 style={{fontSize: 18, width: 120, borderBottomWidth: 1.0, marginBottom: 5}}
