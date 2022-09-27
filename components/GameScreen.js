@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View, Alert } from 'react-native';
 import CountDown from 'react-native-countdown-component';
+import Styles from './Styles';
 
-export default function GameScreen({ navigation }) {
+export default function GameScreen() {
 
     // set data to state
     const [data, setData] = useState([]);
@@ -83,17 +84,17 @@ export default function GameScreen({ navigation }) {
     );
 
     return (
-        <View style={styles.container}>
+        <View style={Styles.container}>
             <Button
                 style={styles.buttons}
                 title="Home"
                 onPress={() => navigation.navigate('Home')}
             />
 
-            <Text style={styles.title}>Trivia</Text>
-            <Text style={styles.category}>{category}</Text>
-            <Text style={styles.question}>{question}</Text>
-            <View style={styles.buttons}>
+            <Text style={Styles.title}>Trivia</Text>
+            <Text style={Styles.category}>{category}</Text>
+            <Text style={Styles.question}>{question}</Text>
+            <View style={Styles.buttons}>
                 {answerButtons()}
             </View>
             <Text>Pointcount: {points}</Text>
@@ -110,36 +111,3 @@ export default function GameScreen({ navigation }) {
         </View>
     );
 };
-
-// Style
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    header: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    buttons: {
-        flexDirection: 'column',
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: 'bold'
-    },
-    category: {
-        fontSize: 14,
-        marginBottom: 10,
-    },
-    question: {
-        fontSize: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlignVertical: 'center',
-        margin: 20,
-    },
-});

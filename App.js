@@ -7,6 +7,7 @@ import RulesScreen from './components/RulesScreen';
 import About from './components/About';
 import HomeScreen from './components/HomeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Styles from './components/Styles';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,13 +27,3 @@ export default function App() {
     </View>
   );
 }
-
-// Style
-const styles = StyleSheet.create({
-  container: {
-    flex: 2,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
