@@ -51,7 +51,6 @@ export default function GameScreen() {
 
     // buttons for answers
     const answerButtons = () => {
-
         let buttons = [];
         for (let i = 0; i < allAnswers.length; i++) {
             buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} key={i}/>);
@@ -71,6 +70,7 @@ export default function GameScreen() {
         }
     }
 
+    // when timer is finished, alert window appears
     const timerAlert = () =>
         Alert.alert(
             "Alert Title",
