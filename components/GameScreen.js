@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
-export default function GameScreen() {
+export default function GameScreen({ navigation }) {
 
     // set data to state
     const [data, setData] = useState([]);
@@ -71,6 +71,12 @@ export default function GameScreen() {
 
     return (
         <View style={styles.container}>
+            <Button
+                style={styles.buttons}
+                title="Home"
+                onPress={() => navigation.navigate('Home')}
+            />
+
             <Text style={styles.title}>Trivia</Text>
             <Text style={styles.category}>{category}</Text>
             <Text style={styles.question}>{question}</Text>
