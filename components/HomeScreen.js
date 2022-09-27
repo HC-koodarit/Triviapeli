@@ -5,13 +5,11 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen( { navigation }) {
 
-    
     return(
         <View style={styles.container}>
             <Button
                 style={styles.buttons}
                 title="Partymode"
-                
             />
             <Button
                 style={styles.buttons}
