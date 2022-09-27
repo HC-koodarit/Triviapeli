@@ -92,13 +92,7 @@ export default function GameScreen() {
     );
 
     return (
-        <SafeAreaView style={styles.container}>
-            <Button
-                style={styles.buttons}
-                title="Home"
-                onPress={() => navigation.navigate('Home')}
-            />
-
+        <SafeAreaView>
             <Text style={Styles.title}>Trivia</Text>
             <Text style={Styles.category}>{category}</Text>
             <Text style={Styles.question}>{question}</Text>

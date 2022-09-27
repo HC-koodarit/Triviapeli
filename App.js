@@ -16,7 +16,9 @@ export default function App() {
   return (
     <View style={{flex: 1}}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName='Home'
+        >
           <Stack.Screen name="Home" component={HomeScreen} style={Styles.title} />
           <Stack.Screen name="Questions" component={GameScreen} style={Styles.title} />
           <Stack.Screen name="Rules" component={RulesScreen} style={Styles.title} />
