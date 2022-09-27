@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, Button, StyleSheet, Text, View, TextInput } from 'react-native';
+import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
-export default function GameScreen() {
+export default function GameScreen({ navigation }) {
 
     // set data to state
     const [data, setData] = useState([]);
@@ -15,6 +15,8 @@ export default function GameScreen() {
     const [allAnswers, setAllAnswers] = useState([]);
     const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
+    const [points, setPoints] = useState(0);
+
     let playerNumber = 1;
 
     // button for getting the question
@@ -64,6 +66,7 @@ export default function GameScreen() {
         if (answer === correctAnswer) {
             alert("Correct!");
             {getQuestion()};
+            setPoints(setPoints => setPoints + 1);
         } else {
             alert("Wrong! The correct answer is " + correctAnswer);
             {getQuestion()};
@@ -76,18 +79,36 @@ export default function GameScreen() {
         setPlayerNames({playerNameGenerator: playerNameTemp});
     }
 
+    const timerAlert = () =>
+        Alert.alert(
+            "Alert Title",
+            "My Alert Msg",
+            [
+                {
+                text: "Ok",
+                onPress: (useEffect()),
+                },
+            ]
+    );
+
     return (
         <SafeAreaView style={styles.container}>
+            <Button
+                style={styles.buttons}
+                title="Home"
+                onPress={() => navigation.navigate('Home')}
+            />
+
             <Text style={styles.title}>Trivia</Text>
             <Text style={styles.category}>{category}</Text>
             <Text style={styles.question}>{question}</Text>
             <View style={styles.buttons}>
                 {answerButtons()}
             </View>
+            <Text>Pointcount: {points}</Text>
             <CountDown
                 until={15}
-                onFinish={() => alert('Time is up!')}
-                onPress={() => alert('hello')}
+                onFinish={() => alert('finished')}
                 timeToShow={['S']}
                 size={20}
                 digitTxtStyle={{color: 'black'}}
