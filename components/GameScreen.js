@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, Button, StyleSheet, Text, View, TextInput } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
 export default function GameScreen() {
@@ -13,8 +13,9 @@ export default function GameScreen() {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
-
-
+    const [playerNames, setPlayerNames] = useState([]);
+    const [playerNameTemp, setPlayerNameTemp] = useState('');
+    let playerNumber = 1;
 
     // button for getting the question
     const getQuestion = () => {
@@ -69,15 +70,20 @@ export default function GameScreen() {
         }
     }
 
+    const addPlayers = () => {
+        let playerNameGenerator = "player" + playerNumber
+        playerNumber + 1;
+        setPlayerNames({playerNameGenerator: playerNameTemp});
+    }
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Trivia</Text>
             <Text style={styles.category}>{category}</Text>
             <Text style={styles.question}>{question}</Text>
             <View style={styles.buttons}>
                 {answerButtons()}
             </View>
-            <StatusBar style="auto" />
             <CountDown
                 until={15}
                 onFinish={() => alert('Time is up!')}
@@ -88,7 +94,18 @@ export default function GameScreen() {
                 timeLabelStyle={{color: 'black', fontWeight: 'bold'}}
                 digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625'}}
             />
-        </View>
+            <View>
+                <TextInput
+                style={{fontSize: 18, width: 120, borderBottomWidth: 1.0, marginBottom: 5}}
+                placeholder='Add player'
+                onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
+                value={playerNameTemp}/>
+                <Button
+                title={"Add"}
+                onPress={addPlayers} >
+                </Button>
+            </View>
+        </SafeAreaView>
     );
 };
 

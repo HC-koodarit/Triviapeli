@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 export default function RulesScreen() {
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.header}>How to play single player mode</Text>
             <Text>1. Start the game</Text>
             <Text>2. Answer the questions</Text>
@@ -18,7 +18,7 @@ export default function RulesScreen() {
             <Text>5. Fail and get wasted</Text>
             <Text style={styles.header}>Powerups</Text>
             <Text> Bla bla bla</Text>
-        </View>
+        </SafeAreaView>
     );
 }
 
