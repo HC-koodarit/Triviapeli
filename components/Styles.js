@@ -12,13 +12,16 @@ export default StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 20,
+        color: '#fff',
     },
     buttons: {
         flexDirection: 'column',
+        color: '#fff',
     },
     title: {
         fontSize: 25,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#fff',
     },
     category: {
         fontSize: 14,
