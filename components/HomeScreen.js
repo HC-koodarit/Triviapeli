@@ -1,28 +1,28 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import Styles from './Styles';
 
 export default function HomeScreen( { navigation }) {
 
     return(
-        <View style={styles.container}>
+        <View style={Styles.container}>
             <Button
-                style={styles.buttons}
+                style={Styles.buttons}
                 title="Partymode"
             />
             <Button
-                style={styles.buttons}
+                style={Styles.buttons}
                 title="Quickplay"
-                onPress={() => navigation.navigate('Questions')}
+                onPress={() => navigation.navigate('Quickplay')}
             />
             <Button
-                style={styles.buttons}
+                style={Styles.buttons}
                 title="Rules"
                 onPress={() => navigation.navigate('Rules')}
             />
             <Button
-                style={styles.buttons}
+                style={Styles.buttons}
                 title="About"
                 onPress={() => navigation.navigate('About')}
             />
@@ -30,15 +30,3 @@ export default function HomeScreen( { navigation }) {
     );
 
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttons: {
-        flexDirection: 'column',
-    },
-});

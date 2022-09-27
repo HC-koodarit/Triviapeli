@@ -56,7 +56,6 @@ export default function GameScreen() {
 
     // buttons for answers
     const answerButtons = () => {
-
         let buttons = [];
         for (let i = 0; i < allAnswers.length; i++) {
             buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} key={i}/>);
@@ -96,7 +95,7 @@ export default function GameScreen() {
             [
                 {
                 text: "Ok",
-                onPress: (useEffect()),
+                //onPress: (useEffect()),
                 },
             ]
     );
