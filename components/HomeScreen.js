@@ -52,7 +52,7 @@ export default function HomeScreen() {
 
         let buttons = [];
         for (let i = 0; i < allAnswers.length; i++) {
-            buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} />);
+            buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} key={i}/>);
         }
         return buttons;
     }
