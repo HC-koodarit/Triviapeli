@@ -77,7 +77,7 @@ export default function GameScreen() {
             [
                 {
                 text: "Ok",
-                onPress: (useEffect()),
+                //onPress: (useEffect()),
                 },
             ]
     );
