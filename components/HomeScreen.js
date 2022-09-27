@@ -2,14 +2,17 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import Styles from './Styles';
+import SelectDropdown from 'react-native-select-dropdown'
 
 export default function HomeScreen( { navigation }) {
+
 
     return(
         <View style={Styles.container}>
             <Button
                 style={Styles.buttons}
                 title="Partymode"
+                onPress={() => navigation.navigate('Partymode')}
             />
             <Button
                 style={Styles.buttons}
