@@ -6,7 +6,6 @@ import About from './components/About';
 import HomeScreen from './components/HomeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Styles from './components/Styles';
-import PartyModeScreen from './components/PartyModeScreen';
 import PointScreen from './components/PointScreen';
 import PartyModeOptions from './components/PartyModeOptions';
 

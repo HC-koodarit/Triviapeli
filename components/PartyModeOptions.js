@@ -8,21 +8,20 @@ export default function PartyModeOptions( { navigation }) {
     const [selectedDrink, setSelectedDrink] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
+    const pickerRef = useRef();
 
-     //Add player variables
-     const [playerNames, setPlayerNames] = useState([]);
-     const [playerNameTemp, setPlayerNameTemp] = useState('');
-     const [playerNumber, setPlayerNumber] = useState(1);
+    //Add player variables
+    const [playerNames, setPlayerNames] = useState([]);
+    const [playerNameTemp, setPlayerNameTemp] = useState('');
+    const [playerNumber, setPlayerNumber] = useState(1);
 
-     const pickerRef = useRef();
+    function open() {
+       pickerRef.current.focus();
+    }
 
-     function open() {
-        pickerRef.current.focus();
+    function close() {
+       pickerRef.current.blur();
      }
-
-     function close() {
-        pickerRef.current.blur();
-      }
 
 
     const addPlayers = () => {
@@ -40,7 +39,7 @@ export default function PartyModeOptions( { navigation }) {
 
     return(
         <View style={Styles.container}>
-            <Text style={Styles.title}>Pick your drink:</Text>
+            <Text style={Styles.title}>Players:</Text>
             <TextInput
                 style={Styles.addPlayers}
                 placeholder='Add player'
@@ -51,24 +50,24 @@ export default function PartyModeOptions( { navigation }) {
                 onPress={addPlayers} >
             </Button>
 
-            <Text style={Styles.title}>Pick your drink:</Text>
+            <Text style={Styles.title}>Drink</Text>
             <View style={{ borderWidth: 1, borderColor: 'white', borderRadius: 4 }}>
                 <Picker
-                style={Styles.picker}
-                ref={pickerRef}
-                selectedValue={selectedDrink}
-                onValueChange={(itemValue, itemIndex) =>
-                    setSelectedDrink(itemValue)
+                    style={Styles.picker}
+                    ref={pickerRef}
+                    selectedValue={selectedDrink}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setSelectedDrink(itemValue)
                 }>
-                <Picker.Item label="Beer / Cider / Long drink" value="Beer / Cider / Long drink" />
-                <Picker.Item label="Shots" value="Shots" />
-                <Picker.Item label="Mixed drinks" value="Mixed drinks" />
+                <Picker.Item label="Mild" value="Mild" />
+                <Picker.Item label="Medium" value="Medium" />
+                <Picker.Item label="Strong" value="Strong" />
                 </Picker>
             </View>
 
-            <Text style={Styles.title}>Pick category:</Text>
+            <Text style={Styles.title}>Category</Text>
             
-            <Text style={Styles.title}>Pick difficulty:</Text>
+            <Text style={Styles.title}>Difficulty</Text>
             
             <Button
                 title='Start game'

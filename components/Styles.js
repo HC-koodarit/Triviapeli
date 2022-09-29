@@ -50,7 +50,6 @@ export default StyleSheet.create({
         marginBottom: 5,
         color: '#fff',
     },
-
     pointsText: {
         color: '#fff'
     },
@@ -58,4 +57,10 @@ export default StyleSheet.create({
         fontSize: 18,
         color: '#fff',
     },
+    picker: {
+        fontSize: 18,
+        color: '#fff',
+        width: 330,
+        height: 100,
+    }
 });
