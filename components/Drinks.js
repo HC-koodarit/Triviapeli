@@ -1,0 +1,47 @@
+import useState from 'react';
+import GameScreen from './GameScreen';
+
+export default function Drinks() {
+    const [lowAlcohol, setLowAlcohol] = useState(0);
+    const [lowAlcFinished, setLowAlcFinished] = useState(0);
+    const [mediumAlcohol, setMediumAlcohol] = useState(0);
+    const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
+    const [highAlcohol, setHighAlcohol] = useState(0);
+
+    // Count wrong answers and add drinks
+
+    //TODO pelaajien profiilien linkittäminen, eli jotenkin tyyliin
+    // if (GameScreen.answerIsCorrect === false && GameScreen.playerNumber === 1) {
+    if (GameScreen.answerIsCorrect === false) {
+        setLowAlcohol(lowAlcohol + 1);
+        setLowAlcFinished(lowAlcFinished + 1);
+    }
+    if (GameScreen.answerIsCorrect === false) {
+        setMediumAlcohol(mediumAlcohol + 1);
+        setMediumAlcFinished(mediumAlcFinished + 1);
+    }
+    if (GameScreen.answerIsCorrect === false) {
+        setHighAlcohol(highAlcohol + 1);
+    }
+// Drinking rules
+    if (lowAlcohol === 1) {
+        alert("Take one sip!");
+        setLowAlcohol(0);
+    }
+    if (lowAlcFinished === 10) {
+        alert("Finish your drink!");
+        setLowAlcFinished(0);
+    }
+    if (mediumAlcohol === 3) {
+        alert("Take one sip!");
+        setMediumAlcohol(0);
+    }
+    if (mediumAlcFinished === 10) {
+        alert("Finish your drink!");
+        setMediumAlcFinished(0);
+    }
+    if (highAlcohol === 10) {
+        alert("Take a shot!");
+        setHighAlcohol(0);
+    }
+}
