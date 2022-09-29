@@ -70,11 +70,11 @@ export default function GameScreen({ navigation }) {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             setPoints(setPoints => setPoints + 1);
-            navigation.navigate('Pointscreen')
+            navigation.navigate('Pointscreen', {paramKey: points})
             {getQuestion()};
             setPoints(setPoints => setPoints + 1);
         } else {
-            navigation.navigate('Pointscreen')
+            navigation.navigate('Pointscreen', {paramKey: points})
             {getQuestion()};
         }
     }

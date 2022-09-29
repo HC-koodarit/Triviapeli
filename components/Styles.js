@@ -50,14 +50,12 @@ export default StyleSheet.create({
         marginBottom: 5,
         color: '#fff',
     },
-<<<<<<< HEAD
+
     pointsText: {
         color: '#fff'
-    }
-=======
+    },
     normalText: {
         fontSize: 18,
         color: '#fff',
     },
->>>>>>> 762135b7e92a7d396bcb226a766f14c17cebcd63
 });
