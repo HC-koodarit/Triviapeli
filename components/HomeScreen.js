@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import Styles from './Styles';
-import SelectDropdown from 'react-native-select-dropdown'
+
 
 export default function HomeScreen( { navigation }) {
 

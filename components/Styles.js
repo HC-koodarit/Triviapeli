@@ -41,5 +41,11 @@ export default StyleSheet.create({
         borderBottomWidth: 1.0,
         marginBottom: 5,
         color: '#fff',
+    },
+    picker: {
+        fontSize: 18,
+        color: '#fff',
+        width: 330,
+        height: 100,
     }
 });
