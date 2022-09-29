@@ -2,13 +2,14 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import Styles from './Styles';
-import SelectDropdown from 'react-native-select-dropdown'
-
-export default function HomeScreen( { navigation }) {
 
 
-    return(
+export default function HomeScreen({ navigation }) {
+
+
+    return (
         <View style={Styles.container}>
+            <Text style={Styles.header}>Trivia</Text>
             <Button
                 style={Styles.buttons}
                 title="Partymode"
@@ -29,7 +30,13 @@ export default function HomeScreen( { navigation }) {
                 title="About"
                 onPress={() => navigation.navigate('About')}
             />
-            <Image source={require('../assets/titlescreen.png')} style={{width: 400, height: 400}} />
+            <Image source={require('../assets/titlescreen.png')} style={
+                {
+                    width: 400,
+                    height: 400,
+                    marginBottom: 0,
+                }
+            } />
         </View>
     );
 

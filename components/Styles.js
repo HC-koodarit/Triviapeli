@@ -6,12 +6,20 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: '#020d23',
         alignItems: 'center',
-        justifyContent: 'center',
+        marginTop: 0,
     },
     header: {
-        fontSize: 30,
+        fontSize: 70,
         fontWeight: 'bold',
         marginBottom: 20,
+        marginTop: 20,
+        color: '#fff',
+    },
+    headerRules: {
+        fontSize:25,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        marginTop: 20,
         color: '#fff',
     },
     buttons: {
@@ -42,7 +50,14 @@ export default StyleSheet.create({
         marginBottom: 5,
         color: '#fff',
     },
+<<<<<<< HEAD
     pointsText: {
         color: '#fff'
     }
+=======
+    normalText: {
+        fontSize: 18,
+        color: '#fff',
+    },
+>>>>>>> 762135b7e92a7d396bcb226a766f14c17cebcd63
 });
