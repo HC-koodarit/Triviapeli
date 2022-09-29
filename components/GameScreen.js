@@ -6,7 +6,7 @@ import CountDown from 'react-native-countdown-component';
 import Styles from './Styles.js';
 
 
-export default function GameScreen() {
+export default function GameScreen({ navigation }) {
 
     // set data to state
     const [data, setData] = useState([]);
@@ -54,7 +54,6 @@ export default function GameScreen() {
     
     useEffect(() => {
         getQuestion();
-        TimerForQuestions();
     }, []);
 
 
@@ -70,11 +69,12 @@ export default function GameScreen() {
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
-            alert("Correct!");
+            setPoints(setPoints => setPoints + 1);
+            navigation.navigate('Pointscreen')
             {getQuestion()};
             setPoints(setPoints => setPoints + 1);
         } else {
-            alert("Wrong! The correct answer is " + correctAnswer);
+            navigation.navigate('Pointscreen')
             {getQuestion()};
         }
     }
@@ -91,20 +91,6 @@ export default function GameScreen() {
         setPlayerNames(newList);
         setPlayerNameTemp('');
     }
-
-    /*
-    const timerAlert = () =>
-        Alert.alert(
-            "Alert Title",
-            "My Alert Msg",
-            [
-                {
-                text: "Ok",
-                //onPress: (useEffect()),
-                },
-            ]
-    );
-    */
 
     // Timer that sets the time in which the player has to answer 
     const TimerForQuestions = () => (
@@ -138,7 +124,9 @@ export default function GameScreen() {
             <View>
                 {TimerForQuestions()}
             </View>
-            <Text>Pointcount: {points}</Text>
+            <Text
+                style={Styles.pointsText}
+            >Pointcount: {points}</Text>
 
             <View>
                 <TextInput

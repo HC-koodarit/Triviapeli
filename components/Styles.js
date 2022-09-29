@@ -41,5 +41,8 @@ export default StyleSheet.create({
         borderBottomWidth: 1.0,
         marginBottom: 5,
         color: '#fff',
+    },
+    pointsText: {
+        color: '#fff'
     }
 });
