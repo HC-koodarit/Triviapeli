@@ -71,6 +71,7 @@ export default function PartyModeOptions( { navigation }) {
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedCategory(itemValue)
                 }>
+                {/*Muutokset näihin, alustavat vaan */}
                 <Picker.Item label="1" value="" />
                 <Picker.Item label="2" value="" />
                 <Picker.Item label="3" value="" />
@@ -84,6 +85,7 @@ export default function PartyModeOptions( { navigation }) {
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedDifficulty(itemValue)
                 }>
+                {/*Muutokset näihin, alustavat vaan */}
                 <Picker.Item label="Easy" value="Easy" />
                 <Picker.Item label="Medium" value="Medium" />
                 <Picker.Item label="Hard" value="Hard" />
