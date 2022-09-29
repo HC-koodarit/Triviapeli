@@ -39,7 +39,7 @@ export default function PartyModeOptions( { navigation }) {
 
     return(
         <View style={Styles.container}>
-            <Text style={Styles.title}>Players:</Text>
+            <Text style={Styles.title}>Players</Text>
             <TextInput
                 style={Styles.addPlayers}
                 placeholder='Add player'
@@ -51,25 +51,46 @@ export default function PartyModeOptions( { navigation }) {
             </Button>
 
             <Text style={Styles.title}>Drink</Text>
-            <View style={{ borderWidth: 1, borderColor: 'white', borderRadius: 4 }}>
                 <Picker
-                    style={Styles.picker}
+                    style={Styles.picker} itemStyle={{height: 60}}
                     ref={pickerRef}
                     selectedValue={selectedDrink}
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedDrink(itemValue)
                 }>
-                <Picker.Item label="Mild" value="Mild" />
-                <Picker.Item label="Medium" value="Medium" />
-                <Picker.Item label="Strong" value="Strong" />
+                <Picker.Item label="Mild (Beer, Cider etc.)" value="Mild" />
+                <Picker.Item label="Medium (Wine etc.)" value="Medium" />
+                <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
                 </Picker>
-            </View>
 
             <Text style={Styles.title}>Category</Text>
-            
+                <Picker
+                    style={Styles.picker} itemStyle={{height: 60}}
+                    ref={pickerRef}
+                    selectedValue={selectedCategory}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setSelectedCategory(itemValue)
+                }>
+                <Picker.Item label="1" value="" />
+                <Picker.Item label="2" value="" />
+                <Picker.Item label="3" value="" />
+                </Picker>
+
             <Text style={Styles.title}>Difficulty</Text>
+                <Picker
+                    style={Styles.picker} itemStyle={{height: 60}}
+                    ref={pickerRef}
+                    selectedValue={selectedDifficulty}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setSelectedDifficulty(itemValue)
+                }>
+                <Picker.Item label="Easy" value="Easy" />
+                <Picker.Item label="Medium" value="Medium" />
+                <Picker.Item label="Hard" value="Hard" />
+                </Picker>
             
             <Button
+                style={Styles.buttons}
                 title='Start game'
                 onPress={() => navigation.navigate('PartyModeGame')}
             />
