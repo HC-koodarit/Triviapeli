@@ -5,10 +5,15 @@ import {Picker} from '@react-native-picker/picker';
 
 export default function PartyModeOptions( { navigation }) {
 
+    // Variables for gameoptions
     const [selectedDrink, setSelectedDrink] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const pickerRef = useRef();
+
+    const category = selectedCategory;
+    const difficulty = selectedDifficulty;
+
 
     //Add player variables
     const [playerNames, setPlayerNames] = useState([]);
@@ -21,8 +26,7 @@ export default function PartyModeOptions( { navigation }) {
 
     function close() {
        pickerRef.current.blur();
-     }
-
+    }
 
     const addPlayers = () => {
         let playerNameGenerator = "player" + playerNumber
