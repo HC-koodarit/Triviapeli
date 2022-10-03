@@ -4,15 +4,19 @@ import Styles from './Styles';
 
 export default function RulesScreen({ navigation }, {route}) {
 
+   //const points = navigation.getParam('points');
+   //const [newPoints, setNewPoints] = useState(0);
+   const { points } = route?.params || {};
+
     return (
         <View style={Styles.container}>
-            <Text style={Styles.header}>Score</Text>
-            <Text>your game results
-            Points: {route.params.paramKey}
+            <Text style={Styles.header}>Scores</Text>
+            <Text style={Styles.pointsText}>your game results, 
+            Points: {points}
             </Text>
             <Button
                 style={Styles.buttons}
-                title="Points"
+                title="Back to game"
                 onPress={() => navigation.navigate('Gamescreen')}
             />
         </View>

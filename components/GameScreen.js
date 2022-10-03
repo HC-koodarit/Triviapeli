@@ -7,6 +7,7 @@ import Styles from './Styles.js';
 
 
 export default function GameScreen({ navigation }) {
+    
 
     // set data to state
     const [data, setData] = useState([]);
@@ -70,11 +71,10 @@ export default function GameScreen({ navigation }) {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             setPoints(setPoints => setPoints + 1);
-            navigation.navigate('Pointscreen', {paramKey: points})
+            navigation.navigate('Pointscreen', {points})
             {getQuestion()};
-            setPoints(setPoints => setPoints + 1);
         } else {
-            navigation.navigate('Pointscreen', {paramKey: points})
+            navigation.navigate('Pointscreen', {points})
             {getQuestion()};
         }
     }
@@ -97,7 +97,7 @@ export default function GameScreen({ navigation }) {
         <CountDown
             isPlaying
             until={15}
-            onFinish={() => alert('Time is up!')}
+            onFinish={() => navigation.navigate('Pointscreen', {points})}
             timeToShow={['S']}
             size={20}
             digitTxtStyle={{color: 'black'}}
