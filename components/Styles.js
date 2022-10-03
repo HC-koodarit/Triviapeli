@@ -16,7 +16,7 @@ export default StyleSheet.create({
         color: '#fff',
     },
     headerRules: {
-        fontSize:25,
+        fontSize: 25,
         fontWeight: 'bold',
         marginBottom: 20,
         marginTop: 20,
@@ -62,5 +62,10 @@ export default StyleSheet.create({
         color: '#fff',
         width: 330,
         height: 100,
-    }
+    },
+    aboutContainer: {
+        flex: 1,
+        backgroundColor: '#020d23',
+        marginTop: 0,
+    },
 });

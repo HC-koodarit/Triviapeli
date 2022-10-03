@@ -7,6 +7,7 @@ export default function Drinks() {
     const [mediumAlcohol, setMediumAlcohol] = useState(0);
     const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
     const [highAlcohol, setHighAlcohol] = useState(0);
+    const [message, setMessage] = useState('');
 
     // Count wrong answers and add drinks
 
@@ -25,23 +26,28 @@ export default function Drinks() {
     }
 // Drinking rules
     if (lowAlcohol === 1) {
-        alert("Take one sip!");
+        //alert("Take one sip!");
+        setMessage("Take one sip!");
         setLowAlcohol(0);
     }
     if (lowAlcFinished === 10) {
-        alert("Finish your drink!");
+        //alert("Finish your drink!");
+        setMessage("Finish your drink!");
         setLowAlcFinished(0);
     }
     if (mediumAlcohol === 3) {
-        alert("Take one sip!");
+        //alert("Take one sip!");
+        setMessage("Take one sip!");
         setMediumAlcohol(0);
     }
     if (mediumAlcFinished === 10) {
-        alert("Finish your drink!");
+        //alert("Finish your drink!");
+        setMessage("Finish your drink!");
         setMediumAlcFinished(0);
     }
     if (highAlcohol === 10) {
-        alert("Take a shot!");
+        //alert("Take a shot!");
+        setMessage("Take a shot!");
         setHighAlcohol(0);
     }
 }

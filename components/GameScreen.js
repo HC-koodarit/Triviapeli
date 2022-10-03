@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 import Styles from './Styles.js';
@@ -16,11 +15,6 @@ export default function GameScreen({ navigation }) {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
-
-    //Add player variables
-    const [playerNames, setPlayerNames] = useState([]);
-    const [playerNameTemp, setPlayerNameTemp] = useState('');
-    const [playerNumber, setPlayerNumber] = useState(1);
 
     const [points, setPoints] = useState(0);
 
@@ -79,18 +73,7 @@ export default function GameScreen({ navigation }) {
         }
     }
 
-    const addPlayers = () => {
-        let playerNameGenerator = "player" + playerNumber
-        //setPlayerNameGenerator("player" + playerNumber);
-        setPlayerNumber(playerNumber + 1);
-        //setPlayerNames({${playerNameGenerator}: playerNameTemp});
-        //setPlayerNameTemp('');
-        //console.log(playerNames);
-        const newList = playerNames.concat({ Name: playerNameTemp, id: playerNameGenerator });
 
-        setPlayerNames(newList);
-        setPlayerNameTemp('');
-    }
 
     // Timer that sets the time in which the player has to answer 
     const TimerForQuestions = () => (
@@ -108,12 +91,6 @@ export default function GameScreen({ navigation }) {
  
     return (
         <SafeAreaView style={Styles.container}>
-            <Button
-                style={Styles.buttons}
-                title="Home"
-                onPress={() => navigation.navigate('Home')}
-            />
-
             <Text style={Styles.title}>Trivia</Text>
             <Text style={Styles.category}>{category}</Text>
             <Text style={Styles.question}>{question}</Text>
@@ -127,18 +104,6 @@ export default function GameScreen({ navigation }) {
             <Text
                 style={Styles.pointsText}
             >Pointcount: {points}</Text>
-
-            <View>
-                <TextInput
-                style={Styles.addPlayers}
-                placeholder='Add player'
-                onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
-                value={playerNameTemp}/>
-                <Button
-                title={"Add"}
-                onPress={addPlayers} >
-                </Button>
-            </View>
         </SafeAreaView>
     );
 };
