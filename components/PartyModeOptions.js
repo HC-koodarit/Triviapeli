@@ -11,8 +11,8 @@ export default function PartyModeOptions( { navigation }) {
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const pickerRef = useRef();
 
-    const category = selectedCategory;
-    const difficulty = selectedDifficulty;
+    // const category = selectedCategory;
+    // const difficulty = selectedDifficulty;
 
 
     //Add player variables
@@ -39,6 +39,15 @@ export default function PartyModeOptions( { navigation }) {
 
         setPlayerNames(newList);
         setPlayerNameTemp('');
+    }
+
+    // start game and pass params to PartyModeScreen
+    const startGame = () => {
+        navigation.navigate('PartyModeGame', {
+            selectedCategory,
+            selectedDifficulty,
+            selectedDrink,
+        });
     }
 
     return(
@@ -76,9 +85,9 @@ export default function PartyModeOptions( { navigation }) {
                         setSelectedCategory(itemValue)
                 }>
                 {/*Muutokset näihin, alustavat vaan */}
-                <Picker.Item label="1" value="" />
-                <Picker.Item label="2" value="" />
-                <Picker.Item label="3" value="" />
+                <Picker.Item label="1" value="1" />
+                <Picker.Item label="2" value="2" />
+                <Picker.Item label="3" value="3" />
                 </Picker>
 
             <Text style={Styles.title}>Difficulty</Text>
@@ -98,7 +107,7 @@ export default function PartyModeOptions( { navigation }) {
             <Button
                 style={Styles.buttons}
                 title='Start game'
-                onPress={() => navigation.navigate('PartyModeGame')}
+                onPress={startGame}
             />
         </View>
     );
