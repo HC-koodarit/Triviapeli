@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import { SafeAreaView, Button, Text, View, TextInput, Alert } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 import Styles from './Styles.js';
 import PartyModeOptions from './PartyModeOptions.js';
