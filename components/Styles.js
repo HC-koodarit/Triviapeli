@@ -7,6 +7,7 @@ export default StyleSheet.create({
         backgroundColor: '#020d23',
         alignItems: 'center',
         marginTop: 0,
+        paddingTop: 0,
     },
     header: {
         fontSize: 70,
@@ -56,6 +57,14 @@ export default StyleSheet.create({
     normalText: {
         fontSize: 18,
         color: '#fff',
+    },
+    picker: {
+        fontSize: 18,
+        color: '#fff',
+        width: 330,
+        height: 100,
+        marginBottom: 20,
+
     },
     aboutContainer: {
         flex: 1,
