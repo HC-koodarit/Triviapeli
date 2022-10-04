@@ -12,7 +12,7 @@ export default function PartyModeScreen({ route, navigation }) {
     const { selectedCategory, selectedDifficulty, selectedDrink,} = route.params;
 
 /*
-    const getCustomQuestion(category, difficulty) {
+    const getCustomQuestion = () => {
         fetch(`https://opentdb.com/api.php?amount=1&category=${selectedCategory}&difficulty=${selectedDifficulty`)
     }
     */
