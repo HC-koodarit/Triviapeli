@@ -6,19 +6,22 @@ import Styles from './Styles.js';
 import PartyModeOptions from './PartyModeOptions.js';
 
 
-export default function PartyModeScreen() {
+export default function PartyModeScreen({ route, navigation }) {
+
+    // passed params from ParyModeOptions
+    const { selectedCategory, selectedDifficulty, selectedDrink,} = route.params;
 
 /*
-    console.log(`Difficulty and Category: ${PartyModeOptions()}`)
-
     const getCustomQuestion(category, difficulty) {
-        fetch(`https://opentdb.com/api.php?amount=1&category=${category}&difficulty=${difficulty`)
+        fetch(`https://opentdb.com/api.php?amount=1&category=${selectedCategory}&difficulty=${selectedDifficulty`)
     }
     */
 
     return(
         <View style={Styles.container}>
-            <Text style={Styles.title}>Juodaa kännit</Text>
+            <Text style={Styles.normalText}>Drink: {selectedDrink}</Text>
+            <Text style={Styles.normalText}>Category: {selectedCategory}</Text>
+            <Text style={Styles.normalText}>Difficulty: {selectedDifficulty}</Text>
         </View>
     );
 };
