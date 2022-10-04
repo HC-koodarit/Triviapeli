@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { SafeAreaView, Button, Text, View, TextInput } from 'react-native';
+import { SafeAreaView, Button, Text, View, TextInput, FlatList } from 'react-native';
 import Styles from './Styles';
 import {Picker} from '@react-native-picker/picker';
 
@@ -13,7 +13,6 @@ export default function PartyModeOptions( { navigation }) {
 
     const category = selectedCategory;
     const difficulty = selectedDifficulty;
-
 
     //Add player variables
     const [playerNames, setPlayerNames] = useState([]);
@@ -34,17 +33,26 @@ export default function PartyModeOptions( { navigation }) {
         setPlayerNumber(playerNumber + 1);
         //setPlayerNames({${playerNameGenerator}: playerNameTemp});
         //setPlayerNameTemp('');
-        //console.log(playerNames);
-        const newList = playerNames.concat({ Name: playerNameTemp, id: playerNameGenerator });
+        console.log(playerNames);
+        setPlayerNames([...playerNames, { name: playerNameTemp, id: playerNameGenerator }]);
 
-        setPlayerNames(newList);
         setPlayerNameTemp('');
     }
 
     return(
-        <View style={Styles.container}>
-            <Text style={Styles.title}>Players</Text>
+        <SafeAreaView style={Styles.partyOptionsContainer}>
+            <View style={Styles.playerNames}>
+            <Text style={Styles.title}>Players:</Text>
+            <FlatList
+                data={playerNames}
+                renderItem={({ item }) =>
+                    <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
+                }
+            />
+            </View>
+            <View style={Styles.playerContainer}>
             <TextInput
+                placeholderTextColor={'white'}
                 style={Styles.addPlayers}
                 placeholder='Add player'
                 onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
@@ -53,7 +61,8 @@ export default function PartyModeOptions( { navigation }) {
                 title={"Add"}
                 onPress={addPlayers} >
             </Button>
-
+            </View>
+            <View style={Styles.otherOptionsContainer}>
             <Text style={Styles.title}>Drink</Text>
                 <Picker
                     style={Styles.picker} itemStyle={{height: 60}}
@@ -76,9 +85,9 @@ export default function PartyModeOptions( { navigation }) {
                         setSelectedCategory(itemValue)
                 }>
                 {/*Muutokset näihin, alustavat vaan */}
-                <Picker.Item label="1" value="" />
-                <Picker.Item label="2" value="" />
-                <Picker.Item label="3" value="" />
+                <Picker.Item label="1" value="1" />
+                <Picker.Item label="2" value="2" />
+                <Picker.Item label="3" value="3" />
                 </Picker>
 
             <Text style={Styles.title}>Difficulty</Text>
@@ -100,7 +109,8 @@ export default function PartyModeOptions( { navigation }) {
                 title='Start game'
                 onPress={() => navigation.navigate('PartyModeGame')}
             />
-        </View>
+            </View>
+        </SafeAreaView>
     );
 }
 

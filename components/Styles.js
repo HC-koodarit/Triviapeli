@@ -43,12 +43,12 @@ export default StyleSheet.create({
         margin: 20,
         color: '#fff',
     },
-    addPlayers: {
+    picker: {
         fontSize: 18,
-        width: 120,
-        borderBottomWidth: 1.0,
-        marginBottom: 5,
-        color: '#fff',
+        color: '#000000',
+        backgroundColor: '#fff',
+        width: 360,
+        height: 50,
     },
     pointsText: {
         color: '#fff'
@@ -57,15 +57,38 @@ export default StyleSheet.create({
         fontSize: 18,
         color: '#fff',
     },
-    picker: {
-        fontSize: 18,
-        color: '#fff',
-        width: 330,
-        height: 100,
-    },
     aboutContainer: {
         flex: 1,
         backgroundColor: '#020d23',
         marginTop: 0,
+    },
+    
+    //PartyModeOptions StyleSheet
+    partyOptionsContainer: {
+        flex: 1,
+        backgroundColor: '#020d23',
+    },
+    playerContainer: {
+        flex: 1,
+    },
+    otherOptionsContainer: {
+        flex: 5,
+    },
+    playerNames: {
+        marginTop: 10,
+        width: 100,
+        color: '#fff',
+        marginBottom: 20,
+    },
+    flatlistPlayerNames: {
+        color: "#fff",
+    },
+    addPlayers: {
+        fontSize: 18,
+        width: 360,
+        borderBottomWidth: 1.0,
+        borderColor: "#fff",
+        marginBottom: 5,
+        color: '#fff',
     },
 });
