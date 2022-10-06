@@ -172,7 +172,7 @@ export default function GameScreen({ navigation }) {
                 title="End Game"
                 onPress={() => {
                     setIsPlaying(false);
-                    navigation.navigate('Pointscreen');
+                    navigation.navigate('Pointscreen', {points: points});
                 }}
             />
         </SafeAreaView>
