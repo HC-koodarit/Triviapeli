@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert, Platform } from 'react-native';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation }) {
-    
+
     // variables for questions and answers
     const [question, setQuestion] = useState('');
     const [category, setCategory] = useState('');
@@ -61,31 +61,65 @@ export default function GameScreen({ navigation }) {
         return buttons;
     }
 
-    const correctAlert = () =>
-        Alert.alert(
-            "Correct",
-            "Good job! :)",
-            [
-            {
-                text: "Next question",
-                onPress: () => getQuestion(),
-                style: "ok",
-            },
-            ],
-        );
+    // alert for correct answer
+    const correctAlert = () => {
+        if (Platform.OS === 'web') {
+            alert("Correct! Good job! :)");
+            getQuestion();
+        } else {
+            Alert.alert(
+                "Correct",
+                "Good job! :)",
+                [
+                    {
+                        text: "Next question",
+                        onPress: () => getQuestion(),
+                        style: "ok",
+                    },
+                ],
+            );
+        }
+    }
 
-    const wrongAlert = () =>
-        Alert.alert(
-            "Wrong",
-            "The correct answer was " + correctAnswer,
-            [
-            {
-                text: "Next question",
-                onPress: () => getQuestion(),
-                style: "ok",
-            },
-            ],
-        );
+    // alert for wrong answer
+    const wrongAlert = () => {
+        if (Platform.OS === 'web') {
+            alert("Wrong! The correct answer was " + correctAnswer);
+            getQuestion();
+        } else {
+            Alert.alert(
+                "Wrong",
+                "The correct answer was " + correctAnswer,
+                [
+                    {
+                        text: "Next question",
+                        onPress: () => getQuestion(),
+                        style: "ok",
+                    },
+                ],
+            );
+        }
+    }
+
+    // alert for time running out
+    const timeIsUpAlert = () => {
+        if (Platform.OS === 'web') {
+            alert("Time is up! The correct answer was " + correctAnswer);
+            getQuestion();
+        } else {
+            Alert.alert(
+                "Time is up!",
+                "The correct answer was " + correctAnswer,
+                [
+                    {
+                        text: "Next question",
+                        onPress: () => getQuestion(),
+                        style: "ok",
+                    },
+                ],
+            );
+        }
+    }
 
     // check if answer is correct
     const checkAnswer = (answer) => {
@@ -100,20 +134,6 @@ export default function GameScreen({ navigation }) {
             wrongAlert();
         }
     }
-
-    const timeIsUpAlert = () =>
-        Alert.alert(
-            "Time is up!",
-            "The correct answer was " + correctAnswer,
-            [
-            {
-                text: "Next question",
-                onPress: () => getQuestion(),
-                style: "ok",
-            },
-            ],
-    );
-
 
     // 15 sec countdown timer
     const TimerForQuestions = () => (
