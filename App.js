@@ -29,7 +29,6 @@ export default function App() {
           <Stack.Screen name="Pointscreen" component={PointScreen} style={Styles.title} />
           <Stack.Screen name="Gamescreen" component={GameScreen} style={Styles.title} />
           <Stack.Screen name="PartyModeGame" component={PartyModeScreen} style={Styles.title} />
-
           <Stack.Screen name="Categories" component={Categories} style={Styles.title} />
         </Stack.Navigator>
       </NavigationContainer>
