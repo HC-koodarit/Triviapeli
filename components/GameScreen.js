@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
-import CountDown from 'react-native-countdown-component';
 import Styles from './Styles.js';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation }) {
     
@@ -16,35 +16,39 @@ export default function GameScreen({ navigation }) {
 
     const [points, setPoints] = useState(0);
 
+    const [isPlaying, setIsPlaying] = useState(true);
+    const [key, setKey] = useState(0);
+
     // button for getting the question
     const getQuestion = () => {
         fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
             .then(response => response.json())
             .then(data => {
-                    setAllAnswers(['']);
-                    setQuestion(decodeURIComponent(data.results[0].question));
-                    setCategory(decodeURIComponent(data.results[0].category));
-                    setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
-                    let answerArray = [];
-                    for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
-                        answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
-                    }
-                    setIncorrectAnswers(answerArray);
-                    answerArray.push(decodeURIComponent(data.results[0].correct_answer));
+                setAllAnswers(['']);
+                setQuestion(decodeURIComponent(data.results[0].question));
+                setCategory(decodeURIComponent(data.results[0].category));
+                setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
+                let answerArray = [];
+                for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
+                    answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
+                }
+                setIncorrectAnswers(answerArray);
+                answerArray.push(decodeURIComponent(data.results[0].correct_answer));
 
-                    answerArray = answerArray.sort(() => Math.random() - 0.5);
+                answerArray = answerArray.sort(() => Math.random() - 0.5);
 
-                    setAllAnswers(answerArray);
-                    //console.log(question);
-                    console.log(decodeURIComponent(data.results[0].correct_answer));
-                    //console.log(incorrectAnswers);
-                    //console.log(allAnswers);
-                    
+                setAllAnswers(answerArray);
+                //console.log(question);
+                //console.log(decodeURIComponent(data.results[0].correct_answer));
+                //console.log(incorrectAnswers);
+                //console.log(allAnswers);
+                setIsPlaying(true);
+
             })
             .catch(err => console.error(err));
-            
+
     }
-    
+
     useEffect(() => {
         getQuestion();
     }, []);
@@ -54,7 +58,8 @@ export default function GameScreen({ navigation }) {
     const answerButtons = () => {
         let buttons = [];
         for (let i = 0; i < allAnswers.length; i++) {
-            buttons.push(<Button title={allAnswers[i]} onPress={() => checkAnswer(allAnswers[i])} key={i}/>);
+            buttons.push(<Button title={allAnswers[i]} onPress={() =>
+                checkAnswer(allAnswers[i])} key={i} />);
         }
         return buttons;
     }
@@ -63,28 +68,34 @@ export default function GameScreen({ navigation }) {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             setPoints(setPoints => setPoints + 1);
-            navigation.push('Pointscreen', {points})
-            {getQuestion()};
+            setKey(prevKey => prevKey + 1);
+            setIsPlaying(false);
+            //navigation.push('Pointscreen', {points})
+            { getQuestion() };
         } else {
-            navigation.push('Pointscreen', {points})
-            {getQuestion()};
+            //navigation.push('Pointscreen', {points})
+            setKey(prevKey => prevKey + 1);
+            setIsPlaying(false);
+            { getQuestion() };
         }
     }
 
-    // Timer that sets the time in which the player has to answer 
     const TimerForQuestions = () => (
-        <CountDown
-            isPlaying
-            until={15}
-            onFinish={() => navigation.push('Pointscreen', {points})}
-            timeToShow={['S']}
-            size={20}
-            digitTxtStyle={{color: 'black'}}
-            timeLabelStyle={{color: 'black', fontWeight: 'bold'}}
-            digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625'}}
-    />
+        <CountdownCircleTimer
+            key={key}
+            isPlaying={isPlaying}
+            duration={15}
+            colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+            onComplete={() => {
+                setKey(prevKey => prevKey + 1);
+                setIsPlaying(false);
+                getQuestion();
+            }}
+        >
+            {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
+        </CountdownCircleTimer>
     )
- 
+
     return (
         <SafeAreaView style={Styles.container}>
             <Text style={Styles.title}>Trivia</Text>
