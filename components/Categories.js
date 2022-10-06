@@ -3,7 +3,7 @@ import { Button, FlatList, Text, View } from 'react-native';
 import Styles from './Styles';
 
 
-export default function Categories() {
+export default function Categories({ navigation }) {
 
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -34,14 +34,20 @@ export default function Categories() {
         const random = Math.floor(Math.random() * categories.length);
         return categories[random].id;
     }
-    // let the user choose categories from the list
+    // let the user choose categories from the list and return to previous screen
     const chooseCategories = () => {
+        navigation.navigate('Partymode', {
+            selectedCategories,
+        });
+        /*
         if (selectedCategories.length > 0) {
             console.log(selectedCategories);
             return selectedCategories;
         } else {
             return randomCategory();
         }
+        */
+        
     }
 
     return (
@@ -62,8 +68,8 @@ export default function Categories() {
             />
             <View style={Styles.buttons}>
                 <Button
-                    title="Submit"
-                    onPress={() => chooseCategories()}
+                    title="Select"
+                    onPress={chooseCategories}
                     color="#0f0"
                 />
             </View>
