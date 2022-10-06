@@ -142,7 +142,7 @@ export default function GameScreen({ navigation }) {
             key={key}
             isPlaying={isPlaying}
             duration={15}
-            colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+            colors={'#004777'}
             onComplete={() => {
                 setKey(prevKey => prevKey + 1);
                 setIsPlaying(false);

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Styles from './Styles';
 
-export default function RulesScreen({ route, navigation }) {
+export default function PointScreen({ route, navigation }) {
 
    const { points } = route.params;
 
