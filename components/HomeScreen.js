@@ -1,6 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Button, Image, Text, View } from 'react-native';
 import Styles from './Styles';
 
 export default function HomeScreen({ navigation }) {
@@ -28,7 +27,6 @@ export default function HomeScreen({ navigation }) {
                 title="About"
                 onPress={() => navigation.navigate('About')}
             />
-            <Button style={Styles.buttons} title="Categories" onPress={() => navigation.navigate('Categories')} />
             <Image source={require('../assets/titlescreen.png')} style={
                 {
                     width: 400,

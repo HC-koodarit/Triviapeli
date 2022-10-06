@@ -5,14 +5,14 @@ import {Picker} from '@react-native-picker/picker';
 import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
 import { app } from '../firebase/firebaseconfig.js';
 
-export default function PartyModeOptions( { navigation }) {
+export default function PartyModeOptions({ route, navigation }) {
 
     // Variables for gameoptions
     const [selectedNum, setSelectedNum] = useState(0);
     const [selectedDrink, setSelectedDrink] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const pickerRef = useRef();
+    const { selectedCategories } = route.params;
 
     //Add player variables
     const [playerNames, setPlayerNames] = useState([]);
@@ -61,13 +61,14 @@ export default function PartyModeOptions( { navigation }) {
     // start game and pass params to PartyModeScreen
     const startGame = () => {
         navigation.navigate('PartyModeGame', {
-            selectedCategory,
+            categories,
             selectedDifficulty,
             selectedDrink,
             selectedNum,
         });
     }
 
+    // set number of guestions per player
     const setNumberOfQuestions = () => {
         setSelectedNum(selectedNum)
     }
@@ -125,19 +126,16 @@ export default function PartyModeOptions( { navigation }) {
                     <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
                 </Picker>
 
-            {/*  TÄMÄN POISTO */}
-            <Text style={Styles.title}>Category</Text>
-                <Picker
-                    style={Styles.pickerPartyMode} itemStyle={{height: 60}}
-                    ref={pickerRef}
-                    selectedValue={selectedCategory}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSelectedCategory(itemValue)
-                }>
-                    <Picker.Item label="1" value="1" />
-                    <Picker.Item label="2" value="2" />
-                    <Picker.Item label="3" value="3" />
-                </Picker>
+            {/* TODO: Select categories */}
+            <Button
+                title='Select categories'
+                onPress={() => navigation.navigate('Categories')}
+            />
+
+            <Button
+                title='show categories'
+                onPress={console.log(categories)}
+            />
 
             <Text style={Styles.title}>Difficulty</Text>
                 <Picker
