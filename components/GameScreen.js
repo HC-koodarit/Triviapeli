@@ -94,7 +94,7 @@ export default function GameScreen({ navigation }) {
                 getQuestion();
             }}
         >
-            {({ remainingTime }) => <Text>{remainingTime}</Text>}
+            {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
         </CountdownCircleTimer>
     )
 
