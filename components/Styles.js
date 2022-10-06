@@ -71,6 +71,10 @@ export default StyleSheet.create({
         backgroundColor: '#020d23',
         marginTop: 0,
     },
+
+    timer: {
+        marginTop: 50,
+    },
     
     //PartyModeOptions StyleSheet
     partyOptionsContainer: {
