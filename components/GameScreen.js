@@ -6,20 +6,21 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation }) {
     
-    // set data to state
-    const [data, setData] = useState([]);
+    // variables for questions and answers
     const [question, setQuestion] = useState('');
     const [category, setCategory] = useState('');
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
 
+    // variable for the player's score
     const [points, setPoints] = useState(0);
 
+    // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(true);
     const [key, setKey] = useState(0);
 
-    // button for getting the question
+    // fetch question data from api and set to variables
     const getQuestion = () => {
         fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
             .then(response => response.json())
@@ -38,11 +39,7 @@ export default function GameScreen({ navigation }) {
                 answerArray = answerArray.sort(() => Math.random() - 0.5);
 
                 setAllAnswers(answerArray);
-                //console.log(question);
-                //console.log(decodeURIComponent(data.results[0].correct_answer));
-                //console.log(incorrectAnswers);
-                //console.log(allAnswers);
-                setIsPlaying(true);
+                setIsPlaying(true);  // start timer
 
             })
             .catch(err => console.error(err));
@@ -96,15 +93,11 @@ export default function GameScreen({ navigation }) {
             setPoints(setPoints => setPoints + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            //navigation.push('Pointscreen', {points})
             correctAlert();
-            //{ getQuestion() };
         } else {
-            //navigation.push('Pointscreen', {points})
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             wrongAlert();
-            //{ getQuestion() };
         }
     }
 
@@ -121,6 +114,8 @@ export default function GameScreen({ navigation }) {
             ],
     );
 
+
+    // 15 sec countdown timer
     const TimerForQuestions = () => (
         <CountdownCircleTimer
             key={key}

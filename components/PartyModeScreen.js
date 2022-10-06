@@ -14,8 +14,8 @@ export default function PartyModeScreen({ route, navigation }) {
 
     const [firebasePoints, setFirebasePoints] = useState([]);
     const [points, setPoints] = useState('');
-    // Initialize Firebase
     
+    // Initialize Firebase
     const database = getDatabase(app);
 
     //Use Effect for database connection
@@ -56,4 +56,3 @@ export default function PartyModeScreen({ route, navigation }) {
         </View>
     );
 };
-
