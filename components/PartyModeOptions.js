@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import { SafeAreaView, Button, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
 import Styles from './Styles';
 import {Picker} from '@react-native-picker/picker';
+import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
+import { app } from '../firebase/firebaseconfig.js';
 
 export default function PartyModeOptions( { navigation }) {
 
@@ -16,6 +18,10 @@ export default function PartyModeOptions( { navigation }) {
     const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
+    const [firebasePlayers, setFirebasePlayers] = useState([]);
+
+    // Initialize Firebase
+    const database = getDatabase(app);
 
     function open() {
        pickerRef.current.focus();
@@ -25,14 +31,29 @@ export default function PartyModeOptions( { navigation }) {
        pickerRef.current.blur();
     }
 
+    //Use Effect for database connection
+    useEffect(() => {
+        const itemsRef = ref(database, 'players/');
+        onValue(itemsRef, (snapshot) => {
+        const data = snapshot.val();
+        const playerNames = data ? Object.keys(data).map(id => ({ id, ...data[id]})) : [];
+        setPlayerNames(playerNames);
+        })
+    }, []);
+
+
     const addPlayers = () => {
         let playerNameGenerator = "player" + playerNumber
         //setPlayerNameGenerator("player" + playerNumber);
         setPlayerNumber(playerNumber + 1);
         //setPlayerNames({${playerNameGenerator}: playerNameTemp});
         //setPlayerNameTemp('');
-        console.log(playerNames);
-        setPlayerNames([...playerNames, { name: playerNameTemp, id: playerNameGenerator }]);
+        //console.log(playerNames);
+        //setPlayerNames([...playerNames, { name: playerNameTemp, id: playerNameGenerator }]);
+
+        push(
+            ref(database, 'players/'),
+            { 'name': playerNameTemp, 'id': playerNameGenerator });
 
         setPlayerNameTemp('');
     }
@@ -57,10 +78,14 @@ export default function PartyModeOptions( { navigation }) {
             <View style={Styles.playerNames}>
             <Text style={Styles.title}>Players:</Text>
             <FlatList
+                style={{marginLeft : "5%"}}
                 data={playerNames}
+                keyExtractor={item => item.id}
                 renderItem={({ item }) =>
+                <View style={Styles.playerContainer}>
                     <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
-                }
+                    <Text style={{color: '#0000ff'}} onPress={() => deleteItem(item.id)}>delete</Text>
+                </View>}
             />
             </View>
             <View style={Styles.playerContainer}>
@@ -89,7 +114,7 @@ export default function PartyModeOptions( { navigation }) {
             />
             <Text style={Styles.title}>Drink</Text>
                 <Picker
-                    style={Styles.picker} itemStyle={{height: 60}}
+                    style={Styles.pickerPartyMode} itemStyle={{height: 60}}
                     ref={pickerRef}
                     selectedValue={selectedDrink}
                     onValueChange={(itemValue, itemIndex) =>
@@ -103,7 +128,7 @@ export default function PartyModeOptions( { navigation }) {
             {/*  TÄMÄN POISTO */}
             <Text style={Styles.title}>Category</Text>
                 <Picker
-                    style={Styles.picker} itemStyle={{height: 60}}
+                    style={Styles.pickerPartyMode} itemStyle={{height: 60}}
                     ref={pickerRef}
                     selectedValue={selectedCategory}
                     onValueChange={(itemValue, itemIndex) =>
@@ -116,7 +141,7 @@ export default function PartyModeOptions( { navigation }) {
 
             <Text style={Styles.title}>Difficulty</Text>
                 <Picker
-                    style={Styles.picker} itemStyle={{height: 60}}
+                    style={Styles.pickerPartyMode} itemStyle={{height: 60}}
                     ref={pickerRef}
                     selectedValue={selectedDifficulty}
                     onValueChange={(itemValue, itemIndex) =>

@@ -65,7 +65,6 @@ export default StyleSheet.create({
         width: 330,
         height: 100,
         marginBottom: 20,
-
     },
     aboutContainer: {
         flex: 1,
@@ -105,6 +104,17 @@ export default StyleSheet.create({
         marginBottom: 5,
         color: '#fff',
     },
+    playerContainer: {
+        marginTop: 10,
+        justifyContent: 'center',
+      },
+    pickerPartyMode: {
+        fontSize: 18,
+        color: '#fff',
+        width: 330,
+        height: 50,
+        marginBottom: 10,
+    },
     addNumber: {
         fontSize: 18,
         width: 100,
@@ -120,5 +130,5 @@ export default StyleSheet.create({
     scrollView: {
         backgroundColor: '#020d23',
         marginHorizontal: 20,
-      },
+    },
 });
