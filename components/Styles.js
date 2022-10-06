@@ -111,4 +111,20 @@ export default StyleSheet.create({
         height: 50,
         marginBottom: 10,
     },
+    addNumber: {
+        fontSize: 18,
+        width: 100,
+        height: 35,
+        borderColor: '#fff',
+        borderWidth: 0.5,
+        alignItems: 'center',
+        borderColor: "#fff",
+        marginBottom: 5,
+        color: '#fff',
+        textAlign: 'center'
+    },
+    scrollView: {
+        backgroundColor: '#020d23',
+        marginHorizontal: 20,
+    },
 });

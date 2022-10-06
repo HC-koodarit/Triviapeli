@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { SafeAreaView, Button, Text, View, TextInput, FlatList } from 'react-native';
+import { SafeAreaView, Button, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
 import Styles from './Styles';
 import {Picker} from '@react-native-picker/picker';
 import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
@@ -8,13 +8,11 @@ import { app } from '../firebase/firebaseconfig.js';
 export default function PartyModeOptions( { navigation }) {
 
     // Variables for gameoptions
+    const [selectedNum, setSelectedNum] = useState(0);
     const [selectedDrink, setSelectedDrink] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const pickerRef = useRef();
-
-    // const category = selectedCategory;
-    // const difficulty = selectedDifficulty;
 
     //Add player variables
     const [playerNames, setPlayerNames] = useState([]);
@@ -66,11 +64,17 @@ export default function PartyModeOptions( { navigation }) {
             selectedCategory,
             selectedDifficulty,
             selectedDrink,
+            selectedNum,
         });
+    }
+
+    const setNumberOfQuestions = () => {
+        setSelectedNum(selectedNum)
     }
 
     return(
         <SafeAreaView style={Styles.partyOptionsContainer}>
+        <ScrollView style={Styles.scrollView}>
             <View style={Styles.playerNames}>
             <Text style={Styles.title}>Players:</Text>
             <FlatList
@@ -96,7 +100,18 @@ export default function PartyModeOptions( { navigation }) {
                 onPress={addPlayers} >
             </Button>
             </View>
-            <View style={Styles.otherOptionsContainer}>
+            <Text style={Styles.title}>Questions per Player</Text>
+                <TextInput
+                    keyboardType='number-pad'
+                    style={Styles.addNumber}
+                    onChangeText={selectedNum => setSelectedNum(Number(selectedNum))}
+                    value={selectedNum} 
+                />
+            <Button
+                style={Styles.buttons}
+                title='Set'
+                onPress={setNumberOfQuestions}
+            />
             <Text style={Styles.title}>Drink</Text>
                 <Picker
                     style={Styles.pickerPartyMode} itemStyle={{height: 60}}
@@ -105,11 +120,12 @@ export default function PartyModeOptions( { navigation }) {
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedDrink(itemValue)
                 }>
-                <Picker.Item label="Mild (Beer, Cider etc.)" value="Mild" />
-                <Picker.Item label="Medium (Wine etc.)" value="Medium" />
-                <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
+                    <Picker.Item label="Mild (Beer, Cider etc.)" value="Mild" />
+                    <Picker.Item label="Medium (Wine etc.)" value="Medium" />
+                    <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
                 </Picker>
 
+            {/*  TÄMÄN POISTO */}
             <Text style={Styles.title}>Category</Text>
                 <Picker
                     style={Styles.pickerPartyMode} itemStyle={{height: 60}}
@@ -118,10 +134,9 @@ export default function PartyModeOptions( { navigation }) {
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedCategory(itemValue)
                 }>
-                {/*Muutokset näihin, alustavat vaan */}
-                <Picker.Item label="1" value="1" />
-                <Picker.Item label="2" value="2" />
-                <Picker.Item label="3" value="3" />
+                    <Picker.Item label="1" value="1" />
+                    <Picker.Item label="2" value="2" />
+                    <Picker.Item label="3" value="3" />
                 </Picker>
 
             <Text style={Styles.title}>Difficulty</Text>
@@ -133,9 +148,9 @@ export default function PartyModeOptions( { navigation }) {
                         setSelectedDifficulty(itemValue)
                 }>
                 {/*Muutokset näihin, alustavat vaan */}
-                <Picker.Item label="Easy" value="Easy" />
-                <Picker.Item label="Medium" value="Medium" />
-                <Picker.Item label="Hard" value="Hard" />
+                    <Picker.Item label="Easy" value="Easy" />
+                    <Picker.Item label="Medium" value="Medium" />
+                    <Picker.Item label="Hard" value="Hard" />
                 </Picker>
             
             <Button
@@ -143,7 +158,7 @@ export default function PartyModeOptions( { navigation }) {
                 title='Start game'
                 onPress={startGame}
             />
-            </View>
+        </ScrollView>
         </SafeAreaView>
     );
 }
