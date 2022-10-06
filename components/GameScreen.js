@@ -64,6 +64,32 @@ export default function GameScreen({ navigation }) {
         return buttons;
     }
 
+    const correctAlert = () =>
+        Alert.alert(
+            "Correct",
+            "Good job! :)",
+            [
+            {
+                text: "Next question",
+                onPress: () => getQuestion(),
+                style: "ok",
+            },
+            ],
+        );
+
+    const wrongAlert = () =>
+        Alert.alert(
+            "Wrong",
+            "The correct answer was " + correctAnswer,
+            [
+            {
+                text: "Next question",
+                onPress: () => getQuestion(),
+                style: "ok",
+            },
+            ],
+        );
+
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
@@ -71,14 +97,29 @@ export default function GameScreen({ navigation }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             //navigation.push('Pointscreen', {points})
-            { getQuestion() };
+            correctAlert();
+            //{ getQuestion() };
         } else {
             //navigation.push('Pointscreen', {points})
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            { getQuestion() };
+            wrongAlert();
+            //{ getQuestion() };
         }
     }
+
+    const timeIsUpAlert = () =>
+        Alert.alert(
+            "Time is up!",
+            "The correct answer was " + correctAnswer,
+            [
+            {
+                text: "Next question",
+                onPress: () => getQuestion(),
+                style: "ok",
+            },
+            ],
+    );
 
     const TimerForQuestions = () => (
         <CountdownCircleTimer
@@ -87,9 +128,10 @@ export default function GameScreen({ navigation }) {
             duration={15}
             colors={['#004777', '#F7B801', '#A30000', '#A30000']}
             onComplete={() => {
+
                 setKey(prevKey => prevKey + 1);
                 setIsPlaying(false);
-                getQuestion();
+                timeIsUpAlert();
             }}
         >
             {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
@@ -111,6 +153,7 @@ export default function GameScreen({ navigation }) {
             <Text
                 style={Styles.pointsText}
             >Pointcount: {points}</Text>
+
         </SafeAreaView>
     );
 };
