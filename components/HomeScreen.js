@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import Styles from './Styles';
 
-
 export default function HomeScreen({ navigation }) {
-
 
     return (
         <View style={Styles.container}>

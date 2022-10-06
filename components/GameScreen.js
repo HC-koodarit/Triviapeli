@@ -4,10 +4,8 @@ import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert } from '
 import CountDown from 'react-native-countdown-component';
 import Styles from './Styles.js';
 
-
 export default function GameScreen({ navigation }) {
     
-
     // set data to state
     const [data, setData] = useState([]);
     const [question, setQuestion] = useState('');
