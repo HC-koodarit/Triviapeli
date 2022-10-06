@@ -81,6 +81,7 @@ export default function GameScreen({ navigation }) {
     }
 
     const TimerForQuestions = () => (
+        <View style={Styles.timer}>
         <CountdownCircleTimer
             key={key}
             isPlaying={isPlaying}
@@ -94,6 +95,7 @@ export default function GameScreen({ navigation }) {
         >
             {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
         </CountdownCircleTimer>
+        </View>
     )
 
     return (
