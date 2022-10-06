@@ -6,9 +6,9 @@ export default function RulesScreen({ navigation }, {route}) {
 
    //const points = navigation.getParam('points');
    //const [newPoints, setNewPoints] = useState(0);
-   
+
    // jostain syystä pointsit eivät tule mukana! pitää korjata
-   const { points } = route?.params || {};
+   //const { points } = route?.params || {};
 
     return (
         <View style={Styles.container}>

@@ -35,6 +35,7 @@ export default StyleSheet.create({
     category: {
         fontSize: 14,
         marginBottom: 10,
+        color: '#fff'
     },
     question: {
         fontSize: 15,
