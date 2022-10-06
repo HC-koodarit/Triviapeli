@@ -144,7 +144,6 @@ export default function GameScreen({ navigation }) {
             duration={15}
             colors={['#004777', '#F7B801', '#A30000', '#A30000']}
             onComplete={() => {
-
                 setKey(prevKey => prevKey + 1);
                 setIsPlaying(false);
                 timeIsUpAlert();
@@ -160,7 +159,6 @@ export default function GameScreen({ navigation }) {
             <Text style={Styles.title}>Trivia</Text>
             <Text style={Styles.category}>{category}</Text>
             <Text style={Styles.question}>{question}</Text>
-
             <View style={Styles.buttons}>
                 {answerButtons()}
             </View>
@@ -169,8 +167,14 @@ export default function GameScreen({ navigation }) {
             </View>
             <Text
                 style={Styles.pointsText}
-            >Pointcount: {points}</Text>
-
+                >Pointcount: {points}</Text>
+            <Button
+                title="End Game"
+                onPress={() => {
+                    setIsPlaying(false);
+                    navigation.navigate('Pointscreen');
+                }}
+            />
         </SafeAreaView>
     );
 };
