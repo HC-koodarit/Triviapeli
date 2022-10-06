@@ -46,6 +46,7 @@ export default function PartyModeScreen({ route, navigation }) {
             <Text style={Styles.normalText}>Drink: {selectedDrink}</Text>
             <Text style={Styles.normalText}>Category: {selectedCategory}</Text>
             <Text style={Styles.normalText}>Difficulty: {selectedDifficulty}</Text>
+            <Text style={Styles.normalText}>Questins per Player: {selectedNum}</Text>
             <TextInput
                 style={Styles.textInput}
                 placeholder='Amount'
