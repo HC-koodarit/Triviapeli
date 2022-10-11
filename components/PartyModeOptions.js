@@ -60,7 +60,7 @@ export default function PartyModeOptions({ route, navigation }) {
     // start game and pass params to PartyModeScreen
     const startGame = () => {
         navigation.navigate('PartyModeGame', {
-            selectedCategories.name,
+            selectedCategories,
             selectedDifficulty,
             selectedDrink,
             selectedNum,
