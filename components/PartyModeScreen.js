@@ -9,7 +9,7 @@ import { app } from '../firebase/firebaseconfig.js';
 
 export default function PartyModeScreen({ route, navigation }) {
 
-    // passed params from ParyModeOptions
+    // passed params from PartyModeOptions
     const { selectedCategories, selectedDifficulty, selectedDrink, selectedNum } = route.params;
 
     const [firebasePoints, setFirebasePoints] = useState([]);
@@ -18,7 +18,7 @@ export default function PartyModeScreen({ route, navigation }) {
     // Initialize Firebase
     const database = getDatabase(app);
 
-    //Use Effect for database connection
+    // Use Effect for database connection
     useEffect(() => {
         const itemsRef = ref(database, 'points/');
         onValue(itemsRef, (snapshot) => {
@@ -28,18 +28,12 @@ export default function PartyModeScreen({ route, navigation }) {
         })
     }, []);
 
-    //Save item to firebase realtime database
+    // Save item to firebase realtime database
     const saveItem = () => {
         push(
         ref(database, 'points/'),
         { 'points': points });
     }
-
-    /*
-    const getCustomQuestion = () => {
-        fetch(`https://opentdb.com/api.php?amount=1&category=${selectedCategory}&difficulty=${selectedDifficulty`)
-    }
-    */
 
     return(
         <View style={Styles.container}>

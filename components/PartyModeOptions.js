@@ -60,7 +60,7 @@ export default function PartyModeOptions({ route, navigation }) {
     // start game and pass params to PartyModeScreen
     const startGame = () => {
         navigation.navigate('PartyModeGame', {
-            selectedCategories,
+            selectedCategories.name,
             selectedDifficulty,
             selectedDrink,
             selectedNum,
@@ -115,6 +115,7 @@ export default function PartyModeOptions({ route, navigation }) {
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
             <ScrollView style={Styles.scrollView}>
+                {/* Players */}
                 <View style={Styles.playerNames}>
                     <Text style={Styles.title}>Players:</Text>
                     <FlatList
@@ -140,6 +141,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         onPress={addPlayers} >
                     </Button>
                 </View>
+                {/* Select number of questions */}
                 <Text style={Styles.title}>Questions per Player</Text>
                 <TextInput
                     keyboardType='number-pad'
@@ -152,6 +154,7 @@ export default function PartyModeOptions({ route, navigation }) {
                     title='Set'
                     onPress={setNumberOfQuestions}
                 />
+                {/* Select drink */}
                 <Text style={Styles.title}>Drink</Text>
                 <Picker
                     style={Styles.pickerPartyMode} itemStyle={{ height: 60 }}
@@ -164,42 +167,39 @@ export default function PartyModeOptions({ route, navigation }) {
                     <Picker.Item label="Medium (Wine etc.)" value="Medium" />
                     <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
                 </Picker>
-
-                {/* TODO: Select categories */}
-                    <Text style={Styles.header}>Categories</Text>
-                    <Text style={Styles.normalText}>Choose your categories</Text>
-                    <FlatList data={categories}
-                        renderItem={({ item }) => (
-                            <View style={Styles.buttons}>
-                                <Button
-                                    title={item.name}
-                                    onPress={() => isCategorySelected(item.id) ? handleRemoveCategory(item.id) : handleCategoryChange(item.id)}
-                                    color={isCategorySelected(item.id) ? '#f00' : '#0f0'}
-                                />
-                            </View>
-                        )}
-                        keyExtractor={item => item.id.toString()}
-                    />
-
-                    <Text style={Styles.title}>Difficulty</Text>
-                    <Picker
-                        style={Styles.pickerPartyMode} itemStyle={{ height: 60 }}
-                        ref={pickerRef}
-                        selectedValue={selectedDifficulty}
-                        onValueChange={(itemValue, itemIndex) =>
-                            setSelectedDifficulty(itemValue)
-                        }>
-                        {/*Muutokset näihin, alustavat vaan */}
-                        <Picker.Item label="Easy" value="Easy" />
-                        <Picker.Item label="Medium" value="Medium" />
-                        <Picker.Item label="Hard" value="Hard" />
-                    </Picker>
-
-                    <Button
-                        style={Styles.buttons}
-                        title='Start game'
-                        onPress={startGame}
-                    />
+                {/* Select categories */}
+                <Text style={Styles.header}>Categories</Text>
+                <Text style={Styles.normalText}>Choose your categories</Text>
+                <FlatList data={categories}
+                    renderItem={({ item }) => (
+                    <View style={Styles.buttons}>
+                        <Button
+                            title={item.name}
+                            onPress={() => isCategorySelected(item.id) ? handleRemoveCategory(item.id) : handleCategoryChange(item.id)}
+                            color={isCategorySelected(item.id) ? '#f00' : '#0f0'}
+                        />
+                    </View>
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                />
+                {/* Select difficulty */}
+                <Text style={Styles.title}>Difficulty</Text>
+                <Picker
+                    style={Styles.pickerPartyMode} itemStyle={{ height: 60 }}
+                    ref={pickerRef}
+                    selectedValue={selectedDifficulty}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setSelectedDifficulty(itemValue)
+                    }>
+                    <Picker.Item label="Easy" value="Easy" />
+                    <Picker.Item label="Medium" value="Medium" />
+                    <Picker.Item label="Hard" value="Hard" />
+                </Picker>
+                <Button
+                    style={Styles.buttons}
+                    title='Start game'
+                    onPress={startGame}
+                />
             </ScrollView>
         </SafeAreaView>
     );
