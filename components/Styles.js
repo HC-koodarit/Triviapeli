@@ -131,4 +131,41 @@ export default StyleSheet.create({
         backgroundColor: '#020d23',
         marginHorizontal: 20,
     },
+    headerPartymode: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        marginTop: 20,
+        color: '#fff',
+    },
+
+    //MultiSelect Dropdown Styles
+    dropdown: {
+      height: 50,
+      backgroundColor: 'transparent',
+      borderBottomColor: 'gray',
+      borderBottomWidth: 0.5,
+    },
+    placeholderStyleDropdown: {
+      fontSize: 16,
+      color: "white",
+    },
+    selectedTextStyleDropdown: {
+      fontSize: 14,
+    },
+    iconStyleDropdown: {
+      width: 20,
+      height: 20,
+    },
+    inputSearchStyleDropdown: {
+      height: 40,
+      fontSize: 16,
+    },
+    iconDropdown: {
+      marginRight: 5,
+    },
+    selectedStyleDropdown: {
+      borderRadius: 12,
+      color: "blue",
+    },
 });

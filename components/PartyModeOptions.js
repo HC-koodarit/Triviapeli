@@ -5,6 +5,8 @@ import Styles from './Styles';
 import { Picker } from '@react-native-picker/picker';
 import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
 import { app } from '../firebase/firebaseconfig.js';
+import { MultiSelect } from 'react-native-element-dropdown';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function PartyModeOptions({ route, navigation }) {
 
@@ -80,10 +82,14 @@ export default function PartyModeOptions({ route, navigation }) {
             .then(response => response.json())
             .then(data => {
                 setCategories(data.trivia_categories);
+                console.log(categories);
             })
             .catch(err => console.error(err));
     }, []);
 
+    const [selected, setSelected] = useState([]);
+
+    /*
     // put the selected categories in an array
     const handleCategoryChange = (itemValue, itemIndex) => {
         setSelectedCategories([...selectedCategories, itemValue]);
@@ -96,6 +102,7 @@ export default function PartyModeOptions({ route, navigation }) {
     const isCategorySelected = (itemValue) => {
         return selectedCategories.includes(itemValue);
     }
+    */
     // choose a random category from the categories
     const randomCategory = () => {
         const random = Math.floor(Math.random() * categories.length);
@@ -167,20 +174,31 @@ export default function PartyModeOptions({ route, navigation }) {
                     <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
                 </Picker>
                 {/* Select categories */}
-                <Text style={Styles.header}>Categories</Text>
                 <Text style={Styles.normalText}>Choose your categories</Text>
-                <FlatList data={categories}
-                    renderItem={({ item }) => (
-                    <View style={Styles.buttons}>
-                        <CheckBox
-                            center
-                            title={item.name}
-                            checked={() => isCategorySelected(item.id) ? handleRemoveCategory(item.id) : handleCategoryChange(item.id)}
+                <MultiSelect
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    inputSearchStyle={Styles.inputSearchStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={categories}
+                    labelField="name"
+                    valueField="id"
+                    placeholder="Select categories"
+                    value={selectedCategories}
+                    onChange={item => {
+                        setSelectedCategories(item);
+                    }}
+                    renderLeftIcon={() => (
+                        <AntDesign
+                        style={Styles.iconDropdown}
+                        color="white"
+                        name="Safety"
+                        size={20}
                         />
-                    </View>
                     )}
-                    keyExtractor={item => item.id.toString()}
-                />
+                    selectedStyle={Styles.selectedStyleDropdown}
+                    />
                 {/* Select difficulty */}
                 <Text style={Styles.title}>Difficulty</Text>
                 <Picker

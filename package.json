@@ -23,12 +23,14 @@
     "react-native": "0.69.5",
     "react-native-countdown-circle-timer": "^3.0.9",
     "react-native-countdown-component": "^2.7.1",
+    "react-native-element-dropdown": "^2.3.0",
     "react-native-elements": "^3.4.2",
     "react-native-picker-checkbox": "^2.0.2",
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "~3.15.0",
     "react-native-select-dropdown": "^2.0.4",
     "react-native-svg": "12.3.0",
+    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.7"
   },
   "devDependencies": {
