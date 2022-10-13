@@ -35,6 +35,7 @@ export default StyleSheet.create({
     category: {
         fontSize: 14,
         marginBottom: 10,
+        color: '#fff'
     },
     question: {
         fontSize: 15,
@@ -64,12 +65,15 @@ export default StyleSheet.create({
         width: 330,
         height: 80,
         marginBottom: 20,
-
     },
     aboutContainer: {
         flex: 1,
         backgroundColor: '#020d23',
         marginTop: 0,
+    },
+
+    timer: {
+        marginTop: 50,
     },
     
     //PartyModeOptions StyleSheet
@@ -99,5 +103,32 @@ export default StyleSheet.create({
         borderColor: "#fff",
         marginBottom: 5,
         color: '#fff',
+    },
+    playerContainer: {
+        marginTop: 10,
+        justifyContent: 'center',
+      },
+    pickerPartyMode: {
+        fontSize: 18,
+        color: '#fff',
+        width: 330,
+        height: 50,
+        marginBottom: 10,
+    },
+    addNumber: {
+        fontSize: 18,
+        width: 100,
+        height: 35,
+        borderColor: '#fff',
+        borderWidth: 0.5,
+        alignItems: 'center',
+        borderColor: "#fff",
+        marginBottom: 5,
+        color: '#fff',
+        textAlign: 'center'
+    },
+    scrollView: {
+        backgroundColor: '#020d23',
+        marginHorizontal: 20,
     },
 });
