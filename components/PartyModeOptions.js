@@ -76,6 +76,7 @@ export default function PartyModeOptions({ route, navigation }) {
     // Category options
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selected, setSelected] = useState([]);
 
     useEffect(() => {
         fetch('https://opentdb.com/api_category.php')
@@ -86,8 +87,6 @@ export default function PartyModeOptions({ route, navigation }) {
             })
             .catch(err => console.error(err));
     }, []);
-
-    const [selected, setSelected] = useState([]);
 
     /*
     // put the selected categories in an array
@@ -160,6 +159,7 @@ export default function PartyModeOptions({ route, navigation }) {
                     title='Set'
                     onPress={setNumberOfQuestions}
                 />
+                <View style={Styles.drinkContainer}>
                 {/* Select drink */}
                 <Text style={Styles.title}>Drink</Text>
                 <Picker
@@ -173,7 +173,9 @@ export default function PartyModeOptions({ route, navigation }) {
                     <Picker.Item label="Medium (Wine etc.)" value="Medium" />
                     <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
                 </Picker>
+                </View>
                 {/* Select categories */}
+                <View style={Styles.categoryContainer}>
                 <Text style={Styles.normalText}>Choose your categories</Text>
                 <MultiSelect
                     style={Styles.dropdown}
@@ -185,21 +187,17 @@ export default function PartyModeOptions({ route, navigation }) {
                     labelField="name"
                     valueField="id"
                     placeholder="Select categories"
-                    value={selectedCategories}
+                    value={selected}
                     onChange={item => {
-                        setSelectedCategories(item);
+                        setSelected(item);
+                        setSelectedCategories([...selectedCategories, {id: item}]);
+                        console.log(selectedCategories);
                     }}
-                    renderLeftIcon={() => (
-                        <AntDesign
-                        style={Styles.iconDropdown}
-                        color="white"
-                        name="Safety"
-                        size={20}
-                        />
-                    )}
                     selectedStyle={Styles.selectedStyleDropdown}
-                    />
+                />
+                </View>
                 {/* Select difficulty */}
+                <View style={Styles.difficultyContainer}>
                 <Text style={Styles.title}>Difficulty</Text>
                 <Picker
                     style={Styles.pickerPartyMode} itemStyle={{ height: 60 }}
@@ -217,6 +215,7 @@ export default function PartyModeOptions({ route, navigation }) {
                     title='Start game'
                     onPress={startGame}
                 />
+                </View>
             </ScrollView>
         </SafeAreaView>
     );

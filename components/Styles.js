@@ -131,12 +131,20 @@ export default StyleSheet.create({
         backgroundColor: '#020d23',
         marginHorizontal: 20,
     },
-    headerPartymode: {
-        fontSize: 40,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        marginTop: 20,
-        color: '#fff',
+
+    //Category Partymode Options
+    categoryContainer: {
+        marginBottom: 15,
+    },
+
+    //Difficulty Partymode Options
+    difficultyContainer: {
+        marginBottom: 25,
+    },
+
+    //Difficulty Partymode Options
+    drinkContainer: {
+        marginBottom: 15,
     },
 
     //MultiSelect Dropdown Styles
@@ -166,6 +174,5 @@ export default StyleSheet.create({
     },
     selectedStyleDropdown: {
       borderRadius: 12,
-      color: "blue",
     },
 });
