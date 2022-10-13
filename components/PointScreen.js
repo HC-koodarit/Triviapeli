@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import Styles from './Styles';
 
 export default function PointScreen({ route, navigation }) {
@@ -13,8 +14,8 @@ export default function PointScreen({ route, navigation }) {
             <Text style={Styles.pointsText}>Your score was {points}
             </Text>
             <Button
-                style={Styles.buttons}
                 title="Back to main page"
+                type="outline"
                 onPress={() => navigation.navigate('Home')}
             />
         </View>
