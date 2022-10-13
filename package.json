@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^0.17.0",
     "@react-native-community/checkbox": "^0.5.12",
     "@react-native-picker/picker": "^2.4.6",
     "@react-navigation/bottom-tabs": "^6.3.3",
@@ -18,17 +19,17 @@
     "expo-status-bar": "~1.4.0",
     "firebase": "9.6.11",
     "react": "18.0.0",
+    "react-dom": "18.0.0",
     "react-native": "0.69.5",
     "react-native-countdown-circle-timer": "^3.0.9",
     "react-native-countdown-component": "^2.7.1",
+    "react-native-elements": "^3.4.2",
     "react-native-picker-checkbox": "^2.0.2",
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "~3.15.0",
     "react-native-select-dropdown": "^2.0.4",
     "react-native-svg": "12.3.0",
-    "react-native-web": "~0.18.7",
-    "react-dom": "18.0.0",
-    "@expo/webpack-config": "^0.17.0"
+    "react-native-web": "~0.18.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

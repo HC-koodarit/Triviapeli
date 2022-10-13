@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Button, StyleSheet, Text, View, TextInput, Alert, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Alert, Platform } from 'react-native';
+import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
@@ -55,7 +56,7 @@ export default function GameScreen({ navigation }) {
     const answerButtons = () => {
         let buttons = [];
         for (let i = 0; i < allAnswers.length; i++) {
-            buttons.push(<Button title={allAnswers[i]} onPress={() =>
+            buttons.push(<Button title={allAnswers[i]} type="outline" onPress={() =>
                 checkAnswer(allAnswers[i])} key={i} />);
         }
         return buttons;
@@ -170,6 +171,7 @@ export default function GameScreen({ navigation }) {
                 >Pointcount: {points}</Text>
             <Button
                 title="End Game"
+                type="outline"
                 onPress={() => {
                     setIsPlaying(false);
                     navigation.navigate('Pointscreen', {points: points});
