@@ -28,14 +28,15 @@ export default function PartyModeOptions( { navigation }) {
     }
 
     const addPlayers = () => {
+        //Generate id for player
         let playerNameGenerator = "player" + playerNumber
-        //setPlayerNameGenerator("player" + playerNumber);
         setPlayerNumber(playerNumber + 1);
-        //setPlayerNames({${playerNameGenerator}: playerNameTemp});
-        //setPlayerNameTemp('');
-        console.log(playerNames);
-        setPlayerNames([...playerNames, { name: playerNameTemp, id: playerNameGenerator }]);
+        
+        //console.log(playerNames);
+        //Save the player name and id to a list
+        setPlayerNames([...playerNames, { id: playerNameGenerator, name: playerNameTemp }]);
 
+        //Empty add player textinput
         setPlayerNameTemp('');
     }
 
@@ -45,6 +46,7 @@ export default function PartyModeOptions( { navigation }) {
             selectedCategory,
             selectedDifficulty,
             selectedDrink,
+            playerNames,
         });
     }
 
