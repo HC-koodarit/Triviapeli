@@ -62,48 +62,8 @@ export default function GameScreen({ navigation }) {
         return buttons;
     }
 
-    // alert for correct answer
-    const correctAlert = () => {
-        if (Platform.OS === 'web') {
-            alert("Correct! Good job! :)");
-            getQuestion();
-        } else {
-            Alert.alert(
-                "Correct",
-                "Good job! :)",
-                [
-                    {
-                        text: "Next question",
-                        onPress: () => getQuestion(),
-                        style: "ok",
-                    },
-                ],
-            );
-        }
-    }
-
-    // alert for wrong answer
-    const wrongAlert = () => {
-        if (Platform.OS === 'web') {
-            alert("Wrong! The correct answer was " + correctAnswer);
-            getQuestion();
-        } else {
-            Alert.alert(
-                "Wrong",
-                "The correct answer was " + correctAnswer,
-                [
-                    {
-                        text: "Next question",
-                        onPress: () => getQuestion(),
-                        style: "ok",
-                    },
-                ],
-            );
-        }
-    }
-
-    // alert for time running out
-    const timeIsUpAlert = () => {
+    // time running out
+    const timeIsUp = () => {
         if (Platform.OS === 'web') {
             alert("Time is up! The correct answer was " + correctAnswer);
             getQuestion();
@@ -121,6 +81,7 @@ export default function GameScreen({ navigation }) {
             );
         }
     }
+    
 
     // check if answer is correct
     const checkAnswer = (answer) => {
@@ -128,12 +89,42 @@ export default function GameScreen({ navigation }) {
             setPoints(setPoints => setPoints + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            correctAlert();
-        } else {
+            if (Platform.OS === 'web') {
+                alert("Correct! Good job! :)");
+                getQuestion();
+            } else {
+                Alert.alert(
+                    "Correct",
+                    "Good job! :)",
+                    [
+                        {
+                            text: "Next question",
+                            onPress: () => getQuestion(),
+                            style: "ok",
+                        },
+                    ],
+                );
+            };
+        } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            wrongAlert();
-        }
+            if (Platform.OS === 'web') {
+                alert("Wrong! The correct answer was " + correctAnswer);
+                getQuestion();
+            } else {
+                Alert.alert(
+                    "Wrong",
+                    "The correct answer was " + correctAnswer,
+                    [
+                        {
+                            text: "Next question",
+                            onPress: () => getQuestion(),
+                            style: "ok",
+                        },
+                    ],
+                );
+            }
+        } 
     }
 
     // 15 sec countdown timer
@@ -147,7 +138,7 @@ export default function GameScreen({ navigation }) {
             onComplete={() => {
                 setKey(prevKey => prevKey + 1);
                 setIsPlaying(false);
-                timeIsUpAlert();
+                timeIsUp();
             }}
         >
             {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
