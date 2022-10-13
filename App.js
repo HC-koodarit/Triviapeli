@@ -10,6 +10,7 @@ import PointScreen from './components/PointScreen';
 import PartyModeOptions from './components/PartyModeOptions';
 import Categories from './components/Categories';
 import PartyModeScreen from './components/PartyModeScreen';
+import PartyModeGame from './components/PartyModeGame';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,8 +29,10 @@ export default function App() {
           <Stack.Screen name="About" component={About} style={Styles.title} />
           <Stack.Screen name="Pointscreen" component={PointScreen} style={Styles.title} />
           <Stack.Screen name="Gamescreen" component={GameScreen} style={Styles.title} />
-          <Stack.Screen name="PartyModeGame" component={PartyModeScreen} style={Styles.title} />
+          <Stack.Screen name="PartyModeScreen" component={PartyModeScreen} style={Styles.title} />
           <Stack.Screen name="Categories" component={Categories} style={Styles.title} />
+          <Stack.Screen name="PartyModeGame" component={PartyModeGame} style={Styles.title} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </View>

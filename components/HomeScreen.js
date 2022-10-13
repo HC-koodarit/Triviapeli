@@ -29,6 +29,11 @@ export default function HomeScreen({ navigation }) {
                 type="outline"
                 onPress={() => navigation.navigate('About')}
             />
+            <Button
+                title="Test PartymodeGame"
+                type="outline"
+                onPress={() => navigation.navigate('PartyModeGame')}
+            />
             <Image source={require('../assets/titlescreen.png')} style={
                 {
                     width: 400,
