@@ -85,7 +85,7 @@ export default function GameScreen({ navigation }) {
 
     // fetch question data from api and set to variables
     const getQuestion = () => {
-        fetch("https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${difficulty}&encode=url3986")
+        fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${difficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
                 setAllAnswers(['']);
@@ -110,6 +110,7 @@ export default function GameScreen({ navigation }) {
     }
 
     useEffect(() => {
+        randomCategory();
         getQuestion();
     }, []);
 
