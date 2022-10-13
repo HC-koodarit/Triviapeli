@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
-import { Input, Button, CheckBox, Icon } from 'react-native-elements';
+import { Button, CheckBox } from 'react-native-elements';
 import Styles from './Styles';
-import { Picker } from '@react-native-picker/picker';
 import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
 import { app } from '../firebase/firebaseconfig.js';
-import { MultiSelect } from 'react-native-element-dropdown';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
+
 
 export default function PartyModeOptions({ route, navigation }) {
 
@@ -39,7 +38,7 @@ export default function PartyModeOptions({ route, navigation }) {
         onValue(itemsRef, (snapshot) => {
             const data = snapshot.val();
             const playerNames = data ? Object.keys(data).map(id => ({ id, ...data[id] })) : [];
-            setPlayerNames(playerNames);
+            setFirebasePlayers(playerNames);
         })
     }, []);
 
@@ -53,9 +52,24 @@ export default function PartyModeOptions({ route, navigation }) {
         //Save the player name and id to a list
         setPlayerNames([...playerNames, { id: playerNameGenerator, name: playerNameTemp }]);
 
+        push(
+            ref(database, 'players/'),
+            { 'name': playerNameTemp, 'id': playerNameGenerator });
+
         //Empty add player textinput
         setPlayerNameTemp('');
     }
+
+    const deletePlayer = (item) => {
+      console.log(item);
+      remove(ref(database, 'players/' + item))
+      .then(function() {
+        console.log("Remove succeeded.")
+      })
+      .catch(function(error) {
+        console.log("Remove failed: " + error.message)
+      });
+  }
 
     // start game and pass params to PartyModeScreen
     const startGame = () => {
@@ -67,6 +81,20 @@ export default function PartyModeOptions({ route, navigation }) {
             selectedNum,
         });
     }
+
+    // Drinks data
+    const drinks = [
+    { label: 'Mild (Beer, Cider etc.)', value: 'Mild' },
+    { label: 'Medium (Wine etc.)', value: 'Medium' },
+    { label: 'Strong (Spririts, Liquor etc.)', value: 'Strong' },
+    ];
+
+    // Difficulty data
+    const difficulty = [
+    { label: 'Easy', value: 'Easy' },
+    { label: 'Medium', value: 'Medium' },
+    { label: 'Hard', value: 'Hard' },
+    ];
 
     // set number of guestions per player
     const setNumberOfQuestions = () => {
@@ -102,6 +130,7 @@ export default function PartyModeOptions({ route, navigation }) {
         return selectedCategories.includes(itemValue);
     }
     */
+
     // choose a random category from the categories
     const randomCategory = () => {
         const random = Math.floor(Math.random() * categories.length);
@@ -125,12 +154,12 @@ export default function PartyModeOptions({ route, navigation }) {
                     <Text style={Styles.title}>Players:</Text>
                     <FlatList
                         style={{ marginLeft: "5%" }}
-                        data={playerNames}
+                        data={firebasePlayers}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
-                                <Text style={{ color: '#0000ff' }} onPress={() => deleteItem(item.id)}>delete</Text>
+                                <Text style={ Styles.flatlistPlayerNames }>{item.name}</Text>
+                                <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
                             </View>}
                     />
                 </View>
@@ -143,37 +172,47 @@ export default function PartyModeOptions({ route, navigation }) {
                         value={playerNameTemp} />
                     <Button
                         title={"Add"}
+                        type="outline"
                         onPress={addPlayers} >
                     </Button>
                 </View>
+
                 {/* Select number of questions */}
+                <SafeAreaView style={Styles.questionContainer}>
                 <Text style={Styles.title}>Questions per Player</Text>
                 <TextInput
-                    keyboardType='number-pad'
+                    keyboardType="number-pad"
                     style={Styles.addNumber}
                     onChangeText={selectedNum => setSelectedNum(Number(selectedNum))}
                     value={selectedNum}
                 />
                 <Button
-                    style={Styles.buttons}
                     title='Set'
+                    type="outline"
                     onPress={setNumberOfQuestions}
                 />
-                <View style={Styles.drinkContainer}>
+                </SafeAreaView>
+                
                 {/* Select drink */}
+                <View style={Styles.drinkContainer}>
                 <Text style={Styles.title}>Drink</Text>
-                <Picker
-                    style={Styles.pickerPartyMode} itemStyle={{ height: 60 }}
-                    ref={pickerRef}
-                    selectedValue={selectedDrink}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSelectedDrink(itemValue)
-                    }>
-                    <Picker.Item label="Mild (Beer, Cider etc.)" value="Mild" />
-                    <Picker.Item label="Medium (Wine etc.)" value="Medium" />
-                    <Picker.Item label="Strong (Spririts, Liquor etc.)" value="Strong" />
-                </Picker>
+                <Dropdown
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={drinks}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Select drink"
+                    value={selectedDrink}
+                    onChange={item => {
+                        setSelectedDrink(item.value);
+                    }}
+                />
                 </View>
+
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
                 <Text style={Styles.normalText}>Choose your categories</Text>
@@ -181,7 +220,6 @@ export default function PartyModeOptions({ route, navigation }) {
                     style={Styles.dropdown}
                     placeholderStyle={Styles.placeholderStyleDropdown}
                     selectedTextStyle={Styles.selectedTextStyleDropdown}
-                    inputSearchStyle={Styles.inputSearchStyleDropdown}
                     iconStyle={Styles.iconStyleDropdown}
                     data={categories}
                     labelField="name"
@@ -196,22 +234,29 @@ export default function PartyModeOptions({ route, navigation }) {
                     selectedStyle={Styles.selectedStyleDropdown}
                 />
                 </View>
+
                 {/* Select difficulty */}
                 <View style={Styles.difficultyContainer}>
                 <Text style={Styles.title}>Difficulty</Text>
-                <Picker
-                    style={Styles.pickerPartyMode} itemStyle={{ height: 60 }}
-                    ref={pickerRef}
-                    selectedValue={selectedDifficulty}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSelectedDifficulty(itemValue)
-                    }>
-                    <Picker.Item label="Easy" value="Easy" />
-                    <Picker.Item label="Medium" value="Medium" />
-                    <Picker.Item label="Hard" value="Hard" />
-                </Picker>
+                <Dropdown
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={difficulty}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Select difficulty"
+                    value={selectedDifficulty}
+                    onChange={item => {
+                        setSelectedDifficulty(item.value);
+                    }}
+                />
+                </View>
+                <View style={Styles.startGamePContainer}>
                 <Button
-                    style={Styles.buttons}
+                    type="outline"
                     title='Start game'
                     onPress={startGame}
                 />

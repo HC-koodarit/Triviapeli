@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-
     container: {
         flex: 1,
         backgroundColor: '#020d23',
@@ -83,6 +82,7 @@ export default StyleSheet.create({
     },
     playerContainer: {
         flex: 1,
+        flexDirection: 'row',
     },
     otherOptionsContainer: {
         flex: 5,
@@ -107,6 +107,7 @@ export default StyleSheet.create({
     playerContainer: {
         marginTop: 10,
         justifyContent: 'center',
+        marginBottom: 10,
       },
     pickerPartyMode: {
         fontSize: 18,
@@ -117,7 +118,6 @@ export default StyleSheet.create({
     },
     addNumber: {
         fontSize: 18,
-        width: 100,
         height: 35,
         borderColor: '#fff',
         borderWidth: 0.5,
@@ -129,22 +129,32 @@ export default StyleSheet.create({
     },
     scrollView: {
         backgroundColor: '#020d23',
-        marginHorizontal: 20,
+        marginHorizontal: 10,
     },
 
-    //Category Partymode Options
+    //Category container Partymode
     categoryContainer: {
         marginBottom: 15,
     },
 
-    //Difficulty Partymode Options
+    //Difficulty container Partymode
     difficultyContainer: {
-        marginBottom: 25,
+        marginBottom: 15,
     },
 
-    //Difficulty Partymode Options
+    //Drinks container Partymode
     drinkContainer: {
         marginBottom: 15,
+    },
+
+    //Questions container Partymode
+    questionContainer: {
+        marginBottom: 15,
+    },
+
+    //Start Game button Partymode
+    startGamePContainer: {
+        marginBottom: 20,
     },
 
     //MultiSelect Dropdown Styles
@@ -160,6 +170,7 @@ export default StyleSheet.create({
     },
     selectedTextStyleDropdown: {
       fontSize: 14,
+      color: "white",
     },
     iconStyleDropdown: {
       width: 20,
