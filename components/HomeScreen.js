@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Image, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import Styles from './Styles';
+import { Button } from 'react-native-elements';
+
 
 export default function HomeScreen({ navigation }) {
 
@@ -8,23 +10,23 @@ export default function HomeScreen({ navigation }) {
         <View style={Styles.container}>
             <Text style={Styles.header}>Trivia</Text>
             <Button
-                style={Styles.buttons}
                 title="Partymode"
-                onPress={() => navigation.navigate('Partymode')}
+                type="outline"
+                onPress={() => { navigation.navigate('Partymode')}}
             />
             <Button
-                style={Styles.buttons}
                 title="Quickplay"
+                type="outline"
                 onPress={() => navigation.navigate('Quickplay')}
             />
             <Button
-                style={Styles.buttons}
                 title="Rules"
+                type="outline"
                 onPress={() => navigation.navigate('Rules')}
             />
             <Button
-                style={Styles.buttons}
                 title="About"
+                type="outline"
                 onPress={() => navigation.navigate('About')}
             />
             <Image source={require('../assets/titlescreen.png')} style={
