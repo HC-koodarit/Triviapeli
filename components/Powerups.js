@@ -29,3 +29,5 @@ const [randomPowerup, setRandomPowerup] = useState(0);
 // sabotage powerup lvl 3: another player will have the text blurred
 // sabotage powerup lvl 4: another player will have the text in a different language
 const [sabotagePowerup, setSabotagePowerup] = useState(0);
+
+const [message, setMessage] = useState('');

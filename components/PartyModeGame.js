@@ -7,6 +7,68 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation }) {
 
+    // TEST DATA
+    //
+    //
+    // add 2 players to test the game screen (remove later)
+    const [players, setPlayers] = useState([
+        {
+            name: 'Player 1',
+            points: 0,
+            powerups: [],
+            drink: 0,
+            drinkPowerup: 0,
+            helpPowerup: 0,
+            randomPowerup: 0,
+            sabotagePowerup: 0,
+        },
+        {
+            name: 'Player 2',
+            points: 0,
+            powerups: [],
+            drink: 0,
+            drinkPowerup: 0,
+            helpPowerup: 0,
+            randomPowerup: 0,
+            sabotagePowerup: 0,
+        },
+    ]);
+
+    // use 3 categories for testing (remove later)
+    const [categories, setCategories] = useState([
+        {
+            id: 9,
+            name: 'General Knowledge',
+        },
+        {
+            id: 10,
+            name: 'Entertainment: Books',
+        },
+        {
+            id: 11,
+            name: 'Entertainment: Film',
+        },
+    ]);
+
+    // for fetching the questions
+    const [categoryForQuestion, setCategoryForQuestion] = useState(0);
+
+    // randomize the categoryForQuestion from the categories array (remove later)
+    const randomCategory = () => {
+        const random = Math.floor(Math.random() * categories.length);
+        setCategoryForQuestion(categories[random].id);
+    }
+
+    // use easy difficulty for testing (remove later)
+    const [difficulty, setDifficulty] = useState('easy');
+
+    // use 10 questions for testing (remove later)
+    const [amount, setAmount] = useState(10);
+    //
+    //
+    // END OF TEST DATA
+
+
     // variables for questions and answers
     const [question, setQuestion] = useState('');
     const [category, setCategory] = useState('');
@@ -23,7 +85,7 @@ export default function GameScreen({ navigation }) {
 
     // fetch question data from api and set to variables
     const getQuestion = () => {
-        fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
+        fetch("https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${difficulty}&encode=url3986")
             .then(response => response.json())
             .then(data => {
                 setAllAnswers(['']);
