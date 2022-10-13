@@ -7,10 +7,11 @@ import PartyModeOptions from './PartyModeOptions.js';
 import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
 import { app } from '../firebase/firebaseconfig.js';
 
-export default function PartyModeScreen({ route, navigation }) {
+export default function PartyModeScreen({ route, navigation, params }) {
 
     // passed params from PartyModeOptions
-    const { selectedCategories, selectedDifficulty, selectedDrink, selectedNum } = route.params;
+    const { selectedCategory, selectedDifficulty, selectedDrink, playerNames} = route.params;
+    const [activePlayer, setActivePlayer] = useState(0);
 
     const [firebasePoints, setFirebasePoints] = useState([]);
     const [points, setPoints] = useState('');
@@ -37,6 +38,7 @@ export default function PartyModeScreen({ route, navigation }) {
 
     return(
         <View style={Styles.container}>
+            <Text style={Styles.normalText}>Player: {activePlayer}</Text>
             <Text style={Styles.normalText}>Drink: {selectedDrink}</Text>
             <Text style={Styles.normalText}>Categories: {selectedCategories}</Text>
             <Text style={Styles.normalText}>Difficulty: {selectedDifficulty}</Text>

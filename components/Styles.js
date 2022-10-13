@@ -63,7 +63,7 @@ export default StyleSheet.create({
         fontSize: 18,
         color: '#fff',
         width: 330,
-        height: 100,
+        height: 80,
         marginBottom: 20,
     },
     aboutContainer: {
