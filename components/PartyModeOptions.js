@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { SafeAreaView, Button, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
+import { Input, Button, CheckBox, Icon } from 'react-native-elements';
 import Styles from './Styles';
 import { Picker } from '@react-native-picker/picker';
 import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
@@ -171,10 +172,10 @@ export default function PartyModeOptions({ route, navigation }) {
                 <FlatList data={categories}
                     renderItem={({ item }) => (
                     <View style={Styles.buttons}>
-                        <Button
+                        <CheckBox
+                            center
                             title={item.name}
-                            onPress={() => isCategorySelected(item.id) ? handleRemoveCategory(item.id) : handleCategoryChange(item.id)}
-                            color={isCategorySelected(item.id) ? '#f00' : '#0f0'}
+                            checked={() => isCategorySelected(item.id) ? handleRemoveCategory(item.id) : handleCategoryChange(item.id)}
                         />
                     </View>
                     )}
