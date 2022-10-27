@@ -7,7 +7,6 @@ import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 export default function PartyModeOptions({ route, navigation }) {
 
     // Variables for gameoptions
-    const [selectedNum, setSelectedNum] = useState(0);
     const [selectedDrink, setSelectedDrink] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     
@@ -100,7 +99,6 @@ export default function PartyModeOptions({ route, navigation }) {
             selectedDifficulty,
             selectedDrink,
             playerNames,
-            selectedNum,
         });
     }
 
@@ -134,22 +132,6 @@ export default function PartyModeOptions({ route, navigation }) {
                         onPress={addPlayers} >
                     </Button>
                 </View>
-
-                {/* Select number of questions */}
-                <SafeAreaView style={Styles.questionContainer}>
-                <Text style={Styles.title}>Questions per Player</Text>
-                <TextInput
-                    keyboardType="number-pad"
-                    style={Styles.addNumber}
-                    onChangeText={selectedNum => setSelectedNum(Number(selectedNum))}
-                    value={selectedNum}
-                />
-                <Button
-                    title='Set'
-                    type="outline"
-                    onPress={setNumberOfQuestions}
-                />
-                </SafeAreaView>
                 
                 {/* Select drink */}
                 <View style={Styles.drinkContainer}>
