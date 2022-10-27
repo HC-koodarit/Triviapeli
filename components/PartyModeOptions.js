@@ -52,11 +52,6 @@ export default function PartyModeOptions({ route, navigation }) {
     { label: 'Hard', value: 'Hard' },
     ];
 
-    // set number of guestions per player
-    const setNumberOfQuestions = () => {
-        setSelectedNum(selectedNum)
-    }
-
     // Category options
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);

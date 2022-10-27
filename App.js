@@ -32,10 +32,9 @@ export default function App() {
           <Stack.Screen name="PartyModeResults" component={PartyModeResults} style={Styles.title} />
           <Stack.Screen name="Categories" component={Categories} style={Styles.title} />
           <Stack.Screen name="PartyModeGame" component={PartyModeGame} style={Styles.title} />
-
         </Stack.Navigator>
       </NavigationContainer>
     </View>
-
+    
   );
 }
