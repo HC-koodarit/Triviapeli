@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
-import { Button, CheckBox } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import Styles from './Styles';
-import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
-import { app } from '../firebase/firebaseconfig.js';
+//import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
+//import { app } from '../firebase/firebaseconfig.js';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 
 
@@ -13,14 +13,15 @@ export default function PartyModeOptions({ route, navigation }) {
     const [selectedNum, setSelectedNum] = useState(0);
     const [selectedDrink, setSelectedDrink] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
-    const pickerRef = useRef();
-
+    
     //Add player variables
     const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
-    const [firebasePlayers, setFirebasePlayers] = useState([]);
-
+    
+    //const [firebasePlayers, setFirebasePlayers] = useState([]);
+    //const pickerRef = useRef();
+    /*Firebase
     // Initialize Firebase
     const database = getDatabase(app);
 
@@ -42,6 +43,16 @@ export default function PartyModeOptions({ route, navigation }) {
         })
     }, []);
 
+    const deletePlayer = (item) => {
+      console.log(item);
+      remove(ref(database, 'players/' + item))
+      .then(function() {
+        console.log("Remove succeeded.")
+      })
+      .catch(function(error) {
+        console.log("Remove failed: " + error.message)
+      });
+  }*/
 
     const addPlayers = () => {
         //Generate id for player
@@ -52,24 +63,14 @@ export default function PartyModeOptions({ route, navigation }) {
         //Save the player name and id to a list
         setPlayerNames([...playerNames, { id: playerNameGenerator, name: playerNameTemp }]);
 
+        /*
         push(
             ref(database, 'players/'),
-            { 'name': playerNameTemp, 'id': playerNameGenerator });
+            { 'name': playerNameTemp, 'id': playerNameGenerator });*/
 
         //Empty add player textinput
         setPlayerNameTemp('');
     }
-
-    const deletePlayer = (item) => {
-      console.log(item);
-      remove(ref(database, 'players/' + item))
-      .then(function() {
-        console.log("Remove succeeded.")
-      })
-      .catch(function(error) {
-        console.log("Remove failed: " + error.message)
-      });
-  }
 
     // start game and pass params to PartyModeScreen
     const startGame = () => {
@@ -154,7 +155,7 @@ export default function PartyModeOptions({ route, navigation }) {
                     <Text style={Styles.title}>Players:</Text>
                     <FlatList
                         style={{ marginLeft: "5%" }}
-                        data={firebasePlayers}
+                        data={playerNames}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
