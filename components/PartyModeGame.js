@@ -1,17 +1,19 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Alert, Platform } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Platform, FlatList, Image  } from 'react-native';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
-export default function GameScreen({ navigation }) {
+export default function GameScreen({ navigation, route }) {
+    const { players, selectedDifficulty, selectedCategories } = route.params;
+    const [chosenPlayer, setChosenPlayer] = useState("");
 
     // TEST DATA
     //
     //
     // add 2 players to test the game screen (remove later)
-    const [players, setPlayers] = useState([
+    /*const [players, setPlayers] = useState([
         {
             name: 'Player 1',
             points: 0,
@@ -32,7 +34,7 @@ export default function GameScreen({ navigation }) {
             randomPowerup: 0,
             sabotagePowerup: 0,
         },
-    ]);
+    ]);*/
 
     // use 3 categories for testing (remove later)
     const [categories, setCategories] = useState([
@@ -78,6 +80,8 @@ export default function GameScreen({ navigation }) {
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
+    // count correct answers for powerups
+    const [correctAnswers, setCorrectAnswers] = useState(0);
 
     // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(true);
@@ -112,6 +116,9 @@ export default function GameScreen({ navigation }) {
     useEffect(() => {
         randomCategory();
         getQuestion();
+        console.log(players);
+        //console.log(selectedCategories);
+        //console.log(selectedDifficulty);
     }, []);
 
 
@@ -150,6 +157,7 @@ export default function GameScreen({ navigation }) {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             setPoints(setPoints => setPoints + 1);
+            setCorrectAnswers(correctAnswers + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             if (Platform.OS === 'web') {
@@ -171,6 +179,7 @@ export default function GameScreen({ navigation }) {
         } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
+            setCorrectAnswers(0);
             if (Platform.OS === 'web') {
                 alert("Wrong! The correct answer was " + correctAnswer);
                 getQuestion();
@@ -188,6 +197,12 @@ export default function GameScreen({ navigation }) {
                 );
             }
         } 
+    }
+
+    const randomplayer = () => {
+        const random = Math.floor(Math.random() * players.name.length);
+        //setChosenPlayer(random);
+        console.log(random);
     }
 
     // 15 sec countdown timer
@@ -220,11 +235,23 @@ export default function GameScreen({ navigation }) {
             <View>
                 {TimerForQuestions()}
             </View>
+
+            <Image source={require('../assets/thinking.gif')} style={
+                {
+                    width: 200,
+                    height: 200,
+                    marginBottom: 0,
+                }
+            } />
+
             <Text
                 style={Styles.pointsText}
                 >Pointcount: {points}</Text>
+            <Text
+                style={Styles.pointsText}
+                >Streak: {correctAnswers}</Text>
             <Button
-                title="End Game"
+                title="USE YOUR POWER UP"
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);

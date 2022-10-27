@@ -54,7 +54,7 @@ export default function PartyModeOptions({ route, navigation }) {
         //Empty add player textinput
         setPlayerNameTemp('');
         setModalVisible(!modalVisible)
-        console.log(players);
+        //console.log(players);
     }
 
     // Drinks data
@@ -111,8 +111,7 @@ export default function PartyModeOptions({ route, navigation }) {
         navigation.navigate('PartyModeGame', {
             selectedCategories,
             selectedDifficulty,
-            selectedDrink,
-            playerNames,
+            players,
         });
     }
 
