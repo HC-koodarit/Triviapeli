@@ -2,10 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
-//import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
-//import { app } from '../firebase/firebaseconfig.js';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
-import * as SQLite from 'expo-sqlite';
 
 export default function PartyModeOptions({ route, navigation }) {
 
@@ -19,109 +16,15 @@ export default function PartyModeOptions({ route, navigation }) {
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
 
-    // ---TÄSTÄ ALKAA SQLITE-HOMMELIT---
-    // make player profile for each player and use sqlite to store the data
-    const db = SQLite.openDatabase('players.db');
-
-    // create table for players
     useEffect(() => {
-        db.transaction(tx => {
-            tx.executeSql(
-                'create table if not exists players (id integer primary key not null, name text, points int, powerup text, drink text);'
-            );
-        });
+        fetch('https://opentdb.com/api_category.php')
+            .then(response => response.json())
+            .then(data => {
+                setCategories(data.trivia_categories);
+                console.log(categories);
+            })
+            .catch(err => console.error(err));
     }, []);
-
-    // insert player profiles into the table
-    const insertPlayer = (name, points, powerup, drink) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                'insert into players (name, points, powerup, drink) values (?, ?, ?, ?);',
-                [playerNames[0], 0, 'none', 'none'],
-                null,
-                null
-            );
-        });
-    }
-
-    // update player profiles
-    const updatePlayer = (id, name, points, powerup, drink) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                'update players set name = ?, points = ?, powerup = ?, drink = ? where id = ?;',
-                [name, points, powerup, drink, id],
-                null,
-                null
-            );
-        });
-    }
-
-    // delete player profiles
-    const deletePlayer = (id) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                'delete from players where id = ?;',
-                [id],
-                null,
-                null
-            );
-        });
-    }
-
-    // get all player profiles
-    const getPlayers = () => {
-        db.transaction(tx => {
-            tx.executeSql(
-                'select * from players;',
-                [],
-                (_, { rows: { _array } }) => setPlayers(_array),
-                null,
-                null
-            );
-        });
-    }
-    
-    // get all player profiles from the table
-    useEffect(() => {
-        getPlayers();
-    }, []);
-
-    // ---TÄHÄN LOPPUU SQLITE-HOMMELIT---
-    
-    //const [firebasePlayers, setFirebasePlayers] = useState([]);
-    //const pickerRef = useRef();
-    /*Firebase
-    // Initialize Firebase
-    const database = getDatabase(app);
-
-    function open() {
-        pickerRef.current.focus();
-    }
-
-    function close() {
-        pickerRef.current.blur();
-    }
-
-    //Use Effect for database connection
-    useEffect(() => {
-        const itemsRef = ref(database, 'players/');
-        onValue(itemsRef, (snapshot) => {
-            const data = snapshot.val();
-            const playerNames = data ? Object.keys(data).map(id => ({ id, ...data[id] })) : [];
-            setFirebasePlayers(playerNames);
-        })
-    }, []);
-
-    const deletePlayer = (item) => {
-      console.log(item);
-      remove(ref(database, 'players/' + item))
-      .then(function() {
-        console.log("Remove succeeded.")
-      })
-      .catch(function(error) {
-        console.log("Remove failed: " + error.message)
-      });
-  }*/
 
     const addPlayers = () => {
         //Generate id for player
@@ -132,24 +35,8 @@ export default function PartyModeOptions({ route, navigation }) {
         //Save the player name and id to a list
         setPlayerNames([...playerNames, { id: playerNameGenerator, name: playerNameTemp }]);
 
-        /*
-        push(
-            ref(database, 'players/'),
-            { 'name': playerNameTemp, 'id': playerNameGenerator });*/
-
         //Empty add player textinput
         setPlayerNameTemp('');
-    }
-
-    // start game and pass params to PartyModeScreen
-    const startGame = () => {
-        navigation.navigate('PartyModeGame', {
-            selectedCategories,
-            selectedDifficulty,
-            selectedDrink,
-            playerNames,
-            selectedNum,
-        });
     }
 
     // Drinks data
@@ -175,16 +62,6 @@ export default function PartyModeOptions({ route, navigation }) {
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selected, setSelected] = useState([]);
-
-    useEffect(() => {
-        fetch('https://opentdb.com/api_category.php')
-            .then(response => response.json())
-            .then(data => {
-                setCategories(data.trivia_categories);
-                console.log(categories);
-            })
-            .catch(err => console.error(err));
-    }, []);
 
     /*
     // put the selected categories in an array
@@ -215,6 +92,17 @@ export default function PartyModeOptions({ route, navigation }) {
         return randomCategory();
     }
     */
+
+    // start game and pass params to PartyModeScreen
+    const startGame = () => {
+        navigation.navigate('PartyModeGame', {
+            selectedCategories,
+            selectedDifficulty,
+            selectedDrink,
+            playerNames,
+            selectedNum,
+        });
+    }
 
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
