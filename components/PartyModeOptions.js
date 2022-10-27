@@ -70,9 +70,9 @@ export default function PartyModeOptions({ route, navigation }) {
 
     // Difficulty data
     const difficulty = [
-    { label: 'Easy', value: 'Easy' },
-    { label: 'Medium', value: 'Medium' },
-    { label: 'Hard', value: 'Hard' },
+    { label: 'Easy', value: 'easy' },
+    { label: 'Medium', value: 'medium' },
+    { label: 'Hard', value: 'hard' },
     ];
 
     // set number of guestions per player

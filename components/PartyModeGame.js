@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, FlatList, Image  } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Platform, FlatList, Image } from 'react-native';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -36,21 +36,23 @@ export default function GameScreen({ navigation, route }) {
         },
     ]);*/
 
-    // use 3 categories for testing (remove later)
-    const [categories, setCategories] = useState([
-        {
-            id: 9,
-            name: 'General Knowledge',
-        },
-        {
-            id: 10,
-            name: 'Entertainment: Books',
-        },
-        {
-            id: 11,
-            name: 'Entertainment: Film',
-        },
-    ]);
+    /*
+        use 3 categories for testing (remove later)
+        const [categories, setCategories] = useState([
+            {
+                id: 9,
+                name: 'General Knowledge',
+            },
+            {
+                id: 10,
+                name: 'Entertainment: Books',
+            },
+            {
+                id: 11,
+                name: 'Entertainment: Film',
+            },
+        ]);
+    */
 
     // for fetching the questions
     const [categoryForQuestion, setCategoryForQuestion] = useState(0);
@@ -62,8 +64,10 @@ export default function GameScreen({ navigation, route }) {
         setCategoryForQuestion(selectedCategories[random]);
     }
 
+    /*
     // use easy difficulty for testing (remove later)
     const [difficulty, setDifficulty] = useState('easy');
+    */
 
     // use 10 questions for testing (remove later)
     const [amount, setAmount] = useState(10);
@@ -90,7 +94,7 @@ export default function GameScreen({ navigation, route }) {
 
     // fetch question data from api and set to variables
     const getQuestion = () => {
-        fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${difficulty}&encode=url3986`)
+        fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
                 setAllAnswers(['']);
@@ -152,7 +156,7 @@ export default function GameScreen({ navigation, route }) {
             );
         }
     }
-    
+
 
     // check if answer is correct
     const checkAnswer = (answer) => {
@@ -197,7 +201,7 @@ export default function GameScreen({ navigation, route }) {
                     ],
                 );
             }
-        } 
+        }
     }
 
     const randomplayer = () => {
@@ -209,19 +213,19 @@ export default function GameScreen({ navigation, route }) {
     // 15 sec countdown timer
     const TimerForQuestions = () => (
         <View style={Styles.timer}>
-        <CountdownCircleTimer
-            key={key}
-            isPlaying={isPlaying}
-            duration={15}
-            colors={'#004777'}
-            onComplete={() => {
-                setKey(prevKey => prevKey + 1);
-                setIsPlaying(false);
-                timeIsUp();
-            }}
-        >
-            {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
-        </CountdownCircleTimer>
+            <CountdownCircleTimer
+                key={key}
+                isPlaying={isPlaying}
+                duration={15}
+                colors={'#004777'}
+                onComplete={() => {
+                    setKey(prevKey => prevKey + 1);
+                    setIsPlaying(false);
+                    timeIsUp();
+                }}
+            >
+                {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
+            </CountdownCircleTimer>
         </View>
     )
 
@@ -247,16 +251,16 @@ export default function GameScreen({ navigation, route }) {
 
             <Text
                 style={Styles.pointsText}
-                >Pointcount: {points}</Text>
+            >Pointcount: {points}</Text>
             <Text
                 style={Styles.pointsText}
-                >Streak: {correctAnswers}</Text>
+            >Streak: {correctAnswers}</Text>
             <Button
                 title="USE YOUR POWER UP"
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
-                    navigation.navigate('Pointscreen', {points: points});
+                    navigation.navigate('Pointscreen', { points: points });
                 }}
             />
             <Button
