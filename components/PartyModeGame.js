@@ -57,6 +57,7 @@ export default function GameScreen({ navigation, route }) {
 
     // randomize the categoryForQuestion from the categories array (remove later)
     const randomCategory = () => {
+        console.log(selectedCategories.length);
         const random = Math.floor(Math.random() * selectedCategories.length);
         setCategoryForQuestion(selectedCategories[random]);
     }
