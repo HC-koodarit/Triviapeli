@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
@@ -181,26 +181,6 @@ export default function PartyModeOptions({ route, navigation }) {
                     >
                         <Text style={Styles.textStyle}>Add players</Text>
                     </Pressable>
-                </View>
-                
-                {/* Select drink */}
-                <View style={Styles.drinkContainer}>
-                <Text style={Styles.title}>Drink</Text>
-                <Dropdown
-                    style={Styles.dropdown}
-                    placeholderStyle={Styles.placeholderStyleDropdown}
-                    selectedTextStyle={Styles.selectedTextStyleDropdown}
-                    iconStyle={Styles.iconStyleDropdown}
-                    data={drinks}
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder="Select drink"
-                    value={selectedDrink}
-                    onChange={item => {
-                        setSelectedDrink(item.value);
-                    }}
-                />
                 </View>
 
                 {/* Select categories */}
