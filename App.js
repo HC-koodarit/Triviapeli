@@ -11,6 +11,7 @@ import PartyModeOptions from './components/PartyModeOptions';
 import Categories from './components/Categories';
 import PartyModeGame from './components/PartyModeGame';
 import PartyModeResults from './components/PartyModeResults';
+import PartyModeInBetweenResults from './components/PartyModeInBetweenResults';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ export default function App() {
           <Stack.Screen name="PartyModeResults" component={PartyModeResults} style={Styles.title} />
           <Stack.Screen name="Categories" component={Categories} style={Styles.title} />
           <Stack.Screen name="PartyModeGame" component={PartyModeGame} style={Styles.title} />
+          <Stack.Screen name="PartyModeInBetweenResults" component={PartyModeInBetweenResults} style={Styles.title} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

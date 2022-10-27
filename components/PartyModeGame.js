@@ -238,8 +238,8 @@ export default function GameScreen({ navigation, route }) {
 
             <Image source={require('../assets/thinking.gif')} style={
                 {
-                    width: 200,
-                    height: 200,
+                    width: 50,
+                    height: 50,
                     marginBottom: 0,
                 }
             } />
@@ -256,6 +256,14 @@ export default function GameScreen({ navigation, route }) {
                 onPress={() => {
                     setIsPlaying(false);
                     navigation.navigate('Pointscreen', {points: points});
+                }}
+            />
+            <Button
+                title="CHECK POINTS"
+                type="outline"
+                onPress={() => {
+                    setIsPlaying(false);
+                    navigation.navigate('PartyModeInBetweenResults', {points: points});
                 }}
             />
         </SafeAreaView>
