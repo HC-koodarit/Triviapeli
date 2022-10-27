@@ -17,6 +17,11 @@ export default function PartyModeOptions({ route, navigation }) {
 
     const [players, setPlayers] = useState([]);
 
+    // Category options
+    const [categories, setCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selected, setSelected] = useState([]);
+
     // Popup modalVisible
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -25,7 +30,6 @@ export default function PartyModeOptions({ route, navigation }) {
             .then(response => response.json())
             .then(data => {
                 setCategories(data.trivia_categories);
-                console.log(categories);
             })
             .catch(err => console.error(err));
     }, []);
@@ -71,10 +75,10 @@ export default function PartyModeOptions({ route, navigation }) {
     { label: 'Hard', value: 'Hard' },
     ];
 
-    // Category options
-    const [categories, setCategories] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selected, setSelected] = useState([]);
+    // set number of guestions per player
+    const setNumberOfQuestions = () => {
+        setSelectedNum(selectedNum)
+    }
 
     /*
     // put the selected categories in an array
@@ -195,11 +199,11 @@ export default function PartyModeOptions({ route, navigation }) {
                     labelField="name"
                     valueField="id"
                     placeholder="Select categories"
-                    value={selected}
+                    value={selectedCategories}
                     onChange={item => {
-                        setSelected(item);
-                        setSelectedCategories([...selectedCategories, {id: item}]);
-                        console.log(selectedCategories);
+                        setSelectedCategories(item);
+                        //setSelectedCategories([...selectedCategories, {id: item}]);
+                        //console.log(selectedCategories);
                     }}
                     selectedStyle={Styles.selectedStyleDropdown}
                 />
