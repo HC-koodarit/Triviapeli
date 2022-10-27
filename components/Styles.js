@@ -87,28 +87,32 @@ export default StyleSheet.create({
     otherOptionsContainer: {
         flex: 5,
     },
+    //Flatlist playerNames
     playerNames: {
         marginTop: 10,
         width: 100,
         color: '#fff',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     flatlistPlayerNames: {
         color: "#fff",
     },
+    //Add players text input styles
     addPlayers: {
         fontSize: 18,
-        width: 360,
+        width: 250,
         borderBottomWidth: 1.0,
-        borderColor: "#fff",
+        borderColor: "#0055b3",
         marginBottom: 5,
-        color: '#fff',
+        color: 'black',
     },
     playerContainer: {
         marginTop: 10,
         justifyContent: 'center',
         marginBottom: 10,
-      },
+    },
+
+    //Pickers and add number
     pickerPartyMode: {
         fontSize: 18,
         color: '#fff',
@@ -157,33 +161,96 @@ export default StyleSheet.create({
         marginBottom: 20,
     },
 
-    //MultiSelect Dropdown Styles
-    dropdown: {
+    //Dropdown Styles for drink choice
+    dropdownDrinks: {
       height: 50,
+      width: 250,
       backgroundColor: 'transparent',
       borderBottomColor: 'gray',
       borderBottomWidth: 0.5,
+      marginBottom: 10,
     },
-    placeholderStyleDropdown: {
+    placeholderStyleDropdownDrinks: {
       fontSize: 16,
-      color: "white",
+      color: "black",
     },
-    selectedTextStyleDropdown: {
+    selectedTextStyleDropdownDrinks: {
       fontSize: 14,
-      color: "white",
+      color: "black",
     },
-    iconStyleDropdown: {
+    iconStyleDropdownDrinks: {
       width: 20,
       height: 20,
     },
-    inputSearchStyleDropdown: {
-      height: 40,
-      fontSize: 16,
-    },
-    iconDropdown: {
-      marginRight: 5,
-    },
-    selectedStyleDropdown: {
-      borderRadius: 12,
-    },
+
+    //Dropdown Styles for category & difficulty
+    dropdown: {
+        height: 50,
+        width: 250,
+        backgroundColor: 'transparent',
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+        marginBottom: 10,
+      },
+      placeholderStyleDropdown: {
+        fontSize: 16,
+        color: "white",
+      },
+      selectedTextStyleDropdown: {
+        fontSize: 14,
+        color: "white",
+      },
+      iconStyleDropdown: {
+        width: 20,
+        height: 20,
+      },
+      iconDropdown: {
+        marginRight: 5,
+      },
+      selectedStyleDropdown: {
+        borderRadius: 12,
+      },
+
+    //PartyMode Options Addplayers Popup
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 10,
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+      },
+      buttonpopup: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+      },
+      buttonOpen: {
+        backgroundColor: "#F194FF",
+      },
+      buttonClose: {
+        backgroundColor: "#2196F3",
+      },
+      textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+      }
 });

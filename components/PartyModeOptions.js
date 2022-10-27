@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
@@ -16,6 +16,11 @@ export default function PartyModeOptions({ route, navigation }) {
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
 
+    const [players, setPlayers] = useState([]);
+
+    // Popup modalVisible
+    const [modalVisible, setModalVisible] = useState(false);
+
     useEffect(() => {
         fetch('https://opentdb.com/api_category.php')
             .then(response => response.json())
@@ -26,7 +31,7 @@ export default function PartyModeOptions({ route, navigation }) {
             .catch(err => console.error(err));
     }, []);
 
-    const addPlayers = () => {
+    /*const addPlayers = () => {
         //Generate id for player
         let playerNameGenerator = "player" + playerNumber
         setPlayerNumber(playerNumber + 1);
@@ -37,6 +42,20 @@ export default function PartyModeOptions({ route, navigation }) {
 
         //Empty add player textinput
         setPlayerNameTemp('');
+    }*/
+
+    const addPlayer = () => {
+        //Generate id for player
+        let playerNameGenerator = "player" + playerNumber
+        setPlayerNumber(playerNumber + 1);
+        
+        //Save the player name and id to a list
+        setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, points: 0, powerup: "" }]);
+
+        //Empty add player textinput
+        setPlayerNameTemp('');
+        setModalVisible(!modalVisible)
+        console.log(players);
     }
 
     // Drinks data
@@ -112,27 +131,64 @@ export default function PartyModeOptions({ route, navigation }) {
                     <Text style={Styles.title}>Players:</Text>
                     <FlatList
                         style={{ marginLeft: "5%" }}
-                        data={playerNames}
+                        data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
                                 <Text style={ Styles.flatlistPlayerNames }>{item.name}</Text>
+                                <Text style={ Styles.flatlistPlayerNames }>Drinks: {item.drink}</Text>
                                 <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
                             </View>}
                     />
                 </View>
-                <View style={Styles.playerContainer}>
-                    <TextInput
-                        placeholderTextColor={'white'}
-                        style={Styles.addPlayers}
-                        placeholder='Add player'
-                        onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
-                        value={playerNameTemp} />
-                    <Button
-                        title={"Add"}
-                        type="outline"
-                        onPress={addPlayers} >
-                    </Button>
+                <View style={Styles.centeredView}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
+                        }}
+                    >
+                        <View style={Styles.centeredView}>
+                        <View style={Styles.modalView}>
+                            <TextInput
+                            placeholderTextColor={'black'}
+                            style={Styles.addPlayers}
+                            placeholder='Insert player name'
+                            onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
+                            value={playerNameTemp} />
+                            <Dropdown
+                                style={Styles.dropdownDrinks}
+                                placeholderStyle={Styles.placeholderStyleDropdownDrinks}
+                                selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
+                                iconStyle={Styles.iconStyleDropdownDrinks}
+                                data={drinks}
+                                maxHeight={300}
+                                labelField="label"
+                                valueField="value"
+                                placeholder="Select drink"
+                                value={selectedDrink}
+                                onChange={item => {
+                                    setSelectedDrink(item.value);
+                                }}
+                            />
+                            <Pressable
+                            style={[Styles.buttonpopup, Styles.buttonClose]}
+                            onPress={addPlayer}
+                            >
+                            <Text style={Styles.textStyle}>Save player</Text>
+                            </Pressable>
+                        </View>
+                        </View>
+                    </Modal>
+                    <Pressable
+                        style={[Styles.buttonpopup, Styles.buttonOpen]}
+                        onPress={() => setModalVisible(true)}
+                    >
+                        <Text style={Styles.textStyle}>Add players</Text>
+                    </Pressable>
                 </View>
 
                 {/* Select number of questions */}
@@ -150,26 +206,6 @@ export default function PartyModeOptions({ route, navigation }) {
                     onPress={setNumberOfQuestions}
                 />
                 </SafeAreaView>
-                
-                {/* Select drink */}
-                <View style={Styles.drinkContainer}>
-                <Text style={Styles.title}>Drink</Text>
-                <Dropdown
-                    style={Styles.dropdown}
-                    placeholderStyle={Styles.placeholderStyleDropdown}
-                    selectedTextStyle={Styles.selectedTextStyleDropdown}
-                    iconStyle={Styles.iconStyleDropdown}
-                    data={drinks}
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder="Select drink"
-                    value={selectedDrink}
-                    onChange={item => {
-                        setSelectedDrink(item.value);
-                    }}
-                />
-                </View>
 
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
