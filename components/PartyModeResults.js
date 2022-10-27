@@ -8,7 +8,7 @@ import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
 import { app } from '../firebase/firebaseconfig.js';
 import * as SQLite from 'expo-sqlite';
 
-export default function PartyModeScreen({ route, navigation, params }) {
+export default function PartyModeResults({ route, navigation, params }) {
 
     // passed params from PartyModeOptions
     const { selectedCategory, selectedDifficulty, selectedDrink, playerNames } = route.params;
