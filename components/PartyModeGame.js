@@ -1,17 +1,19 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Alert, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Alert, Platform, FlatList } from 'react-native';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
-export default function GameScreen({ navigation }) {
+export default function GameScreen({ navigation, route }) {
+    const { players, selectedDifficulty, selectedCategories } = route.params;
+    const [chosenPlayer, setChosenPlayer] = useState("");
 
     // TEST DATA
     //
     //
     // add 2 players to test the game screen (remove later)
-    const [players, setPlayers] = useState([
+    /*const [players, setPlayers] = useState([
         {
             name: 'Player 1',
             points: 0,
@@ -32,7 +34,7 @@ export default function GameScreen({ navigation }) {
             randomPowerup: 0,
             sabotagePowerup: 0,
         },
-    ]);
+    ]);*/
 
     // use 3 categories for testing (remove later)
     const [categories, setCategories] = useState([
@@ -112,6 +114,9 @@ export default function GameScreen({ navigation }) {
     useEffect(() => {
         randomCategory();
         getQuestion();
+        console.log(players);
+        //console.log(selectedCategories);
+        //console.log(selectedDifficulty);
     }, []);
 
 
@@ -188,6 +193,12 @@ export default function GameScreen({ navigation }) {
                 );
             }
         } 
+    }
+
+    const randomplayer = () => {
+        const random = Math.floor(Math.random() * players.name.length);
+        //setChosenPlayer(random);
+        console.log(random);
     }
 
     // 15 sec countdown timer
