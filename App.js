@@ -21,6 +21,9 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName='Home'
+          screenOptions={{
+            headerShown: false
+          }}
         >
           <Stack.Screen name="Home" component={HomeScreen} style={Styles.title} />
           <Stack.Screen name="Partymode" component={PartyModeOptions} style={Styles.title} />
