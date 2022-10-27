@@ -18,7 +18,7 @@ export default function GameScreen({ navigation }) {
     const [points, setPoints] = useState(0);
 
     // variables for the countdown timer
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
     // fetch question data from api and set to variables
@@ -51,7 +51,6 @@ export default function GameScreen({ navigation }) {
         getQuestion();
     }, []);
 
-
     // buttons for answers
     const answerButtons = () => {
         let buttons = [];
@@ -81,7 +80,7 @@ export default function GameScreen({ navigation }) {
             );
         }
     }
-    
+
 
     // check if answer is correct
     const checkAnswer = (answer) => {
@@ -124,25 +123,25 @@ export default function GameScreen({ navigation }) {
                     ],
                 );
             }
-        } 
+        }
     }
 
     // 15 sec countdown timer
     const TimerForQuestions = () => (
         <View style={Styles.timer}>
-        <CountdownCircleTimer
-            key={key}
-            isPlaying={isPlaying}
-            duration={15}
-            colors={'#004777'}
-            onComplete={() => {
-                setKey(prevKey => prevKey + 1);
-                setIsPlaying(false);
-                timeIsUp();
-            }}
-        >
-            {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
-        </CountdownCircleTimer>
+            <CountdownCircleTimer
+                key={key}
+                isPlaying={isPlaying}
+                duration={15}
+                colors={'#004777'}
+                onComplete={() => {
+                    setKey(prevKey => prevKey + 1);
+                    setIsPlaying(false);
+                    timeIsUp();
+                }}
+            >
+                {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
+            </CountdownCircleTimer>
         </View>
     )
 
@@ -157,15 +156,13 @@ export default function GameScreen({ navigation }) {
             <View>
                 {TimerForQuestions()}
             </View>
-            <Text
-                style={Styles.pointsText}
-                >Pointcount: {points}</Text>
+            <Text style={Styles.pointsText}>Pointcount: {points}</Text>
             <Button
                 title="End Game"
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
-                    navigation.navigate('Pointscreen', {points: points});
+                    navigation.navigate('Pointscreen', { points: points });
                 }}
             />
         </SafeAreaView>

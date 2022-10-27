@@ -7,7 +7,6 @@ import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 export default function PartyModeOptions({ route, navigation }) {
 
     // Variables for gameoptions
-    const [selectedNum, setSelectedNum] = useState(0);
     const [selectedDrink, setSelectedDrink] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     
@@ -119,7 +118,6 @@ export default function PartyModeOptions({ route, navigation }) {
             selectedDifficulty,
             selectedDrink,
             playerNames,
-            selectedNum,
         });
     }
 
@@ -190,22 +188,26 @@ export default function PartyModeOptions({ route, navigation }) {
                         <Text style={Styles.textStyle}>Add players</Text>
                     </Pressable>
                 </View>
-
-                {/* Select number of questions */}
-                <SafeAreaView style={Styles.questionContainer}>
-                <Text style={Styles.title}>Questions per Player</Text>
-                <TextInput
-                    keyboardType="number-pad"
-                    style={Styles.addNumber}
-                    onChangeText={selectedNum => setSelectedNum(Number(selectedNum))}
-                    value={selectedNum}
+                
+                {/* Select drink */}
+                <View style={Styles.drinkContainer}>
+                <Text style={Styles.title}>Drink</Text>
+                <Dropdown
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={drinks}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Select drink"
+                    value={selectedDrink}
+                    onChange={item => {
+                        setSelectedDrink(item.value);
+                    }}
                 />
-                <Button
-                    title='Set'
-                    type="outline"
-                    onPress={setNumberOfQuestions}
-                />
-                </SafeAreaView>
+                </View>
 
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
