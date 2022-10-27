@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Alert, Platform, FlatList } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Platform, FlatList, Image  } from 'react-native';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -80,6 +80,8 @@ export default function GameScreen({ navigation, route }) {
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
+    // count correct answers for powerups
+    const [correctAnswers, setCorrectAnswers] = useState(0);
 
     // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(true);
@@ -155,6 +157,7 @@ export default function GameScreen({ navigation, route }) {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             setPoints(setPoints => setPoints + 1);
+            setCorrectAnswers(correctAnswers + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             if (Platform.OS === 'web') {
@@ -176,6 +179,7 @@ export default function GameScreen({ navigation, route }) {
         } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
+            setCorrectAnswers(0);
             if (Platform.OS === 'web') {
                 alert("Wrong! The correct answer was " + correctAnswer);
                 getQuestion();
@@ -231,11 +235,23 @@ export default function GameScreen({ navigation, route }) {
             <View>
                 {TimerForQuestions()}
             </View>
+
+            <Image source={require('../assets/thinking.gif')} style={
+                {
+                    width: 200,
+                    height: 200,
+                    marginBottom: 0,
+                }
+            } />
+
             <Text
                 style={Styles.pointsText}
                 >Pointcount: {points}</Text>
+            <Text
+                style={Styles.pointsText}
+                >Streak: {correctAnswers}</Text>
             <Button
-                title="End Game"
+                title="USE YOUR POWER UP"
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
