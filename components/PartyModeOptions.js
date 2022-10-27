@@ -5,7 +5,7 @@ import Styles from './Styles';
 //import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
 //import { app } from '../firebase/firebaseconfig.js';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
-
+import * as SQLite from 'expo-sqlite';
 
 export default function PartyModeOptions({ route, navigation }) {
 
@@ -18,6 +18,75 @@ export default function PartyModeOptions({ route, navigation }) {
     const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
+
+    // ---TÄSTÄ ALKAA SQLITE-HOMMELIT---
+    // make player profile for each player and use sqlite to store the data
+    const db = SQLite.openDatabase('players.db');
+
+    // create table for players
+    useEffect(() => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'create table if not exists players (id integer primary key not null, name text, points int, powerup text, drink text);'
+            );
+        });
+    }, []);
+
+    // insert player profiles into the table
+    const insertPlayer = (name, points, powerup, drink) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'insert into players (name, points, powerup, drink) values (?, ?, ?, ?);',
+                [playerNames[0], 0, 'none', 'none'],
+                null,
+                null
+            );
+        });
+    }
+
+    // update player profiles
+    const updatePlayer = (id, name, points, powerup, drink) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'update players set name = ?, points = ?, powerup = ?, drink = ? where id = ?;',
+                [name, points, powerup, drink, id],
+                null,
+                null
+            );
+        });
+    }
+
+    // delete player profiles
+    const deletePlayer = (id) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'delete from players where id = ?;',
+                [id],
+                null,
+                null
+            );
+        });
+    }
+
+    // get all player profiles
+    const getPlayers = () => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'select * from players;',
+                [],
+                (_, { rows: { _array } }) => setPlayers(_array),
+                null,
+                null
+            );
+        });
+    }
+    
+    // get all player profiles from the table
+    useEffect(() => {
+        getPlayers();
+    }, []);
+
+    // ---TÄHÄN LOPPUU SQLITE-HOMMELIT---
     
     //const [firebasePlayers, setFirebasePlayers] = useState([]);
     //const pickerRef = useRef();
