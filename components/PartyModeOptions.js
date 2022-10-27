@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
@@ -75,10 +75,17 @@ export default function PartyModeOptions({ route, navigation }) {
     { label: 'Hard', value: 'Hard' },
     ];
 
+<<<<<<< HEAD
     // set number of guestions per player
     const setNumberOfQuestions = () => {
         setSelectedNum(selectedNum)
     }
+=======
+    // Category options
+    const [categories, setCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selected, setSelected] = useState([]);
+>>>>>>> f1c5f819f6102b9cbef3868e92f9b11c34ff26ad
 
     /*
     // put the selected categories in an array

@@ -21,6 +21,9 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName='Home'
+          screenOptions={{
+            headerShown: false
+          }}
         >
           <Stack.Screen name="Home" component={HomeScreen} style={Styles.title} />
           <Stack.Screen name="Partymode" component={PartyModeOptions} style={Styles.title} />
@@ -32,10 +35,9 @@ export default function App() {
           <Stack.Screen name="PartyModeResults" component={PartyModeResults} style={Styles.title} />
           <Stack.Screen name="Categories" component={Categories} style={Styles.title} />
           <Stack.Screen name="PartyModeGame" component={PartyModeGame} style={Styles.title} />
-
         </Stack.Navigator>
       </NavigationContainer>
     </View>
-
+    
   );
 }
