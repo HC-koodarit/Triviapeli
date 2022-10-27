@@ -17,6 +17,11 @@ export default function PartyModeOptions({ route, navigation }) {
 
     const [players, setPlayers] = useState([]);
 
+    // Category options
+    const [categories, setCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selected, setSelected] = useState([]);
+
     // Popup modalVisible
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -25,7 +30,6 @@ export default function PartyModeOptions({ route, navigation }) {
             .then(response => response.json())
             .then(data => {
                 setCategories(data.trivia_categories);
-                console.log(categories);
             })
             .catch(err => console.error(err));
     }, []);
@@ -75,11 +79,6 @@ export default function PartyModeOptions({ route, navigation }) {
     const setNumberOfQuestions = () => {
         setSelectedNum(selectedNum)
     }
-
-    // Category options
-    const [categories, setCategories] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selected, setSelected] = useState([]);
 
     /*
     // put the selected categories in an array
@@ -187,26 +186,6 @@ export default function PartyModeOptions({ route, navigation }) {
                         <Text style={Styles.textStyle}>Add players</Text>
                     </Pressable>
                 </View>
-                
-                {/* Select drink */}
-                <View style={Styles.drinkContainer}>
-                <Text style={Styles.title}>Drink</Text>
-                <Dropdown
-                    style={Styles.dropdown}
-                    placeholderStyle={Styles.placeholderStyleDropdown}
-                    selectedTextStyle={Styles.selectedTextStyleDropdown}
-                    iconStyle={Styles.iconStyleDropdown}
-                    data={drinks}
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder="Select drink"
-                    value={selectedDrink}
-                    onChange={item => {
-                        setSelectedDrink(item.value);
-                    }}
-                />
-                </View>
 
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
@@ -220,11 +199,11 @@ export default function PartyModeOptions({ route, navigation }) {
                     labelField="name"
                     valueField="id"
                     placeholder="Select categories"
-                    value={selected}
+                    value={selectedCategories}
                     onChange={item => {
-                        setSelected(item);
-                        setSelectedCategories([...selectedCategories, {id: item}]);
-                        console.log(selectedCategories);
+                        setSelectedCategories(item);
+                        //setSelectedCategories([...selectedCategories, {id: item}]);
+                        //console.log(selectedCategories);
                     }}
                     selectedStyle={Styles.selectedStyleDropdown}
                 />

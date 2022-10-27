@@ -57,8 +57,8 @@ export default function GameScreen({ navigation, route }) {
 
     // randomize the categoryForQuestion from the categories array (remove later)
     const randomCategory = () => {
-        const random = Math.floor(Math.random() * categories.length);
-        setCategoryForQuestion(categories[random].id);
+        const random = Math.floor(Math.random() * selectedCategories.length);
+        setCategoryForQuestion(selectedCategories[random]);
     }
 
     // use easy difficulty for testing (remove later)
@@ -116,8 +116,8 @@ export default function GameScreen({ navigation, route }) {
     useEffect(() => {
         randomCategory();
         getQuestion();
-        console.log(players);
-        //console.log(selectedCategories);
+        //console.log(players);
+        console.log(selectedCategories);
         //console.log(selectedDifficulty);
     }, []);
 
