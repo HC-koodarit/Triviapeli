@@ -7,7 +7,10 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation, route }) {
     const { players, selectedDifficulty, selectedCategories } = route.params;
-    const [chosenPlayer, setChosenPlayer] = useState("");
+    
+    // Use first player from route params as the initial value
+    // TODO: Require players to be defined from the previous view
+    const [chosenPlayer, setChosenPlayer] = useState(players[0]);
 
     // TEST DATA
     //
@@ -99,6 +102,11 @@ export default function GameScreen({ navigation, route }) {
         fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
+                const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id)
+                // Set new index for player, and fallback to 0 if next index larger than player count
+                const nextIndex = (currentPlayerIndex + 1) % players.length
+                setChosenPlayer(players[nextIndex])
+
                 setAllAnswers(['']);
                 setQuestion(decodeURIComponent(data.results[0].question));
                 setCategory(decodeURIComponent(data.results[0].category));
@@ -118,7 +126,7 @@ export default function GameScreen({ navigation, route }) {
             })
             .catch(err => console.error(err));
 
-    }, [selectedCategories])
+    }, [selectedCategories, chosenPlayer])
 
     useEffect(() => {
         //srandomCategory();
@@ -230,6 +238,7 @@ export default function GameScreen({ navigation, route }) {
             <Text style={Styles.title}>Trivia</Text>
             <Text style={Styles.category}>{category}</Text>
             <Text style={Styles.question}>{question}</Text>
+            <Text style={Styles.question}>{chosenPlayer.name}</Text>
             <View style={Styles.buttons}>
                 {answerButtons()}
             </View>
