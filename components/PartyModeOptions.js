@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, CheckBox } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 
@@ -64,6 +64,7 @@ export default function PartyModeOptions({ route, navigation }) {
             alert('Name already in use');
             return;
         }
+
         //Save the player name and id to a list
         setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, points: 0, powerup: "" }]);
 
@@ -136,6 +137,14 @@ export default function PartyModeOptions({ route, navigation }) {
         } else {
             alert('Please add at least two players');
         }
+    }
+
+    // add all categories to the array
+    const addAllCategories = () => {
+        categories.forEach(category => {
+            setSelectedCategories([...selectedCategories, category.id]);
+        });
+        console.log(selectedCategories);
     }
 
     return (
