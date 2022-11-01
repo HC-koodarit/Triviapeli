@@ -34,7 +34,7 @@ export default function HomeScreen({ navigation }) {
                 type="outline"
                 onPress={() => navigation.navigate('PartyModeGame')}
             />
-            <Image source={require('../assets/titlescreen.png')} style={
+            <Image source={require('../assets/people.png')} style={
                 {
                     width: 400,
                     height: 400,
