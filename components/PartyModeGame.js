@@ -11,6 +11,7 @@ export default function GameScreen({ navigation, route }) {
     // Use first player from route params as the initial value
     // TODO: Require players to be defined from the previous view
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
+    const [pelaajat, setPelaajat] = useState(players);
 
     // TEST DATA
     //
@@ -102,10 +103,13 @@ export default function GameScreen({ navigation, route }) {
         fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
-                const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id)
+                const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id);
                 // Set new index for player, and fallback to 0 if next index larger than player count
-                const nextIndex = (currentPlayerIndex + 1) % players.length
-                setChosenPlayer(players[nextIndex])
+                const nextIndex = (currentPlayerIndex + 1) % players.length;
+                setChosenPlayer(players[nextIndex]);
+                console.log(chosenPlayer);
+                console.log("pelaajat:")
+                console.log(pelaajat);
 
                 setAllAnswers(['']);
                 setQuestion(decodeURIComponent(data.results[0].question));
@@ -166,6 +170,9 @@ export default function GameScreen({ navigation, route }) {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             setPoints(setPoints => setPoints + 1);
+            let pointsCounter = points + 1;
+            setPelaajat({...pelaajat, drinks: chosenPlayer.drinks, id: chosenPlayer.id, name: chosenPlayer.name, points: pointsCounter, powerups: ""});
+            //setCustomer({...customer, [event.target.name]: event.target.value})
             setCorrectAnswers(correctAnswers + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
