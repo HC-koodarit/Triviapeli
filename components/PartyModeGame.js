@@ -226,6 +226,7 @@ export default function GameScreen({ navigation, route }) {
                 isPlaying={isPlaying}
                 duration={15}
                 colors={'#004777'}
+                size={90}
                 onComplete={() => {
                     setKey(prevKey => prevKey + 1);
                     setIsPlaying(false);
@@ -253,7 +254,7 @@ export default function GameScreen({ navigation, route }) {
             <Image source={require('../assets/thinking.gif')} style={
                 {
                     width: 50,
-                    height: 50,
+                    height: 70,
                     marginBottom: 0,
                 }
             } />

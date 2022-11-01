@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Alert, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Alert, Platform, Image } from 'react-native';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -134,6 +134,7 @@ export default function GameScreen({ navigation }) {
                 isPlaying={isPlaying}
                 duration={15}
                 colors={'#004777'}
+                size={90}
                 onComplete={() => {
                     setKey(prevKey => prevKey + 1);
                     setIsPlaying(false);
@@ -156,6 +157,13 @@ export default function GameScreen({ navigation }) {
             <View>
                 {TimerForQuestions()}
             </View>
+            <Image source={require('../assets/thinking.gif')} style={
+                {
+                    width: 50,
+                    height: 70,
+                    marginBottom: 0,
+                }
+            } />
             <Text style={Styles.pointsText}>Pointcount: {points}</Text>
             <Button
                 title="End Game"
