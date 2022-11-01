@@ -13,6 +13,9 @@ export default function GameScreen({ navigation, route }) {
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
     const [pelaajat, setPelaajat] = useState(players);
 
+    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
+    const [playersStrike, setPlayersStrike] = useState([]);
+
     // TEST DATA
     //
     //
@@ -169,11 +172,17 @@ export default function GameScreen({ navigation, route }) {
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
+<<<<<<< HEAD
             setPoints(setPoints => setPoints + 1);
             let pointsCounter = points + 1;
             setPelaajat({...pelaajat, drinks: chosenPlayer.drinks, id: chosenPlayer.id, name: chosenPlayer.name, points: pointsCounter, powerups: ""});
             //setCustomer({...customer, [event.target.name]: event.target.value})
             setCorrectAnswers(correctAnswers + 1);
+=======
+            //setPoints(setPoints => setPoints + 1);
+            setPlayersCorrectAnswers(setPlayersCorrectAnswers[chosenPlayer.id] == setPlayersCorrectAnswers + 1);
+            //setCorrectAnswers(correctAnswers + 1);
+>>>>>>> 1df68fa0c8808e2af088f9fc5d6640c976439712
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             if (Platform.OS === 'web') {
@@ -264,7 +273,7 @@ export default function GameScreen({ navigation, route }) {
 
             <Text
                 style={Styles.pointsText}
-            >Pointcount: {points}</Text>
+            >Pointcount: {playersCorrectAnswers}</Text>
             <Text
                 style={Styles.pointsText}
             >Streak: {correctAnswers}</Text>
@@ -281,7 +290,7 @@ export default function GameScreen({ navigation, route }) {
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
-                    navigation.navigate('PartyModeInBetweenResults', {points: points});
+                    navigation.navigate('PartyModeInBetweenResults', {playersCorrectAnswers: playersCorrectAnswers});
                 }}
             />
         </SafeAreaView>
