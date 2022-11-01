@@ -61,6 +61,14 @@ export default function PartyModeOptions({ route, navigation }) {
         //console.log(players);
     }
 
+
+    const deletePlayer = (id) => {
+        const filteredData = players.filter(item => item.id !== id);
+        //Updating List Data State with NEW Data.
+        setPlayers(filteredData);
+
+      }
+
     // Drinks data
     const drinks = [
     { label: 'Mild (Beer, Cider etc.)', value: 'Mild' },
