@@ -1,3 +1,5 @@
+import PartyModeGame from './components/PartyModeGame';
+
 // when player answers a question correctly five times, the player gets a powerup
 // the player has one powerup at a time
 // if player doesn't use the powerup, the player will get a better powerup after 10 correct answers
