@@ -75,11 +75,6 @@ export default function PartyModeOptions({ route, navigation }) {
     { label: 'Hard', value: 'hard' },
     ];
 
-    // set number of guestions per player
-    const setNumberOfQuestions = () => {
-        setSelectedNum(selectedNum)
-    }
-
     /*
     // put the selected categories in an array
     const handleCategoryChange = (itemValue, itemIndex) => {
@@ -131,8 +126,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={ Styles.flatlistPlayerNames }>{item.name}</Text>
-                                <Text style={ Styles.flatlistPlayerNames }>Drinks: {item.drink}</Text>
+                                <Text style={ Styles.flatlistPlayerNames }>{item.name}: {item.drink}</Text>
                                 <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
                             </View>}
                     />

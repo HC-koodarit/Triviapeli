@@ -79,6 +79,7 @@ export default StyleSheet.create({
     partyOptionsContainer: {
         flex: 1,
         backgroundColor: '#020d23',
+        paddingTop: 25,
     },
     playerContainer: {
         flex: 1,
@@ -89,10 +90,10 @@ export default StyleSheet.create({
     },
     //Flatlist playerNames
     playerNames: {
-        marginTop: 10,
-        width: 100,
+        marginTop: 5,
+        width: 150,
         color: '#fff',
-        marginBottom: 10,
+        marginBottom: 5,
     },
     flatlistPlayerNames: {
         color: "#fff",
@@ -107,9 +108,9 @@ export default StyleSheet.create({
         color: 'black',
     },
     playerContainer: {
-        marginTop: 10,
+        marginTop: 5,
+        marginBottom: 5,
         justifyContent: 'center',
-        marginBottom: 10,
     },
 
     //Pickers and add number
@@ -216,7 +217,7 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 10,
+        marginBottom: 15,
       },
       modalView: {
         margin: 20,
