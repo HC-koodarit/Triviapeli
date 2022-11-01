@@ -12,6 +12,9 @@ export default function GameScreen({ navigation, route }) {
     // TODO: Require players to be defined from the previous view
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
 
+    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
+    const [playersStrike, setPlayersStrike] = useState([]);
+
     // TEST DATA
     //
     //
@@ -165,8 +168,9 @@ export default function GameScreen({ navigation, route }) {
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
-            setPoints(setPoints => setPoints + 1);
-            setCorrectAnswers(correctAnswers + 1);
+            //setPoints(setPoints => setPoints + 1);
+            setPlayersCorrectAnswers(setPlayersCorrectAnswers[chosenPlayer.id] == setPlayersCorrectAnswers + 1);
+            //setCorrectAnswers(correctAnswers + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             if (Platform.OS === 'web') {
@@ -256,7 +260,7 @@ export default function GameScreen({ navigation, route }) {
 
             <Text
                 style={Styles.pointsText}
-            >Pointcount: {points}</Text>
+            >Pointcount: {playersCorrectAnswers}</Text>
             <Text
                 style={Styles.pointsText}
             >Streak: {correctAnswers}</Text>
@@ -273,7 +277,7 @@ export default function GameScreen({ navigation, route }) {
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
-                    navigation.navigate('PartyModeInBetweenResults', {points: points});
+                    navigation.navigate('PartyModeInBetweenResults', {playersCorrectAnswers: playersCorrectAnswers});
                 }}
             />
         </SafeAreaView>
