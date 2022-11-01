@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, Alert, Platform, FlatList, Image } from 'react-native';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
@@ -7,7 +7,10 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation, route }) {
     const { players, selectedDifficulty, selectedCategories } = route.params;
-    const [chosenPlayer, setChosenPlayer] = useState("");
+    
+    // Use first player from route params as the initial value
+    // TODO: Require players to be defined from the previous view
+    const [chosenPlayer, setChosenPlayer] = useState(players[0]);
 
     // TEST DATA
     //
@@ -55,14 +58,14 @@ export default function GameScreen({ navigation, route }) {
     */
 
     // for fetching the questions
-    const [categoryForQuestion, setCategoryForQuestion] = useState(0);
+    // const [categoryForQuestion, setCategoryForQuestion] = useState(0);
 
-    // randomize the categoryForQuestion from the categories array (remove later)
-    const randomCategory = () => {
-        console.log(selectedCategories.length);
-        const random = Math.floor(Math.random() * selectedCategories.length);
-        setCategoryForQuestion(selectedCategories[random]);
-    }
+    // // randomize the categoryForQuestion from the categories array (remove later)
+    //  const randomCategory = () => {
+    //     console.log(selectedCategories.length);
+    //     const random = Math.floor(Math.random() * selectedCategories.length);
+    //     setCategoryForQuestion(selectedCategories[random]);
+    // }
 
     /*
     // use easy difficulty for testing (remove later)
@@ -93,10 +96,17 @@ export default function GameScreen({ navigation, route }) {
     const [key, setKey] = useState(0);
 
     // fetch question data from api and set to variables
-    const getQuestion = () => {
+    const getQuestion = useCallback(() => {
+        const random = Math.floor(Math.random() * selectedCategories.length);
+        const categoryForQuestion = selectedCategories[random];
         fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
+                const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id)
+                // Set new index for player, and fallback to 0 if next index larger than player count
+                const nextIndex = (currentPlayerIndex + 1) % players.length
+                setChosenPlayer(players[nextIndex])
+
                 setAllAnswers(['']);
                 setQuestion(decodeURIComponent(data.results[0].question));
                 setCategory(decodeURIComponent(data.results[0].category));
@@ -116,10 +126,10 @@ export default function GameScreen({ navigation, route }) {
             })
             .catch(err => console.error(err));
 
-    }
+    }, [selectedCategories, chosenPlayer])
 
     useEffect(() => {
-        randomCategory();
+        //srandomCategory();
         getQuestion();
         //console.log(players);
         console.log(selectedCategories);
@@ -128,14 +138,8 @@ export default function GameScreen({ navigation, route }) {
 
 
     // buttons for answers
-    const answerButtons = () => {
-        let buttons = [];
-        for (let i = 0; i < allAnswers.length; i++) {
-            buttons.push(<Button title={allAnswers[i]} type="outline" onPress={() =>
-                checkAnswer(allAnswers[i])} key={i} />);
-        }
-        return buttons;
-    }
+    const answerButtons = () => allAnswers.map((answer) => <Button title={answer} type="outline" onPress={() =>
+            checkAnswer(answer)} key={answer} />)
 
     // time running out
     const timeIsUp = () => {
@@ -234,6 +238,7 @@ export default function GameScreen({ navigation, route }) {
             <Text style={Styles.title}>Trivia</Text>
             <Text style={Styles.category}>{category}</Text>
             <Text style={Styles.question}>{question}</Text>
+            <Text style={Styles.question}>{chosenPlayer.name}</Text>
             <View style={Styles.buttons}>
                 {answerButtons()}
             </View>
