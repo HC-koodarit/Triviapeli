@@ -22,7 +22,7 @@ export default StyleSheet.create({
     },
     buttons: {
         flexDirection: 'column',
-        color: '#fff',
+        color: '#fff',        
     },
     title: {
         fontSize: 25,
