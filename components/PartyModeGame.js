@@ -10,6 +10,7 @@ export default function GameScreen({ navigation, route }) {
     
     // Use first player from route params as the initial value
     // TODO: Require players to be defined from the previous view
+<<<<<<< HEAD
     
     
     const [players, setPlayers] = useState(playerDetails);
@@ -17,69 +18,14 @@ export default function GameScreen({ navigation, route }) {
     //{id: "player1", name: "Daniel", drink: "Mild", points: 0, powerup: ""}
 
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
+=======
+    const [chosenPlayer, setChosenPlayer] = useState([players[0]]);
+>>>>>>> 8688ef7013899a336d7c36b39f19365d314a87a7
 
     const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
     const [playersStreak, setPlayersStreak] = useState([]);
 
-    // TEST DATA
-    //
-    //
-    // add 2 players to test the game screen (remove later)
-    /*const [players, setPlayers] = useState([
-        {
-            name: 'Player 1',
-            points: 0,
-            powerups: [],
-            drink: 0,
-            drinkPowerup: 0,
-            helpPowerup: 0,
-            randomPowerup: 0,
-            sabotagePowerup: 0,
-        },
-        {
-            name: 'Player 2',
-            points: 0,
-            powerups: [],
-            drink: 0,
-            drinkPowerup: 0,
-            helpPowerup: 0,
-            randomPowerup: 0,
-            sabotagePowerup: 0,
-        },
-    ]);*/
 
-    /*
-        use 3 categories for testing (remove later)
-        const [categories, setCategories] = useState([
-            {
-                id: 9,
-                name: 'General Knowledge',
-            },
-            {
-                id: 10,
-                name: 'Entertainment: Books',
-            },
-            {
-                id: 11,
-                name: 'Entertainment: Film',
-            },
-        ]);
-    */
-
-    // for fetching the questions
-    // const [categoryForQuestion, setCategoryForQuestion] = useState(0);
-
-    // // randomize the categoryForQuestion from the categories array (remove later)
-    //  const randomCategory = () => {
-    //     console.log(selectedCategories.length);
-    //     const random = Math.floor(Math.random() * selectedCategories.length);
-    //     setCategoryForQuestion(selectedCategories[random]);
-    // }
-
-    /*
-    // use easy difficulty for testing (remove later)
-    const [difficulty, setDifficulty] = useState('easy');
-    */
 
     // use 10 questions for testing (remove later)
     const [amount, setAmount] = useState(10);
@@ -319,6 +265,14 @@ export default function GameScreen({ navigation, route }) {
                 onPress={() => {
                     setIsPlaying(false);
                     navigation.navigate('PartyModeInBetweenResults', {playersCorrectAnswers: playersCorrectAnswers});
+                }}
+            />
+                        <Button
+                title="End game and go back to main page"
+                type="outline"
+                onPress={() => {
+                    setIsPlaying(false);
+                    navigation.navigate('Home');
                 }}
             />
         </SafeAreaView>
