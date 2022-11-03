@@ -68,7 +68,6 @@ export default StyleSheet.create({
         backgroundColor: '#020d23',
         marginTop: 0,
     },
-
     timer: {
         marginTop: 50,
     },
@@ -77,11 +76,7 @@ export default StyleSheet.create({
     partyOptionsContainer: {
         flex: 1,
         backgroundColor: '#020d23',
-        paddingTop: 25,
-    },
-    playerContainer: {
-        flex: 1,
-        flexDirection: 'row',
+        alignItems: 'center',
     },
     otherOptionsContainer: {
         flex: 5,
@@ -109,6 +104,7 @@ export default StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         justifyContent: 'center',
+        flexDirection: 'row',
     },
 
     //Pickers and add number
@@ -118,21 +114,6 @@ export default StyleSheet.create({
         width: 330,
         height: 50,
         marginBottom: 10,
-    },
-    addNumber: {
-        fontSize: 18,
-        height: 35,
-        borderColor: '#fff',
-        borderWidth: 0.5,
-        alignItems: 'center',
-        borderColor: "#fff",
-        marginBottom: 5,
-        color: '#fff',
-        textAlign: 'center'
-    },
-    scrollView: {
-        backgroundColor: '#020d23',
-        marginHorizontal: 10,
     },
 
     //Category container Partymode
