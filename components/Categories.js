@@ -39,15 +39,6 @@ export default function Categories({ navigation }) {
         navigation.navigate('Partymode', {
             selectedCategories,
         });
-        /*
-        if (selectedCategories.length > 0) {
-            console.log(selectedCategories);
-            return selectedCategories;
-        } else {
-            return randomCategory();
-        }
-        */
-        
     }
 
     return (

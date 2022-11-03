@@ -3,7 +3,7 @@ import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Press
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
-import { DrinkImages } from './DrinkImages';
+import { DrinkImages } from '../images/DrinkImages';
 
 export default function PartyModeOptions({ route, navigation }) {
 
@@ -258,6 +258,7 @@ export default function PartyModeOptions({ route, navigation }) {
                 <Button
                     title='Back'
                     titleStyle={{ fontWeight: '700' }}
+<<<<<<< HEAD
                     buttonStyle={{
                         backgroundColor: '#ff3333',
                         borderColor: 'transparent',
@@ -268,6 +269,10 @@ export default function PartyModeOptions({ route, navigation }) {
                         width: 140,
                         marginLeft: 5,
                     }}
+=======
+                    buttonStyle={Styles.backButton}
+                    containerStyle={Styles.backButtonContainer}
+>>>>>>> f5e7dd37b6e7c6b4501b3af9d42232b9dddd0a2a
                     onPress={() => navigation.navigate('Home')}
                 />
             </View>

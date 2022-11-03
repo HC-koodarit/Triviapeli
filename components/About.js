@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 
@@ -24,17 +24,8 @@ export default function About({ navigation }) {
             <Button
                     title='Back'
                     titleStyle={{ fontWeight: '700' }}
-                    buttonStyle={{
-                        backgroundColor: '#ff3333',
-                        borderColor: 'transparent',
-                        borderWidth: 0,
-                        borderRadius: 30,
-                    }}
-                    containerStyle={{
-                        width: 140,
-                        marginHorizontal: 50,
-                        marginVertical: 20,
-                    }}
+                    buttonStyle={Styles.backButton}
+                    containerStyle={Styles.backButtonContainer}
                     onPress={() => navigation.navigate('Home')}
                 />
         </View>
