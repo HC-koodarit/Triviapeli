@@ -99,6 +99,7 @@ export default StyleSheet.create({
         width: 500,
         color: '#fff',
         marginTop: 20,
+        marginBottom: 20
     },
     flatlistPlayerNames: {
         color: "#fff",
@@ -137,6 +138,7 @@ export default StyleSheet.create({
     //Difficulty container Partymode
     difficultyContainer: {
         marginBottom: 1,
+        marginTop: 3
     },
 
     //Drinks container Partymode
@@ -236,6 +238,7 @@ export default StyleSheet.create({
       },
       buttonOpen: {
         backgroundColor: "#F194FF",
+        marginBottom: 20
       },
       buttonClose: {
         backgroundColor: "#2196F3",
