@@ -186,7 +186,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
             {/* Select categories */}
             <View style={Styles.categoryContainer}>
-                <Text style={Styles.playersTitle}>Categories</Text>
+                <Text style={Styles.optionsSubTitle}>Categories</Text>
                 <MultiSelect
                     style={Styles.dropdown}
                     placeholderStyle={Styles.placeholderStyleDropdown}
@@ -208,7 +208,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
             {/* Select difficulty */}
             <View style={Styles.difficultyContainer}>
-                <Text style={Styles.playersTitle}>Difficulty</Text>
+                <Text style={Styles.optionsSubTitle}>Difficulty</Text>
                 <Dropdown
                     style={Styles.dropdown}
                     placeholderStyle={Styles.placeholderStyleDropdown}
