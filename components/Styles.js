@@ -183,7 +183,7 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
-        marginBottom: 60,
+        marginBottom: 20,
         alignSelf: 'center',
       },
       placeholderStyleDropdown: {
@@ -254,7 +254,6 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         width: 200,
         alignContent: 'center',
-        marginTop: 10,
         alignSelf: 'center',
       },
 });
