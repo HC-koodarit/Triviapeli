@@ -222,7 +222,7 @@ export default StyleSheet.create({
 
     //Start Game button Partymode
     startGamePContainer: {
-        marginBottom: 100,
+        marginBottom: 10,
     },
 
     //Dropdown Styles for drink choice
