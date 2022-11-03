@@ -226,7 +226,7 @@ export default function GameScreen({ navigation, route }) {
                     navigation.navigate('PartyModeInBetweenResults', {playersCorrectAnswers: playersCorrectAnswers});
                 }}
             />
-                        <Button
+            <Button
                 title="End game and go back to main page"
                 type="outline"
                 onPress={() => {
