@@ -3,7 +3,7 @@ import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Press
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
-import { DrinkImages } from './DrinkImages';
+import { DrinkImages } from '../images/DrinkImages';
 
 export default function PartyModeOptions({ route, navigation }) {
 
