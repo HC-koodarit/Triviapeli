@@ -110,7 +110,10 @@ export default function PartyModeOptions({ route, navigation }) {
     }
 
     return (
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0c44a14464452f4c0db308eb55db6234600da86f
         <SafeAreaView style={Styles.partyOptionsContainer}>
             {/* Players */}
             <Text style={Styles.playersTitle}>Players</Text>
@@ -266,6 +269,9 @@ export default function PartyModeOptions({ route, navigation }) {
                 />
             </View>
         </SafeAreaView>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0c44a14464452f4c0db308eb55db6234600da86f
     );
 }
