@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: '#020d23',
@@ -247,5 +248,13 @@ export default StyleSheet.create({
       modalText: {
         marginBottom: 15,
         textAlign: "center"
-      }
+      },
+      buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 200,
+        alignContent: 'center',
+        marginTop: 10,
+        alignSelf: 'center',
+      },
 });

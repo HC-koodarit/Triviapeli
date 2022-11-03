@@ -101,12 +101,12 @@ export default function PartyModeOptions({ route, navigation }) {
         }
     }
 
-    // add all categories to the array
-    const addAllCategories = () => {
-        categories.forEach(category => {
-            setSelectedCategories([...selectedCategories, category.id]);
-        });
-        console.log(selectedCategories);
+    // select and deselect all categories
+    const selectAll = () => {
+        setSelectedCategories(categories.map(category => category.id));
+    }
+    const deselectAll = () => {
+        setSelectedCategories([]);
     }
 
     return (
@@ -204,6 +204,18 @@ export default function PartyModeOptions({ route, navigation }) {
                     }}
                     selectedStyle={Styles.selectedStyleDropdown}
                 />
+                <View style={Styles.buttonContainer}>
+                <Button
+                    title="Select all"
+                    onPress={selectAll}
+                    color="#3c87c2"
+                />
+                <Button
+                    title="Deselect all"
+                    onPress={deselectAll}
+                    color="#3c87c2"
+                />
+                </View>
             </View>
 
             {/* Select difficulty */}
