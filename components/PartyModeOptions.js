@@ -110,10 +110,6 @@ export default function PartyModeOptions({ route, navigation }) {
     }
 
     return (
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c44a14464452f4c0db308eb55db6234600da86f
         <SafeAreaView style={Styles.partyOptionsContainer}>
             {/* Players */}
             <Text style={Styles.playersTitle}>Players</Text>
@@ -126,13 +122,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         <View style={Styles.playerContainer}>
                             <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
                             <Text style={Styles.flatlistPlayerNames}> - {item.drink} </Text>
-                            <Image source={item.image} style={
-                                {
-                                    width: 25,
-                                    height: 25,
-                                    marginBottom: 0,
-                                }
-                            } />
+                            <Image source={item.image} style={Styles.playerDrinkImage} />
                             <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>  delete</Text>
                         </View>
                     }
@@ -269,9 +259,5 @@ export default function PartyModeOptions({ route, navigation }) {
                 />
             </View>
         </SafeAreaView>
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c44a14464452f4c0db308eb55db6234600da86f
     );
 }
