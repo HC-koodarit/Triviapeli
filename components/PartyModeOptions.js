@@ -115,7 +115,7 @@ export default function PartyModeOptions({ route, navigation }) {
             <Text style={Styles.playersTitle}>Players</Text>
             <SafeAreaView style={Styles.playerNames}>
                 <FlatList
-                    style={{ marginLeft: "5%" }}
+                    style={Styles.playerFlatlist}
                     data={playerDetails}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) =>
@@ -125,7 +125,7 @@ export default function PartyModeOptions({ route, navigation }) {
                             <Image source={item.image} style={
                                 {
                                     width: 25,
-                                    height: 35,
+                                    height: 25,
                                     marginBottom: 0,
                                 }
                             } />

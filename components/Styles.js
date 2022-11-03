@@ -79,13 +79,7 @@ export default StyleSheet.create({
         backgroundColor: '#020d23',
         alignItems: 'center',
     },
-    playersTitle: {
-      fontSize: 25,
-      alignSelf: 'center',
-      fontWeight: 'bold',
-      color: '#fff',
-      paddingTop: 40,
-    },
+    
     optionsSubTitle: {
       fontSize: 25,
       alignSelf: 'center',
@@ -100,47 +94,112 @@ export default StyleSheet.create({
     otherOptionsContainer: {
         flex: 5,
     },
-    //Flatlist playerNames
-    playerNames: {
+
+    //Players tyylit
+      playersTitle: {
+        fontSize: 25,
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        color: '#fff',
+        paddingTop: 40,
+      },
+      //Flatlist playerNames
+      playerNames: {
         //paddingTop: 20,
         width: 500,
+        height: 100,
         color: '#fff',
         marginTop: 20,
         marginBottom: 20
-    },
-    flatlistPlayerNames: {
+      },
+      playerFlatlist: {
+        flex: 1,
+      },
+      flatlistPlayerNames: {
         color: "#fff",
-    },
-    //Add players text input styles
-    addPlayers: {
-        fontSize: 18,
-        width: 250,
-        borderBottomWidth: 1.0,
-        borderColor: "#0055b3",
-        marginBottom: 5,
-        color: 'black',
-    },
-    playerContainer: {
-        marginTop: 5,
-        marginBottom: 5,
-        justifyContent: 'center',
+      },
+
+      //Add players text input styles
+      addPlayers: {
+          fontSize: 18,
+          width: 250,
+          borderBottomWidth: 1.0,
+          borderColor: "#0055b3",
+          marginBottom: 5,
+          color: 'black',
+      },
+      playerContainer: {
+          marginTop: 1,
+          marginBottom: 1,
+          justifyContent: 'center',
+          flexDirection: 'row',
+      },
+      
+
+      //PartyMode Options Addplayers Popup
+      centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 40,
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+      },
+      buttonpopup: {
+        borderRadius: 20,
+        padding: 15,
+        elevation: 2
+      },
+      buttonOpen: {
+        backgroundColor: "#F194FF",
+        marginBottom: 20
+      },
+      buttonClose: {
+        backgroundColor: "#2196F3",
+      },
+      textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+      },
+      buttonContainer: {
         flexDirection: 'row',
-        //justifyContent: 'space-between',
-    },
+        justifyContent: 'space-between',
+        width: 200,
+        alignContent: 'center',
+        alignSelf: 'center',
+      },
 
-    //Pickers and add number
-    pickerPartyMode: {
-        fontSize: 18,
-        color: '#fff',
-        width: 330,
-        height: 50,
-        marginBottom: 10,
-    },
+      //Pickers and add number
+      pickerPartyMode: {
+          fontSize: 18,
+          color: '#fff',
+          width: 330,
+          height: 50,
+          marginBottom: 10,
+      },
 
-    //Category container Partymode
-    categoryContainer: {
-        marginBottom: 1,
-    },
+      //Category container Partymode
+      categoryContainer: {
+          marginBottom: 1,
+      },
 
     //Difficulty container Partymode
     difficultyContainer: {
@@ -213,56 +272,5 @@ export default StyleSheet.create({
       },
       selectedStyleDropdown: {
         borderRadius: 12,
-      },
-
-    //PartyMode Options Addplayers Popup
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginBottom: 40,
-      },
-      modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-      },
-      buttonpopup: {
-        borderRadius: 20,
-        padding: 15,
-        elevation: 2
-      },
-      buttonOpen: {
-        backgroundColor: "#F194FF",
-        marginBottom: 20
-      },
-      buttonClose: {
-        backgroundColor: "#2196F3",
-      },
-      textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-      },
-      modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-      },
-      buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 200,
-        alignContent: 'center',
-        alignSelf: 'center',
       },
 });
