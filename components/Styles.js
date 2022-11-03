@@ -117,6 +117,8 @@ export default StyleSheet.create({
       playerFlatlist: {
         flex: 1,
       },
+
+      //Rendered 
       flatlistPlayerNames: {
         color: "#fff",
       },
@@ -166,7 +168,6 @@ export default StyleSheet.create({
         elevation: 2
       },
       buttonOpen: {
-        backgroundColor: "#F194FF",
         marginBottom: 20
       },
       buttonClose: {
