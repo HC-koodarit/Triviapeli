@@ -87,116 +87,116 @@ export default StyleSheet.create({
   },
 
   //Players tyylit - PartyModeOptions
-    //View Tyyli
-    playersTitle: {
-      fontSize: 25,
-      alignSelf: 'center',
-      fontWeight: 'bold',
-      color: '#fff',
-      paddingTop: 40,
-    },
-    //Flatlist playerNames
-    playerNames: {
-      //paddingTop: 20,
-      width: 500,
-      height: 100,
-      color: '#fff',
-      marginTop: 20,
-      marginBottom: 20
-    },
-    playerFlatlist: {
-      flex: 1,
-    },
+  //View Tyyli
+  playersTitle: {
+    fontSize: 25,
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
+    paddingTop: 40,
+  },
+  //Flatlist playerNames
+  playerNames: {
+    //paddingTop: 20,
+    width: 500,
+    height: 100,
+    color: '#fff',
+    marginTop: 20,
+    marginBottom: 20
+  },
+  playerFlatlist: {
+    flex: 1,
+  },
 
-    //Rendered players list
-    playerContainer: {
-      marginTop: 1,
-      marginBottom: 1,
-      justifyContent: 'center',
-      flexDirection: 'row',
-    },
-    flatlistPlayerNames: {
-      color: "#fff",
-    },
-    playerDrinkImage: {
-      width: 25,
-      height: 25,
-      marginBottom: 0,
-    },
+  //Rendered players list
+  playerContainer: {
+    marginTop: 1,
+    marginBottom: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  flatlistPlayerNames: {
+    color: "#fff",
+  },
+  playerDrinkImage: {
+    width: 25,
+    height: 25,
+    marginBottom: 0,
+  },
 
-    //PartyMode Options Addplayers Popup
-    centeredView: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: 40,
+  //PartyMode Options Addplayers Popup
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
     },
-    modalView: {
-      margin: 20,
-      backgroundColor: "white",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
-    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
 
-    addPlayers: {
-      fontSize: 18,
-      width: 250,
-      borderBottomWidth: 1.0,
-      borderColor: "#0055b3",
-      marginBottom: 5,
-      color: 'black',
-    },
+  addPlayers: {
+    fontSize: 18,
+    width: 250,
+    borderBottomWidth: 1.0,
+    borderColor: "#0055b3",
+    marginBottom: 5,
+    color: 'black',
+  },
 
-    //Dropdown Styles for drink choice
-    dropdownDrinks: {
-      height: 50,
-      width: 250,
-      backgroundColor: 'transparent',
-      borderBottomColor: 'gray',
-      borderBottomWidth: 0.5,
-      marginBottom: 10,
-    },
-    placeholderStyleDropdownDrinks: {
-      fontSize: 16,
-      color: "black",
-    },
-    selectedTextStyleDropdownDrinks: {
-      fontSize: 14,
-      color: "black",
-    },
-    iconStyleDropdownDrinks: {
-      width: 20,
-      height: 20,
-    },
+  //Dropdown Styles for drink choice
+  dropdownDrinks: {
+    height: 50,
+    width: 250,
+    backgroundColor: 'transparent',
+    borderBottomColor: 'gray',
+    borderBottomWidth: 0.5,
+    marginBottom: 10,
+  },
+  placeholderStyleDropdownDrinks: {
+    fontSize: 16,
+    color: "black",
+  },
+  selectedTextStyleDropdownDrinks: {
+    fontSize: 14,
+    color: "black",
+  },
+  iconStyleDropdownDrinks: {
+    width: 20,
+    height: 20,
+  },
 
-    //Button Styles (addplayer & Save Player)
-    buttonpopup: {
-      borderRadius: 20,
-      padding: 15,
-      elevation: 2
-    },
-    buttonOpen: {
-      marginBottom: 20
-    },
-    buttonClose: {
-      backgroundColor: "#2196F3",
-    },
+  //Button Styles (addplayer & Save Player)
+  buttonpopup: {
+    borderRadius: 20,
+    padding: 15,
+    elevation: 2
+  },
+  buttonOpen: {
+    marginBottom: 20
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
 
-    //Text Style for save player text
-    textStyle: {
-      color: "white",
-      fontWeight: "bold",
-      textAlign: "center"
-    },
+  //Text Style for save player text
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
 
   //Pickers and add number
   pickerPartyMode: {
@@ -221,12 +221,12 @@ export default StyleSheet.create({
   },
 
   //Difficulty settings styles
-    //Difficulty container Partymode
-    difficultyContainer: {
-      marginBottom: 1,
-      marginTop: 3
-    },
-  
+  //Difficulty container Partymode
+  difficultyContainer: {
+    marginBottom: 1,
+    marginTop: 3
+  },
+
   //Dropdown Styles for category & difficulty
   dropdown: {
     height: 50,
@@ -261,4 +261,18 @@ export default StyleSheet.create({
   startGamePContainer: {
     marginBottom: 10,
   },
+
+  // Back button
+  backButton: {
+    backgroundColor: '#ff3333',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 30
+  },
+
+  backButtonContainer: {
+    width: 140,
+    marginHorizontal: 50,
+    marginVertical: 20,
+  }
 });
