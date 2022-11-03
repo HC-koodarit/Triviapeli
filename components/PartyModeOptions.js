@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
-import { Button, CheckBox } from 'react-native-elements';
+import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image } from 'react-native';
+import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
+import { DrinkImages } from './DrinkImages';
 
 export default function PartyModeOptions({ route, navigation }) {
 
     // Variables for gameoptions
     const [selectedDrink, setSelectedDrink] = useState('');
+    const [drinkImage, setDrinkImage] = useState(null);
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
 
     //Add player variables
-    const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
 
@@ -33,19 +34,6 @@ export default function PartyModeOptions({ route, navigation }) {
             })
             .catch(err => console.error(err));
     }, []);
-
-    /*const addPlayers = () => {
-        //Generate id for player
-        let playerNameGenerator = "player" + playerNumber
-        setPlayerNumber(playerNumber + 1);
-        
-        //console.log(playerNames);
-        //Save the player name and id to a list
-        setPlayerNames([...playerNames, { id: playerNameGenerator, name: playerNameTemp }]);
-
-        //Empty add player textinput
-        setPlayerNameTemp('');
-    }*/
 
     const addPlayer = () => {
         //Generate id for player
@@ -74,7 +62,6 @@ export default function PartyModeOptions({ route, navigation }) {
         //console.log(players);
     }
 
-
     const deletePlayer = (id) => {
         const filteredData = playerDetails.filter(item => item.id !== id);
         //Updating List Data State with NEW Data.
@@ -84,9 +71,9 @@ export default function PartyModeOptions({ route, navigation }) {
 
     // Drinks data
     const drinks = [
-        { label: 'Mild (Beer, Cider etc.)', value: 'Mild' },
-        { label: 'Medium (Wine etc.)', value: 'Medium' },
-        { label: 'Strong (Spririts, Liquor etc.)', value: 'Strong' },
+        { label: 'Mild (<10%)', value: 'Mild' },
+        { label: 'Medium (10%–20%)', value: 'Medium' },
+        { label: 'Strong (>20%)', value: 'Strong' },
     ];
 
     // Difficulty data
@@ -96,35 +83,11 @@ export default function PartyModeOptions({ route, navigation }) {
         { label: 'Hard', value: 'hard' },
     ];
 
-    /*
-    // put the selected categories in an array
-    const handleCategoryChange = (itemValue, itemIndex) => {
-        setSelectedCategories([...selectedCategories, itemValue]);
-    }
-    // remove the selected category from the array
-    const handleRemoveCategory = (itemValue, itemIndex) => {
-        setSelectedCategories(selectedCategories.filter(category => category !== itemValue));
-    }
-    // check if the category is already selected
-    const isCategorySelected = (itemValue) => {
-        return selectedCategories.includes(itemValue);
-    }
-    */
-
     // choose a random category from the categories
     const randomCategory = () => {
         const random = Math.floor(Math.random() * categories.length);
         return categories[random].id;
     }
-
-    /*
-    if (selectedCategories.length > 0) {
-        console.log(selectedCategories);
-        return selectedCategories;
-    } else {
-        return randomCategory();
-    }
-    */
 
     // start game and pass params to PartyModeScreen
     const startGame = () => {
@@ -149,22 +112,22 @@ export default function PartyModeOptions({ route, navigation }) {
 
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
-            <ScrollView style={Styles.scrollView}>
                 {/* Players */}
-                <View style={Styles.playerNames}>
-                    <Text style={Styles.title}>Players:</Text>
+                <Text style={Styles.playersTitle}>Players</Text>
+                <SafeAreaView style={Styles.playerNames}>
                     <FlatList
                         style={{ marginLeft: "5%" }}
                         data={playerDetails}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
-                                <Text style={Styles.flatlistPlayerNames}>Drinks: {item.drink}</Text>
-                                <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
-                            </View>}
+                                <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> - {item.drink} </Text>
+                                <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>  delete</Text>
+                            </View>
+                            }
                     />
-                </View>
+                </SafeAreaView>
                 <View style={Styles.centeredView}>
                     <Modal
                         animationType="slide"
@@ -217,7 +180,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
-                    <Text style={Styles.normalText}>Choose your categories</Text>
+                    <Text style={Styles.playersTitle}>Categories</Text>
                     <MultiSelect
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
@@ -239,7 +202,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select difficulty */}
                 <View style={Styles.difficultyContainer}>
-                    <Text style={Styles.title}>Difficulty</Text>
+                    <Text style={Styles.playersTitle}>Difficulty</Text>
                     <Dropdown
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
@@ -258,14 +221,29 @@ export default function PartyModeOptions({ route, navigation }) {
                 </View>
                 <View style={Styles.startGamePContainer}>
                     <Button
-                        type="outline"
-                        title='Start game'
+                        title='Start'
+                        icon={{
+                            name: 'play',
+                            type: 'font-awesome',
+                            size: 20,
+                            color: 'white',
+                        }}
+                        iconContainerStyle={{ marginRight: 10 }}
+                        titleStyle={{ fontWeight: '700' }}
+                        buttonStyle={{
+                            backgroundColor: '#ff6303',
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                            borderRadius: 30,
+                        }}
+                        containerStyle={{
+                            width: 140,
+                            marginHorizontal: 50,
+                            marginVertical: 20,
+                        }}
                         onPress={startGame}
                     />
                 </View>
-            </ScrollView>
         </SafeAreaView>
     );
 }
-
-

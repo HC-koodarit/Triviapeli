@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Alert, Platform, Image } from 'react-native';
-import { Input, Button, ListItem, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
@@ -44,7 +44,6 @@ export default function GameScreen({ navigation }) {
 
             })
             .catch(err => console.error(err));
-
     }
 
     useEffect(() => {
@@ -88,6 +87,7 @@ export default function GameScreen({ navigation }) {
             setPoints(setPoints => setPoints + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
+            
             if (Platform.OS === 'web') {
                 alert("Correct! Good job! :)");
                 getQuestion();
@@ -107,6 +107,7 @@ export default function GameScreen({ navigation }) {
         } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
+
             if (Platform.OS === 'web') {
                 alert("Wrong! The correct answer was " + correctAnswer);
                 getQuestion();
@@ -141,7 +142,8 @@ export default function GameScreen({ navigation }) {
                     timeIsUp();
                 }}
             >
-                {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
+                {({ remainingTime }) => 
+                <Text style={Styles.normalText}>{remainingTime}</Text>}
             </CountdownCircleTimer>
         </View>
     )

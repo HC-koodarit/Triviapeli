@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, FlatList, Image } from 'react-native';
-import { Input, Button, ListItem, Icon } from 'react-native-elements';
+import { SafeAreaView, Text, View, Alert, Platform, Image } from 'react-native';
+import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
@@ -18,8 +18,8 @@ export default function GameScreen({ navigation, route }) {
 
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
 
-    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([]);
-    const [playersStrike, setPlayersStrike] = useState([]);
+    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
+    const [playersStreak, setPlayersStreak] = useState([]);
 
     // TEST DATA
     //
@@ -101,7 +101,7 @@ export default function GameScreen({ navigation, route }) {
     const [correctAnswers, setCorrectAnswers] = useState(0);
 
     // variables for the countdown timer
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
     // fetch question data from api and set to variables
@@ -145,9 +145,8 @@ export default function GameScreen({ navigation, route }) {
     }, [selectedCategories, chosenPlayer])
 
     useEffect(() => {
-        //srandomCategory();
-        //copyPlayers();
-        getQuestion();1
+        //randomCategory();
+        getQuestion();
         //console.log(players);
         console.log(selectedCategories);
         //console.log(selectedDifficulty);
@@ -231,6 +230,7 @@ export default function GameScreen({ navigation, route }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setCorrectAnswers(0);
+
             if (Platform.OS === 'web') {
                 alert("Wrong! The correct answer was " + correctAnswer);
                 getQuestion();
@@ -271,7 +271,8 @@ export default function GameScreen({ navigation, route }) {
                     timeIsUp();
                 }}
             >
-                {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
+                {({ remainingTime }) => 
+                <Text style={Styles.normalText}>{remainingTime}</Text>}
             </CountdownCircleTimer>
         </View>
     )
@@ -297,12 +298,13 @@ export default function GameScreen({ navigation, route }) {
                 }
             } />
 
-            <Text
-                style={Styles.pointsText}
-            >Pointcount: {chosenPlayer.points}</Text>
-            <Text
-                style={Styles.pointsText}
-            >Streak: {correctAnswers}</Text>
+            <Text style={Styles.pointsText}>
+                Pointcount: {chosenPlayer.points}
+            </Text>
+            <Text style={Styles.pointsText}>
+                Streak: {correctAnswers}
+            </Text>
+            
             <Button
                 title="USE YOUR POWER UP"
                 type="outline"

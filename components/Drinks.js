@@ -1,5 +1,5 @@
 import useState from 'react';
-import GameScreen from './GameScreen';
+import PartyModeGame from './PartyModeGame';
 
 export default function Drinks() {
     const [lowAlcohol, setLowAlcohol] = useState(0);
@@ -12,19 +12,21 @@ export default function Drinks() {
     // Count wrong answers and add drinks
 
     //TODO pelaajien profiilien linkittäminen, eli jotenkin tyyliin
-    // if (GameScreen.answerIsCorrect === false && GameScreen.playerNumber === 1) {
-    if (GameScreen.answerIsCorrect === false) {
+    // if (PartyModeGame.correctAnswer === false && PartyModeGame.playerNumber === 1) {
+
+    if (PartyModeGame.correctAnswer === false) {
         setLowAlcohol(lowAlcohol + 1);
         setLowAlcFinished(lowAlcFinished + 1);
     }
-    if (GameScreen.answerIsCorrect === false) {
+    if (PartyModeGame.correctAnswer === false) {
         setMediumAlcohol(mediumAlcohol + 1);
         setMediumAlcFinished(mediumAlcFinished + 1);
     }
-    if (GameScreen.answerIsCorrect === false) {
+    if (PartyModeGame.correctAnswer === false) {
         setHighAlcohol(highAlcohol + 1);
     }
 // Drinking rules
+
     if (lowAlcohol === 1) {
         //alert("Take one sip!");
         setMessage("Take one sip!");
@@ -50,4 +52,5 @@ export default function Drinks() {
         setMessage("Take a shot!");
         setHighAlcohol(0);
     }
+
 }
