@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import Styles from './Styles';
 
-export default function About() {
+export default function About({ navigation }) {
 
     return (
         <View style={Styles.aboutContainer}>
@@ -20,6 +21,22 @@ export default function About() {
             <Text style={Styles.normalText}>This application uses data from The Open Trivia Database API for trivia questions and answers.</Text>
             <Text> </Text>
             <Text style={Styles.normalText}>All data provided by the API is available under the Creative Commons Attribution-ShareAlike 4.0 International License.</Text>
+            <Button
+                    title='Back'
+                    titleStyle={{ fontWeight: '700' }}
+                    buttonStyle={{
+                        backgroundColor: '#ff3333',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        borderRadius: 30,
+                    }}
+                    containerStyle={{
+                        width: 140,
+                        marginHorizontal: 50,
+                        marginVertical: 20,
+                    }}
+                    onPress={() => navigation.navigate('Home')}
+                />
         </View>
     );
 }

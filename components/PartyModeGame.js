@@ -239,11 +239,13 @@ export default function GameScreen({ navigation, route }) {
             } />
 
             <Text style={Styles.pointsText}>
-                Pointcount: {chosenPlayer.points}
+                Pointcount for {chosenPlayer.name}: {chosenPlayer.points}
             </Text>
+            {/* Streak button for every player
             <Text style={Styles.pointsText}>
                 Streak: {correctAnswers}
             </Text>
+            */}
             
             <Button
                 title="USE YOUR POWER UP"
