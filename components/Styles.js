@@ -243,7 +243,6 @@ export default StyleSheet.create({
         elevation: 2
       },
       buttonOpen: {
-        backgroundColor: "#F194FF",
         marginBottom: 20
       },
       buttonClose: {
