@@ -97,7 +97,7 @@ export default StyleSheet.create({
         paddingTop: 20,
         width: 150,
         color: '#fff',
-        //marginBottom: 5,
+        marginTop: 20,
     },
     flatlistPlayerNames: {
         color: "#fff",
@@ -150,7 +150,7 @@ export default StyleSheet.create({
 
     //Start Game button Partymode
     startGamePContainer: {
-        marginBottom: 60,
+        marginBottom: 100,
     },
 
     //Dropdown Styles for drink choice
@@ -188,7 +188,7 @@ export default StyleSheet.create({
       placeholderStyleDropdown: {
         fontSize: 16,
         color: "white",
-        alignSelf: 'center',
+        alignItems: 'center'
       },
       selectedTextStyleDropdown: {
         fontSize: 14,

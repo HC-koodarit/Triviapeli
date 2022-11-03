@@ -115,7 +115,6 @@ export default function PartyModeOptions({ route, navigation }) {
                 <Text style={Styles.playersTitle}>Players</Text>
                 <SafeAreaView style={Styles.playerNames}>
                     <FlatList
-                        style={{ marginTop: "10%" }}
                         data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
@@ -179,7 +178,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
-                    <Text style={Styles.normalText}>Choose your categories</Text>
+                    <Text style={Styles.playersTitle}>Categories</Text>
                     <MultiSelect
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
@@ -201,7 +200,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select difficulty */}
                 <View style={Styles.difficultyContainer}>
-                    <Text style={Styles.title}>Difficulty</Text>
+                    <Text style={Styles.playersTitle}>Difficulty</Text>
                     <Dropdown
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
