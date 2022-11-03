@@ -13,18 +13,22 @@ export default function HomeScreen({ navigation }) {
             <Button
                 title="Partymode"
                 type="outline"
+                size="lg"
                 onPress={() => { navigation.navigate('Partymode')}}
             />
+            <Text> </Text>
             <Button
                 title="Quickplay"
                 type="outline"
                 onPress={() => navigation.navigate('Quickplay')}
             />
+            <Text> </Text>
             <Button
                 title="Rules"
                 type="outline"
                 onPress={() => navigation.navigate('Rules')}
             />
+            <Text> </Text>
             <Button
                 title="About"
                 type="outline"
