@@ -159,14 +159,17 @@ export default function GameScreen({ navigation }) {
             <View>
                 {TimerForQuestions()}
             </View>
+            <Text> </Text>
             <Image source={require('../assets/thinking.gif')} style={
                 {
-                    width: 50,
-                    height: 70,
+                    width: 200,
+                    height: 220,
                     marginBottom: 0,
                 }
             } />
+            <Text> </Text>
             <Text style={Styles.pointsText}>Pointcount: {points}</Text>
+            <Text> </Text>
             <Button
                 title="End Game"
                 type="outline"

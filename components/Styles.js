@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: '#020d23',
@@ -190,7 +191,7 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
-        marginBottom: 60,
+        marginBottom: 20,
         alignSelf: 'center',
       },
       placeholderStyleDropdown: {
@@ -199,7 +200,7 @@ export default StyleSheet.create({
         alignItems: 'center'
       },
       selectedTextStyleDropdown: {
-        fontSize: 14,
+        fontSize: 12,
         color: "white",
       },
       iconStyleDropdown: {
@@ -239,10 +240,10 @@ export default StyleSheet.create({
         borderRadius: 20,
         padding: 15,
         elevation: 2
-
       },
       buttonOpen: {
         backgroundColor: "#F194FF",
+        width: 100,
       },
       buttonClose: {
         backgroundColor: "#2196F3",
@@ -255,5 +256,12 @@ export default StyleSheet.create({
       modalText: {
         marginBottom: 15,
         textAlign: "center"
-      }
+      },
+      buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 200,
+        alignContent: 'center',
+        alignSelf: 'center',
+      },
 });
