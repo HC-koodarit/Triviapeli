@@ -110,6 +110,7 @@ export default function PartyModeOptions({ route, navigation }) {
     }
 
     return (
+        <ScrollView>
         <SafeAreaView style={Styles.partyOptionsContainer}>
             {/* Players */}
             <Text style={Styles.playersTitle}>Players</Text>
@@ -265,5 +266,6 @@ export default function PartyModeOptions({ route, navigation }) {
                 />
             </View>
         </SafeAreaView>
+        </ScrollView>
     );
 }
