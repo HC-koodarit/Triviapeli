@@ -10,7 +10,6 @@ export default function GameScreen({ navigation, route }) {
     
     // Use first player from route params as the initial value
     // TODO: Require players to be defined from the previous view
-<<<<<<< HEAD
     
     
     const [players, setPlayers] = useState(playerDetails);
@@ -18,9 +17,6 @@ export default function GameScreen({ navigation, route }) {
     //{id: "player1", name: "Daniel", drink: "Mild", points: 0, powerup: ""}
 
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
-=======
-    const [chosenPlayer, setChosenPlayer] = useState([players[0]]);
->>>>>>> 8688ef7013899a336d7c36b39f19365d314a87a7
 
     const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
     const [playersStreak, setPlayersStreak] = useState([]);
