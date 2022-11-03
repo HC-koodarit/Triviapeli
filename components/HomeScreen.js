@@ -2,12 +2,13 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Styles from './Styles';
 import { Button } from 'react-native-elements';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function HomeScreen({ navigation }) {
 
     return (
-        <View style={Styles.container}>
+        <SafeAreaView style={Styles.container}>
             <Text style={Styles.header}>Trivia</Text>
             <Button
                 title="Partymode"
@@ -41,7 +42,7 @@ export default function HomeScreen({ navigation }) {
                     marginBottom: 0,
                 }
             } />
-        </View>
+        </SafeAreaView>
     );
 
 };

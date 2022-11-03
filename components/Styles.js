@@ -5,14 +5,12 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: '#020d23',
         alignItems: 'center',
-        marginTop: 0,
-        paddingTop: 0,
     },
     header: {
         fontSize: 70,
         fontWeight: 'bold',
         marginBottom: 20,
-        marginTop: 20,
+        marginTop: 50,
         color: '#fff',
     },
     headerRules: {

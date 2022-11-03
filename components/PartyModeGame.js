@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, FlatList, Image } from 'react-native';
-import { Input, Button, ListItem, Icon } from 'react-native-elements';
+import { SafeAreaView, Text, View, Alert, Platform, Image } from 'react-native';
+import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
@@ -13,7 +13,7 @@ export default function GameScreen({ navigation, route }) {
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
 
     const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
-    const [playersStrike, setPlayersStrike] = useState([]);
+    const [playersStreak, setPlayersStreak] = useState([]);
 
     // TEST DATA
     //
@@ -132,7 +132,7 @@ export default function GameScreen({ navigation, route }) {
     }, [selectedCategories, chosenPlayer])
 
     useEffect(() => {
-        //srandomCategory();
+        //randomCategory();
         getQuestion();
         //console.log(players);
         console.log(selectedCategories);
@@ -173,6 +173,7 @@ export default function GameScreen({ navigation, route }) {
             //setCorrectAnswers(correctAnswers + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
+
             if (Platform.OS === 'web') {
                 alert("Correct! Good job! :)");
                 getQuestion();
@@ -193,6 +194,7 @@ export default function GameScreen({ navigation, route }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setCorrectAnswers(0);
+
             if (Platform.OS === 'web') {
                 alert("Wrong! The correct answer was " + correctAnswer);
                 getQuestion();
@@ -233,7 +235,8 @@ export default function GameScreen({ navigation, route }) {
                     timeIsUp();
                 }}
             >
-                {({ remainingTime }) => <Text style={Styles.normalText}>{remainingTime}</Text>}
+                {({ remainingTime }) => 
+                <Text style={Styles.normalText}>{remainingTime}</Text>}
             </CountdownCircleTimer>
         </View>
     )
@@ -259,12 +262,12 @@ export default function GameScreen({ navigation, route }) {
                 }
             } />
 
-            <Text
-                style={Styles.pointsText}
-            >Pointcount: {playersCorrectAnswers}</Text>
-            <Text
-                style={Styles.pointsText}
-            >Streak: {correctAnswers}</Text>
+            <Text style={Styles.pointsText}>
+                Pointcount: {playersCorrectAnswers}
+            </Text>
+            <Text style={Styles.pointsText}>
+                Streak: {correctAnswers}
+            </Text>
             <Button
                 title="USE YOUR POWER UP"
                 type="outline"
