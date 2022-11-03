@@ -9,24 +9,13 @@ export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
     
     // Use first player from route params as the initial value
-    
     const [players, setPlayers] = useState(playerDetails);
-    //{id: "player2", name: "Sebu", drink: "Mild", points: 0, powerup: ""},
-    //{id: "player1", name: "Daniel", drink: "Mild", points: 0, powerup: ""}
-
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
-
     const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
-    const [playersStreak, setPlayersStreak] = useState([]);
-
-
+    //const [playersStreak, setPlayersStreak] = useState([]);   // Ei toiminnassa vielä
 
     // use 10 questions for testing (remove later)
     const [amount, setAmount] = useState(10);
-    //
-    //
-    // END OF TEST DATA
-
 
     // variables for questions and answers
     const [question, setQuestion] = useState('');
@@ -35,10 +24,8 @@ export default function GameScreen({ navigation, route }) {
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
 
-    // variable for the player's score
-    const [points, setPoints] = useState(0);
-    // count correct answers for powerups
-    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [points, setPoints] = useState(0);                    // variable for the player's score
+    const [correctAnswers, setCorrectAnswers] = useState(0);    // count correct answers for powerups
 
     // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(false);
@@ -58,8 +45,6 @@ export default function GameScreen({ navigation, route }) {
                 // Set new index for player, and fallback to 0 if next index larger than player count
                 const nextIndex = (currentPlayerIndex + 1) % players.length;
                 setChosenPlayer(players[nextIndex]);
-                //console.log("chosenPlayer:");
-                //console.log(chosenPlayer);
                 console.log("pelaajat:");
                 console.log(players);
 
@@ -73,30 +58,25 @@ export default function GameScreen({ navigation, route }) {
                 }
                 setIncorrectAnswers(answerArray);
                 answerArray.push(decodeURIComponent(data.results[0].correct_answer));
-
                 answerArray = answerArray.sort(() => Math.random() - 0.5);
-
                 setAllAnswers(answerArray);
                 setIsPlaying(true);  // start timer
-
             })
             .catch(err => console.error(err));
 
     }, [selectedCategories, chosenPlayer])
 
     useEffect(() => {
-        //randomCategory();
         getQuestion();
-        //console.log(players);
         console.log(selectedCategories);
-        //console.log(selectedDifficulty);
     }, []);
 
     // buttons for answers
-    const answerButtons = () => allAnswers.map((answer) => <Button title={answer} type="outline" onPress={() =>
+    const answerButtons = () => allAnswers.map((answer) => 
+        <Button title={answer} type="outline" onPress={() =>
             checkAnswer(answer)} key={answer} />)
 
-    // time running out
+    // timer runs out
     const timeIsUp = () => {
         if (Platform.OS === 'web') {
             alert("Time is up! The correct answer was " + correctAnswer);
@@ -119,34 +99,17 @@ export default function GameScreen({ navigation, route }) {
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
-            /*
-            setPoints(setPoints => setPoints + 1);
-            console.log("chosenpoints");
-            console.log(chosenPlayer.points);
-            
-            setPlayers({...players, id: chosenPlayer.id, name: chosenPlayer.name, drink: chosenPlayer.drink, points: pointsCounter, powerup: ""});
-            console.log("pelaajat:");
-            console.log(players);
-            pointsCounter = 0;*/
             let pointsCounter = chosenPlayer.points + 1;
-            
             const newState = players.map(obj => {
                 // 👇️ if id equals 2, update country property
                 if (obj.id === chosenPlayer.id) {
                   return {...obj, points: pointsCounter};
                 }
-          
                 // 👇️ otherwise return object as is
                 return obj;
             });
 
             setPlayers(newState);
-            //setCustomer({...customer, [event.target.name]: event.target.value})
-            //setCorrectAnswers(correctAnswers + 1);
-            //setPoints(setPoints => setPoints + 1);
-            //setPlayersCorrectAnswers({...playerPoints, id: chosenPlayer.id, name: chosenPlayer.name, points: pointsCounter});
-            //setPlayersCorrectAnswers(setPlayersCorrectAnswers[chosenPlayer.id] == setPlayersCorrectAnswers + 1);
-            //setCorrectAnswers(correctAnswers + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             
@@ -190,11 +153,10 @@ export default function GameScreen({ navigation, route }) {
         }
     }
 
-    const randomplayer = () => {
+    /*const randomplayer = () => {
         const random = Math.floor(Math.random() * players.name.length);
-        //setChosenPlayer(random);
         console.log(random);
-    }
+    } */
 
     // 15 sec countdown timer
     const TimerForQuestions = () => (
@@ -229,7 +191,6 @@ export default function GameScreen({ navigation, route }) {
             <View>
                 {TimerForQuestions()}
             </View>
-
             <Image source={require('../assets/thinking.gif')} style={
                 {
                     width: 50,
@@ -237,7 +198,6 @@ export default function GameScreen({ navigation, route }) {
                     marginBottom: 0,
                 }
             } />
-
             <Text style={Styles.pointsText}>
                 Pointcount for {chosenPlayer.name}: {chosenPlayer.points}
             </Text>
@@ -246,9 +206,8 @@ export default function GameScreen({ navigation, route }) {
                 Streak: {correctAnswers}
             </Text>
             */}
-            
             <Button
-                title="USE YOUR POWER UP"
+                title="Use your powerup"
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
@@ -256,7 +215,7 @@ export default function GameScreen({ navigation, route }) {
                 }}
             />
             <Button
-                title="CHECK POINTS"
+                title="Check point"
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
