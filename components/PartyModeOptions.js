@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
-import { Button, CheckBox } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 
@@ -33,19 +33,6 @@ export default function PartyModeOptions({ route, navigation }) {
             })
             .catch(err => console.error(err));
     }, []);
-
-    /*const addPlayers = () => {
-        //Generate id for player
-        let playerNameGenerator = "player" + playerNumber
-        setPlayerNumber(playerNumber + 1);
-        
-        //console.log(playerNames);
-        //Save the player name and id to a list
-        setPlayerNames([...playerNames, { id: playerNameGenerator, name: playerNameTemp }]);
-
-        //Empty add player textinput
-        setPlayerNameTemp('');
-    }*/
 
     const addPlayer = () => {
         //Generate id for player
@@ -96,35 +83,11 @@ export default function PartyModeOptions({ route, navigation }) {
         { label: 'Hard', value: 'hard' },
     ];
 
-    /*
-    // put the selected categories in an array
-    const handleCategoryChange = (itemValue, itemIndex) => {
-        setSelectedCategories([...selectedCategories, itemValue]);
-    }
-    // remove the selected category from the array
-    const handleRemoveCategory = (itemValue, itemIndex) => {
-        setSelectedCategories(selectedCategories.filter(category => category !== itemValue));
-    }
-    // check if the category is already selected
-    const isCategorySelected = (itemValue) => {
-        return selectedCategories.includes(itemValue);
-    }
-    */
-
     // choose a random category from the categories
     const randomCategory = () => {
         const random = Math.floor(Math.random() * categories.length);
         return categories[random].id;
     }
-
-    /*
-    if (selectedCategories.length > 0) {
-        console.log(selectedCategories);
-        return selectedCategories;
-    } else {
-        return randomCategory();
-    }
-    */
 
     // start game and pass params to PartyModeScreen
     const startGame = () => {
@@ -151,10 +114,9 @@ export default function PartyModeOptions({ route, navigation }) {
 
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
-            <ScrollView style={Styles.scrollView}>
                 {/* Players */}
+                <Text style={Styles.title}>Players:</Text>
                 <View style={Styles.playerNames}>
-                    <Text style={Styles.title}>Players:</Text>
                     <FlatList
                         style={{ marginLeft: "5%" }}
                         data={players}
@@ -265,7 +227,6 @@ export default function PartyModeOptions({ route, navigation }) {
                         onPress={startGame}
                     />
                 </View>
-            </ScrollView>
         </SafeAreaView>
     );
 }
