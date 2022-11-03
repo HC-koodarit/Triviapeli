@@ -191,7 +191,7 @@ export default StyleSheet.create({
         alignItems: 'center'
       },
       selectedTextStyleDropdown: {
-        fontSize: 14,
+        fontSize: 12,
         color: "white",
       },
       iconStyleDropdown: {
@@ -231,10 +231,10 @@ export default StyleSheet.create({
         borderRadius: 20,
         padding: 10,
         elevation: 2
-
       },
       buttonOpen: {
         backgroundColor: "#F194FF",
+        width: 100,
       },
       buttonClose: {
         backgroundColor: "#2196F3",
