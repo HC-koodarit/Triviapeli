@@ -84,7 +84,14 @@ export default StyleSheet.create({
       alignSelf: 'center',
       fontWeight: 'bold',
       color: '#fff',
-      paddingTop: 30,
+      paddingTop: 40,
+    },
+    optionsSubTitle: {
+      fontSize: 25,
+      alignSelf: 'center',
+      fontWeight: 'bold',
+      color: '#fff',
+      paddingTop: 10,
     },
     playerContainer: {
       flex: 1,
@@ -95,7 +102,7 @@ export default StyleSheet.create({
     },
     //Flatlist playerNames
     playerNames: {
-        paddingTop: 20,
+        //paddingTop: 20,
         width: 500,
         color: '#fff',
         marginTop: 20,
@@ -194,7 +201,7 @@ export default StyleSheet.create({
         alignItems: 'center'
       },
       selectedTextStyleDropdown: {
-        fontSize: 14,
+        fontSize: 12,
         color: "white",
       },
       iconStyleDropdown: {
@@ -213,7 +220,7 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 5,
+        marginBottom: 40,
       },
       modalView: {
         margin: 20,
@@ -232,9 +239,8 @@ export default StyleSheet.create({
       },
       buttonpopup: {
         borderRadius: 20,
-        padding: 10,
+        padding: 15,
         elevation: 2
-
       },
       buttonOpen: {
         backgroundColor: "#F194FF",
