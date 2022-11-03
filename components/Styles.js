@@ -95,7 +95,7 @@ export default StyleSheet.create({
     //Flatlist playerNames
     playerNames: {
         paddingTop: 20,
-        width: 150,
+        width: 500,
         color: '#fff',
         marginTop: 20,
     },
