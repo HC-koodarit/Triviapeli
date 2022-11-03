@@ -16,7 +16,7 @@ export default function PartyModeOptions({ route, navigation }) {
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
 
-    const [players, setPlayers] = useState([]);
+    const [playerDetails, setPlayerDetails] = useState([]);
 
     // Category options
     const [categories, setCategories] = useState([]);
@@ -48,13 +48,13 @@ export default function PartyModeOptions({ route, navigation }) {
             alert('Please enter a name');
             return;
         }
-        if (players.find(player => player.name === playerNameTemp)) {
+        if (playerDetails.find(playerDetails => playerDetails.name === playerNameTemp)) {
             alert('Name already in use');
             return;
         }
 
         //Save the player name and id to a list
-        setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, image: drinkImage, points: 0, powerup: "" }]);
+        setPlayerDetails([...playerDetails, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, image: drinkImage, points: 0, powerup: "" }]);
 
         //Empty add player textinput
         setPlayerNameTemp('');
@@ -63,9 +63,9 @@ export default function PartyModeOptions({ route, navigation }) {
     }
 
     const deletePlayer = (id) => {
-        const filteredData = players.filter(item => item.id !== id);
+        const filteredData = playerDetails.filter(item => item.id !== id);
         //Updating List Data State with NEW Data.
-        setPlayers(filteredData);
+        setPlayerDetails(filteredData);
     }
 
     // Drinks data
@@ -90,11 +90,11 @@ export default function PartyModeOptions({ route, navigation }) {
 
     // start game and pass params to PartyModeScreen
     const startGame = () => {
-        if (players.length > 1) {
+        if (playerDetails.length > 1) {
             navigation.navigate('PartyModeGame', {
                 selectedCategories,
                 selectedDifficulty,
-                players,
+                playerDetails,
             });
         } else {
             alert('Please add at least two players');
@@ -115,7 +115,8 @@ export default function PartyModeOptions({ route, navigation }) {
             <Text style={Styles.playersTitle}>Players</Text>
             <SafeAreaView style={Styles.playerNames}>
                 <FlatList
-                    data={players}
+                    style={{ marginLeft: "5%" }}
+                    data={playerDetails}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) =>
                         <View style={Styles.playerContainer}>
@@ -125,7 +126,7 @@ export default function PartyModeOptions({ route, navigation }) {
                                 {
                                     width: 25,
                                     height: 35,
-                                    marginBottom: 0
+                                    marginBottom: 0,
                                 }
                             } />
                             <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>  delete</Text>
@@ -185,7 +186,8 @@ export default function PartyModeOptions({ route, navigation }) {
             </View>
 
             {/* Select categories */}
-            <View style={Styles.categoryContainer}>
+            
+            <ScrollView style={Styles.categoryContainer}>
                 <Text style={Styles.playersTitle}>Categories</Text>
                 <MultiSelect
                     style={Styles.dropdown}
@@ -205,18 +207,19 @@ export default function PartyModeOptions({ route, navigation }) {
                     selectedStyle={Styles.selectedStyleDropdown}
                 />
                 <View style={Styles.buttonContainer}>
-                <Button
-                    title="Select all"
-                    onPress={selectAll}
-                    color="#3c87c2"
-                />
-                <Button
-                    title="Deselect all"
-                    onPress={deselectAll}
-                    color="#3c87c2"
-                />
+                    <Button
+                        title="Select all"
+                        onPress={selectAll}
+                        color="#3c87c2"
+                    />
+                    <Button
+                        title="Deselect all"
+                        onPress={deselectAll}
+                        color="#3c87c2"
+                    />
                 </View>
-            </View>
+            </ScrollView>
+           
 
             {/* Select difficulty */}
             <View style={Styles.difficultyContainer}>
