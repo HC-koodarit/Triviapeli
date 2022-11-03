@@ -9,8 +9,6 @@ export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
     
     // Use first player from route params as the initial value
-    // TODO: Require players to be defined from the previous view
-    
     
     const [players, setPlayers] = useState(playerDetails);
     //{id: "player2", name: "Sebu", drink: "Mild", points: 0, powerup: ""},
