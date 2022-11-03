@@ -6,14 +6,19 @@ import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation, route }) {
-    const { players, selectedDifficulty, selectedCategories } = route.params;
+    const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
     
     // Use first player from route params as the initial value
     // TODO: Require players to be defined from the previous view
-    const [chosenPlayer, setChosenPlayer] = useState(players[0]);
-    const [pelaajat, setPelaajat] = useState(players);
+    
+    
+    const [players, setPlayers] = useState(playerDetails);
+    //{id: "player2", name: "Sebu", drink: "Mild", points: 0, powerup: ""},
+    //{id: "player1", name: "Daniel", drink: "Mild", points: 0, powerup: ""}
 
-    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
+    const [chosenPlayer, setChosenPlayer] = useState(players[0]);
+
+    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([]);
     const [playersStrike, setPlayersStrike] = useState([]);
 
     // TEST DATA
@@ -106,13 +111,17 @@ export default function GameScreen({ navigation, route }) {
         fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
+                setCorrectAnswers(correctAnswers + 1);
+                console.log("isArray:" + Array.isArray(players))
+                console.log(players.findIndex(p => p.id === chosenPlayer.id));
                 const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id);
                 // Set new index for player, and fallback to 0 if next index larger than player count
                 const nextIndex = (currentPlayerIndex + 1) % players.length;
                 setChosenPlayer(players[nextIndex]);
-                console.log(chosenPlayer);
-                console.log("pelaajat:")
-                console.log(pelaajat);
+                //console.log("chosenPlayer:");
+                //console.log(chosenPlayer);
+                console.log("pelaajat:");
+                console.log(players);
 
                 setAllAnswers(['']);
                 setQuestion(decodeURIComponent(data.results[0].question));
@@ -137,12 +146,12 @@ export default function GameScreen({ navigation, route }) {
 
     useEffect(() => {
         //srandomCategory();
-        getQuestion();
+        //copyPlayers();
+        getQuestion();1
         //console.log(players);
         console.log(selectedCategories);
         //console.log(selectedDifficulty);
     }, []);
-
 
     // buttons for answers
     const answerButtons = () => allAnswers.map((answer) => <Button title={answer} type="outline" onPress={() =>
@@ -168,23 +177,40 @@ export default function GameScreen({ navigation, route }) {
         }
     }
 
-
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
-<<<<<<< HEAD
+            /*
             setPoints(setPoints => setPoints + 1);
-            let pointsCounter = points + 1;
-            setPelaajat({...pelaajat, drinks: chosenPlayer.drinks, id: chosenPlayer.id, name: chosenPlayer.name, points: pointsCounter, powerups: ""});
+            console.log("chosenpoints");
+            console.log(chosenPlayer.points);
+            
+            setPlayers({...players, id: chosenPlayer.id, name: chosenPlayer.name, drink: chosenPlayer.drink, points: pointsCounter, powerup: ""});
+            console.log("pelaajat:");
+            console.log(players);
+            pointsCounter = 0;*/
+            let pointsCounter = chosenPlayer.points + 1;
+            
+            const newState = players.map(obj => {
+                // 👇️ if id equals 2, update country property
+                if (obj.id === chosenPlayer.id) {
+                  return {...obj, points: pointsCounter};
+                }
+          
+                // 👇️ otherwise return object as is
+                return obj;
+            });
+
+            setPlayers(newState);
             //setCustomer({...customer, [event.target.name]: event.target.value})
-            setCorrectAnswers(correctAnswers + 1);
-=======
-            //setPoints(setPoints => setPoints + 1);
-            setPlayersCorrectAnswers(setPlayersCorrectAnswers[chosenPlayer.id] == setPlayersCorrectAnswers + 1);
             //setCorrectAnswers(correctAnswers + 1);
->>>>>>> 1df68fa0c8808e2af088f9fc5d6640c976439712
+            //setPoints(setPoints => setPoints + 1);
+            //setPlayersCorrectAnswers({...playerPoints, id: chosenPlayer.id, name: chosenPlayer.name, points: pointsCounter});
+            //setPlayersCorrectAnswers(setPlayersCorrectAnswers[chosenPlayer.id] == setPlayersCorrectAnswers + 1);
+            //setCorrectAnswers(correctAnswers + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
+            
             if (Platform.OS === 'web') {
                 alert("Correct! Good job! :)");
                 getQuestion();
@@ -273,7 +299,7 @@ export default function GameScreen({ navigation, route }) {
 
             <Text
                 style={Styles.pointsText}
-            >Pointcount: {playersCorrectAnswers}</Text>
+            >Pointcount: {chosenPlayer.points}</Text>
             <Text
                 style={Styles.pointsText}
             >Streak: {correctAnswers}</Text>
