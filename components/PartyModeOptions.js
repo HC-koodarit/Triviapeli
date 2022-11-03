@@ -258,21 +258,8 @@ export default function PartyModeOptions({ route, navigation }) {
                 <Button
                     title='Back'
                     titleStyle={{ fontWeight: '700' }}
-<<<<<<< HEAD
-                    buttonStyle={{
-                        backgroundColor: '#ff3333',
-                        borderColor: 'transparent',
-                        borderWidth: 0,
-                        borderRadius: 30,
-                    }}
-                    containerStyle={{
-                        width: 140,
-                        marginLeft: 5,
-                    }}
-=======
                     buttonStyle={Styles.backButton}
                     containerStyle={Styles.backButtonContainer}
->>>>>>> f5e7dd37b6e7c6b4501b3af9d42232b9dddd0a2a
                     onPress={() => navigation.navigate('Home')}
                 />
             </View>
