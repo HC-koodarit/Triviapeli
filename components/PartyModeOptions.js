@@ -16,7 +16,7 @@ export default function PartyModeOptions({ route, navigation }) {
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
 
-    const [playerDetails, setPlayerDetails] = useState([]);
+    const [players, setPlayers] = useState([]);
 
     // Category options
     const [categories, setCategories] = useState([]);
@@ -48,13 +48,13 @@ export default function PartyModeOptions({ route, navigation }) {
             alert('Please enter a name');
             return;
         }
-        if (playerDetails.find(playerDetails => playerDetails.name === playerNameTemp)) {
+        if (players.find(player => player.name === playerNameTemp)) {
             alert('Name already in use');
             return;
         }
 
         //Save the player name and id to a list
-        setPlayerDetails([...playerDetails, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, points: 0, powerup: "" }]);
+        setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, image: drinkImage, points: 0, powerup: "" }]);
 
         //Empty add player textinput
         setPlayerNameTemp('');
@@ -63,11 +63,10 @@ export default function PartyModeOptions({ route, navigation }) {
     }
 
     const deletePlayer = (id) => {
-        const filteredData = playerDetails.filter(item => item.id !== id);
+        const filteredData = players.filter(item => item.id !== id);
         //Updating List Data State with NEW Data.
-        setPlayerDetails(filteredData);
-
-      }
+        setPlayers(filteredData);
+    }
 
     // Drinks data
     const drinks = [
@@ -91,159 +90,178 @@ export default function PartyModeOptions({ route, navigation }) {
 
     // start game and pass params to PartyModeScreen
     const startGame = () => {
-        if (playerDetails.length > 1) {
+        if (players.length > 1) {
             navigation.navigate('PartyModeGame', {
                 selectedCategories,
                 selectedDifficulty,
-                playerDetails,
+                players,
             });
         } else {
             alert('Please add at least two players');
         }
     }
 
-    // add all categories to the array
-    const addAllCategories = () => {
-        categories.forEach(category => {
-            setSelectedCategories([...selectedCategories, category.id]);
-        });
-        console.log(selectedCategories);
+    // select and deselect all categories
+    const selectAll = () => {
+        setSelectedCategories(categories.map(category => category.id));
+    }
+    const deselectAll = () => {
+        setSelectedCategories([]);
     }
 
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
-                {/* Players */}
-                <Text style={Styles.playersTitle}>Players</Text>
-                <SafeAreaView style={Styles.playerNames}>
-                    <FlatList
-                        style={{ marginLeft: "5%" }}
-                        data={playerDetails}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) =>
-                            <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
-                                <Text style={Styles.flatlistPlayerNames}> - {item.drink} </Text>
-                                <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>  delete</Text>
-                            </View>
-                            }
-                    />
-                </SafeAreaView>
-                <View style={Styles.centeredView}>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                            Alert.alert("Modal has been closed.");
-                            setModalVisible(!modalVisible);
-                        }}
-                    >
-                        <View style={Styles.centeredView}>
-                            <View style={Styles.modalView}>
-                                <TextInput
-                                    placeholderTextColor={'black'}
-                                    style={Styles.addPlayers}
-                                    placeholder='Insert player name'
-                                    onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
-                                    value={playerNameTemp} />
-                                <Dropdown
-                                    style={Styles.dropdownDrinks}
-                                    placeholderStyle={Styles.placeholderStyleDropdownDrinks}
-                                    selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
-                                    iconStyle={Styles.iconStyleDropdownDrinks}
-                                    data={drinks}
-                                    maxHeight={300}
-                                    labelField="label"
-                                    valueField="value"
-                                    placeholder="Select drink"
-                                    value={selectedDrink}
-                                    onChange={item => {
-                                        setSelectedDrink(item.value);
-                                    }}
-                                />
-                                <Pressable
-                                    style={[Styles.buttonpopup, Styles.buttonClose]}
-                                    onPress={addPlayer}
-                                >
-                                    <Text style={Styles.textStyle}>Save player</Text>
-                                </Pressable>
-                            </View>
+            {/* Players */}
+            <Text style={Styles.playersTitle}>Players</Text>
+            <SafeAreaView style={Styles.playerNames}>
+                <FlatList
+                    data={players}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) =>
+                        <View style={Styles.playerContainer}>
+                            <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
+                            <Text style={Styles.flatlistPlayerNames}> - {item.drink} </Text>
+                            <Image source={item.image} style={
+                                {
+                                    width: 25,
+                                    height: 35,
+                                    marginBottom: 0
+                                }
+                            } />
+                            <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>  delete</Text>
                         </View>
-                    </Modal>
-                    <Pressable
-                        style={[Styles.buttonpopup, Styles.buttonOpen]}
-                        onPress={() => setModalVisible(true)}
-                    >
-                        <Text style={Styles.textStyle}>Add players</Text>
-                    </Pressable>
-                </View>
+                    }
+                />
+            </SafeAreaView>
+            <View style={Styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={Styles.centeredView}>
+                        <View style={Styles.modalView}>
+                            <TextInput
+                                placeholderTextColor={'black'}
+                                style={Styles.addPlayers}
+                                placeholder='Insert player name'
+                                onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
+                                value={playerNameTemp} />
+                            <Dropdown
+                                style={Styles.dropdownDrinks}
+                                placeholderStyle={Styles.placeholderStyleDropdownDrinks}
+                                selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
+                                iconStyle={Styles.iconStyleDropdownDrinks}
+                                data={drinks}
+                                maxHeight={300}
+                                labelField="label"
+                                valueField="value"
+                                placeholder="Select drink"
+                                value={selectedDrink}
+                                onChange={item => {
+                                    setSelectedDrink(item.value);
+                                    setDrinkImage(DrinkImages[item.value.toLowerCase()]?.uri);
+                                }}
+                            />
+                            <Pressable
+                                style={[Styles.buttonpopup, Styles.buttonClose]}
+                                onPress={addPlayer}
+                            >
+                                <Text style={Styles.textStyle}>Save player</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+                <Pressable
+                    style={[Styles.buttonpopup, Styles.buttonOpen]}
+                    onPress={() => setModalVisible(true)}
+                >
+                    <Text style={Styles.textStyle}>Add players</Text>
+                </Pressable>
+            </View>
 
-                {/* Select categories */}
-                <View style={Styles.categoryContainer}>
-                    <Text style={Styles.playersTitle}>Categories</Text>
-                    <MultiSelect
-                        style={Styles.dropdown}
-                        placeholderStyle={Styles.placeholderStyleDropdown}
-                        selectedTextStyle={Styles.selectedTextStyleDropdown}
-                        iconStyle={Styles.iconStyleDropdown}
-                        data={categories}
-                        labelField="name"
-                        valueField="id"
-                        placeholder="Select categories"
-                        value={selectedCategories}
-                        onChange={item => {
-                            setSelectedCategories(item);
-                            //setSelectedCategories([...selectedCategories, {id: item}]);
-                            //console.log(selectedCategories);
-                        }}
-                        selectedStyle={Styles.selectedStyleDropdown}
-                    />
+            {/* Select categories */}
+            <View style={Styles.categoryContainer}>
+                <Text style={Styles.playersTitle}>Categories</Text>
+                <MultiSelect
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={categories}
+                    labelField="name"
+                    valueField="id"
+                    placeholder="Select categories"
+                    value={selectedCategories}
+                    onChange={item => {
+                        setSelectedCategories(item);
+                        //setSelectedCategories([...selectedCategories, {id: item}]);
+                        //console.log(selectedCategories);
+                    }}
+                    selectedStyle={Styles.selectedStyleDropdown}
+                />
+                <View style={Styles.buttonContainer}>
+                <Button
+                    title="Select all"
+                    onPress={selectAll}
+                    color="#3c87c2"
+                />
+                <Button
+                    title="Deselect all"
+                    onPress={deselectAll}
+                    color="#3c87c2"
+                />
                 </View>
+            </View>
 
-                {/* Select difficulty */}
-                <View style={Styles.difficultyContainer}>
-                    <Text style={Styles.playersTitle}>Difficulty</Text>
-                    <Dropdown
-                        style={Styles.dropdown}
-                        placeholderStyle={Styles.placeholderStyleDropdown}
-                        selectedTextStyle={Styles.selectedTextStyleDropdown}
-                        iconStyle={Styles.iconStyleDropdown}
-                        data={difficulty}
-                        maxHeight={300}
-                        labelField="label"
-                        valueField="value"
-                        placeholder="Select difficulty"
-                        value={selectedDifficulty}
-                        onChange={item => {
-                            setSelectedDifficulty(item.value);
-                        }}
-                    />
-                </View>
-                <View style={Styles.startGamePContainer}>
-                    <Button
-                        title='Start'
-                        icon={{
-                            name: 'play',
-                            type: 'font-awesome',
-                            size: 20,
-                            color: 'white',
-                        }}
-                        iconContainerStyle={{ marginRight: 10 }}
-                        titleStyle={{ fontWeight: '700' }}
-                        buttonStyle={{
-                            backgroundColor: '#ff6303',
-                            borderColor: 'transparent',
-                            borderWidth: 0,
-                            borderRadius: 30,
-                        }}
-                        containerStyle={{
-                            width: 140,
-                            marginHorizontal: 50,
-                            marginVertical: 20,
-                        }}
-                        onPress={startGame}
-                    />
-                </View>
+            {/* Select difficulty */}
+            <View style={Styles.difficultyContainer}>
+                <Text style={Styles.playersTitle}>Difficulty</Text>
+                <Dropdown
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={difficulty}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Select difficulty"
+                    value={selectedDifficulty}
+                    onChange={item => {
+                        setSelectedDifficulty(item.value);
+                    }}
+                />
+            </View>
+            <View style={Styles.startGamePContainer}>
+                <Button
+                    title='Start'
+                    icon={{
+                        name: 'play',
+                        type: 'font-awesome',
+                        size: 20,
+                        color: 'white',
+                    }}
+                    iconContainerStyle={{ marginRight: 10 }}
+                    titleStyle={{ fontWeight: '700' }}
+                    buttonStyle={{
+                        backgroundColor: '#ff6303',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        borderRadius: 30,
+                    }}
+                    containerStyle={{
+                        width: 140,
+                        marginHorizontal: 50,
+                        marginVertical: 20,
+                    }}
+                    onPress={startGame}
+                />
+            </View>
         </SafeAreaView>
     );
 }
