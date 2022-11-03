@@ -95,7 +95,7 @@ export default function GameScreen({ navigation, route }) {
     const [correctAnswers, setCorrectAnswers] = useState(0);
 
     // variables for the countdown timer
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
     // fetch question data from api and set to variables

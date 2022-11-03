@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
+import { DrinkImages } from './DrinkImages';
 
 export default function PartyModeOptions({ route, navigation }) {
 
     // Variables for gameoptions
     const [selectedDrink, setSelectedDrink] = useState('');
+    const [drinkImage, setDrinkImage] = useState(null);
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
 
     //Add player variables
@@ -52,7 +54,7 @@ export default function PartyModeOptions({ route, navigation }) {
         }
 
         //Save the player name and id to a list
-        setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, points: 0, powerup: "" }]);
+        setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, image: drinkImage, points: 0, powerup: "" }]);
 
         //Empty add player textinput
         setPlayerNameTemp('');
@@ -60,18 +62,17 @@ export default function PartyModeOptions({ route, navigation }) {
         //console.log(players);
     }
 
-
     const deletePlayer = (id) => {
         const filteredData = players.filter(item => item.id !== id);
         //Updating List Data State with NEW Data.
         setPlayers(filteredData);
-      }
+    }
 
     // Drinks data
     const drinks = [
-        { label: 'Mild (Beer, Cider etc.)', value: 'Mild' },
-        { label: 'Medium (Wine etc.)', value: 'Medium' },
-        { label: 'Strong (Spririts, Liquor etc.)', value: 'Strong' },
+        { label: 'Mild (<10%)', value: 'Mild' },
+        { label: 'Medium (10%–20%)', value: 'Medium' },
+        { label: 'Strong (>20%)', value: 'Strong' },
     ];
 
     // Difficulty data
@@ -178,7 +179,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
-                    <Text style={Styles.playersTitle}>Categories</Text>
+                    <Text style={Styles.normalText}>Choose your categories</Text>
                     <MultiSelect
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
@@ -200,7 +201,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select difficulty */}
                 <View style={Styles.difficultyContainer}>
-                    <Text style={Styles.playersTitle}>Difficulty</Text>
+                    <Text style={Styles.title}>Difficulty</Text>
                     <Dropdown
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
@@ -227,5 +228,3 @@ export default function PartyModeOptions({ route, navigation }) {
         </SafeAreaView>
     );
 }
-
-
