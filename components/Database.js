@@ -1,9 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
-//import { getDatabase, push, ref, onValue, remove } from 'firebase/database';
-//import { app } from '../firebase/firebaseconfig.js';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 import * as SQLite from 'expo-sqlite';
 
