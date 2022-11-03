@@ -177,12 +177,12 @@ export default function PartyModeOptions({ route, navigation }) {
                         </View>
                     </View>
                 </Modal>
-                <Pressable
-                    style={[Styles.buttonpopup, Styles.buttonOpen]}
-                    onPress={() => setModalVisible(true)}
-                >
-                    <Text style={Styles.textStyle}>Add players</Text>
-                </Pressable>
+                <Button
+                        title="Add Player"
+                        style={[Styles.buttonpopup, Styles.buttonOpen]}
+                        onPress={() => setModalVisible(true)}
+                    >
+                </Button>
             </View>
 
             {/* Select categories */}
