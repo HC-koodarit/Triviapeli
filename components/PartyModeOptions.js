@@ -219,8 +219,26 @@ export default function PartyModeOptions({ route, navigation }) {
                 </View>
                 <View style={Styles.startGamePContainer}>
                     <Button
-                        type="outline"
-                        title='Start game'
+                        title='Start'
+                        icon={{
+                            name: 'play',
+                            type: 'font-awesome',
+                            size: 20,
+                            color: 'white',
+                        }}
+                        iconContainerStyle={{ marginRight: 10 }}
+                        titleStyle={{ fontWeight: '700' }}
+                        buttonStyle={{
+                            backgroundColor: '#ff6303',
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                            borderRadius: 30,
+                        }}
+                        containerStyle={{
+                            width: 140,
+                            marginHorizontal: 50,
+                            marginVertical: 20,
+                        }}
                         onPress={startGame}
                     />
                 </View>
