@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
+import { DrinkImages } from './DrinkImages';
 
 export default function PartyModeOptions({ route, navigation }) {
 
     // Variables for gameoptions
     const [selectedDrink, setSelectedDrink] = useState('');
+    const [drinkImage, setDrinkImage] = useState(null);
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
 
     //Add player variables
-    const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
 
@@ -53,7 +54,7 @@ export default function PartyModeOptions({ route, navigation }) {
         }
 
         //Save the player name and id to a list
-        setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, points: 0, powerup: "" }]);
+        setPlayers([...players, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, image: drinkImage, points: 0, powerup: "" }]);
 
         //Empty add player textinput
         setPlayerNameTemp('');
@@ -61,19 +62,17 @@ export default function PartyModeOptions({ route, navigation }) {
         //console.log(players);
     }
 
-
     const deletePlayer = (id) => {
         const filteredData = players.filter(item => item.id !== id);
         //Updating List Data State with NEW Data.
         setPlayers(filteredData);
-
-      }
+    }
 
     // Drinks data
     const drinks = [
-        { label: 'Mild (Beer, Cider etc.)', value: 'Mild' },
-        { label: 'Medium (Wine etc.)', value: 'Medium' },
-        { label: 'Strong (Spririts, Liquor etc.)', value: 'Strong' },
+        { label: 'Mild (<10%)', value: 'Mild' },
+        { label: 'Medium (10%–20%)', value: 'Medium' },
+        { label: 'Strong (>20%)', value: 'Strong' },
     ];
 
     // Difficulty data
@@ -114,121 +113,125 @@ export default function PartyModeOptions({ route, navigation }) {
 
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
-                {/* Players */}
-                <Text style={Styles.title}>Players:</Text>
-                <View style={Styles.playerNames}>
-                    <FlatList
-                        style={{ marginLeft: "5%" }}
-                        data={players}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) =>
-                            <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
-                                <Text style={Styles.flatlistPlayerNames}>Drinks: {item.drink}</Text>
-                                <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
-                            </View>}
-                    />
-                </View>
-                <View style={Styles.centeredView}>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                            Alert.alert("Modal has been closed.");
-                            setModalVisible(!modalVisible);
-                        }}
-                    >
-                        <View style={Styles.centeredView}>
-                            <View style={Styles.modalView}>
-                                <TextInput
-                                    placeholderTextColor={'black'}
-                                    style={Styles.addPlayers}
-                                    placeholder='Insert player name'
-                                    onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
-                                    value={playerNameTemp} />
-                                <Dropdown
-                                    style={Styles.dropdownDrinks}
-                                    placeholderStyle={Styles.placeholderStyleDropdownDrinks}
-                                    selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
-                                    iconStyle={Styles.iconStyleDropdownDrinks}
-                                    data={drinks}
-                                    maxHeight={300}
-                                    labelField="label"
-                                    valueField="value"
-                                    placeholder="Select drink"
-                                    value={selectedDrink}
-                                    onChange={item => {
-                                        setSelectedDrink(item.value);
-                                    }}
-                                />
-                                <Pressable
-                                    style={[Styles.buttonpopup, Styles.buttonClose]}
-                                    onPress={addPlayer}
-                                >
-                                    <Text style={Styles.textStyle}>Save player</Text>
-                                </Pressable>
-                            </View>
+            {/* Players */}
+            <Text style={Styles.title}>Players:</Text>
+            <View style={Styles.playerNames}>
+                <FlatList
+                    style={{ marginLeft: "5%" }}
+                    data={players}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) =>
+                        <View style={Styles.playerContainer}>
+                            <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
+                            <Text style={Styles.flatlistPlayerNames}>Drink: {item.drink}</Text>
+                            <Image source={item.image} style={
+                                {
+                                    width: 50,
+                                    height: 70,
+                                    marginBottom: 0,
+                                }
+                            } />
+                            <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
+                        </View>}
+                />
+            </View>
+            <View style={Styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={Styles.centeredView}>
+                        <View style={Styles.modalView}>
+                            <TextInput
+                                placeholderTextColor={'black'}
+                                style={Styles.addPlayers}
+                                placeholder='Insert player name'
+                                onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
+                                value={playerNameTemp} />
+                            <Dropdown
+                                style={Styles.dropdownDrinks}
+                                placeholderStyle={Styles.placeholderStyleDropdownDrinks}
+                                selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
+                                iconStyle={Styles.iconStyleDropdownDrinks}
+                                data={drinks}
+                                maxHeight={300}
+                                labelField="label"
+                                valueField="value"
+                                placeholder="Select drink"
+                                value={selectedDrink}
+                                onChange={item => {
+                                    setSelectedDrink(item.value);
+                                    setDrinkImage(DrinkImages[item.value.toLowerCase()]?.uri);
+                                }}
+                            />
+                            <Pressable
+                                style={[Styles.buttonpopup, Styles.buttonClose]}
+                                onPress={addPlayer}
+                            >
+                                <Text style={Styles.textStyle}>Save player</Text>
+                            </Pressable>
                         </View>
-                    </Modal>
-                    <Pressable
-                        style={[Styles.buttonpopup, Styles.buttonOpen]}
-                        onPress={() => setModalVisible(true)}
-                    >
-                        <Text style={Styles.textStyle}>Add players</Text>
-                    </Pressable>
-                </View>
+                    </View>
+                </Modal>
+                <Pressable
+                    style={[Styles.buttonpopup, Styles.buttonOpen]}
+                    onPress={() => setModalVisible(true)}
+                >
+                    <Text style={Styles.textStyle}>Add players</Text>
+                </Pressable>
+            </View>
 
-                {/* Select categories */}
-                <View style={Styles.categoryContainer}>
-                    <Text style={Styles.normalText}>Choose your categories</Text>
-                    <MultiSelect
-                        style={Styles.dropdown}
-                        placeholderStyle={Styles.placeholderStyleDropdown}
-                        selectedTextStyle={Styles.selectedTextStyleDropdown}
-                        iconStyle={Styles.iconStyleDropdown}
-                        data={categories}
-                        labelField="name"
-                        valueField="id"
-                        placeholder="Select categories"
-                        value={selectedCategories}
-                        onChange={item => {
-                            setSelectedCategories(item);
-                            //setSelectedCategories([...selectedCategories, {id: item}]);
-                            //console.log(selectedCategories);
-                        }}
-                        selectedStyle={Styles.selectedStyleDropdown}
-                    />
-                </View>
+            {/* Select categories */}
+            <View style={Styles.categoryContainer}>
+                <Text style={Styles.normalText}>Choose your categories</Text>
+                <MultiSelect
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={categories}
+                    labelField="name"
+                    valueField="id"
+                    placeholder="Select categories"
+                    value={selectedCategories}
+                    onChange={item => {
+                        setSelectedCategories(item);
+                    }}
+                    selectedStyle={Styles.selectedStyleDropdown}
+                />
+            </View>
 
-                {/* Select difficulty */}
-                <View style={Styles.difficultyContainer}>
-                    <Text style={Styles.title}>Difficulty</Text>
-                    <Dropdown
-                        style={Styles.dropdown}
-                        placeholderStyle={Styles.placeholderStyleDropdown}
-                        selectedTextStyle={Styles.selectedTextStyleDropdown}
-                        iconStyle={Styles.iconStyleDropdown}
-                        data={difficulty}
-                        maxHeight={300}
-                        labelField="label"
-                        valueField="value"
-                        placeholder="Select difficulty"
-                        value={selectedDifficulty}
-                        onChange={item => {
-                            setSelectedDifficulty(item.value);
-                        }}
-                    />
-                </View>
-                <View style={Styles.startGamePContainer}>
-                    <Button
-                        type="outline"
-                        title='Start game'
-                        onPress={startGame}
-                    />
-                </View>
+            {/* Select difficulty */}
+            <View style={Styles.difficultyContainer}>
+                <Text style={Styles.title}>Difficulty</Text>
+                <Dropdown
+                    style={Styles.dropdown}
+                    placeholderStyle={Styles.placeholderStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    iconStyle={Styles.iconStyleDropdown}
+                    data={difficulty}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Select difficulty"
+                    value={selectedDifficulty}
+                    onChange={item => {
+                        setSelectedDifficulty(item.value);
+                    }}
+                />
+            </View>
+            <View style={Styles.startGamePContainer}>
+                <Button
+                    type="outline"
+                    title='Start game'
+                    onPress={startGame}
+                />
+            </View>
         </SafeAreaView>
     );
 }
-
-

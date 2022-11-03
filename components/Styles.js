@@ -105,6 +105,7 @@ export default StyleSheet.create({
         marginBottom: 5,
         justifyContent: 'center',
         flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 
     //Pickers and add number
