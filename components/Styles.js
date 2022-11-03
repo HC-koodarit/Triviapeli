@@ -68,6 +68,7 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: '#020d23',
         marginTop: 0,
+        alignItems: "center"
     },
     timer: {
         marginTop: 50,

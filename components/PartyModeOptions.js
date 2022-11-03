@@ -110,10 +110,6 @@ export default function PartyModeOptions({ route, navigation }) {
     }
 
     return (
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c44a14464452f4c0db308eb55db6234600da86f
         <SafeAreaView style={Styles.partyOptionsContainer}>
             {/* Players */}
             <Text style={Styles.playersTitle}>Players</Text>
@@ -204,8 +200,6 @@ export default function PartyModeOptions({ route, navigation }) {
                     value={selectedCategories}
                     onChange={item => {
                         setSelectedCategories(item);
-                        //setSelectedCategories([...selectedCategories, {id: item}]);
-                        //console.log(selectedCategories);
                     }}
                     selectedStyle={Styles.selectedStyleDropdown}
                 />
@@ -267,11 +261,23 @@ export default function PartyModeOptions({ route, navigation }) {
                     }}
                     onPress={startGame}
                 />
+                <Button
+                    title='Back'
+                    titleStyle={{ fontWeight: '700' }}
+                    buttonStyle={{
+                        backgroundColor: '#ff3333',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        borderRadius: 30,
+                    }}
+                    containerStyle={{
+                        width: 140,
+                        marginHorizontal: 50,
+                        marginVertical: 20,
+                    }}
+                    onPress={() => navigation.navigate('Home')}
+                />
             </View>
         </SafeAreaView>
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c44a14464452f4c0db308eb55db6234600da86f
     );
 }
