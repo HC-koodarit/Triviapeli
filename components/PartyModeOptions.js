@@ -200,8 +200,6 @@ export default function PartyModeOptions({ route, navigation }) {
                     value={selectedCategories}
                     onChange={item => {
                         setSelectedCategories(item);
-                        //setSelectedCategories([...selectedCategories, {id: item}]);
-                        //console.log(selectedCategories);
                     }}
                     selectedStyle={Styles.selectedStyleDropdown}
                 />
@@ -262,6 +260,22 @@ export default function PartyModeOptions({ route, navigation }) {
                         marginVertical: 20,
                     }}
                     onPress={startGame}
+                />
+                <Button
+                    title='Back'
+                    titleStyle={{ fontWeight: '700' }}
+                    buttonStyle={{
+                        backgroundColor: '#ff3333',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        borderRadius: 30,
+                    }}
+                    containerStyle={{
+                        width: 140,
+                        marginHorizontal: 50,
+                        marginVertical: 20,
+                    }}
+                    onPress={() => navigation.navigate('Home')}
                 />
             </View>
         </SafeAreaView>
