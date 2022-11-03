@@ -11,7 +11,6 @@ export default function PartyModeOptions({ route, navigation }) {
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
 
     //Add player variables
-    const [playerNames, setPlayerNames] = useState([]);
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
 
@@ -66,7 +65,6 @@ export default function PartyModeOptions({ route, navigation }) {
         const filteredData = players.filter(item => item.id !== id);
         //Updating List Data State with NEW Data.
         setPlayers(filteredData);
-
       }
 
     // Drinks data
@@ -121,7 +119,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
+                                <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
                                 <Text style={Styles.flatlistPlayerNames}>Drinks: {item.drink}</Text>
                                 <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
                             </View>}
