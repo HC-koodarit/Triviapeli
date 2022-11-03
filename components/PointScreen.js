@@ -4,18 +4,18 @@ import { Button } from 'react-native-elements';
 import Styles from './Styles';
 
 export default function PointScreen({ route, navigation }) {
+    const { points } = route.params;
 
-   const { points } = route.params;
-
-   // Score haetaan tietokannasta, tämä pitää tehdä vielä
     return (
         <View style={Styles.container}>
             <Text style={Styles.header}>Scores</Text>
             <Text style={Styles.pointsText}>Your score was {points}
             </Text>
             <Button
-                title="Back to main page"
-                type="outline"
+                title='Home'
+                titleStyle={{ fontWeight: '700' }}
+                buttonStyle={Styles.backButton}
+                containerStyle={Styles.backButtonContainer}
                 onPress={() => navigation.navigate('Home')}
             />
         </View>

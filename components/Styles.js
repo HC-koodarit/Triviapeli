@@ -40,21 +40,21 @@ export default StyleSheet.create({
     justifyContent: 'center',
     textAlignVertical: 'center',
     margin: 20,
-    color: '#fff',
+    color: '#fff'
   },
   pointsText: {
     color: '#fff'
   },
   normalText: {
     fontSize: 18,
-    color: '#fff',
+    color: '#fff'
   },
 
   //About.js styles
   aboutContainer: {
     flex: 1,
     backgroundColor: '#020d23',
-    marginTop: 0,
+    alignItems: 'center'
   },
 
   //Party mode timer styles
@@ -87,46 +87,46 @@ export default StyleSheet.create({
   },
 
   //Players tyylit - PartyModeOptions
-    //View Tyyli
-    playersTitle: {
-      fontSize: 25,
-      alignSelf: 'center',
-      fontWeight: 'bold',
-      color: '#fff',
-      paddingTop: 40,
-    },
-    //Flatlist playerNames
-    playerNames: {
-      //paddingTop: 20,
-      width: 500,
-      height: 160,
-      color: '#fff',
-      marginTop: 20,
-      marginBottom: 20
-    },
-    playerFlatlist: {
-      flex: 1,
-    },
+  //View Tyyli
+  playersTitle: {
+    fontSize: 25,
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
+    paddingTop: 40,
+  },
+  //Flatlist playerNames
+  playerNames: {
+    //paddingTop: 20,
+    width: 500,
+    height: 160,
+    color: '#fff',
+    marginTop: 20,
+    marginBottom: 20
+  },
+  playerFlatlist: {
+    flex: 1,
+  },
 
-    //Rendered players list
-    playerContainer: {
-      marginTop: 1,
-      marginBottom: 1,
-      justifyContent: 'center',
-      flexDirection: 'row',
-    },
-    AddPlayerButtonContainer: {
-      alignItems: 'center',
-      marginTop: 5,
-    },
-    flatlistPlayerNames: {
-      color: "#fff",
-    },
-    playerDrinkImage: {
-      width: 25,
-      height: 25,
-      marginBottom: 0,
-    },
+  //Rendered players list
+  playerContainer: {
+    marginTop: 1,
+    marginBottom: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  AddPlayerButtonContainer: {
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  flatlistPlayerNames: {
+    color: "#fff",
+  },
+  playerDrinkImage: {
+    width: 25,
+    height: 25,
+    marginBottom: 0,
+  },
 
   //PartyMode Options Addplayers Popup
   centeredView: {
@@ -182,19 +182,19 @@ export default StyleSheet.create({
     height: 20,
   },
 
-    //Button Styles (addplayer & Save Player)
-    buttonpopup: {
-      borderRadius: 20,
-      padding: 12,
-      elevation: 2
-    },
-    buttonOpen: {
-      backgroundColor: "#2196F3",
-      borderColor: 'transparent',
-    },
-    buttonClose: {
-      backgroundColor: "#2196F3",
-    },
+  //Button Styles (addplayer & Save Player)
+  buttonpopup: {
+    borderRadius: 20,
+    padding: 12,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#2196F3",
+    borderColor: 'transparent',
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
 
   //Text Style for save player text
   textStyle: {
@@ -280,5 +280,20 @@ export default StyleSheet.create({
     width: 140,
     marginHorizontal: 50,
     marginVertical: 20,
+  },
+
+  //Start game button styles
+  startButton: {
+    backgroundColor: '#ff6303',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 30
+  },
+
+  startButtonContainer: {
+    width: 140,
+    marginHorizontal: 50,
+    marginVertical: 20,
   }
+
 });

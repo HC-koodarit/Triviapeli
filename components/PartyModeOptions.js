@@ -15,17 +15,16 @@ export default function PartyModeOptions({ route, navigation }) {
     //Add player variables
     const [playerNameTemp, setPlayerNameTemp] = useState('');
     const [playerNumber, setPlayerNumber] = useState(1);
-
     const [playerDetails, setPlayerDetails] = useState([]);
 
     // Category options
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selected, setSelected] = useState([]);
 
     // Popup modalVisible
     const [modalVisible, setModalVisible] = useState(false);
 
+    // get categories
     useEffect(() => {
         fetch('https://opentdb.com/api_category.php')
             .then(response => response.json())
@@ -54,12 +53,20 @@ export default function PartyModeOptions({ route, navigation }) {
         }
 
         //Save the player name and id to a list
-        setPlayerDetails([...playerDetails, { id: playerNameGenerator, name: playerNameTemp, drink: selectedDrink, image: drinkImage, points: 0, powerup: "" }]);
+        setPlayerDetails([...playerDetails,
+        {
+            id: playerNameGenerator,
+            name: playerNameTemp,
+            drink: selectedDrink,
+            image: drinkImage,
+            points: 0,
+            powerup: ""
+        }
+        ]);
 
         //Empty add player textinput
         setPlayerNameTemp('');
-        setModalVisible(!modalVisible)
-        //console.log(players);
+        setModalVisible(!modalVisible);
     }
 
     const deletePlayer = (id) => {
@@ -82,22 +89,18 @@ export default function PartyModeOptions({ route, navigation }) {
         { label: 'Hard', value: 'hard' },
     ];
 
-    // choose a random category from the categories
-    const randomCategory = () => {
-        const random = Math.floor(Math.random() * categories.length);
-        return categories[random].id;
-    }
-
     // start game and pass params to PartyModeScreen
     const startGame = () => {
-        if (playerDetails.length > 1) {
+        if (playerDetails.length <= 1) {
+            alert('Please add at least two players');
+        } else if (selectedCategories.length == 0) {
+            alert('Please select at least one category')
+        } else {
             navigation.navigate('PartyModeGame', {
                 selectedCategories,
                 selectedDifficulty,
                 playerDetails,
             });
-        } else {
-            alert('Please add at least two players');
         }
     }
 
@@ -105,13 +108,14 @@ export default function PartyModeOptions({ route, navigation }) {
     const selectAll = () => {
         setSelectedCategories(categories.map(category => category.id));
     }
+
     const deselectAll = () => {
         setSelectedCategories([]);
     }
 
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
-            {/* Players */}
+            {/* List of players */}
             <Text style={Styles.playersTitle}>Players</Text>
             <View style={Styles.playerNames}>
                 <FlatList
@@ -136,6 +140,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         setModalVisible(!modalVisible);
                     }}
                 >
+                    {/* Add a new player */}
                     <View style={Styles.centeredView}>
                         <View style={Styles.modalView}>
                             <TextInput
@@ -171,10 +176,10 @@ export default function PartyModeOptions({ route, navigation }) {
                 </Modal>
                 <View style={Styles.AddPlayerButtonContainer}>
                     <Pressable
-                            title="Add Player"
-                            style={[Styles.buttonpopup, Styles.buttonOpen]}
-                            onPress={() => setModalVisible(true)}
-                        >
+                        title="Add Player"
+                        style={[Styles.buttonpopup, Styles.buttonOpen]}
+                        onPress={() => setModalVisible(true)}
+                    >
                         <Text style={Styles.textStyle}>Add player</Text>
                     </Pressable>
                 </View>
@@ -211,7 +216,7 @@ export default function PartyModeOptions({ route, navigation }) {
                     />
                 </View>
             </ScrollView>
-           
+
 
             {/* Select difficulty */}
             <View style={Styles.difficultyContainer}>
@@ -232,7 +237,16 @@ export default function PartyModeOptions({ route, navigation }) {
                     }}
                 />
             </View>
+
+            {/* Start and Back buttons */}
             <View style={Styles.startGamePContainer}>
+                <Button
+                    title='Back'
+                    titleStyle={{ fontWeight: '700' }}
+                    buttonStyle={Styles.backButton}
+                    containerStyle={Styles.backButtonContainer}
+                    onPress={() => navigation.navigate('Home')}
+                />
                 <Button
                     title='Start'
                     icon={{
@@ -243,24 +257,9 @@ export default function PartyModeOptions({ route, navigation }) {
                     }}
                     iconContainerStyle={{ marginRight: 10 }}
                     titleStyle={{ fontWeight: '700' }}
-                    buttonStyle={{
-                        backgroundColor: '#ff6303',
-                        borderColor: 'transparent',
-                        borderWidth: 0,
-                        borderRadius: 30,
-                    }}
-                    containerStyle={{
-                        width: 140,
-                        marginRight: 5,
-                    }}
+                    buttonStyle={Styles.startButton}
+                    containerStyle={Styles.startButtonContainer}
                     onPress={startGame}
-                />
-                <Button
-                    title='Back'
-                    titleStyle={{ fontWeight: '700' }}
-                    buttonStyle={Styles.backButton}
-                    containerStyle={Styles.backButtonContainer}
-                    onPress={() => navigation.navigate('Home')}
                 />
             </View>
         </SafeAreaView>

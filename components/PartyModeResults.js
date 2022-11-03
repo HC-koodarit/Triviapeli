@@ -1,11 +1,21 @@
 import React from 'react';
 import { useState } from 'react';
-import { SafeAreaView, Button, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 
 export default function PartyModeResults({ route, navigation, params }) {
 
     return (
-        <Text style={Styles.normalText}>Results coming</Text>
+        <SafeAreaView style={Styles.container}>
+            <Text style={Styles.normalText}>Results coming</Text>
+            <Button
+                title='Home'
+                titleStyle={{ fontWeight: '700' }}
+                buttonStyle={Styles.backButton}
+                containerStyle={Styles.backButtonContainer}
+                onPress={() => navigation.navigate('Home')}
+            />
+        </SafeAreaView>
     );
 };

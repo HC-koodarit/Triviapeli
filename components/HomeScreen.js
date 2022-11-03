@@ -106,8 +106,8 @@ export default function HomeScreen({ navigation }) {
 
             <Image source={require('../assets/people.png')} style={
                 {
-                    width: 400,
-                    height: 400,
+                    width: 200,
+                    height: 200,
                     marginBottom: 0,
                 }
             } />

@@ -12,10 +12,7 @@ export default function GameScreen({ navigation, route }) {
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
     const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
-    //const [playersStreak, setPlayersStreak] = useState([]);   // Ei toiminnassa vielä
-
-    // use 10 questions for testing (remove later)
-    const [amount, setAmount] = useState(10);
+    //const [playersStreak, setPlayersStreak] = useState([]);   // not yet in use
 
     // variables for questions and answers
     const [question, setQuestion] = useState('');
@@ -24,8 +21,11 @@ export default function GameScreen({ navigation, route }) {
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
 
-    const [points, setPoints] = useState(0);                    // variable for the player's score
-    const [correctAnswers, setCorrectAnswers] = useState(0);    // count correct answers for powerups
+    // variable for the player's score
+    const [points, setPoints] = useState(0);
+
+    // count correct answers for powerups
+    const [correctAnswers, setCorrectAnswers] = useState(0);
 
     // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(false);
@@ -35,18 +35,14 @@ export default function GameScreen({ navigation, route }) {
     const getQuestion = useCallback(() => {
         const random = Math.floor(Math.random() * selectedCategories.length);
         const categoryForQuestion = selectedCategories[random];
-        fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
+        fetch(`https://opentdb.com/api.php?amount=1&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
                 setCorrectAnswers(correctAnswers + 1);
-                console.log("isArray:" + Array.isArray(players))
-                console.log(players.findIndex(p => p.id === chosenPlayer.id));
                 const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id);
                 // Set new index for player, and fallback to 0 if next index larger than player count
                 const nextIndex = (currentPlayerIndex + 1) % players.length;
                 setChosenPlayer(players[nextIndex]);
-                console.log("pelaajat:");
-                console.log(players);
 
                 setAllAnswers(['']);
                 setQuestion(decodeURIComponent(data.results[0].question));
@@ -68,7 +64,6 @@ export default function GameScreen({ navigation, route }) {
 
     useEffect(() => {
         getQuestion();
-        console.log(selectedCategories);
     }, []);
 
     // buttons for answers
@@ -101,7 +96,7 @@ export default function GameScreen({ navigation, route }) {
         if (answer === correctAnswer) {
             let pointsCounter = chosenPlayer.points + 1;
             const newState = players.map(obj => {
-                // 👇️ if id equals 2, update country property
+                // 👇️ if id equals chosenPlayer id, update player points
                 if (obj.id === chosenPlayer.id) {
                   return {...obj, points: pointsCounter};
                 }
@@ -153,11 +148,6 @@ export default function GameScreen({ navigation, route }) {
         }
     }
 
-    /*const randomplayer = () => {
-        const random = Math.floor(Math.random() * players.name.length);
-        console.log(random);
-    } */
-
     // 15 sec countdown timer
     const TimerForQuestions = () => (
         <View style={Styles.timer}>
@@ -199,7 +189,7 @@ export default function GameScreen({ navigation, route }) {
                 }
             } />
             <Text style={Styles.pointsText}>
-                Pointcount for {chosenPlayer.name}: {chosenPlayer.points}
+                Points for {chosenPlayer.name}: {chosenPlayer.points}
             </Text>
             {/* Streak button for every player
             <Text style={Styles.pointsText}>
@@ -210,24 +200,15 @@ export default function GameScreen({ navigation, route }) {
                 title="Use your powerup"
                 type="outline"
                 onPress={() => {
-                    setIsPlaying(false);
-                    navigation.navigate('Pointscreen', { points: points });
+                    alert("Powerups coming soon!")
                 }}
             />
             <Button
-                title="Check point"
+                title="End game"
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
-                    navigation.navigate('PartyModeInBetweenResults', {playersCorrectAnswers: playersCorrectAnswers});
-                }}
-            />
-            <Button
-                title="End game and go back to main page"
-                type="outline"
-                onPress={() => {
-                    setIsPlaying(false);
-                    navigation.navigate('Home');
+                    navigation.navigate('PartyModeResults');
                 }}
             />
         </SafeAreaView>

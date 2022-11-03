@@ -17,7 +17,6 @@ it('renders the Flatlist component', () => {
   expect(tree).toMatchSnapshot();
 
 });
-*/
 
 describe("Filter function", () => {
   test("it should filter by a search term (link)", () => {
@@ -33,3 +32,4 @@ describe("Filter function", () => {
 
   });
 });
+*/
