@@ -99,7 +99,7 @@ export default StyleSheet.create({
     playerNames: {
       //paddingTop: 20,
       width: 500,
-      height: 100,
+      height: 160,
       color: '#fff',
       marginTop: 20,
       marginBottom: 20
@@ -114,6 +114,10 @@ export default StyleSheet.create({
       marginBottom: 1,
       justifyContent: 'center',
       flexDirection: 'row',
+    },
+    AddPlayerButtonContainer: {
+      alignItems: 'center',
+      marginTop: 5,
     },
     flatlistPlayerNames: {
       color: "#fff",
@@ -181,11 +185,12 @@ export default StyleSheet.create({
     //Button Styles (addplayer & Save Player)
     buttonpopup: {
       borderRadius: 20,
-      padding: 15,
+      padding: 12,
       elevation: 2
     },
     buttonOpen: {
-      marginBottom: 20
+      backgroundColor: "#2196F3",
+      borderColor: 'transparent',
     },
     buttonClose: {
       backgroundColor: "#2196F3",
@@ -230,11 +235,11 @@ export default StyleSheet.create({
   //Dropdown Styles for category & difficulty
   dropdown: {
     height: 50,
-    width: 250,
+    width: 240,
     backgroundColor: 'transparent',
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
-    marginBottom: 20,
+    marginBottom: 10,
     alignSelf: 'center',
   },
   placeholderStyleDropdown: {
@@ -259,6 +264,7 @@ export default StyleSheet.create({
 
   //Start Game button Partymode
   startGamePContainer: {
-    marginBottom: 10,
+    marginBottom: 20,
+    flexDirection: 'row',
   },
 });

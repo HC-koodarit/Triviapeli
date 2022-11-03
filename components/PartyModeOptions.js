@@ -113,7 +113,7 @@ export default function PartyModeOptions({ route, navigation }) {
         <SafeAreaView style={Styles.partyOptionsContainer}>
             {/* Players */}
             <Text style={Styles.playersTitle}>Players</Text>
-            <SafeAreaView style={Styles.playerNames}>
+            <View style={Styles.playerNames}>
                 <FlatList
                     style={Styles.playerFlatlist}
                     data={playerDetails}
@@ -127,8 +127,6 @@ export default function PartyModeOptions({ route, navigation }) {
                         </View>
                     }
                 />
-            </SafeAreaView>
-            <View style={Styles.centeredView}>
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -171,12 +169,15 @@ export default function PartyModeOptions({ route, navigation }) {
                         </View>
                     </View>
                 </Modal>
-                <Button
-                        title="Add Player"
-                        style={[Styles.buttonpopup, Styles.buttonOpen]}
-                        onPress={() => setModalVisible(true)}
-                    >
-                </Button>
+                <View style={Styles.AddPlayerButtonContainer}>
+                    <Pressable
+                            title="Add Player"
+                            style={[Styles.buttonpopup, Styles.buttonOpen]}
+                            onPress={() => setModalVisible(true)}
+                        >
+                        <Text style={Styles.textStyle}>Add player</Text>
+                    </Pressable>
+                </View>
             </View>
 
             {/* Select categories */}
@@ -250,8 +251,7 @@ export default function PartyModeOptions({ route, navigation }) {
                     }}
                     containerStyle={{
                         width: 140,
-                        marginHorizontal: 50,
-                        marginVertical: 20,
+                        marginRight: 5,
                     }}
                     onPress={startGame}
                 />
@@ -266,8 +266,7 @@ export default function PartyModeOptions({ route, navigation }) {
                     }}
                     containerStyle={{
                         width: 140,
-                        marginHorizontal: 50,
-                        marginVertical: 20,
+                        marginLeft: 5,
                     }}
                     onPress={() => navigation.navigate('Home')}
                 />
