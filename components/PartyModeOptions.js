@@ -186,7 +186,7 @@ export default function PartyModeOptions({ route, navigation }) {
             </View>
 
             {/* Select categories */}
-            <View style={Styles.categoryContainer}>
+            <ScrollView style={Styles.categoryContainer}>
                 <Text style={Styles.optionsSubTitle}>Categories</Text>
                 <MultiSelect
                     style={Styles.dropdown}
