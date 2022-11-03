@@ -87,10 +87,12 @@ export default StyleSheet.create({
       color: '#fff',
       paddingTop: 10,
     },
+
     playerContainer: {
       flex: 1,
       flexDirection: 'row',
     },
+    
     otherOptionsContainer: {
         flex: 5,
     },
