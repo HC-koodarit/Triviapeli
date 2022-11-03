@@ -147,6 +147,8 @@ export default function PartyModeOptions({ route, navigation }) {
         console.log(selectedCategories);
     }
 
+
+
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
             <ScrollView style={Styles.scrollView}>
