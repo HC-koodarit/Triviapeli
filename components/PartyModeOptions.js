@@ -108,25 +108,24 @@ export default function PartyModeOptions({ route, navigation }) {
         console.log(selectedCategories);
     }
 
-
-
     return (
         <SafeAreaView style={Styles.partyOptionsContainer}>
                 {/* Players */}
-                <Text style={Styles.title}>Players:</Text>
-                <View style={Styles.playerNames}>
+                <Text style={Styles.playersTitle}>Players</Text>
+                <SafeAreaView style={Styles.playerNames}>
                     <FlatList
-                        style={{ marginLeft: "5%" }}
+                        style={{ marginTop: "10%" }}
                         data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
                                 <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
-                                <Text style={Styles.flatlistPlayerNames}>Drinks: {item.drink}</Text>
-                                <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>delete</Text>
-                            </View>}
+                                <Text style={Styles.flatlistPlayerNames}> - {item.drink} </Text>
+                                <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>  delete</Text>
+                            </View>
+                            }
                     />
-                </View>
+                </SafeAreaView>
                 <View style={Styles.centeredView}>
                     <Modal
                         animationType="slide"
@@ -179,7 +178,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select categories */}
                 <View style={Styles.categoryContainer}>
-                    <Text style={Styles.normalText}>Choose your categories</Text>
+                    <Text style={Styles.playersTitle}>Categories</Text>
                     <MultiSelect
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
@@ -201,7 +200,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                 {/* Select difficulty */}
                 <View style={Styles.difficultyContainer}>
-                    <Text style={Styles.title}>Difficulty</Text>
+                    <Text style={Styles.playersTitle}>Difficulty</Text>
                     <Dropdown
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}

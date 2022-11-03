@@ -78,15 +78,26 @@ export default StyleSheet.create({
         backgroundColor: '#020d23',
         alignItems: 'center',
     },
+    playersTitle: {
+      fontSize: 25,
+      alignSelf: 'center',
+      fontWeight: 'bold',
+      color: '#fff',
+      paddingTop: 30,
+    },
+    playerContainer: {
+      flex: 1,
+      flexDirection: 'row',
+    },
     otherOptionsContainer: {
         flex: 5,
     },
     //Flatlist playerNames
     playerNames: {
-        marginTop: 5,
+        paddingTop: 20,
         width: 150,
         color: '#fff',
-        marginBottom: 5,
+        //marginBottom: 5,
     },
     flatlistPlayerNames: {
         color: "#fff",
@@ -105,7 +116,7 @@ export default StyleSheet.create({
         marginBottom: 5,
         justifyContent: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
     },
 
     //Pickers and add number
@@ -119,12 +130,12 @@ export default StyleSheet.create({
 
     //Category container Partymode
     categoryContainer: {
-        marginBottom: 15,
+        marginBottom: 1,
     },
 
     //Difficulty container Partymode
     difficultyContainer: {
-        marginBottom: 15,
+        marginBottom: 1,
     },
 
     //Drinks container Partymode
@@ -139,7 +150,7 @@ export default StyleSheet.create({
 
     //Start Game button Partymode
     startGamePContainer: {
-        marginBottom: 20,
+        marginBottom: 60,
     },
 
     //Dropdown Styles for drink choice
@@ -171,11 +182,13 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
-        marginBottom: 10,
+        marginBottom: 60,
+        alignSelf: 'center',
       },
       placeholderStyleDropdown: {
         fontSize: 16,
         color: "white",
+        alignSelf: 'center',
       },
       selectedTextStyleDropdown: {
         fontSize: 14,
@@ -197,7 +210,7 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 15,
+        marginBottom: 5,
       },
       modalView: {
         margin: 20,
@@ -218,6 +231,7 @@ export default StyleSheet.create({
         borderRadius: 20,
         padding: 10,
         elevation: 2
+
       },
       buttonOpen: {
         backgroundColor: "#F194FF",
