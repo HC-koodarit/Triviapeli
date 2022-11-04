@@ -278,7 +278,7 @@ export default StyleSheet.create({
 
   backButtonContainer: {
     width: 140,
-    marginHorizontal: 50,
+    marginHorizontal: 30,
     marginVertical: 20,
   },
 
@@ -292,8 +292,23 @@ export default StyleSheet.create({
 
   startButtonContainer: {
     width: 140,
-    marginHorizontal: 50,
+    marginHorizontal: 30,
     marginVertical: 20,
-  }
+  },
+
+  //Party Mode Game styles
+  PartyModeGameContainer: {
+    flex: 1,
+    backgroundColor: '#020d23',
+    alignItems: 'center',
+    paddingTop: 40,
+  },
+
+  PartyModeResultsContainer: {
+    flex: 1,
+    backgroundColor: '#020d23',
+    alignItems: 'center',
+    paddingTop: 40,
+  },
 
 });

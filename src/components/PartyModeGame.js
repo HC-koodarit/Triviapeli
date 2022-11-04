@@ -170,7 +170,7 @@ export default function GameScreen({ navigation, route }) {
     )
 
     return (
-        <SafeAreaView style={Styles.container}>
+        <SafeAreaView style={Styles.PartyModeGameContainer}>
             <Text style={Styles.title}>Trivia</Text>
             <Text style={Styles.category}>{category}</Text>
             <Text style={Styles.question}>{question}</Text>

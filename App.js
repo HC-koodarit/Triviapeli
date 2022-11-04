@@ -1,17 +1,17 @@
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import GameScreen from './components/GameScreen';
-import RulesScreen from './components/RulesScreen';
-import About from './components/About';
-import HomeScreen from './components/HomeScreen';
+import GameScreen from './src/components/GameScreen';
+import RulesScreen from './src/components/RulesScreen';
+import About from './src/components/About';
+import HomeScreen from './src/components/HomeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Styles from './components/Styles';
-import PointScreen from './components/PointScreen';
-import PartyModeOptions from './components/PartyModeOptions';
-import Categories from './components/Categories';
-import PartyModeGame from './components/PartyModeGame';
-import PartyModeResults from './components/PartyModeResults';
-import PartyModeInBetweenResults from './components/PartyModeInBetweenResults';
+import Styles from './src/components/Styles';
+import PointScreen from './src/components/PointScreen';
+import PartyModeOptions from './src/components/PartyModeOptions';
+import Categories from './src/components/Categories';
+import PartyModeGame from './src/components/PartyModeGame';
+import PartyModeResults from './src/components/PartyModeResults';
+import PartyModeInBetweenResults from './src/components/PartyModeInBetweenResults';
 
 const Stack = createNativeStackNavigator();
 

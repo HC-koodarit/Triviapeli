@@ -7,7 +7,7 @@ import Styles from './Styles.js';
 export default function PartyModeResults({ route, navigation, params }) {
 
     return (
-        <SafeAreaView style={Styles.container}>
+        <SafeAreaView style={Styles.PartyModeResultsContainer}>
             <Text style={Styles.normalText}>Results coming</Text>
             <Button
                 title='Home'
