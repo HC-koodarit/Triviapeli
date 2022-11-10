@@ -272,12 +272,10 @@ export default StyleSheet.create({
       backgroundColor: '#ff3333',
       borderColor: 'transparent',
       borderWidth: 0,
-      borderRadius: 30
-    },
-    backButtonContainer: {
+      borderRadius: 30,
       width: 140,
-      marginHorizontal: 30,
-      marginVertical: 20,
+      marginHorizontal: 25,
+      marginTop: 20,
     },
 
     //Start game button styles (PartyModeOptions)
@@ -285,12 +283,10 @@ export default StyleSheet.create({
       backgroundColor: '#ff6303',
       borderColor: 'transparent',
       borderWidth: 0,
-      borderRadius: 30
-    },
-    startButtonContainer: {
+      borderRadius: 30,
       width: 140,
-      marginHorizontal: 30,
-      marginVertical: 20,
+      marginHorizontal: 25,
+      marginTop: 20,
     },
 
     //Start Game button Partymode

@@ -6,14 +6,17 @@ import Styles from './Styles.js';
 
 export default function PartyModeResults({ route, navigation, params }) {
 
+    const { players } = route.params;
+    const [playerName, setPlayerName] = players.name;
+
     return (
         <SafeAreaView style={Styles.PartyModeResultsContainer}>
             <Text style={Styles.normalText}>Results coming</Text>
+            <Text>player was</Text>
             <Button
                 title='Home'
                 titleStyle={{ fontWeight: '700' }}
                 buttonStyle={Styles.backButton}
-                containerStyle={Styles.backButtonContainer}
                 onPress={() => navigation.navigate('Home')}
             />
         </SafeAreaView>
