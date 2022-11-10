@@ -7,7 +7,7 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
-    
+
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -20,6 +20,7 @@ export default function GameScreen({ navigation, route }) {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
+    const [message, setMessage] = useState('');
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
@@ -57,6 +58,7 @@ export default function GameScreen({ navigation, route }) {
                 answerArray = answerArray.sort(() => Math.random() - 0.5);
                 setAllAnswers(answerArray);
                 setIsPlaying(true);  // start timer
+                setMessage('');
             })
             .catch(err => console.error(err));
 
@@ -67,7 +69,7 @@ export default function GameScreen({ navigation, route }) {
     }, []);
 
     // buttons for answers
-    const answerButtons = () => allAnswers.map((answer) => 
+    const answerButtons = () => allAnswers.map((answer) =>
         <Button title={answer} type="outline" onPress={() =>
             checkAnswer(answer)} key={answer} />)
 
@@ -103,13 +105,14 @@ export default function GameScreen({ navigation, route }) {
 
     // check if answer is correct
     const checkAnswer = (answer) => {
+
         if (answer === correctAnswer) {
             let pointsCounter = chosenPlayer.points + 1;
             let streakCounter = chosenPlayer.streak + 1;
             const newState = players.map(obj => {
                 // 👇️ if id equals chosenPlayer id, update player points and streak
                 if (obj.id === chosenPlayer.id) {
-                  return {...obj, points: pointsCounter, streak: streakCounter};
+                    return { ...obj, points: pointsCounter, streak: streakCounter };
                 }
                 // 👇️ otherwise return object as is
                 return obj;
@@ -118,11 +121,13 @@ export default function GameScreen({ navigation, route }) {
             setPlayers(newState);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            
+
             if (Platform.OS === 'web') {
-                alert("Correct! Good job! :)");
-                getQuestion();
+                //alert("Correct! Good job! :)");
+                //getQuestion();
+                setMessage("Correct! Good job! :)");
             } else {
+                /*
                 Alert.alert(
                     "Correct",
                     "Good job! :)",
@@ -134,6 +139,8 @@ export default function GameScreen({ navigation, route }) {
                         },
                     ],
                 );
+                */
+                setMessage("Correct! Good job! :)");
             };
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
@@ -151,9 +158,11 @@ export default function GameScreen({ navigation, route }) {
             setCorrectAnswers(0);
 
             if (Platform.OS === 'web') {
-                alert("Wrong! The correct answer was " + correctAnswer);
-                getQuestion();
+                //alert("Wrong! The correct answer was " + correctAnswer);
+                //getQuestion();
+                setMessage("Wrong! The correct answer was " + correctAnswer);
             } else {
+                /*
                 Alert.alert(
                     "Wrong",
                     "The correct answer was " + correctAnswer,
@@ -165,6 +174,8 @@ export default function GameScreen({ navigation, route }) {
                         },
                     ],
                 );
+                */
+                setMessage("Wrong! The correct answer was " + correctAnswer);
             }
         }
     }
@@ -184,53 +195,68 @@ export default function GameScreen({ navigation, route }) {
                     timeIsUp();
                 }}
             >
-                {({ remainingTime }) => 
-                <Text style={Styles.normalText}>{remainingTime}</Text>}
+                {({ remainingTime }) =>
+                    <Text style={Styles.normalText}>{remainingTime}</Text>}
             </CountdownCircleTimer>
         </View>
     )
 
-    return (
-        <SafeAreaView style={Styles.PartyModeGameContainer}>
-            <Text style={Styles.title}>Trivia</Text>
-            <Text style={Styles.category}>{category}</Text>
-            <Text style={Styles.question}>{question}</Text>
-            <Text style={Styles.question}>{chosenPlayer.name}</Text>
-            <View style={Styles.buttons}>
-                {answerButtons()}
-            </View>
-            <View>
-                {TimerForQuestions()}
-            </View>
-            <Image source={require('../assets/thinking.gif')} style={
-                {
-                    width: 50,
-                    height: 70,
-                    marginBottom: 0,
-                }
-            } />
-            <Text style={Styles.pointsText}>
-                Points for {chosenPlayer.name}: {chosenPlayer.points}
-            </Text>
-            {/* Streak button for every player*/}
+    // if answer button is pressed, show player stats
+    if (message === "") {
+
+        return (
+            <SafeAreaView style={Styles.PartyModeGameContainer}>
+                <Text style={Styles.title}>Trivia</Text>
+                <Text style={Styles.category}>{category}</Text>
+                <Text style={Styles.question}>{question}</Text>
+                <Text style={Styles.question}>{chosenPlayer.name}</Text>
+                <View style={Styles.buttons}>
+                    {answerButtons()}
+                </View>
+                <View>
+                    {TimerForQuestions()}
+                </View>
+                <Image source={require('../assets/thinking.gif')} style={
+                    {
+                        width: 50,
+                        height: 70,
+                        marginBottom: 0,
+                    }
+                } />
+                <Text style={Styles.pointsText}>
+                    Points for {chosenPlayer.name}: {chosenPlayer.points}
+                </Text>
+                {/* Streak button for every player*/}
             <Text style={Styles.pointsText}>
                 Streak: {chosenPlayer.streak}
             </Text>
-            <Button
-                title="Use your powerup"
-                type="outline"
-                onPress={() => {
-                    alert("Powerups coming soon!")
-                }}
-            />
-            <Button
-                title="End game"
-                type="outline"
-                onPress={() => {
-                    setIsPlaying(false);
-                    navigation.navigate('PartyModeResults');
-                }}
-            />
-        </SafeAreaView>
-    );
-};
+                <Button
+                    title="Use your powerup"
+                    type="outline"
+                    onPress={() => {
+                        alert("Powerups coming soon!")
+                    }}
+                />
+                <Button
+                    title="End game"
+                    type="outline"
+                    onPress={() => {
+                        setIsPlaying(false);
+                        navigation.navigate('PartyModeResults');
+                    }}
+                />
+            </SafeAreaView>
+        );
+    } else {
+        return (
+            <View style={Styles.PartyModeGameContainer}>
+                <Text style={Styles.normalText}>{message}</Text>
+                <Text style={Styles.normalText}>Player: {chosenPlayer.name}</Text>
+                <Text style={Styles.normalText}>Points: {chosenPlayer.points}</Text>
+                <Text style={Styles.normalText}>Streak: {correctAnswers}</Text>
+                <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <Button title="Next question" onPress={() => getQuestion()} />
+            </View>
+        )
+    }
+}
