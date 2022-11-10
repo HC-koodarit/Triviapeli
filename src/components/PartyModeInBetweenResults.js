@@ -8,7 +8,6 @@ export default function PartyModeInBetweenResults({ route, navigation }) {
    const { chosenPlayer } = route.params;
    const { playerDetails } = route.params;
 
-   // Score haetaan tietokannasta, tämä pitää tehdä vielä
     return (
         <View style={Styles.container}>
             <Text style={Styles.header}>Partymode scores</Text>

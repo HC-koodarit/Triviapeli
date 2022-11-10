@@ -162,13 +162,13 @@ export default function GameScreen({ navigation }) {
             <Text> </Text>
             <Image source={require('../assets/thinking.gif')} style={
                 {
-                    width: 200,
-                    height: 220,
+                    width: 50,
+                    height: 70,
                     marginBottom: 0,
                 }
             } />
             <Text> </Text>
-            <Text style={Styles.pointsText}>Pointcount: {points}</Text>
+            <Text style={Styles.pointsText}>Points: {points}</Text>
             <Text> </Text>
             <Button
                 title="End Game"
