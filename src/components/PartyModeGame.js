@@ -12,7 +12,7 @@ export default function GameScreen({ navigation, route }) {
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
     const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
-    //const [playersStreak, setPlayersStreak] = useState([]);   // not yet in use
+    const [playersStreak, setPlayersStreak] = useState([]);   
 
     // variables for questions and answers
     const [question, setQuestion] = useState('');
@@ -191,11 +191,10 @@ export default function GameScreen({ navigation, route }) {
             <Text style={Styles.pointsText}>
                 Points for {chosenPlayer.name}: {chosenPlayer.points}
             </Text>
-            {/* Streak button for every player
+            {/* Streak button for every player*/}
             <Text style={Styles.pointsText}>
                 Streak: {correctAnswers}
             </Text>
-            */}
             <Button
                 title="Use your powerup"
                 type="outline"
