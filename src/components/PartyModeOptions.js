@@ -60,6 +60,7 @@ export default function PartyModeOptions({ route, navigation }) {
             drink: selectedDrink,
             image: drinkImage,
             points: 0,
+            streak: 0,
             powerup: ""
         }
         ]);
