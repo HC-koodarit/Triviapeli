@@ -5,15 +5,15 @@ import Styles from './Styles';
 
 export default function PartyModeInBetweenResults({ route, navigation }) {
 
-   const { points } = route.params;
-   const { players } = route.params;
+   const { chosenPlayer } = route.params;
+   const { playerDetails } = route.params;
 
    // Score haetaan tietokannasta, tämä pitää tehdä vielä
     return (
         <View style={Styles.container}>
             <Text style={Styles.header}>Partymode scores</Text>
-            <Text style={Styles.pointsText}>Your score was {points} </Text>
-            <Text style={Styles.pointsText}>Player was {players} </Text>
+            <Text style={Styles.pointsText}>Your score was {playerDetails} </Text>
+            <Text style={Styles.pointsText}>Player was {chosenPlayer.name} </Text>
             <Button
                 title="End game and go back to main page"
                 type="outline"

@@ -260,7 +260,7 @@ export default function GameScreen({ navigation, route }) {
                 type="outline"
                 onPress={() => {
                     setIsPlaying(false);
-                    navigation.navigate('PartyModeInBetweenResults', {playersCorrectAnswers: playersCorrectAnswers});
+                    navigation.navigate('PartyModeInBetweenResults', {chosenPlayer: points});
                 }}
             />
             <Button

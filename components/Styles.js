@@ -169,7 +169,7 @@ export default StyleSheet.create({
         elevation: 2
       },
       buttonOpen: {
-        marginBottom: 20
+        marginBottom: 0
       },
       buttonClose: {
         backgroundColor: "#2196F3",
@@ -203,6 +203,7 @@ export default StyleSheet.create({
       //Category container Partymode
       categoryContainer: {
           marginBottom: 1,
+          height: 200
       },
 
     //Difficulty container Partymode
