@@ -102,9 +102,11 @@ export default function GameScreen({ navigation, route }) {
             setPlayers(newState);
 
         if (Platform.OS === 'web') {
-            alert("Time is up! The correct answer was " + correctAnswer);
-            getQuestion();
+            //alert("Time is up! The correct answer was " + correctAnswer);
+            //getQuestion();
+            setMessage("Time is up! The correct answer was " + correctAnswer);
         } else {
+            /*
             Alert.alert(
                 "Time is up!",
                 "The correct answer was " + correctAnswer,
@@ -116,6 +118,8 @@ export default function GameScreen({ navigation, route }) {
                     },
                 ],
             );
+            */
+            setMessage("Time is up! The correct answer was " + correctAnswer);
         }
     }
 
