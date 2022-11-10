@@ -20,7 +20,7 @@ export default function GameScreen({ navigation, route }) {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('welcome');
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
@@ -211,6 +211,22 @@ export default function GameScreen({ navigation, route }) {
                 />
             </SafeAreaView>
         );
+    } else if (message === "welcome") {
+        return (
+            <View style={Styles.PartyModeGameContainer}>
+                <Text style={Styles.title}>Welcome!</Text>
+                <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <Button
+                    title="Start game"
+                    type="outline"
+                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    onPress={() => {
+                        setMessage("");
+                    }
+                    }
+                />
+            </View>
+        )
     } else {
         return (
             <View style={Styles.PartyModeGameContainer}>
