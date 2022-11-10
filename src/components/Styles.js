@@ -310,5 +310,18 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingTop: 40,
   },
+   
+  //close Modal by pressing outside
+    outsideModal: {
+    backgroundColor: "rgba(1, 1, 1, 0.2)",
+    flex: 1,
+  },
+  
+   //close Modal by clicing button
+    modalHeaderCloseText: {
+    textAlign: "center",
+    paddingLeft: 5,
+    paddingTop: 5
+  },
 
 });

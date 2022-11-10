@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, Image } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Platform, Image, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -20,7 +20,7 @@ export default function GameScreen({ navigation, route }) {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('welcome');
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
@@ -63,28 +63,28 @@ export default function GameScreen({ navigation, route }) {
             .catch(err => console.error(err));
 
     }, [selectedCategories, chosenPlayer])
-
+/*
     useEffect(() => {
         getQuestion();
     }, []);
-
+*/
     // buttons for answers
     const AnswerButtons = () => {
         return (
             <View>
                 {
-                allAnswers.map((answer) => {
-                    return (
-                        <Button
-                        title={answer}
-                        titleStyle={{ color: 'white', marginHorizontal: 20 }}
-                        type="outline"
-                        onPress={() => checkAnswer(answer)}
-                        key={answer}
-                        />
-                    )
-                })
-                } 
+                    allAnswers.map((answer) => {
+                        return (
+                            <Button
+                                title={answer}
+                                titleStyle={{ color: 'white', marginHorizontal: 20 }}
+                                type="outline"
+                                onPress={() => checkAnswer(answer)}
+                                key={answer}
+                            />
+                        )
+                    })
+                }
             </View>
         )
     }
@@ -92,35 +92,15 @@ export default function GameScreen({ navigation, route }) {
     // timer runs out
     const timeIsUp = () => {
         let streakCounter = chosenPlayer.streak = 0;
-            const newState = players.map(obj => {
-                if (obj.id === chosenPlayer.id) {
-                    return {...obj, streak: streakCounter};
-                } else {
-                    return obj;
-                }
-            });
-            setPlayers(newState);
-
-        if (Platform.OS === 'web') {
-            //alert("Time is up! The correct answer was " + correctAnswer);
-            //getQuestion();
-            setMessage("Time is up! The correct answer was " + correctAnswer);
-        } else {
-            /*
-            Alert.alert(
-                "Time is up!",
-                "The correct answer was " + correctAnswer,
-                [
-                    {
-                        text: "Next question",
-                        onPress: () => getQuestion(),
-                        style: "ok",
-                    },
-                ],
-            );
-            */
-            setMessage("Time is up! The correct answer was " + correctAnswer);
-        }
+        const newState = players.map(obj => {
+            if (obj.id === chosenPlayer.id) {
+                return { ...obj, streak: streakCounter };
+            } else {
+                return obj;
+            }
+        });
+        setPlayers(newState);
+        setMessage("Time is up! The correct answer was " + correctAnswer);
     }
 
     // check if answer is correct
@@ -141,32 +121,13 @@ export default function GameScreen({ navigation, route }) {
             setPlayers(newState);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
+            setMessage("Correct! Good job! :)");
 
-            if (Platform.OS === 'web') {
-                //alert("Correct! Good job! :)");
-                //getQuestion();
-                setMessage("Correct! Good job! :)");
-            } else {
-                /*
-                Alert.alert(
-                    "Correct",
-                    "Good job! :)",
-                    [
-                        {
-                            text: "Next question",
-                            onPress: () => getQuestion(),
-                            style: "ok",
-                        },
-                    ],
-                );
-                */
-                setMessage("Correct! Good job! :)");
-            };
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
             const newState = players.map(obj => {
                 if (obj.id === chosenPlayer.id) {
-                    return {...obj, streak: streakCounter};
+                    return { ...obj, streak: streakCounter };
                 } else {
                     return obj;
                 }
@@ -176,27 +137,7 @@ export default function GameScreen({ navigation, route }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setCorrectAnswers(0);
-
-            if (Platform.OS === 'web') {
-                //alert("Wrong! The correct answer was " + correctAnswer);
-                //getQuestion();
-                setMessage("Wrong! The correct answer was " + correctAnswer);
-            } else {
-                /*
-                Alert.alert(
-                    "Wrong",
-                    "The correct answer was " + correctAnswer,
-                    [
-                        {
-                            text: "Next question",
-                            onPress: () => getQuestion(),
-                            style: "ok",
-                        },
-                    ],
-                );
-                */
-                setMessage("Wrong! The correct answer was " + correctAnswer);
-            }
+            setMessage("Wrong! The correct answer was " + correctAnswer);
         }
     }
 
@@ -216,8 +157,8 @@ export default function GameScreen({ navigation, route }) {
                         timeIsUp();
                     }}
                 >
-                    {({ remainingTime }) => 
-                    <Text style={Styles.normalText}>{remainingTime}</Text>}
+                    {({ remainingTime }) =>
+                        <Text style={Styles.normalText}>{remainingTime}</Text>}
                 </CountdownCircleTimer>
             </View>
         )
@@ -231,6 +172,9 @@ export default function GameScreen({ navigation, route }) {
                 <Text style={Styles.category}>{category}</Text>
                 <Text style={Styles.question}>{question}</Text>
                 <Text style={Styles.question}>{chosenPlayer.name}</Text>
+                <Text style={Styles.pointsText}>
+                    Points {chosenPlayer.points}, Streak: {chosenPlayer.streak}
+                </Text>
                 <View style={Styles.buttons}>
                     <AnswerButtons />
                 </View>
@@ -244,43 +188,64 @@ export default function GameScreen({ navigation, route }) {
                         marginBottom: 0,
                     }
                 } />
-                <Text style={Styles.pointsText}>
-                    Points for {chosenPlayer.name}: {chosenPlayer.points}
-                </Text>
-                {/* Streak button for every player*/}
-            <Text style={Styles.pointsText}>
-                Streak: {chosenPlayer.streak}
-            </Text>
-            {/* Streak button for every player*/}
-            <Text style={Styles.pointsText}>
-                Streak: {correctAnswers}
-            </Text>
-            <Button
-                title="Use your powerup"
-                type="outline"
-                titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                onPress={() => {
-                    alert("Powerups coming soon!")
-                }}
-            />
-            <Button
-                title="End game"
-                type="outline"
-                titleStyle={{ color: 'white', marginHorizontal: 30 }}
-                onPress={() => {
-                    setIsPlaying(false);
-                    navigation.navigate('PartyModeResults');
-                }}
-            />
-        </SafeAreaView>
-    );
+
+                <Button
+                    title="Use your powerup"
+                    type="outline"
+                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    onPress={() => {
+                        alert("Powerups coming soon!")
+                    }}
+                />
+                <Button
+                    title="End game"
+                    type="outline"
+                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    onPress={() => {
+                        setIsPlaying(false);
+                        navigation.navigate('PartyModeResults');
+                    }}
+                />
+            </SafeAreaView>
+        );
+
+    } else if (message === "welcome") {
+        return (
+            <View style={Styles.PartyModeGameContainer}>
+                <Text style={Styles.title}>Welcome!</Text>
+                <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <Button
+                    title="Start game"
+                    type="outline"
+                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    onPress={() => {
+                        setMessage("");
+                        getQuestion();
+                    }
+                    }
+                />
+            </View>
+        )
+
     } else {
         return (
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalText}>{message}</Text>
-                <Text style={Styles.normalText}>Player: {chosenPlayer.name}</Text>
-                <Text style={Styles.normalText}>Points: {chosenPlayer.points}</Text>
-                <Text style={Styles.normalText}>Streak: {correctAnswers}</Text>
+                <Text style={Styles.playersTitle}>Players</Text>
+                <View style={Styles.playerNames}>
+                    <FlatList
+                        style={Styles.playerFlatlist}
+                        data={players}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) =>
+                            <View style={Styles.playerContainer}>
+                                <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak} </Text>
+                            </View>
+                        }
+                    />
+                </View>
                 <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <Button title="Next question" onPress={() => getQuestion()} />
             </View>
