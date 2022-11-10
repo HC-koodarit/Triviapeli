@@ -188,22 +188,25 @@ export default function PartyModeOptions({ route, navigation }) {
 
             {/* Select categories */}
             <ScrollView style={Styles.categoryContainer}>
-                <Text style={Styles.optionsSubTitle}>Categories</Text>
-                <MultiSelect
-                    style={Styles.dropdown}
-                    placeholderStyle={Styles.placeholderStyleDropdown}
-                    selectedTextStyle={Styles.selectedTextStyleDropdown}
-                    iconStyle={Styles.iconStyleDropdown}
-                    data={categories}
-                    labelField="name"
-                    valueField="id"
-                    placeholder="Select categories"
-                    value={selectedCategories}
-                    onChange={item => {
-                        setSelectedCategories(item);
-                    }}
-                    selectedStyle={Styles.selectedStyleDropdown}
-                />
+                <View>
+                    <Text style={Styles.optionsSubTitle}>Categories</Text>
+                    <MultiSelect
+                        style={Styles.dropdown}
+                        placeholderStyle={Styles.placeholderStyleDropdown}
+                        selectedTextStyle={Styles.selectedTextStyleDropdown}
+                        selectedStyle={Styles.selectedStyleDropdown}
+                        iconStyle={Styles.iconStyleDropdown}
+                        activeColor={'#99cfe0'}
+                        data={categories}
+                        labelField="name"
+                        valueField="id"
+                        placeholder="Select categories"
+                        value={selectedCategories}
+                        onChange={item => {
+                            setSelectedCategories(item);
+                        }}
+                    />
+                </View>
                 <View style={Styles.buttonContainer}>
                     <Button
                         title="Select all"

@@ -240,7 +240,7 @@ export default StyleSheet.create({
     //Dropdown Styles for category & difficulty (PartyModeOptions)
     dropdown: {
       height: 50,
-      width: 240,
+      width: 250,
       backgroundColor: 'transparent',
       borderBottomColor: 'gray',
       borderBottomWidth: 0.5,
@@ -250,7 +250,7 @@ export default StyleSheet.create({
     placeholderStyleDropdown: {
       fontSize: 16,
       color: "white",
-      alignItems: 'center'
+      alignItems: 'center',
     },
     selectedTextStyleDropdown: {
       fontSize: 12,
@@ -265,6 +265,8 @@ export default StyleSheet.create({
     },
     selectedStyleDropdown: {
       borderRadius: 12,
+    },
+    activeColorDropdown: {
     },
 
     // Back button (Multiple js files)
