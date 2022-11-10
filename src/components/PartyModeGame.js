@@ -67,9 +67,25 @@ export default function GameScreen({ navigation, route }) {
     }, []);
 
     // buttons for answers
-    const answerButtons = () => allAnswers.map((answer) => 
-        <Button title={answer} type="outline" onPress={() =>
-            checkAnswer(answer)} key={answer} />)
+    const AnswerButtons = () => {
+        return (
+            <View>
+                {
+                allAnswers.map((answer) => {
+                    return (
+                        <Button
+                        title={answer}
+                        titleStyle={{ color: 'white', marginHorizontal: 20 }}
+                        type="outline"
+                        onPress={() => checkAnswer(answer)}
+                        key={answer}
+                        />
+                    )
+                })
+                } 
+            </View>
+        )
+    }
 
     // timer runs out
     const timeIsUp = () => {
@@ -149,25 +165,27 @@ export default function GameScreen({ navigation, route }) {
     }
 
     // 15 sec countdown timer
-    const TimerForQuestions = () => (
-        <View style={Styles.timer}>
-            <CountdownCircleTimer
-                key={key}
-                isPlaying={isPlaying}
-                duration={15}
-                colors={'#004777'}
-                size={90}
-                onComplete={() => {
-                    setKey(prevKey => prevKey + 1);
-                    setIsPlaying(false);
-                    timeIsUp();
-                }}
-            >
-                {({ remainingTime }) => 
-                <Text style={Styles.normalText}>{remainingTime}</Text>}
-            </CountdownCircleTimer>
-        </View>
-    )
+    const TimerForQuestions = () => {
+        return (
+            <View style={Styles.timer}>
+                <CountdownCircleTimer
+                    key={key}
+                    isPlaying={isPlaying}
+                    duration={15}
+                    colors={'#004777'}
+                    size={90}
+                    onComplete={() => {
+                        setKey(prevKey => prevKey + 1);
+                        setIsPlaying(false);
+                        timeIsUp();
+                    }}
+                >
+                    {({ remainingTime }) => 
+                    <Text style={Styles.normalText}>{remainingTime}</Text>}
+                </CountdownCircleTimer>
+            </View>
+        )
+    }
 
     return (
         <SafeAreaView style={Styles.PartyModeGameContainer}>
@@ -176,10 +194,10 @@ export default function GameScreen({ navigation, route }) {
             <Text style={Styles.question}>{question}</Text>
             <Text style={Styles.question}>{chosenPlayer.name}</Text>
             <View style={Styles.buttons}>
-                {answerButtons()}
+                <AnswerButtons />
             </View>
             <View>
-                {TimerForQuestions()}
+                <TimerForQuestions />
             </View>
             <Image source={require('../assets/thinking.gif')} style={
                 {
@@ -198,6 +216,7 @@ export default function GameScreen({ navigation, route }) {
             <Button
                 title="Use your powerup"
                 type="outline"
+                titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 onPress={() => {
                     alert("Powerups coming soon!")
                 }}
@@ -205,6 +224,7 @@ export default function GameScreen({ navigation, route }) {
             <Button
                 title="End game"
                 type="outline"
+                titleStyle={{ color: 'white', marginHorizontal: 30 }}
                 onPress={() => {
                     setIsPlaying(false);
                     navigation.navigate('PartyModeResults');

@@ -13,7 +13,6 @@ export default function PartyModeResults({ route, navigation, params }) {
                 title='Home'
                 titleStyle={{ fontWeight: '700' }}
                 buttonStyle={Styles.backButton}
-                containerStyle={Styles.backButtonContainer}
                 onPress={() => navigation.navigate('Home')}
             />
         </SafeAreaView>

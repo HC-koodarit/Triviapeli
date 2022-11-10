@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 import Styles from './Styles';
 
-
 export default function Categories({ navigation }) {
 
     const [categories, setCategories] = useState([]);
