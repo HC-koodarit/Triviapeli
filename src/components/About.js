@@ -8,7 +8,7 @@ export default function About({ navigation }) {
     return (
         <View style={Styles.aboutContainer}>
             <Text style={Styles.header}>About</Text>
-            <Text style={Styles.normalText}>This game is the work of the Ohjelmistoprojekti 2 (Software Project 2) course at Haaga-Helia University of Applied Sciences.</Text>
+            <Text style={Styles.normalText}>This game is the work of the Ohjelmistoprojekti II (Software Project II) course at Haaga-Helia University of Applied Sciences.</Text>
             <Text> </Text>
             <Text style={Styles.normalText}>The team members in alphabetical order are:</Text>
             <Text style={Styles.normalText}>- Bergman Sebastian</Text>
@@ -22,12 +22,11 @@ export default function About({ navigation }) {
             <Text> </Text>
             <Text style={Styles.normalText}>All data provided by the API is available under the Creative Commons Attribution-ShareAlike 4.0 International License.</Text>
             <Button
-                    title='Back'
-                    titleStyle={{ fontWeight: '700' }}
-                    buttonStyle={Styles.backButton}
-                    containerStyle={Styles.backButtonContainer}
-                    onPress={() => navigation.navigate('Home')}
-                />
+                title='Back'
+                titleStyle={{ fontWeight: '700' }}
+                buttonStyle={Styles.backButton}
+                onPress={() => navigation.navigate('Home')}
+            />
         </View>
     );
 }

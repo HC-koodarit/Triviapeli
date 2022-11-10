@@ -245,7 +245,6 @@ export default function PartyModeOptions({ route, navigation }) {
                     title='Back'
                     titleStyle={{ fontWeight: '700' }}
                     buttonStyle={Styles.backButton}
-                    containerStyle={Styles.backButtonContainer}
                     onPress={() => navigation.navigate('Home')}
                 />
                 <Button
@@ -259,7 +258,6 @@ export default function PartyModeOptions({ route, navigation }) {
                     iconContainerStyle={{ marginRight: 10 }}
                     titleStyle={{ fontWeight: '700' }}
                     buttonStyle={Styles.startButton}
-                    containerStyle={Styles.startButtonContainer}
                     onPress={startGame}
                 />
             </View>
