@@ -143,7 +143,6 @@ export default StyleSheet.create({
 
     addPlayers: {
       fontSize: 18,
-      width: 250,
       borderBottomWidth: 1.0,
       borderColor: "#0055b3",
       marginBottom: 5,
@@ -151,13 +150,11 @@ export default StyleSheet.create({
     },
 
     modalView: {
-      flex: 1,
-      backgroundColor: "white",
       alignItems: "center",
       justifyContent: "center",
     },
     modal: {
-      flex: 1,
+      height: 200,
       margin: 50,
       padding: 5,
       backgroundColor: "white",
@@ -174,7 +171,8 @@ export default StyleSheet.create({
     modalContent: {
       flex: 1,
       borderWidth: 1,
-      borderColor: "black"
+      borderColor: "black",
+      padding: 15,
     },
     modalHeader: {
       flexDirection: "row",
@@ -184,6 +182,7 @@ export default StyleSheet.create({
     /* The header takes up all the vertical space not used by the close button. */
     modalHeaderContent: {
       flexGrow: 1,
+      marginLeft: 5,
     },
     modalHeaderCloseText: {
       textAlign: "center",
@@ -198,18 +197,13 @@ export default StyleSheet.create({
     //Dropdown Styles for drink choice (PartyModeOptions)
     dropdownDrinks: {
       height: 50,
-      width: 250,
       backgroundColor: 'transparent',
       borderBottomColor: 'gray',
       borderBottomWidth: 0.5,
       marginBottom: 10,
     },
-    placeholderStyleDropdownDrinks: {
-      fontSize: 16,
-      color: "black",
-    },
     selectedTextStyleDropdownDrinks: {
-      fontSize: 14,
+      fontSize: 16,
       color: "black",
     },
     iconStyleDropdownDrinks: {
@@ -269,7 +263,14 @@ export default StyleSheet.create({
 
     //Dropdown Styles for category & difficulty (PartyModeOptions)
     dropdown: {
-      height: 50,
+      width: 250,
+      backgroundColor: 'transparent',
+      borderBottomColor: 'gray',
+      borderBottomWidth: 0.5,
+      marginBottom: 10,
+      alignSelf: 'center',
+    },
+    dropdownDifficulty: {
       width: 250,
       backgroundColor: 'transparent',
       borderBottomColor: 'gray',
@@ -278,12 +279,16 @@ export default StyleSheet.create({
       alignSelf: 'center',
     },
     placeholderStyleDropdown: {
-      fontSize: 16,
+      fontSize: 15,
       color: "white",
       alignItems: 'center',
     },
     selectedTextStyleDropdown: {
       fontSize: 12,
+      color: "white",
+    },
+    selectedTextDropdownDifficulty: {
+      fontSize: 15,
       color: "white",
     },
     iconStyleDropdown: {
@@ -295,8 +300,6 @@ export default StyleSheet.create({
     },
     selectedStyleDropdown: {
       borderRadius: 12,
-    },
-    activeColorDropdown: {
     },
 
     // Back button (Multiple js files)

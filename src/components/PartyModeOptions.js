@@ -134,7 +134,7 @@ export default function PartyModeOptions({ route, navigation }) {
                 />
                 <View style={Styles.modalView}>
                     <Modal
-                        animationType="slide"
+                        animationType="fade"
                         transparent={true}
                         visible={modalVisible}
                         onRequestClose={() => setModalVisible(false)}>
@@ -146,7 +146,7 @@ export default function PartyModeOptions({ route, navigation }) {
                             <View style={Styles.modal}>
                                 <View style={Styles.modalHeader}>
                                     <View style={Styles.modalHeaderContent}>
-                                        <Text>Other header content</Text>
+                                        <Text>Add players</Text>
                                     </View>
                                     <TouchableOpacity onPress={() => setModalVisible(false)}>
                                         <Text style={Styles.modalHeaderCloseText}>X</Text>
@@ -156,14 +156,14 @@ export default function PartyModeOptions({ route, navigation }) {
                                     <TextInput
                                         placeholderTextColor={'black'}
                                         style={Styles.addPlayers}
-                                        placeholder='Insert player name'
+                                        placeholder='player name'
                                         onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
                                         value={playerNameTemp} />
                                     <Dropdown
                                         style={Styles.dropdownDrinks}
-                                        placeholderStyle={Styles.placeholderStyleDropdownDrinks}
                                         selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
                                         iconStyle={Styles.iconStyleDropdownDrinks}
+                                        activeColor={'#99cfe0'}
                                         data={drinks}
                                         maxHeight={300}
                                         labelField="label"
@@ -236,10 +236,11 @@ export default function PartyModeOptions({ route, navigation }) {
             <View style={Styles.difficultyContainer}>
                 <Text style={Styles.optionsSubTitle}>Difficulty</Text>
                 <Dropdown
-                    style={Styles.dropdown}
+                    style={Styles.dropdownDifficulty}
                     placeholderStyle={Styles.placeholderStyleDropdown}
-                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextDropdownDifficulty}
                     iconStyle={Styles.iconStyleDropdown}
+                    activeColor={'#99cfe0'}
                     data={difficulty}
                     maxHeight={300}
                     labelField="label"
