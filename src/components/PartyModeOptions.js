@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
@@ -139,8 +139,13 @@ export default function PartyModeOptions({ route, navigation }) {
                     onRequestClose={() => {
                         Alert.alert("Modal has been closed.");
                         setModalVisible(!modalVisible);
+                        
                     }}
+
                 >
+                     <Pressable style={Styles.outsideModal}
+                     onPress={(event) => { if (event.target == event.currentTarget) { 
+                        setModalVisible(false); } }} ></Pressable>
                     {/* Add a new player */}
                     <View style={Styles.centeredView}>
                         <View style={Styles.modalView}>
@@ -172,6 +177,9 @@ export default function PartyModeOptions({ route, navigation }) {
                             >
                                 <Text style={Styles.textStyle}>Save player</Text>
                             </Pressable>
+                            <TouchableOpacity onPress={() => setModalVisible(false)}>
+                            <Text style={Styles.modalHeaderCloseText}>X</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </Modal>
