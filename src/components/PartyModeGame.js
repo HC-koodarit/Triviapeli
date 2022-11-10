@@ -12,7 +12,7 @@ export default function GameScreen({ navigation, route }) {
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
     const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
-    const [playersStreak, setPlayersStreak] = useState([]);   
+    // const [playersStreak, setPlayersStreak] = useState([]);   // ei käytössä
 
     // variables for questions and answers
     const [question, setQuestion] = useState('');
@@ -24,7 +24,7 @@ export default function GameScreen({ navigation, route }) {
     // variable for the player's score
     const [points, setPoints] = useState(0);
 
-    // count correct answers for powerups
+    // count correct answers for powerups HUOM! Ei laske streakkiä
     const [correctAnswers, setCorrectAnswers] = useState(0);
 
     // variables for the countdown timer
@@ -73,6 +73,16 @@ export default function GameScreen({ navigation, route }) {
 
     // timer runs out
     const timeIsUp = () => {
+        let streakCounter = chosenPlayer.streak = 0;
+            const newState = players.map(obj => {
+                if (obj.id === chosenPlayer.id) {
+                    return {...obj, streak: streakCounter};
+                } else {
+                    return obj;
+                }
+            });
+            setPlayers(newState);
+
         if (Platform.OS === 'web') {
             alert("Time is up! The correct answer was " + correctAnswer);
             getQuestion();
@@ -95,10 +105,11 @@ export default function GameScreen({ navigation, route }) {
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             let pointsCounter = chosenPlayer.points + 1;
+            let streakCounter = chosenPlayer.streak + 1;
             const newState = players.map(obj => {
-                // 👇️ if id equals chosenPlayer id, update player points
+                // 👇️ if id equals chosenPlayer id, update player points and streak
                 if (obj.id === chosenPlayer.id) {
-                  return {...obj, points: pointsCounter};
+                  return {...obj, points: pointsCounter, streak: streakCounter};
                 }
                 // 👇️ otherwise return object as is
                 return obj;
@@ -125,6 +136,16 @@ export default function GameScreen({ navigation, route }) {
                 );
             };
         } else if (answer !== correctAnswer) {
+            let streakCounter = chosenPlayer.streak = 0;
+            const newState = players.map(obj => {
+                if (obj.id === chosenPlayer.id) {
+                    return {...obj, streak: streakCounter};
+                } else {
+                    return obj;
+                }
+            });
+
+            setPlayers(newState);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setCorrectAnswers(0);
@@ -193,7 +214,7 @@ export default function GameScreen({ navigation, route }) {
             </Text>
             {/* Streak button for every player*/}
             <Text style={Styles.pointsText}>
-                Streak: {correctAnswers}
+                Streak: {chosenPlayer.streak}
             </Text>
             <Button
                 title="Use your powerup"
