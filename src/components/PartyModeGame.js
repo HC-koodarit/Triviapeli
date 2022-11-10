@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, Image } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Platform, Image, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -215,9 +215,21 @@ export default function GameScreen({ navigation, route }) {
         return (
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalText}>{message}</Text>
-                <Text style={Styles.normalText}>Player: {chosenPlayer.name}</Text>
-                <Text style={Styles.normalText}>Points: {chosenPlayer.points}</Text>
-                <Text style={Styles.normalText}>Streak: {chosenPlayer.streak}</Text>
+                <Text style={Styles.playersTitle}>Players</Text>
+                <View style={Styles.playerNames}>
+                    <FlatList
+                        style={Styles.playerFlatlist}
+                        data={players}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) =>
+                            <View style={Styles.playerContainer}>
+                                <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak} </Text>
+                            </View>
+                        }
+                    />
+                </View>
                 <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <Button title="Next question" onPress={() => getQuestion()} />
             </View>
