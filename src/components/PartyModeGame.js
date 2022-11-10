@@ -63,11 +63,11 @@ export default function GameScreen({ navigation, route }) {
             .catch(err => console.error(err));
 
     }, [selectedCategories, chosenPlayer])
-
+/*
     useEffect(() => {
         getQuestion();
     }, []);
-
+*/
     // buttons for answers
     const AnswerButtons = () => {
         return (
@@ -211,6 +211,7 @@ export default function GameScreen({ navigation, route }) {
                 />
             </SafeAreaView>
         );
+
     } else if (message === "welcome") {
         return (
             <View style={Styles.PartyModeGameContainer}>
@@ -222,11 +223,13 @@ export default function GameScreen({ navigation, route }) {
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
                     onPress={() => {
                         setMessage("");
+                        getQuestion();
                     }
                     }
                 />
             </View>
         )
+
     } else {
         return (
             <View style={Styles.PartyModeGameContainer}>
