@@ -172,6 +172,9 @@ export default function GameScreen({ navigation, route }) {
                 <Text style={Styles.category}>{category}</Text>
                 <Text style={Styles.question}>{question}</Text>
                 <Text style={Styles.question}>{chosenPlayer.name}</Text>
+                <Text style={Styles.pointsText}>
+                    Points {chosenPlayer.points}, Streak: {chosenPlayer.streak}
+                </Text>
                 <View style={Styles.buttons}>
                     <AnswerButtons />
                 </View>
@@ -185,13 +188,7 @@ export default function GameScreen({ navigation, route }) {
                         marginBottom: 0,
                     }
                 } />
-                <Text style={Styles.pointsText}>
-                    Points for {chosenPlayer.name}: {chosenPlayer.points}
-                </Text>
-                {/* Streak button for every player*/}
-                <Text style={Styles.pointsText}>
-                    Streak: {chosenPlayer.streak}
-                </Text>
+
                 <Button
                     title="Use your powerup"
                     type="outline"

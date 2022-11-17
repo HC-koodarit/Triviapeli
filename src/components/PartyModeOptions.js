@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
@@ -132,78 +132,91 @@ export default function PartyModeOptions({ route, navigation }) {
                         </View>
                     }
                 />
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                        setModalVisible(!modalVisible);
-                    }}
-                >
-                    {/* Add a new player */}
-                    <View style={Styles.centeredView}>
-                        <View style={Styles.modalView}>
-                            <TextInput
-                                placeholderTextColor={'black'}
-                                style={Styles.addPlayers}
-                                placeholder='Insert player name'
-                                onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
-                                value={playerNameTemp} />
-                            <Dropdown
-                                style={Styles.dropdownDrinks}
-                                placeholderStyle={Styles.placeholderStyleDropdownDrinks}
-                                selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
-                                iconStyle={Styles.iconStyleDropdownDrinks}
-                                data={drinks}
-                                maxHeight={300}
-                                labelField="label"
-                                valueField="value"
-                                placeholder="Select drink"
-                                value={selectedDrink}
-                                onChange={item => {
-                                    setSelectedDrink(item.value);
-                                    setDrinkImage(DrinkImages[item.value.toLowerCase()]?.uri);
-                                }}
-                            />
-                            <Pressable
-                                style={[Styles.buttonpopup, Styles.buttonClose]}
-                                onPress={addPlayer}
-                            >
-                                <Text style={Styles.textStyle}>Save player</Text>
-                            </Pressable>
-                        </View>
-                    </View>
-                </Modal>
-                <View style={Styles.AddPlayerButtonContainer}>
-                    <Pressable
-                        title="Add Player"
-                        style={[Styles.buttonpopup, Styles.buttonOpen]}
-                        onPress={() => setModalVisible(true)}
-                    >
-                        <Text style={Styles.textStyle}>Add player</Text>
-                    </Pressable>
+                <View style={Styles.modalView}>
+                    <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => setModalVisible(false)}>
+                        <Pressable style={Styles.outsideModal}
+                        onPress={(event) => { if (event.target == event.currentTarget) { 
+                            setModalVisible(false); } }} >
+
+                            {/* Add a new player */}
+                            <View style={Styles.modal}>
+                                <View style={Styles.modalHeader}>
+                                    <View style={Styles.modalHeaderContent}>
+                                        <Text>Add players</Text>
+                                    </View>
+                                    <TouchableOpacity onPress={() => setModalVisible(false)}>
+                                        <Text style={Styles.modalHeaderCloseText}>X</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={Styles.modalContent}>
+                                    <TextInput
+                                        placeholderTextColor={'black'}
+                                        style={Styles.addPlayers}
+                                        placeholder='player name'
+                                        onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
+                                        value={playerNameTemp} />
+                                    <Dropdown
+                                        style={Styles.dropdownDrinks}
+                                        selectedTextStyle={Styles.selectedTextStyleDropdownDrinks}
+                                        iconStyle={Styles.iconStyleDropdownDrinks}
+                                        activeColor={'#99cfe0'}
+                                        data={drinks}
+                                        maxHeight={300}
+                                        labelField="label"
+                                        valueField="value"
+                                        placeholder="Select drink"
+                                        value={selectedDrink}
+                                        onChange={item => {
+                                            setSelectedDrink(item.value);
+                                            setDrinkImage(DrinkImages[item.value.toLowerCase()]?.uri);
+                                        }}
+                                    />
+                                    <Pressable
+                                        style={[Styles.buttonpopup, Styles.buttonClose]}
+                                        onPress={addPlayer} >
+                                    <Text style={Styles.textStyle}>Save player</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </Pressable>
+                    </Modal>
                 </View>
+                    <View style={Styles.AddPlayerButtonContainer}>
+                        <Pressable
+                            title="Add Player"
+                            style={[Styles.buttonpopup, Styles.buttonOpen]}
+                            onPress={() => setModalVisible(true)}
+                        >
+                        <Text style={Styles.textStyle}>Add player</Text>
+                        </Pressable>
+                    </View>
             </View>
 
             {/* Select categories */}
             <ScrollView style={Styles.categoryContainer}>
-                <Text style={Styles.optionsSubTitle}>Categories</Text>
-                <MultiSelect
-                    style={Styles.dropdown}
-                    placeholderStyle={Styles.placeholderStyleDropdown}
-                    selectedTextStyle={Styles.selectedTextStyleDropdown}
-                    iconStyle={Styles.iconStyleDropdown}
-                    data={categories}
-                    labelField="name"
-                    valueField="id"
-                    placeholder="Select categories"
-                    value={selectedCategories}
-                    onChange={item => {
-                        setSelectedCategories(item);
-                    }}
-                    selectedStyle={Styles.selectedStyleDropdown}
-                />
+                <View>
+                    <Text style={Styles.optionsSubTitle}>Categories</Text>
+                    <MultiSelect
+                        style={Styles.dropdown}
+                        placeholderStyle={Styles.placeholderStyleDropdown}
+                        selectedTextStyle={Styles.selectedTextStyleDropdown}
+                        selectedStyle={Styles.selectedStyleDropdown}
+                        iconStyle={Styles.iconStyleDropdown}
+                        activeColor={'#99cfe0'}
+                        data={categories}
+                        labelField="name"
+                        valueField="id"
+                        placeholder="Select categories"
+                        value={selectedCategories}
+                        onChange={item => {
+                            setSelectedCategories(item);
+                        }}
+                    />
+                </View>
                 <View style={Styles.buttonContainer}>
                     <Button
                         title="Select all"
@@ -223,10 +236,11 @@ export default function PartyModeOptions({ route, navigation }) {
             <View style={Styles.difficultyContainer}>
                 <Text style={Styles.optionsSubTitle}>Difficulty</Text>
                 <Dropdown
-                    style={Styles.dropdown}
+                    style={Styles.dropdownDifficulty}
                     placeholderStyle={Styles.placeholderStyleDropdown}
-                    selectedTextStyle={Styles.selectedTextStyleDropdown}
+                    selectedTextStyle={Styles.selectedTextDropdownDifficulty}
                     iconStyle={Styles.iconStyleDropdown}
+                    activeColor={'#99cfe0'}
                     data={difficulty}
                     maxHeight={300}
                     labelField="label"

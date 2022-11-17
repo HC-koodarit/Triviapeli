@@ -140,46 +140,70 @@ export default StyleSheet.create({
       alignItems: "center",
       marginBottom: 40,
     },
-    modalView: {
-      margin: 20,
-      backgroundColor: "white",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
-    },
 
     addPlayers: {
       fontSize: 18,
-      width: 250,
       borderBottomWidth: 1.0,
       borderColor: "#0055b3",
       marginBottom: 5,
       color: 'black',
     },
 
+    modalView: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    modal: {
+      height: 200,
+      margin: 50,
+      padding: 5,
+      backgroundColor: "white",
+      shadowColor: "black",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    /* The content of the modal takes all the vertical space not used by the header. */
+    modalContent: {
+      flex: 1,
+      borderWidth: 1,
+      borderColor: "black",
+      padding: 15,
+    },
+    modalHeader: {
+      flexDirection: "row",
+      borderWidth: 1,
+      borderColor: "black"
+    },
+    /* The header takes up all the vertical space not used by the close button. */
+    modalHeaderContent: {
+      flexGrow: 1,
+      marginLeft: 5,
+    },
+    modalHeaderCloseText: {
+      textAlign: "center",
+      paddingLeft: 5,
+      paddingRight: 5
+    },
+    outsideModal: {
+      backgroundColor: "rgba(1, 1, 1, 0.2)",
+      flex: 1,
+    },
+
     //Dropdown Styles for drink choice (PartyModeOptions)
     dropdownDrinks: {
       height: 50,
-      width: 250,
       backgroundColor: 'transparent',
       borderBottomColor: 'gray',
       borderBottomWidth: 0.5,
       marginBottom: 10,
     },
-    placeholderStyleDropdownDrinks: {
-      fontSize: 16,
-      color: "black",
-    },
     selectedTextStyleDropdownDrinks: {
-      fontSize: 14,
+      fontSize: 16,
       color: "black",
     },
     iconStyleDropdownDrinks: {
@@ -239,8 +263,15 @@ export default StyleSheet.create({
 
     //Dropdown Styles for category & difficulty (PartyModeOptions)
     dropdown: {
-      height: 50,
-      width: 240,
+      width: 250,
+      backgroundColor: 'transparent',
+      borderBottomColor: 'gray',
+      borderBottomWidth: 0.5,
+      marginBottom: 10,
+      alignSelf: 'center',
+    },
+    dropdownDifficulty: {
+      width: 250,
       backgroundColor: 'transparent',
       borderBottomColor: 'gray',
       borderBottomWidth: 0.5,
@@ -248,12 +279,16 @@ export default StyleSheet.create({
       alignSelf: 'center',
     },
     placeholderStyleDropdown: {
-      fontSize: 16,
+      fontSize: 15,
       color: "white",
-      alignItems: 'center'
+      alignItems: 'center',
     },
     selectedTextStyleDropdown: {
       fontSize: 12,
+      color: "white",
+    },
+    selectedTextDropdownDifficulty: {
+      fontSize: 15,
       color: "white",
     },
     iconStyleDropdown: {
@@ -308,5 +343,4 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingTop: 40,
   },
-
 });

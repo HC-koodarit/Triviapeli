@@ -13,7 +13,7 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "@expo/webpack-config": "^0.17.0",
+    "@expo/webpack-config": "^0.16.19",
     "@react-native-community/checkbox": "^0.5.12",
     "@react-native-picker/picker": "^2.4.6",
     "@react-navigation/bottom-tabs": "^6.3.3",
