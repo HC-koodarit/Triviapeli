@@ -80,14 +80,14 @@ export default function PartyModeOptions({ route, navigation }) {
     const drinks = [
         { label: 'Mild (<10%)', value: 'Mild' },
         { label: 'Medium (10%–20%)', value: 'Medium' },
-        { label: 'Strong (>20%)', value: 'Strong' },
+        { label: 'Strong (>20%)', value: 'Strong' }
     ];
 
     // Difficulty data
     const difficulty = [
         { label: 'Easy', value: 'easy' },
         { label: 'Medium', value: 'medium' },
-        { label: 'Hard', value: 'hard' },
+        { label: 'Hard', value: 'hard' }
     ];
 
     // start game and pass params to PartyModeScreen
@@ -100,7 +100,7 @@ export default function PartyModeOptions({ route, navigation }) {
             navigation.navigate('PartyModeGame', {
                 selectedCategories,
                 selectedDifficulty,
-                playerDetails,
+                playerDetails
             });
         }
     }

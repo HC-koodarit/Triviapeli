@@ -173,7 +173,7 @@ export default function GameScreen({ navigation, route }) {
                 <Text style={Styles.question}>{question}</Text>
                 <Text style={Styles.question}>{chosenPlayer.name}</Text>
                 <Text style={Styles.pointsText}>
-                    Points {chosenPlayer.points}, Streak: {chosenPlayer.streak}
+                    Points: {chosenPlayer.points}, Streak: {chosenPlayer.streak}
                 </Text>
                 <View style={Styles.buttons}>
                     <AnswerButtons />
@@ -188,24 +188,25 @@ export default function GameScreen({ navigation, route }) {
                         marginBottom: 0,
                     }
                 } />
-
-                <Button
+            <View style={{ flexDirection:"row" }}>
+                <Button 
                     title="Use your powerup"
-                    type="outline"
+                    buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
                         alert("Powerups coming soon!")
                     }}
                 />
-                <Button
+                <Button style={Styles.startGamePContainer}
                     title="End game"
-                    type="outline"
+                    buttonStyle={Styles.backButton}
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
                     onPress={() => {
                         setIsPlaying(false);
-                        navigation.navigate("PartyModeResults");
+                        navigation.navigate('PartyModeResults', { players });
                     }}
                 />
+            </View>
             </SafeAreaView>
         );
 
@@ -239,8 +240,8 @@ export default function GameScreen({ navigation, route }) {
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
-                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points} </Text>
+                                <Text style={Styles.flatlistPlayerNames}>{item.name} – </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points} – </Text>
                                 <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak} </Text>
                             </View>
                         }

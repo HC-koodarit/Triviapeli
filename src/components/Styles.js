@@ -326,6 +326,17 @@ export default StyleSheet.create({
       marginTop: 20,
     },
 
+    //Button for powerup
+    powerUpButton: {
+      backgroundColor: '#ff6303',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 30,
+      width: 140,
+      marginHorizontal: 25,
+      marginTop: 20,
+    },
+
     //Start Game button Partymode
     startGamePContainer: {
       marginBottom: 20,
