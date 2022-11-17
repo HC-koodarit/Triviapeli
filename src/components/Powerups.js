@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import PartyModeGame from './components/PartyModeGame';
 
-// when player answers a question correctly three times, the player gets a powerup
+// when player answers a question correctly 3 times, the player gets a powerup
 // the player has one powerup at a time
 // if player doesn't use the powerup, the player will get a better powerup after 5 correct answers
 // if player doesn't use the powerup, the player will get a better powerup after 7 correct answers
 // if player doesn't use the powerup, the player will get a better powerup after 10 correct answers
 // when player uses a powerup, the powerup will be removed from the player's powerup list and the counter will be reset
+
+    // Pushup powerup for testing 
+    const [pushupPowerup, setPushupPowerup] = useState('');
 
     const [powerups, setPowerups] = useState([]);
 

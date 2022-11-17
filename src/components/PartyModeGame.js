@@ -254,7 +254,7 @@ export default function GameScreen({ navigation, route }) {
                 
                 <Button style={Styles.startGamePContainer}
                     title="End game"
-                    buttonStyle={Styles.backButton}
+                    type="outline"
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
                     onPress={() => {
                         setIsPlaying(false);
@@ -268,13 +268,15 @@ export default function GameScreen({ navigation, route }) {
     } else if (message === "welcome") {
         // welcome screen before the first question
         return (
-            <View style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.title}>Welcome!</Text>
-                <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+            <View style={Styles.WelcomeContainer}>
+                <Text style={Styles.welcomeTitle}>Welcome!</Text>
+                <Text style={Styles.infoText}>The game starts from player</Text>
+                <Text style={Styles.infoText}>{players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <Button
+                    style={Styles.startButton}
                     title="Start game"
-                    type="outline"
-                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    type=""
+                    titleStyle={{ color: 'white', marginHorizontal: 25 }}
                     onPress={() => {
                         setMessage("");
                         getQuestion();

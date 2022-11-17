@@ -25,11 +25,23 @@ export default StyleSheet.create({
     color: '#fff',
   },
   
-  //GameScreen .js styles
+  //GameScreen aka quickplay styles
   title: {
     fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',
+  },
+  welcomeTitle: {
+    fontSize: 45,
+    fontWeight: 'bold',
+    color: '#fff',
+    paddingBottom: 20,
+  },
+  QuickPlaycontainer: {
+    flex: 1,
+    backgroundColor: '#020d23',
+    alignItems: 'center',
+    paddingTop: 40,
   },
   //Category also used in PartyModeGame
   category: {
@@ -67,6 +79,16 @@ export default StyleSheet.create({
   normalText: {
     fontSize: 18,
     color: '#fff'
+  },
+  infoText: {
+    fontSize: 20,
+    color: '#fff',
+    paddingVertical: 15,
+  },
+  headingText: {
+    fontSize: 25,
+    color: '#fff',
+    fontWeight: 'bold',
   },
 
   //About.js styles
@@ -371,12 +393,49 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingTop: 40,
   },
-  PartyModeResultsContainer: {
+  WelcomeContainer: {
     flex: 1,
     backgroundColor: '#020d23',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  //Party Mode Results styles
+  PartyModeResultsContainer: {
+    flex: 1,
+    backgroundColor: '#020d23',
     paddingTop: 40,
   },
+  //For flatlist view & text
+  PMResultsFlatlistContainer: {
+    alignItems: 'center',
+  },
+  playerFlatlistResults: {
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  flatlistPlayerNameResults: {
+    fontSize: 20,
+    color: "#fff",
+  },
+  //Styles for home button (partyModeResults)
+  PMResultsButtonContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  // PartyModeResults Home button style
+  backButtonResults: {
+    backgroundColor: '#ff3333',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 30,
+    width: 100,
+  },
+
   loading: {
     flex: 1,
     justifyContent: "center",
