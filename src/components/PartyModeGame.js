@@ -203,7 +203,7 @@ export default function GameScreen({ navigation, route }) {
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
                     onPress={() => {
                         setIsPlaying(false);
-                        navigation.navigate('PartyModeResults');
+                        navigation.navigate("PartyModeResults");
                     }}
                 />
             </SafeAreaView>

@@ -152,29 +152,32 @@ export default StyleSheet.create({
 
     modalView: {
       flex: 1,
-      backgroundColor: "white",
+      backgroundColor: "grey",
       alignItems: "center",
       justifyContent: "center",
     },
     modal: {
       flex: 1,
       margin: 50,
-      padding: 5,
+      padding: 0,
       backgroundColor: "white",
       shadowColor: "black",
       shadowOffset: {
         width: 0,
         height: 2,
       },
+      textAlign: "centered",
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
+      borderRadius: 10
     },
     /* The content of the modal takes all the vertical space not used by the header. */
     modalContent: {
       flex: 1,
       borderWidth: 1,
-      borderColor: "black"
+      borderColor: "black",
+      justifyContent: "centered",
     },
     modalHeader: {
       flexDirection: "row",

@@ -12,7 +12,7 @@ export default function PartyModeResults({ route, navigation, params }) {
     return (
         <SafeAreaView style={Styles.PartyModeResultsContainer}>
             <Text style={Styles.normalText}>Results coming</Text>
-            <Text>player was</Text>
+            <Text>player was {playerName} </Text>
             <Button
                 title='Home'
                 titleStyle={{ fontWeight: '700' }}
