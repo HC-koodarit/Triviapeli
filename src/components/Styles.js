@@ -81,7 +81,7 @@ export default StyleSheet.create({
   infoText: {
     fontSize: 20,
     color: '#fff',
-    paddingVertical: 15,
+    paddingVertical: 12,
   },
   headingText: {
     fontSize: 25,
@@ -356,6 +356,17 @@ export default StyleSheet.create({
       marginTop: 20,
     },
 
+    // Continue game
+    continueButton: {
+      backgroundColor: '#42b32e',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 30,
+      width: 160,
+      marginHorizontal: 25,
+      marginTop: 20,
+    },
+
     //Button for powerup
     powerUpButton: {
       backgroundColor: '#ff6303',
@@ -384,18 +395,39 @@ export default StyleSheet.create({
       flexDirection: 'row',
     },
 
-  //Party Mode Container styles
+  //Party Mode Container styles = inBetweenScreen during the game
   PartyModeGameContainer: {
     flex: 1,
     backgroundColor: '#020d23',
     alignItems: 'center',
-    paddingTop: 40,
+    justifyContent: 'center',
+    paddingTop: 30,
   },
   WelcomeContainer: {
     flex: 1,
     backgroundColor: '#020d23',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  currentScoreList: {
+    width: 500,
+    height: 270,
+    color: '#fff',
+    marginTop: 15,
+    marginBottom: 30
+  },
+  playerStats: {
+    paddingTop: 10,
+    width: 500,
+    fontSize: 30,
+    height: 160,
+    color: '#fff',
+    marginTop: 20,
+    marginBottom: 20
+  },
+  statsList: {
+    fontSize: 20,
+    color: "#fff",
   },
 
   //Party Mode Results styles

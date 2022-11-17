@@ -272,24 +272,30 @@ export default function GameScreen({ navigation, route }) {
         // if answer button is pressed, show player stats
         return (
             <View style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.normalText}>{message}</Text>
-                <Text style={Styles.playersTitle}>Players</Text>
-                <View style={Styles.playerNames}>
+                <Text style={Styles.infoText}>{message}</Text>
+                <Text style={Styles.playersTitle}>Current score</Text>
+                <View style={Styles.currentScoreList}>
                     <FlatList
                         style={Styles.playerFlatlist}
                         data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name} – </Text>
-                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points} – </Text>
-                                <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak} </Text>
+                                <Text style={Styles.statsList}>{item.name} – </Text>
+                                <Text style={Styles.statsList}> Points: {item.points} – </Text>
+                                <Text style={Styles.statsList}> Streak: {item.streak} </Text>
                             </View>
                         }
                     />
                 </View>
-                <Text style={Styles.normalText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
-                <Button title="Next question" onPress={() => getQuestion()} />
+                <Text style={Styles.infoText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <Button 
+                    style={Styles.continueButton}
+                    type=""
+                    title="Next question" 
+                    titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
+                    onPress={() => getQuestion()} 
+                />
             </View>
         )
     }
