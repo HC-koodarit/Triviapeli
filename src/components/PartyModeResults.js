@@ -12,24 +12,27 @@ export default function PartyModeResults({ route, navigation, params }) {
 
     return (
         <SafeAreaView style={Styles.PartyModeResultsContainer}>
-            <Text style={Styles.normalText}>Results</Text>
+            <View style={Styles.PMResultsFlatlistContainer}>
+            <Text style={Styles.headingText}>Results:</Text>
             <FlatList
-                style={Styles.playerFlatlist}
+                style={Styles.playerFlatlistResults}
                 data={playersPoints}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) =>
-                    <View style={Styles.playerContainer}>
-                        <Text style={Styles.flatlistPlayerNames}>{item.name} – </Text>
-                        <Text style={Styles.flatlistPlayerNames}> Points: {item.points} </Text>
+                    <View>
+                        <Text style={Styles.flatlistPlayerNameResults}>{item.name} – Points: {item.points}</Text>
                     </View>
                 }
             />
+            </View>
+            <View style={Styles.PMResultsButtonContainer}>
             <Button
                 title='Home'
                 titleStyle={{ fontWeight: '700' }}
-                buttonStyle={Styles.backButton}
+                buttonStyle={Styles.backButtonResults}
                 onPress={() => navigation.navigate('Home')}
             />
+            </View>
         </SafeAreaView>
     );
 };

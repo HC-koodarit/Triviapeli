@@ -154,7 +154,7 @@ export default function PartyModeOptions({ route, navigation }) {
                                 </View>
                                 <View style={Styles.modalContent}>
                                     <TextInput
-                                        placeholderTextColor={'black'}
+                                        placeholderTextColor={'grey'}
                                         style={Styles.addPlayers}
                                         placeholder='player name'
                                         onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}

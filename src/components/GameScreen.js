@@ -118,7 +118,7 @@ export default function GameScreen({ navigation }) {
         );
     } else if (message === '') {
         return (
-            <SafeAreaView style={Styles.container}>
+            <SafeAreaView style={Styles.QuickPlaycontainer}>
                 <Text style={Styles.title}>Trivia</Text>
                 <Text style={Styles.category}>{category}</Text>
                 <Text style={Styles.question}>{question}</Text>
