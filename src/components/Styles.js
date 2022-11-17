@@ -38,12 +38,14 @@ export default StyleSheet.create({
     color: '#fff'
   },
   question: {
-    fontSize: 15,
+    fontSize: 25,
     alignItems: 'center',
     justifyContent: 'center',
     textAlignVertical: 'center',
     margin: 10,
-    color: '#fff'
+    color: '#fff',
+    fontWeight: 'bold',
+    textDecorationLines: 'underline'
   },
   playerName: {
     fontSize: 15,

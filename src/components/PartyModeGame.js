@@ -8,8 +8,8 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
-    const {powerUpTrue, setPowerUpTrue} = useState(false);
-
+    // Powerups
+    const {powerUpList, setPowerUpList} = ["Do a backflip", "Sprint around the house", "message someone"];
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -170,7 +170,6 @@ export default function GameScreen({ navigation, route }) {
         )
     }
 
-
     // Loading screen, when question fetching is not done.  
     if (isLoading) {
         return(
@@ -179,31 +178,50 @@ export default function GameScreen({ navigation, route }) {
             </View>
         );
     }
+
+    // Randomizing powerups
+    function Rand(){
+        let i = powerUpList.length - 1;
+        const j = Math.floor(Math.random() * i);
+        powerUpListString = JSON.stringify(powerUpList);
+        return powerUpListString[j];
+    }
     
+    // Powerup appears if streak is long enough
     const PowerUpButton = () => {
         let powerUpCounter = chosenPlayer.streak;
-        if (powerUpCounter === 3) {
+        if (powerUpCounter === 1 || powerUpCounter === 4) {
             return (
                 <Button 
-                title="Use your powerup"
+                title="Use your stage 1 powerup"
                 buttonStyle={Styles.powerUpButton}
                 titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 onPress={() => {
-                    alert("Choose a player to do ten pushups")
+                    alert({Rand})
+                }}
+                />
+            );
+        } else if (powerUpCounter === 5) {
+            return (
+                <Button 
+                title="Use your stage 2 powerup"
+                buttonStyle={Styles.powerUpButton}
+                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                onPress={() => {
+                    alert({Rand})
                 }}
             />
-        )
+            );
         } else {
-        return (
-            <Button 
-            title="No powerup yet"
-            buttonStyle={Styles.notYetPowerUpButton}
-            titleStyle={{ color: 'white', marginHorizontal: 0 }}
-            />
-        );
+            return (
+                <Button 
+                title="No powerup yet"
+                buttonStyle={Styles.notYetPowerUpButton}
+                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                />
+            );
+        }
     }
-    }
-    
 
     // gameplay screen
     if (message === "") {
@@ -279,9 +297,9 @@ export default function GameScreen({ navigation, route }) {
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name} – </Text>
-                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points} – </Text>
-                                <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak} </Text>
+                                <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
+                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points}</Text>
+                                <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak}</Text>
                             </View>
                         }
                     />
