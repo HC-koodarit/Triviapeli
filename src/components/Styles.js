@@ -48,7 +48,15 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlignVertical: 'center',
-    margin: 20,
+    margin: 10,
+    color: '#fff'
+  },
+  playerName: {
+    fontSize: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlignVertical: 'center',
+    margin: 5,
     color: '#fff'
   },
   buttons: {
@@ -340,6 +348,17 @@ export default StyleSheet.create({
     //Button for powerup
     powerUpButton: {
       backgroundColor: '#ff6303',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 30,
+      width: 140,
+      marginHorizontal: 25,
+      marginTop: 20,
+    },
+
+    //Button if you don't have powerup yet
+    notYetPowerUpButton: {
+      backgroundColor: '#f5975d',
       borderColor: 'transparent',
       borderWidth: 0,
       borderRadius: 30,

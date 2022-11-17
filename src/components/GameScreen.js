@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, Image } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Platform, Image, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -13,6 +13,7 @@ export default function GameScreen({ navigation }) {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
+    const [message, setMessage] = useState('');
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
@@ -21,8 +22,12 @@ export default function GameScreen({ navigation }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
+    // variable for loadingscreen
+    const [isLoading, setIsLoading] = useState(false);
+
     // fetch question data from api and set to variables
     const getQuestion = () => {
+        setIsLoading(true);
         fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
             .then(response => response.json())
             .then(data => {
@@ -40,7 +45,9 @@ export default function GameScreen({ navigation }) {
                 answerArray = answerArray.sort(() => Math.random() - 0.5);
 
                 setAllAnswers(answerArray);
+                setIsLoading(false);
                 setIsPlaying(true);  // start timer
+                setMessage('');
 
             })
             .catch(err => console.error(err));
@@ -62,22 +69,7 @@ export default function GameScreen({ navigation }) {
 
     // time running out
     const timeIsUp = () => {
-        if (Platform.OS === 'web') {
-            alert("Time is up! The correct answer was " + correctAnswer);
-            getQuestion();
-        } else {
-            Alert.alert(
-                "Time is up!",
-                "The correct answer was " + correctAnswer,
-                [
-                    {
-                        text: "Next question",
-                        onPress: () => getQuestion(),
-                        style: "ok",
-                    },
-                ],
-            );
-        }
+        setMessage("Time is up! The correct answer was " + correctAnswer);
     }
 
 
@@ -87,43 +79,12 @@ export default function GameScreen({ navigation }) {
             setPoints(setPoints => setPoints + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            
-            if (Platform.OS === 'web') {
-                alert("Correct! Good job! :)");
-                getQuestion();
-            } else {
-                Alert.alert(
-                    "Correct",
-                    "Good job! :)",
-                    [
-                        {
-                            text: "Next question",
-                            onPress: () => getQuestion(),
-                            style: "ok",
-                        },
-                    ],
-                );
-            };
+            setMessage("Correct! Good job! :)");
+
         } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-
-            if (Platform.OS === 'web') {
-                alert("Wrong! The correct answer was " + correctAnswer);
-                getQuestion();
-            } else {
-                Alert.alert(
-                    "Wrong",
-                    "The correct answer was " + correctAnswer,
-                    [
-                        {
-                            text: "Next question",
-                            onPress: () => getQuestion(),
-                            style: "ok",
-                        },
-                    ],
-                );
-            }
+            setMessage("Wrong! The correct answer was " + correctAnswer);
         }
     }
 
@@ -135,49 +96,66 @@ export default function GameScreen({ navigation }) {
                 isPlaying={isPlaying}
                 duration={15}
                 colors={'#004777'}
-                size={90}
+                size={60}
                 onComplete={() => {
                     setKey(prevKey => prevKey + 1);
                     setIsPlaying(false);
                     timeIsUp();
                 }}
             >
-                {({ remainingTime }) => 
-                <Text style={Styles.normalText}>{remainingTime}</Text>}
+                {({ remainingTime }) =>
+                    <Text style={Styles.normalText}>{remainingTime}</Text>}
             </CountdownCircleTimer>
         </View>
     )
 
-    return (
-        <SafeAreaView style={Styles.QuickPlaycontainer}>
-            <Text style={Styles.title}>Trivia</Text>
-            <Text style={Styles.category}>{category}</Text>
-            <Text style={Styles.question}>{question}</Text>
-            <View style={Styles.buttons}>
-                {answerButtons()}
+    // Loading screen, when question fetching is not done.  
+    if (isLoading) {
+        return (
+            <View style={[Styles.PartyModeGameContainer, Styles.loading]}>
+                <ActivityIndicator size="large" color="#03bafc" />
             </View>
-            <View>
-                {TimerForQuestions()}
+        );
+    } else if (message === '') {
+        return (
+            <SafeAreaView style={Styles.QuickPlaycontainer}>
+                <Text style={Styles.title}>Trivia</Text>
+                <Text style={Styles.category}>{category}</Text>
+                <Text style={Styles.question}>{question}</Text>
+                <Text style={Styles.pointsText}>Points: {points}</Text>
+                <View style={Styles.buttons}>
+                    {answerButtons()}
+                </View>
+                <View>
+                    {TimerForQuestions()}
+                </View>
+                <Text> </Text>
+                <Image source={require('../assets/thinking.gif')} style={
+                    {
+                        width: 50,
+                        height: 70,
+                        marginBottom: 0,
+                    }
+                } />
+                <Text> </Text>
+                <Button style={Styles.startGamePContainer}
+                    title="End game"
+                    buttonStyle={Styles.backButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    onPress={() => {
+                        setIsPlaying(false);
+                        navigation.navigate('Pointscreen', { points: points });
+                    }}
+                />
+            </SafeAreaView>
+        );
+    } else {
+        return (
+            <View style={Styles.PartyModeGameContainer}>
+                <Text style={Styles.normalText}>{message}</Text>
+                <Text style={Styles.normalText}>Points: {points}</Text>
+                <Button title="Next question" onPress={() => getQuestion()} />
             </View>
-            <Text> </Text>
-            <Image source={require('../assets/thinking.gif')} style={
-                {
-                    width: 50,
-                    height: 70,
-                    marginBottom: 0,
-                }
-            } />
-            <Text> </Text>
-            <Text style={Styles.pointsText}>Points: {points}</Text>
-            <Text> </Text>
-            <Button
-                title="End Game"
-                type="outline"
-                onPress={() => {
-                    setIsPlaying(false);
-                    navigation.navigate('Pointscreen', { points: points });
-                }}
-            />
-        </SafeAreaView>
-    );
+        )
+    }
 };
