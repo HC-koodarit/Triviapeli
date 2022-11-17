@@ -405,6 +405,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#020d23',
     paddingTop: 40,
+    alignItems: "center"
   },
   //For flatlist view & text
   PMResultsFlatlistContainer: {
