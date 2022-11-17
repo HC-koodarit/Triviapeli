@@ -31,6 +31,12 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
+  welcomeTitle: {
+    fontSize: 45,
+    fontWeight: 'bold',
+    color: '#fff',
+    paddingBottom: 20,
+  },
   QuickPlaycontainer: {
     flex: 1,
     backgroundColor: '#020d23',
@@ -71,6 +77,11 @@ export default StyleSheet.create({
   normalText: {
     fontSize: 18,
     color: '#fff'
+  },
+  infoText: {
+    fontSize: 20,
+    color: '#fff',
+    paddingVertical: 15,
   },
   headingText: {
     fontSize: 25,
@@ -379,6 +390,12 @@ export default StyleSheet.create({
     backgroundColor: '#020d23',
     alignItems: 'center',
     paddingTop: 40,
+  },
+  WelcomeContainer: {
+    flex: 1,
+    backgroundColor: '#020d23',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   //Party Mode Results styles
