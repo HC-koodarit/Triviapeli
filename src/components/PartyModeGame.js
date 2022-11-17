@@ -96,7 +96,7 @@ export default function GameScreen({ navigation, route }) {
 
     // timer runs out
     const timeIsUp = () => {
-        let streakCounter = chosenPlayer.streak = 0;
+        let streakCounter = chosenPlayer.streak = 0;    // reset player's streak
         const newState = players.map(obj => {
             if (obj.id === chosenPlayer.id) {
                 return { ...obj, streak: streakCounter };
@@ -110,7 +110,6 @@ export default function GameScreen({ navigation, route }) {
 
     // check if answer is correct
     const checkAnswer = (answer) => {
-
         if (answer === correctAnswer) {
             let pointsCounter = chosenPlayer.points + 1;
             let streakCounter = chosenPlayer.streak + 1;
@@ -260,7 +259,7 @@ export default function GameScreen({ navigation, route }) {
                         }
                     />
                 </View>
-                <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <Text style={Styles.normalText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <Button title="Next question" onPress={() => getQuestion()} />
             </View>
         )
