@@ -243,6 +243,7 @@ export default function GameScreen({ navigation, route }) {
                         navigation.navigate('PartyModeResults', { players });
                     }}
                 />
+            </View>
             </SafeAreaView>
         );
 
