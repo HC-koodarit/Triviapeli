@@ -34,6 +34,15 @@ export default function GameScreen({ navigation, route }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
+    // variables for drinking rules
+
+    const [lowAlcohol, setLowAlcohol] = useState(0);
+    const [lowAlcFinished, setLowAlcFinished] = useState(0);
+    const [mediumAlcohol, setMediumAlcohol] = useState(0);
+    const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
+    const [highAlcohol, setHighAlcohol] = useState(0);
+    const [drinkMessage, setDrinkMessage] = useState('');
+    
     // variable for loadingscreen
     const [isLoading, setIsLoading] = useState(false);
 
@@ -66,15 +75,16 @@ export default function GameScreen({ navigation, route }) {
                 setIsLoading(false);
                 setIsPlaying(true);  // start timer
                 setMessage('');
+                setDrinkMessage('');
             })
             .catch(err => console.error(err));
 
     }, [selectedCategories, chosenPlayer])
-/*
-    useEffect(() => {
-        getQuestion();
-    }, []);
-*/
+    /*
+        useEffect(() => {
+            getQuestion();
+        }, []);
+    */
     // buttons for answers
     const AnswerButtons = () => {
         return (
@@ -131,9 +141,11 @@ export default function GameScreen({ navigation, route }) {
 
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
+            let wrongAnswerCounter = chosenPlayer.wrongAnswer + 1;
+
             const newState = players.map(obj => {
                 if (obj.id === chosenPlayer.id) {
-                    return { ...obj, streak: streakCounter };
+                    return { ...obj, streak: streakCounter, wrongAnswer: wrongAnswerCounter };
                 } else {
                     return obj;
                 }
@@ -144,6 +156,31 @@ export default function GameScreen({ navigation, route }) {
             setIsPlaying(false);
             setCorrectAnswers(0);
             setMessage("Wrong! The correct answer was " + correctAnswer);
+
+            // drinking logic
+            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer < 10) {
+                setDrinkMessage('Take a sip!');
+            }
+            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer === 9) {
+                setDrinkMessage('Finish your drink!');
+                // TODO väärien vastausten nollaus,alempi ei toimi
+                chosenPlayer.wrongAnswer = 0;
+            }
+            if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 2 ||
+                chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 4 ||
+                chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 7) {
+                setDrinkMessage('Take a sip!');
+            }
+            if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 9) {
+                setDrinkMessage('Finish your drink!');
+                // TODO väärien vastausten nollaus,tuokaan ei toimi
+                chosenPlayer.wrongAnswer - 9;
+            }
+            if (chosenPlayer.drink === 'Strong' && chosenPlayer.wrongAnswer === 9) {
+                setDrinkMessage('Take a shot!');
+                // TODO eli keksikää jotain näihin :DD
+                chosenPlayer.wrongAnswer - 9;
+            }
         }
     }
 
@@ -292,6 +329,7 @@ export default function GameScreen({ navigation, route }) {
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalText}>{message}</Text>
                 <Text style={Styles.playersTitle}>Players</Text>
+                <Text style={Styles.question}>{drinkMessage}</Text>
                 <View style={Styles.playerNames}>
                     <FlatList
                         style={Styles.playerFlatlist}
@@ -299,9 +337,10 @@ export default function GameScreen({ navigation, route }) {
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.flatlistPlayerNames}>{item.name}</Text>
-                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points}</Text>
-                                <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak}</Text>
+                                <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Points: {item.points} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Streak: {item.streak} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Wrong answers: {item.wrongAnswer} </Text>
                             </View>
                         }
                     />
