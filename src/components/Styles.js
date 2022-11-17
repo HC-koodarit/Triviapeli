@@ -42,7 +42,15 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlignVertical: 'center',
-    margin: 20,
+    margin: 10,
+    color: '#fff'
+  },
+  playerName: {
+    fontSize: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlignVertical: 'center',
+    margin: 5,
     color: '#fff'
   },
   buttons: {

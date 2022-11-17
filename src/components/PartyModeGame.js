@@ -98,7 +98,7 @@ export default function GameScreen({ navigation, route }) {
 
     // timer runs out
     const timeIsUp = () => {
-        let streakCounter = chosenPlayer.streak = 0;
+        let streakCounter = chosenPlayer.streak = 0;    // reset player's streak
         const newState = players.map(obj => {
             if (obj.id === chosenPlayer.id) {
                 return { ...obj, streak: streakCounter };
@@ -112,7 +112,6 @@ export default function GameScreen({ navigation, route }) {
 
     // check if answer is correct
     const checkAnswer = (answer) => {
-
         if (answer === correctAnswer) {
             let pointsCounter = chosenPlayer.points + 1;
             let streakCounter = chosenPlayer.streak + 1;
@@ -157,7 +156,7 @@ export default function GameScreen({ navigation, route }) {
                     isPlaying={isPlaying}
                     duration={15}
                     colors={'#004777'}
-                    size={90}
+                    size={60}
                     onComplete={() => {
                         setKey(prevKey => prevKey + 1);
                         setIsPlaying(false);
@@ -206,14 +205,14 @@ export default function GameScreen({ navigation, route }) {
     }
     
 
-    // if answer button is pressed, show player stats
+    // gameplay screen
     if (message === "") {
         return (
             <SafeAreaView style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.title}>Trivia</Text>
                 <Text style={Styles.category}>{category}</Text>
                 <Text style={Styles.question}>{question}</Text>
-                <Text style={Styles.question}>{chosenPlayer.name}</Text>
+                <Text style={Styles.playerName}>{chosenPlayer.name}</Text>
                 <Text style={Styles.pointsText}>
                     Points: {chosenPlayer.points}, Streak: {chosenPlayer.streak}
                 </Text>
@@ -249,6 +248,7 @@ export default function GameScreen({ navigation, route }) {
         );
 
     } else if (message === "welcome") {
+        // welcome screen before the first question
         return (
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.title}>Welcome!</Text>
@@ -267,6 +267,7 @@ export default function GameScreen({ navigation, route }) {
         )
 
     } else {
+        // if answer button is pressed, show player stats
         return (
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalText}>{message}</Text>
@@ -285,7 +286,7 @@ export default function GameScreen({ navigation, route }) {
                         }
                     />
                 </View>
-                <Text style={Styles.normalText}>Next player is: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <Text style={Styles.normalText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <Button title="Next question" onPress={() => getQuestion()} />
             </View>
         )
