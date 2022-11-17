@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, Image, FlatList } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Platform, Image, FlatList, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
