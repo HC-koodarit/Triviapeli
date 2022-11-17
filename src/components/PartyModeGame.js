@@ -288,10 +288,9 @@ export default function GameScreen({ navigation, route }) {
                 <View>
                     <PowerUpButton />    
                 </View>
-                
                 <Button style={Styles.startGamePContainer}
                     title="End game"
-                    type="outline"
+                    buttonStyle={Styles.backButton}
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
                     onPress={() => {
                         setIsPlaying(false);
