@@ -8,8 +8,8 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
-    const {powerUpTrue, setPowerUpTrue} = useState(false);
-
+    // Powerups
+    const {powerUpList, setPowerUpList} = ["Do a backflip", "Sprint around the house", "message someone"];
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -34,6 +34,15 @@ export default function GameScreen({ navigation, route }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
+    // variables for drinking rules
+
+    const [lowAlcohol, setLowAlcohol] = useState(0);
+    const [lowAlcFinished, setLowAlcFinished] = useState(0);
+    const [mediumAlcohol, setMediumAlcohol] = useState(0);
+    const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
+    const [highAlcohol, setHighAlcohol] = useState(0);
+    const [drinkMessage, setDrinkMessage] = useState('');
+    
     // variable for loadingscreen
     const [isLoading, setIsLoading] = useState(false);
 
@@ -66,15 +75,16 @@ export default function GameScreen({ navigation, route }) {
                 setIsLoading(false);
                 setIsPlaying(true);  // start timer
                 setMessage('');
+                setDrinkMessage('');
             })
             .catch(err => console.error(err));
 
     }, [selectedCategories, chosenPlayer])
-/*
-    useEffect(() => {
-        getQuestion();
-    }, []);
-*/
+    /*
+        useEffect(() => {
+            getQuestion();
+        }, []);
+    */
     // buttons for answers
     const AnswerButtons = () => {
         return (
@@ -131,9 +141,11 @@ export default function GameScreen({ navigation, route }) {
 
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
+            let wrongAnswerCounter = chosenPlayer.wrongAnswer + 1;
+
             const newState = players.map(obj => {
                 if (obj.id === chosenPlayer.id) {
-                    return { ...obj, streak: streakCounter };
+                    return { ...obj, streak: streakCounter, wrongAnswer: wrongAnswerCounter };
                 } else {
                     return obj;
                 }
@@ -144,6 +156,31 @@ export default function GameScreen({ navigation, route }) {
             setIsPlaying(false);
             setCorrectAnswers(0);
             setMessage("Wrong! The correct answer was " + correctAnswer);
+
+            // drinking logic
+            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer < 10) {
+                setDrinkMessage('Take a sip!');
+            }
+            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer === 9) {
+                setDrinkMessage('Finish your drink!');
+                // TODO väärien vastausten nollaus,alempi ei toimi
+                chosenPlayer.wrongAnswer = 0;
+            }
+            if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 2 ||
+                chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 4 ||
+                chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 7) {
+                setDrinkMessage('Take a sip!');
+            }
+            if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 9) {
+                setDrinkMessage('Finish your drink!');
+                // TODO väärien vastausten nollaus,tuokaan ei toimi
+                chosenPlayer.wrongAnswer - 9;
+            }
+            if (chosenPlayer.drink === 'Strong' && chosenPlayer.wrongAnswer === 9) {
+                setDrinkMessage('Take a shot!');
+                // TODO eli keksikää jotain näihin :DD
+                chosenPlayer.wrongAnswer - 9;
+            }
         }
     }
 
@@ -170,7 +207,6 @@ export default function GameScreen({ navigation, route }) {
         )
     }
 
-
     // Loading screen, when question fetching is not done.  
     if (isLoading) {
         return(
@@ -179,31 +215,50 @@ export default function GameScreen({ navigation, route }) {
             </View>
         );
     }
+
+    // Randomizing powerups
+    function Rand(){
+        let i = powerUpList.length - 1;
+        const j = Math.floor(Math.random() * i);
+        powerUpListString = JSON.stringify(powerUpList);
+        return powerUpListString[j];
+    }
     
+    // Powerup appears if streak is long enough
     const PowerUpButton = () => {
         let powerUpCounter = chosenPlayer.streak;
-        if (powerUpCounter === 3) {
+        if (powerUpCounter === 1 || powerUpCounter === 4) {
             return (
                 <Button 
-                title="Use your powerup"
+                title="Use your stage 1 powerup"
                 buttonStyle={Styles.powerUpButton}
                 titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 onPress={() => {
-                    alert("Choose a player to do ten pushups")
+                    alert({Rand})
+                }}
+                />
+            );
+        } else if (powerUpCounter === 5) {
+            return (
+                <Button 
+                title="Use your stage 2 powerup"
+                buttonStyle={Styles.powerUpButton}
+                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                onPress={() => {
+                    alert({Rand})
                 }}
             />
-        )
+            );
         } else {
-        return (
-            <Button 
-            title="No powerup yet"
-            buttonStyle={Styles.notYetPowerUpButton}
-            titleStyle={{ color: 'white', marginHorizontal: 0 }}
-            />
-        );
+            return (
+                <Button 
+                title="No powerup yet"
+                buttonStyle={Styles.notYetPowerUpButton}
+                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                />
+            );
+        }
     }
-    }
-    
 
     // gameplay screen
     if (message === "") {
@@ -233,10 +288,9 @@ export default function GameScreen({ navigation, route }) {
                 <View>
                     <PowerUpButton />    
                 </View>
-                
                 <Button style={Styles.startGamePContainer}
                     title="End game"
-                    type="outline"
+                    buttonStyle={Styles.backButton}
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
                     onPress={() => {
                         setIsPlaying(false);
@@ -274,6 +328,7 @@ export default function GameScreen({ navigation, route }) {
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.infoText}>{message}</Text>
                 <Text style={Styles.playersTitle}>Current score</Text>
+                <Text style={Styles.question}>{drinkMessage}</Text>
                 <View style={Styles.currentScoreList}>
                     <FlatList
                         style={Styles.playerFlatlist}
@@ -281,9 +336,10 @@ export default function GameScreen({ navigation, route }) {
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.statsList}>{item.name} – </Text>
-                                <Text style={Styles.statsList}> Points: {item.points} – </Text>
+                                <Text style={Styles.statsList}>{item.name} </Text>
+                                <Text style={Styles.statsList}> Points: {item.points} </Text>
                                 <Text style={Styles.statsList}> Streak: {item.streak} </Text>
+                                <Text style={Styles.flatlistPlayerNames}> Wrong answers: {item.wrongAnswer} </Text>
                             </View>
                         }
                     />

@@ -8,11 +8,9 @@ export default function Drinks() {
     const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
     const [highAlcohol, setHighAlcohol] = useState(0);
     const [message, setMessage] = useState('');
+    const [wrongAnswer, setWrongAnswer] = useState(0);
 
     // Count wrong answers and add drinks
-
-    //TODO pelaajien profiilien linkittäminen, eli jotenkin tyyliin
-    // if (PartyModeGame.correctAnswer === false && PartyModeGame.playerNumber === 1) {
 
     if (PartyModeGame.correctAnswer === false) {
         setLowAlcohol(lowAlcohol + 1);
@@ -25,7 +23,8 @@ export default function Drinks() {
     if (PartyModeGame.correctAnswer === false) {
         setHighAlcohol(highAlcohol + 1);
     }
-// Drinking rules
+
+    // Drinking rules
 
     if (lowAlcohol === 1) {
         //alert("Take one sip!");
