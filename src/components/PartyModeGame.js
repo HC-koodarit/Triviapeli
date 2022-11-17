@@ -32,8 +32,12 @@ export default function GameScreen({ navigation, route }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
+    // variable for loadingscreen
+    const [isLoading, setIsLoading] = useState(false);
+
     // fetch question data from api and set to variables
     const getQuestion = useCallback(() => {
+        setIsLoading(true);
         const random = Math.floor(Math.random() * selectedCategories.length);
         const categoryForQuestion = selectedCategories[random];
         fetch(`https://opentdb.com/api.php?amount=1&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
@@ -57,6 +61,7 @@ export default function GameScreen({ navigation, route }) {
                 answerArray.push(decodeURIComponent(data.results[0].correct_answer));
                 answerArray = answerArray.sort(() => Math.random() - 0.5);
                 setAllAnswers(answerArray);
+                setIsLoading(false);
                 setIsPlaying(true);  // start timer
                 setMessage('');
             })
@@ -162,6 +167,15 @@ export default function GameScreen({ navigation, route }) {
                 </CountdownCircleTimer>
             </View>
         )
+    }
+
+    // Loading screen, when question fetching is not done.  
+    if (isLoading) {
+        return(
+            <View style={[Styles.PartyModeGameContainer, Styles.loading]}>
+                <ActivityIndicator size="large" color="#03bafc" />
+            </View>
+        );
     }
 
     // if answer button is pressed, show player stats
