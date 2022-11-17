@@ -5,15 +5,14 @@ import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 
 export default function PartyModeResults({ route, navigation, params }) {
-
     const { players } = route.params;
-    //const [playerName, setPlayerName] = players.name;
 
+    // sort players by points from highest to lowest 
     const playersPoints = [...players].sort((a, b) => b.points - a.points);
 
     return (
         <SafeAreaView style={Styles.PartyModeResultsContainer}>
-            <Text style={Styles.normalText}>Results coming</Text>
+            <Text style={Styles.normalText}>Results</Text>
             <FlatList
                 style={Styles.playerFlatlist}
                 data={playersPoints}

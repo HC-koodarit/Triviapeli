@@ -356,4 +356,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingTop: 40,
   },
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 10
+  },
 });
