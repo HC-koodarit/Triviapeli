@@ -14,7 +14,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
     //Add player variables
     const [playerNameTemp, setPlayerNameTemp] = useState('');
-    const [playerNumber, setPlayerNumber] = useState(1);
+    const [playerNumber, setPlayerNumber] = useState(0);
     const [playerDetails, setPlayerDetails] = useState([]);
 
     // Category options

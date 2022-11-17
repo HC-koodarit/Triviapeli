@@ -156,16 +156,18 @@ export default StyleSheet.create({
     modal: {
       height: 200,
       margin: 50,
-      padding: 5,
+      padding: 0,
       backgroundColor: "white",
       shadowColor: "black",
       shadowOffset: {
         width: 0,
         height: 2,
       },
+      textAlign: "centered",
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
+      borderRadius: 10
     },
     /* The content of the modal takes all the vertical space not used by the header. */
     modalContent: {
@@ -315,6 +317,17 @@ export default StyleSheet.create({
 
     //Start game button styles (PartyModeOptions)
     startButton: {
+      backgroundColor: '#ff6303',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 30,
+      width: 140,
+      marginHorizontal: 25,
+      marginTop: 20,
+    },
+
+    //Button for powerup
+    powerUpButton: {
       backgroundColor: '#ff6303',
       borderColor: 'transparent',
       borderWidth: 0,

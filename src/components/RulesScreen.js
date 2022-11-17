@@ -16,8 +16,8 @@ export default function RulesScreen({ navigation }) {
             <Text style={Styles.headerRules}>How to play party mode</Text>
 
             <Text style={Styles.normalText}>1. Add players</Text>
-            <Text style={Styles.normalText}>2. Select categories</Text>
-            <Text style={Styles.normalText}>3. Choose your poison</Text>
+            <Text style={Styles.normalText}>2. Choose your poison</Text>
+            <Text style={Styles.normalText}>3. Select categories</Text>
             <Text style={Styles.normalText}>4. Start the game</Text>
             <Text style={Styles.normalText}>5. Answer the questions</Text>
             <Text style={Styles.normalText}>6. Fail and get wasted</Text>

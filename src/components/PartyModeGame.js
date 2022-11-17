@@ -201,24 +201,25 @@ export default function GameScreen({ navigation, route }) {
                         marginBottom: 0,
                     }
                 } />
-
-                <Button
+            <View style={{ flexDirection:"row" }}>
+                <Button 
                     title="Use your powerup"
-                    type="outline"
+                    buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
                         alert("Powerups coming soon!")
                     }}
                 />
-                <Button
+                <Button style={Styles.startGamePContainer}
                     title="End game"
-                    type="outline"
+                    buttonStyle={Styles.backButton}
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
                     onPress={() => {
                         setIsPlaying(false);
                         navigation.navigate('PartyModeResults', { players });
                     }}
                 />
+            </View>
             </SafeAreaView>
         );
 
