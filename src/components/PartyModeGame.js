@@ -8,6 +8,8 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
+    const {powerUpTrue, setPowerUpTrue} = useState(false);
+
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -169,6 +171,7 @@ export default function GameScreen({ navigation, route }) {
         )
     }
 
+
     // Loading screen, when question fetching is not done.  
     if (isLoading) {
         return(
@@ -177,6 +180,31 @@ export default function GameScreen({ navigation, route }) {
             </View>
         );
     }
+    
+    const PowerUpButton = () => {
+        let powerUpCounter = chosenPlayer.streak;
+        if (powerUpCounter === 3) {
+            return (
+                <Button 
+                title="Use your powerup"
+                buttonStyle={Styles.powerUpButton}
+                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                onPress={() => {
+                    alert("Choose a player to do ten pushups")
+                }}
+            />
+        )
+        } else {
+        return (
+            <Button 
+            title="No powerup yet"
+            buttonStyle={Styles.notYetPowerUpButton}
+            titleStyle={{ color: 'white', marginHorizontal: 0 }}
+            />
+        );
+    }
+    }
+    
 
     // if answer button is pressed, show player stats
     if (message === "") {
@@ -203,14 +231,10 @@ export default function GameScreen({ navigation, route }) {
                     }
                 } />
             <View style={{ flexDirection:"row" }}>
-                <Button 
-                    title="Use your powerup"
-                    buttonStyle={Styles.powerUpButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                    onPress={() => {
-                        alert("Powerups coming soon!")
-                    }}
-                />
+                <View>
+                    <PowerUpButton />    
+                </View>
+                
                 <Button style={Styles.startGamePContainer}
                     title="End game"
                     buttonStyle={Styles.backButton}
