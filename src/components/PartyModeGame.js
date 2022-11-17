@@ -8,6 +8,8 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
+    const {powerUpTrue, setPowerUpTrue} = useState(false);
+
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -154,7 +156,7 @@ export default function GameScreen({ navigation, route }) {
                     isPlaying={isPlaying}
                     duration={15}
                     colors={'#004777'}
-                    size={90}
+                    size={60}
                     onComplete={() => {
                         setKey(prevKey => prevKey + 1);
                         setIsPlaying(false);
@@ -168,6 +170,7 @@ export default function GameScreen({ navigation, route }) {
         )
     }
 
+
     // Loading screen, when question fetching is not done.  
     if (isLoading) {
         return(
@@ -176,15 +179,40 @@ export default function GameScreen({ navigation, route }) {
             </View>
         );
     }
+    
+    const PowerUpButton = () => {
+        let powerUpCounter = chosenPlayer.streak;
+        if (powerUpCounter === 3) {
+            return (
+                <Button 
+                title="Use your powerup"
+                buttonStyle={Styles.powerUpButton}
+                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                onPress={() => {
+                    alert("Choose a player to do ten pushups")
+                }}
+            />
+        )
+        } else {
+        return (
+            <Button 
+            title="No powerup yet"
+            buttonStyle={Styles.notYetPowerUpButton}
+            titleStyle={{ color: 'white', marginHorizontal: 0 }}
+            />
+        );
+    }
+    }
+    
 
-    // if answer button is pressed, show player stats
+    // gameplay screen
     if (message === "") {
         return (
             <SafeAreaView style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.title}>Trivia</Text>
                 <Text style={Styles.category}>{category}</Text>
                 <Text style={Styles.question}>{question}</Text>
-                <Text style={Styles.question}>{chosenPlayer.name}</Text>
+                <Text style={Styles.playerName}>{chosenPlayer.name}</Text>
                 <Text style={Styles.pointsText}>
                     Points: {chosenPlayer.points}, Streak: {chosenPlayer.streak}
                 </Text>
@@ -201,16 +229,12 @@ export default function GameScreen({ navigation, route }) {
                         marginBottom: 0,
                     }
                 } />
-
-                <Button
-                    title="Use your powerup"
-                    type="outline"
-                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                    onPress={() => {
-                        alert("Powerups coming soon!")
-                    }}
-                />
-                <Button
+            <View style={{ flexDirection:"row" }}>
+                <View>
+                    <PowerUpButton />    
+                </View>
+                
+                <Button style={Styles.startGamePContainer}
                     title="End game"
                     type="outline"
                     titleStyle={{ color: 'white', marginHorizontal: 30 }}
@@ -223,6 +247,7 @@ export default function GameScreen({ navigation, route }) {
         );
 
     } else if (message === "welcome") {
+        // welcome screen before the first question
         return (
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.title}>Welcome!</Text>
@@ -241,6 +266,7 @@ export default function GameScreen({ navigation, route }) {
         )
 
     } else {
+        // if answer button is pressed, show player stats
         return (
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalText}>{message}</Text>

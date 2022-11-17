@@ -96,7 +96,7 @@ export default function GameScreen({ navigation }) {
                 isPlaying={isPlaying}
                 duration={15}
                 colors={'#004777'}
-                size={90}
+                size={60}
                 onComplete={() => {
                     setKey(prevKey => prevKey + 1);
                     setIsPlaying(false);
@@ -151,7 +151,7 @@ export default function GameScreen({ navigation }) {
         );
     } else {
         return (
-            <View style={Styles.container}>
+            <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalText}>{message}</Text>
                 <Text style={Styles.normalText}>Points: {points}</Text>
                 <Button title="Next question" onPress={() => getQuestion()} />
