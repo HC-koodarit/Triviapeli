@@ -9,7 +9,7 @@ export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
     // Powerups
-    const {powerUpList, setPowerUpList} = ["Do a backflip", "Sprint around the house", "message someone"];
+    const [powerUpList, setPowerUpList] = ["Do a backflip", "Sprint around the house", "message someone"];
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -42,6 +42,7 @@ export default function GameScreen({ navigation, route }) {
     const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
     const [highAlcohol, setHighAlcohol] = useState(0);
     const [drinkMessage, setDrinkMessage] = useState('');
+    const [powerUpMessage, setPowerUpMessage] = useState('');
     
     // variable for loadingscreen
     const [isLoading, setIsLoading] = useState(false);
@@ -76,6 +77,7 @@ export default function GameScreen({ navigation, route }) {
                 setIsPlaying(true);  // start timer
                 setMessage('');
                 setDrinkMessage('');
+                setPowerUpMessage('');
             })
             .catch(err => console.error(err));
 
@@ -139,6 +141,10 @@ export default function GameScreen({ navigation, route }) {
             setIsPlaying(false);
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
+            if (streakCounter === 1) {
+                setPowerUpMessage('You got a level 1 powerup!')
+            }
+
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
             let wrongAnswerCounter = chosenPlayer.wrongAnswer + 1;
@@ -198,7 +204,7 @@ export default function GameScreen({ navigation, route }) {
                 setPlayers(wrongAnswerReset);
             }
             if (chosenPlayer.drink === 'Strong' && chosenPlayer.wrongAnswer === 9) {
-                setDrinkMessage('Take a shot!');
+                setDrinkMessage(`${chosenPlayer.name}: Take a shot!`);
 
                 //Resets wronganswer counter of active player
                 const wrongAnswerReset = players.map(obj => {
@@ -254,6 +260,7 @@ export default function GameScreen({ navigation, route }) {
         powerUpListString = JSON.stringify(powerUpList);
         return powerUpListString[j];
     }
+
     
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
@@ -261,35 +268,36 @@ export default function GameScreen({ navigation, route }) {
         if (powerUpCounter === 1 || powerUpCounter === 4) {
             return (
                 <Button 
-                title="Use your stage 1 powerup"
-                buttonStyle={Styles.powerUpButton}
-                titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                onPress={() => {
-                    alert({Rand})
-                }}
+                    title="Use your stage 1 powerup"
+                    buttonStyle={Styles.powerUpButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    onPress={() => {
+                        alert({Rand})
+                    }}
                 />
             );
-        } else if (powerUpCounter === 5) {
+        } else if (powerUpCounter === 5 || powerUpCounter > 5) {
             return (
                 <Button 
-                title="Use your stage 2 powerup"
-                buttonStyle={Styles.powerUpButton}
-                titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                onPress={() => {
-                    alert({Rand})
+                    title="Use your stage 2 powerup"
+                    buttonStyle={Styles.powerUpButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    onPress={() => {
+                        alert({Rand})
                 }}
             />
             );
         } else {
             return (
                 <Button 
-                title="No powerup yet"
-                buttonStyle={Styles.notYetPowerUpButton}
-                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    title="No powerup yet"
+                    buttonStyle={Styles.notYetPowerUpButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 />
             );
         }
     }
+
 
     // gameplay screen
     if (message === "") {
@@ -361,9 +369,11 @@ export default function GameScreen({ navigation, route }) {
                 <View style={{marginTop: 15}} >
                     <Text style={Styles.normalTextCentered}>{message}</Text>
                 </View>
-                <Text style={Styles.playersTitle}>Current score</Text>
-                <Text style={Styles.question}>{drinkMessage}</Text>
+                
+                <Text style={Styles.question}>{chosenPlayer.name}: {drinkMessage}</Text>
+                <Text style={Styles.question}>{powerUpMessage}</Text>
                 <View style={Styles.currentScoreList}>
+                <Text style={Styles.playersTitle}>Current scores:</Text>
                     <FlatList
                         style={Styles.playerFlatlist}
                         data={players}
