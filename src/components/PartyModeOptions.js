@@ -196,7 +196,7 @@ export default function PartyModeOptions({ route, navigation }) {
 
                         name='person-add-outline'
                         type='ionicon'
-                        color='#517fa4'
+                        color='#FFFFFF'
                         />
                         <Text style={Styles.textStyle}>Add player</Text>
                         </Pressable>
