@@ -42,6 +42,7 @@ export default function GameScreen({ navigation, route }) {
     const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
     const [highAlcohol, setHighAlcohol] = useState(0);
     const [drinkMessage, setDrinkMessage] = useState('');
+    const [powerUpMessage, setPowerUpMessage] = useState('');
     
     // variable for loadingscreen
     const [isLoading, setIsLoading] = useState(false);
@@ -76,6 +77,7 @@ export default function GameScreen({ navigation, route }) {
                 setIsPlaying(true);  // start timer
                 setMessage('');
                 setDrinkMessage('');
+                setPowerUpMessage('');
             })
             .catch(err => console.error(err));
 
@@ -138,6 +140,10 @@ export default function GameScreen({ navigation, route }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
+
+            if (streakCounter === 1) {
+                setPowerUpMessage('You got a level 1 powerup!')
+            }
 
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
@@ -269,7 +275,7 @@ export default function GameScreen({ navigation, route }) {
                 }}
                 />
             );
-        } else if (powerUpCounter === 5) {
+        } else if (powerUpCounter === 5 || powerUpCounter > 5) {
             return (
                 <Button 
                 title="Use your stage 2 powerup"
@@ -290,6 +296,7 @@ export default function GameScreen({ navigation, route }) {
             );
         }
     }
+
 
     // gameplay screen
     if (message === "") {
@@ -359,8 +366,9 @@ export default function GameScreen({ navigation, route }) {
             <SafeAreaView style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalText}>{question}</Text>
                 <Text style={Styles.normalText}>{message}</Text>
-                <Text style={Styles.playersTitle}>Current score</Text>
+                <Text style={Styles.playersTitle}>Current scores</Text>
                 <Text style={Styles.question}>{drinkMessage}</Text>
+                <Text style={Styles.question}>{powerUpMessage}</Text>
                 <View style={Styles.currentScoreList}>
                     <FlatList
                         style={Styles.playerFlatlist}
