@@ -141,6 +141,7 @@ export default function GameScreen({ navigation, route }) {
             setIsPlaying(false);
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
+            // if player gets a powerup, message shows in the point screen
             if (streakCounter === 3 || streakCounter === 4 ) {
                 setPowerUpMessage('You got a level 1 powerup!')
             } else if (streakCounter >= 5) {
