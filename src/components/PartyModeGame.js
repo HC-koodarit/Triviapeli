@@ -1,12 +1,21 @@
 import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, Image, FlatList, ActivityIndicator } from 'react-native';
+import { SafeAreaView, Text, View, Image, FlatList, ActivityIndicator, Modal } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
+
+    // modal for powerups
+    const [modalText, setModalText] = useState('');
+    const [item, setItem] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const showModal = () => {
+        setItem(item);
+        setModalVisible(true);
+    };
 
     // Powerups
     const [powerUpList, setPowerUpList] = useState(["Do a backflip", "Sprint around the house", "message someone"]);
@@ -43,7 +52,7 @@ export default function GameScreen({ navigation, route }) {
     const [highAlcohol, setHighAlcohol] = useState(0);
     const [drinkMessage, setDrinkMessage] = useState('');
     const [powerUpMessage, setPowerUpMessage] = useState('');
-    
+
     // variable for loadingscreen
     const [isLoading, setIsLoading] = useState(false);
 
@@ -249,7 +258,7 @@ export default function GameScreen({ navigation, route }) {
 
     // Loading screen, when question fetching is not done.  
     if (isLoading) {
-        return(
+        return (
             <View style={[Styles.PartyModeGameContainer, Styles.loading]}>
                 <ActivityIndicator size="large" color="#03bafc" />
             </View>
@@ -257,44 +266,50 @@ export default function GameScreen({ navigation, route }) {
     }
 
     // Randomizing powerups
-    const Rand = () => {
+    const Rand = ()  => {
         let i = powerUpList.length;
         const j = Math.floor(Math.random() * i);
         let powerUpString = powerUpList[j];
         alert(powerUpString);
     }
-    
+
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
         let powerUpCounter = chosenPlayer.streak;
         if (powerUpCounter === 1 || powerUpCounter === 4) {
+            setModalText('You have a powerup!');
             return (
-                <Button 
+                <Button
                     title="Use your stage 1 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                    onPress={() => {
-                        Rand();
-                    }}
+                    onPress={() => showModal(item)}
                 />
             );
         } else if (powerUpCounter === 5 || powerUpCounter > 5) {
             return (
-                <Button 
+                <Button
                     title="Use your stage 2 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        Rand();
-                }}
-            />
+                        setModalText('Use your stage 2 powerup');
+                        showModal(item)
+                        setIsPlaying(false);
+                    }}
+                />
             );
         } else {
             return (
-                <Button 
+                <Button
                     title="No powerup yet"
                     buttonStyle={Styles.notYetPowerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    onPress={() => {
+                        setModalText('No powerups available');
+                        showModal(item)
+                        setIsPlaying(false);
+                    }}
                 />
             );
         }
@@ -325,9 +340,20 @@ export default function GameScreen({ navigation, route }) {
                         marginBottom: 0,
                     }
                 } />
-            <View style={{ flexDirection:"row" }}>
-                <View>
-                    <PowerUpButton />    
+                <View style={{ flexDirection: "row" }}>
+                    <View>
+                        <PowerUpButton />
+                    </View>
+
+                    <Button style={Styles.startGamePContainer}
+                        title="End game"
+                        type="outline"
+                        titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                        onPress={() => {
+                            setIsPlaying(false);
+                            navigation.navigate('PartyModeResults', { players });
+                        }}
+                    />
                 </View>
                 <Button style={Styles.startGamePContainer}
                     title="End game"
@@ -338,7 +364,29 @@ export default function GameScreen({ navigation, route }) {
                         navigation.navigate('PartyModeResults', { players });
                     }}
                 />
-            </View>
+                <Modal
+                    style={Styles.modalPowerup}
+                    animationType="slide"
+                    visible={modalVisible}
+                    transparent={true}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={Styles.modalPowerup}>
+                        <Text style={Styles.modalText}>{modalText}</Text>
+                        <Button
+                            buttonStyle={{ backgroundColor: 'black', borderColor: 'white', borderWidth: 1, borderRadius: 10 }}
+                            title="Close"
+                            onPress={() => {
+                                setIsPlaying(true);
+                                setModalText('');
+                                setModalVisible(!modalVisible)
+                            }}
+                        />
+                    </View>
+                </Modal>
+
             </SafeAreaView>
         );
 
