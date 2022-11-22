@@ -344,17 +344,6 @@ export default function GameScreen({ navigation, route }) {
                     <View>
                         <PowerUpButton />
                     </View>
-
-                    <Button style={Styles.startGamePContainer}
-                        title="End game"
-                        type="outline"
-                        titleStyle={{ color: 'white', marginHorizontal: 30 }}
-                        onPress={() => {
-                            setIsPlaying(false);
-                            navigation.navigate('PartyModeResults', { players });
-                        }}
-                    />
-                </View>
                 <Button style={Styles.startGamePContainer}
                     title="End game"
                     buttonStyle={Styles.backButton}
@@ -364,6 +353,7 @@ export default function GameScreen({ navigation, route }) {
                         navigation.navigate('PartyModeResults', { players });
                     }}
                 />
+                </View>
                 <Modal
                     style={Styles.modalPowerup}
                     animationType="slide"
