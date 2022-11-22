@@ -9,7 +9,7 @@ export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
     // Powerups
-    const {powerUpList, setPowerUpList} = ["Do a backflip", "Sprint around the house", "message someone"];
+    const [powerUpList, setPowerUpList] = ["Do a backflip", "Sprint around the house", "message someone"];
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -223,6 +223,7 @@ export default function GameScreen({ navigation, route }) {
         powerUpListString = JSON.stringify(powerUpList);
         return powerUpListString[j];
     }
+
     
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
@@ -230,31 +231,31 @@ export default function GameScreen({ navigation, route }) {
         if (powerUpCounter === 1 || powerUpCounter === 4) {
             return (
                 <Button 
-                title="Use your stage 1 powerup"
-                buttonStyle={Styles.powerUpButton}
-                titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                onPress={() => {
-                    alert({Rand})
-                }}
+                    title="Use your stage 1 powerup"
+                    buttonStyle={Styles.powerUpButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    onPress={() => {
+                        alert({Rand})
+                    }}
                 />
             );
         } else if (powerUpCounter === 5) {
             return (
                 <Button 
-                title="Use your stage 2 powerup"
-                buttonStyle={Styles.powerUpButton}
-                titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                onPress={() => {
-                    alert({Rand})
+                    title="Use your stage 2 powerup"
+                    buttonStyle={Styles.powerUpButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    onPress={() => {
+                        alert({Rand})
                 }}
             />
             );
         } else {
             return (
                 <Button 
-                title="No powerup yet"
-                buttonStyle={Styles.notYetPowerUpButton}
-                titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    title="No powerup yet"
+                    buttonStyle={Styles.notYetPowerUpButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 />
             );
         }
