@@ -72,19 +72,19 @@ export default function GameScreen({ navigation }) {
         setMessage("Time is up! The correct answer was " + correctAnswer);
     }
 
-
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
             setPoints(setPoints => setPoints + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            setMessage("Correct! Good job! :)");
+            setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
         } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            setMessage("Wrong! The correct answer was " + correctAnswer);
+            let answerText = answer.toString()
+            setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
         }
     }
 
@@ -152,6 +152,7 @@ export default function GameScreen({ navigation }) {
     } else {
         return (
             <View style={Styles.PartyModeGameContainer}>
+                <Text style={Styles.normalText}>{question}</Text>
                 <Text style={Styles.normalText}>{message}</Text>
                 <Text style={Styles.normalText}>Points: {points}</Text>
                 <Button title="Next question" onPress={() => getQuestion()} />

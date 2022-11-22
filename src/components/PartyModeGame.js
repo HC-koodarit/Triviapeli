@@ -137,7 +137,7 @@ export default function GameScreen({ navigation, route }) {
             setPlayers(newState);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            setMessage("Correct! Good job! :)");
+            setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
@@ -155,7 +155,8 @@ export default function GameScreen({ navigation, route }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setCorrectAnswers(0);
-            setMessage("Wrong! The correct answer was " + correctAnswer);
+            let answerText = answer.toString()
+            setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
 
             // drinking logic
             if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer < 10) {
@@ -336,7 +337,7 @@ export default function GameScreen({ navigation, route }) {
         return (
             <View style={Styles.WelcomeContainer}>
                 <Text style={Styles.welcomeTitle}>Welcome!</Text>
-                <Text style={Styles.infoText}>The game starts from player</Text>
+                <Text style={Styles.infoText}>The first player is:</Text>
                 <Text style={Styles.infoText}>{players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <Button
                     style={Styles.startButton}
@@ -355,8 +356,9 @@ export default function GameScreen({ navigation, route }) {
     } else {
         // if answer button is pressed, show player stats
         return (
-            <View style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.infoText}>{message}</Text>
+            <SafeAreaView style={Styles.PartyModeGameContainer}>
+                <Text style={Styles.normalText}>{question}</Text>
+                <Text style={Styles.normalText}>{message}</Text>
                 <Text style={Styles.playersTitle}>Current score</Text>
                 <Text style={Styles.question}>{drinkMessage}</Text>
                 <View style={Styles.currentScoreList}>
@@ -382,7 +384,7 @@ export default function GameScreen({ navigation, route }) {
                     titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
                     onPress={() => getQuestion()} 
                 />
-            </View>
+            </SafeAreaView>
         )
     }
 }
