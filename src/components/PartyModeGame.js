@@ -25,7 +25,7 @@ export default function GameScreen({ navigation, route }) {
     const [message, setMessage] = useState('welcome');
 
     // variable for the player's score
-    const [points, setPoints] = useState(0);
+    // const [points, setPoints] = useState(0);
 
     // count correct answers for powerups HUOM! Ei laske streakkiä
     const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -36,11 +36,12 @@ export default function GameScreen({ navigation, route }) {
 
     // variables for drinking rules
 
-    const [lowAlcohol, setLowAlcohol] = useState(0);
+    /* const [lowAlcohol, setLowAlcohol] = useState(0);
     const [lowAlcFinished, setLowAlcFinished] = useState(0);
     const [mediumAlcohol, setMediumAlcohol] = useState(0);
     const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
     const [highAlcohol, setHighAlcohol] = useState(0);
+    */
     const [drinkMessage, setDrinkMessage] = useState('');
     const [powerUpMessage, setPowerUpMessage] = useState('');
     
@@ -143,9 +144,9 @@ export default function GameScreen({ navigation, route }) {
 
             // if player gets a powerup, message shows in the point screen
             if (streakCounter === 3 || streakCounter === 4 ) {
-                setPowerUpMessage(chosenPlayer.name + ' You got a level 1 powerup!')
+                setPowerUpMessage(chosenPlayer.name + ' You got a level 1 powerup!');
             } else if (streakCounter >= 5) {
-                setPowerUpMessage(chosenPlayer.name + ' You got a level 2 powerup!')
+                setPowerUpMessage(chosenPlayer.name + ' You got a level 2 powerup!');
             };
 
         } else if (answer !== correctAnswer) {
