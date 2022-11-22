@@ -163,8 +163,18 @@ export default function GameScreen({ navigation, route }) {
             }
             if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer === 9) {
                 setDrinkMessage('Finish your drink!');
-                // TODO väärien vastausten nollaus,alempi ei toimi
-                chosenPlayer.wrongAnswer = 0;
+
+                //Resets wronganswer counter of active player
+                const wrongAnswerReset = players.map(obj => {
+                    if (obj.id === chosenPlayer.id) {
+                        console.log("obj:")
+                        console.log(obj);
+                        return { ...obj, wrongAnswer: 0 };
+                    } else {
+                        return obj;
+                    }
+                });
+                setPlayers(wrongAnswerReset);
             }
             if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 2 ||
                 chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 4 ||
@@ -173,13 +183,33 @@ export default function GameScreen({ navigation, route }) {
             }
             if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 9) {
                 setDrinkMessage('Finish your drink!');
-                // TODO väärien vastausten nollaus,tuokaan ei toimi
-                chosenPlayer.wrongAnswer - 9;
+
+                //Resets wronganswer counter of active player
+                const wrongAnswerReset = players.map(obj => {
+                    if (obj.id === chosenPlayer.id) {
+                        console.log("obj:")
+                        console.log(obj);
+                        return { ...obj, wrongAnswer: 0 };
+                    } else {
+                        return obj;
+                    }
+                });
+                setPlayers(wrongAnswerReset);
             }
             if (chosenPlayer.drink === 'Strong' && chosenPlayer.wrongAnswer === 9) {
                 setDrinkMessage('Take a shot!');
-                // TODO eli keksikää jotain näihin :DD
-                chosenPlayer.wrongAnswer - 9;
+
+                //Resets wronganswer counter of active player
+                const wrongAnswerReset = players.map(obj => {
+                    if (obj.id === chosenPlayer.id) {
+                        console.log("obj:")
+                        console.log(obj);
+                        return { ...obj, wrongAnswer: 0 };
+                    } else {
+                        return obj;
+                    }
+                });
+                setPlayers(wrongAnswerReset);
             }
         }
     }
