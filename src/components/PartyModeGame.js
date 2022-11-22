@@ -9,7 +9,7 @@ export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
     // Powerups
-    var powerUpList = ["Do a backflip", "Sprint around the house", "message someone"];
+    const [powerUpList, setPowerUpList] = useState(["Do a backflip", "Sprint around the house", "message someone"]);
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -42,6 +42,7 @@ export default function GameScreen({ navigation, route }) {
     const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
     const [highAlcohol, setHighAlcohol] = useState(0);
     const [drinkMessage, setDrinkMessage] = useState('');
+    const [powerUpMessage, setPowerUpMessage] = useState('');
     
     // variable for loadingscreen
     const [isLoading, setIsLoading] = useState(false);
@@ -76,6 +77,7 @@ export default function GameScreen({ navigation, route }) {
                 setIsPlaying(true);  // start timer
                 setMessage('');
                 setDrinkMessage('');
+                setPowerUpMessage('');
             })
             .catch(err => console.error(err));
 
@@ -139,6 +141,13 @@ export default function GameScreen({ navigation, route }) {
             setIsPlaying(false);
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
+            // if player gets a powerup, message shows in the point screen
+            if (streakCounter === 3 || streakCounter === 4 ) {
+                setPowerUpMessage(chosenPlayer.name + ' You got a level 1 powerup!')
+            } else if (streakCounter >= 5) {
+                setPowerUpMessage(chosenPlayer.name + ' You got a level 2 powerup!')
+            };
+
         } else if (answer !== correctAnswer) {
             let streakCounter = chosenPlayer.streak = 0;
             let wrongAnswerCounter = chosenPlayer.wrongAnswer + 1;
@@ -198,7 +207,7 @@ export default function GameScreen({ navigation, route }) {
                 setPlayers(wrongAnswerReset);
             }
             if (chosenPlayer.drink === 'Strong' && chosenPlayer.wrongAnswer === 9) {
-                setDrinkMessage('Take a shot!');
+                setDrinkMessage(`${chosenPlayer.name}: Take a shot!`);
 
                 //Resets wronganswer counter of active player
                 const wrongAnswerReset = players.map(obj => {
@@ -248,13 +257,12 @@ export default function GameScreen({ navigation, route }) {
     }
 
     // Randomizing powerups
-    function Rand(){
-        let i = powerUpList.length - 1;
+    const Rand = () => {
+        let i = powerUpList.length;
         const j = Math.floor(Math.random() * i);
-        powerUpListString = JSON.stringify(powerUpList);
-        return powerUpListString[j];
+        let powerUpString = powerUpList[j];
+        alert(powerUpString);
     }
-
     
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
@@ -266,18 +274,18 @@ export default function GameScreen({ navigation, route }) {
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        alert({Rand})
+                        Rand();
                     }}
                 />
             );
-        } else if (powerUpCounter === 5) {
+        } else if (powerUpCounter === 5 || powerUpCounter > 5) {
             return (
                 <Button 
                     title="Use your stage 2 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        alert({Rand})
+                        Rand();
                 }}
             />
             );
@@ -291,6 +299,7 @@ export default function GameScreen({ navigation, route }) {
             );
         }
     }
+
 
     // gameplay screen
     if (message === "") {
@@ -358,22 +367,28 @@ export default function GameScreen({ navigation, route }) {
         // if answer button is pressed, show player stats
         return (
             <SafeAreaView style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.normalText}>{question}</Text>
-                <Text style={Styles.normalText}>{message}</Text>
-                <Text style={Styles.playersTitle}>Current score</Text>
-                <Text style={Styles.question}>{drinkMessage}</Text>
+                <Text style={Styles.normalTextCentered}>{question}</Text>
+                <View style={{marginTop: 15}} >
+                    <Text style={Styles.normalTextCentered}>{message}</Text>
+                </View>
+                
+                <Text style={Styles.question}>{chosenPlayer.name}: {drinkMessage}</Text>
+                <Text style={Styles.question}>{powerUpMessage}</Text>
                 <View style={Styles.currentScoreList}>
+                <Text style={Styles.playersTitle}>Current scores:</Text>
                     <FlatList
                         style={Styles.playerFlatlist}
                         data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
+                        <View style={Styles.statListContainer}>
+                            <Text style={Styles.statsList}>{item.name}</Text>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.statsList}>{item.name} </Text>
-                                <Text style={Styles.statsList}> Points: {item.points} </Text>
-                                <Text style={Styles.statsList}> Streak: {item.streak} </Text>
-                                <Text style={Styles.flatlistPlayerNames}> Wrong answers: {item.wrongAnswer} </Text>
+                                <Text style={Styles.statsList}>Points: {item.points} Streak: {item.streak}</Text>
+                                {/*<Text style={Styles.statsList}> Streak: {item.streak} </Text>*/}
+                                <Text style={Styles.statsListWrongAnswers}> Wrong answers: {item.wrongAnswer} </Text>
                             </View>
+                        </View>
                         }
                     />
                 </View>

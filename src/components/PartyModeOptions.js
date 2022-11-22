@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, FlatList, ScrollView, Modal, Pressable, Image, TouchableOpacity } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 import { DrinkImages } from '../images/DrinkImages';
@@ -192,6 +192,12 @@ export default function PartyModeOptions({ route, navigation }) {
                             style={[Styles.buttonpopup, Styles.buttonOpen]}
                             onPress={() => setModalVisible(true)}
                         >
+                        <Icon
+
+                        name='person-add-outline'
+                        type='ionicon'
+                        color='#517fa4'
+                        />
                         <Text style={Styles.textStyle}>Add player</Text>
                         </Pressable>
                     </View>
