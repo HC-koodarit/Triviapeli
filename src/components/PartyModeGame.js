@@ -9,7 +9,7 @@ export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
     // Powerups
-    const [powerUpList, setPowerUpList] = ["Do a backflip", "Sprint around the house", "message someone"];
+    var powerUpList = ["Do a backflip", "Sprint around the house", "message someone"];
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
