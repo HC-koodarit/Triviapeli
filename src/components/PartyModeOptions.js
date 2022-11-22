@@ -193,7 +193,6 @@ export default function PartyModeOptions({ route, navigation }) {
                             onPress={() => setModalVisible(true)}
                         >
                         <Icon
-
                         name='person-add-outline'
                         type='ionicon'
                         color='#517fa4'
