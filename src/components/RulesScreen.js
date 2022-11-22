@@ -23,7 +23,8 @@ export default function RulesScreen({ navigation }) {
             <Text style={Styles.normalText}>6. Fail and get wasted</Text>
             <Text> </Text>
             <Text style={Styles.headerRules}>Powerups</Text>
-            <Text style={Styles.normalText}>To be Continued</Text>
+            <Text style={Styles.normalText}>Powerups are given to players who have a streak higher than x</Text>
+            <Text style={Styles.normalText}>Powerups are random and give the player an advantage when used</Text>
             <Button
                 title='Back'
                 titleStyle={{ fontWeight: '700' }}

@@ -357,8 +357,10 @@ export default function GameScreen({ navigation, route }) {
         // if answer button is pressed, show player stats
         return (
             <SafeAreaView style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.normalText}>{question}</Text>
-                <Text style={Styles.normalText}>{message}</Text>
+                <Text style={Styles.normalTextCentered}>{question}</Text>
+                <View style={{marginTop: 15}} >
+                    <Text style={Styles.normalTextCentered}>{message}</Text>
+                </View>
                 <Text style={Styles.playersTitle}>Current score</Text>
                 <Text style={Styles.question}>{drinkMessage}</Text>
                 <View style={Styles.currentScoreList}>
@@ -367,12 +369,14 @@ export default function GameScreen({ navigation, route }) {
                         data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
+                        <View style={Styles.statListContainer}>
+                            <Text style={Styles.statsList}>{item.name}</Text>
                             <View style={Styles.playerContainer}>
-                                <Text style={Styles.statsList}>{item.name} </Text>
-                                <Text style={Styles.statsList}> Points: {item.points} </Text>
-                                <Text style={Styles.statsList}> Streak: {item.streak} </Text>
-                                <Text style={Styles.flatlistPlayerNames}> Wrong answers: {item.wrongAnswer} </Text>
+                                <Text style={Styles.statsList}>Points: {item.points} Streak: {item.streak}</Text>
+                                {/*<Text style={Styles.statsList}> Streak: {item.streak} </Text>*/}
+                                <Text style={Styles.statsListWrongAnswers}> Wrong answers: {item.wrongAnswer} </Text>
                             </View>
+                        </View>
                         }
                     />
                 </View>

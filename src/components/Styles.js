@@ -78,7 +78,12 @@ export default StyleSheet.create({
   },
   normalText: {
     fontSize: 18,
-    color: '#fff'
+    color: '#fff',
+  },
+  normalTextCentered: {
+    fontSize: 18,
+    color: '#fff',
+    textAlign: 'center',
   },
   infoText: {
     fontSize: 20,
@@ -149,6 +154,7 @@ export default StyleSheet.create({
     playerContainer: {
       marginTop: 1,
       marginBottom: 1,
+      alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'row',
     },
@@ -427,8 +433,19 @@ export default StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
+  statListContainer: {
+    marginTop: 1,
+    marginBottom: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
   statsList: {
-    fontSize: 20,
+    fontSize: 18,
+    color: "#fff",
+  },
+  statsListWrongAnswers: {
+    fontSize: 13,
     color: "#fff",
   },
 
