@@ -4,6 +4,8 @@ import { Button, Icon } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 import { DrinkImages } from '../images/DrinkImages';
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 export default function PartyModeOptions({ route, navigation }) {
 
@@ -129,7 +131,13 @@ export default function PartyModeOptions({ route, navigation }) {
                             <Text style={Styles.flatlistPlayerNames}>{item.name} </Text>
                             <Text style={Styles.flatlistPlayerNames}> - {item.drink} </Text>
                             <Image source={item.image} style={Styles.playerDrinkImage} />
-                            <Text style={{ color: '#3c87c2' }} onPress={() => deletePlayer(item.id)}>  delete</Text>
+                            <Text style={Styles.flatlistPlayerNames}>    </Text>
+                            <MaterialIcons 
+                                name="cancel" 
+                                size={20} 
+                                color="#990808" 
+                                onPress={() => deletePlayer(item.id)}
+                            />
                         </View>
                     }
                 />
@@ -192,13 +200,15 @@ export default function PartyModeOptions({ route, navigation }) {
                             style={[Styles.buttonpopup, Styles.buttonOpen]}
                             onPress={() => setModalVisible(true)}
                         >
-                        <Icon
-
-                        name='person-add-outline'
-                        type='ionicon'
-                        color='#517fa4'
-                        />
-                        <Text style={Styles.textStyle}>Add player</Text>
+                        <Text 
+                            style={Styles.textStyle}>Add player {" "}  
+                            <Icon
+                                name='person-add-outline'
+                                type='ionicon'
+                                color='white'
+                                size={15}
+                            />
+                        </Text>
                         </Pressable>
                     </View>
             </View>
