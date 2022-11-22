@@ -9,7 +9,7 @@ export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
     // Powerups
-    const [powerUpList, setPowerUpList] = ["Do a backflip", "Sprint around the house", "message someone"];
+    const [powerUpList, setPowerUpList] = useState(["Do a backflip", "Sprint around the house", "message someone"]);
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -258,13 +258,12 @@ export default function GameScreen({ navigation, route }) {
     }
 
     // Randomizing powerups
-    function Rand(){
-        let i = powerUpList.length - 1;
+    const Rand = () => {
+        let i = powerUpList.length;
         const j = Math.floor(Math.random() * i);
-        powerUpListString = JSON.stringify(powerUpList);
-        return powerUpListString[j];
+        let powerUpString = powerUpList[j];
+        alert(powerUpString);
     }
-
     
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
@@ -276,7 +275,7 @@ export default function GameScreen({ navigation, route }) {
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        alert({Rand})
+                        Rand();
                     }}
                 />
             );
@@ -287,7 +286,7 @@ export default function GameScreen({ navigation, route }) {
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        alert({Rand})
+                        Rand();
                 }}
             />
             );
