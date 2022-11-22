@@ -169,10 +169,10 @@ export default function GameScreen({ navigation, route }) {
 
             // drinking logic
             if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer < 10) {
-                setDrinkMessage('Take a sip!');
+                setDrinkMessage(`${chosenPlayer.name}: Take a sip!`);
             }
             if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer === 9) {
-                setDrinkMessage('Finish your drink!');
+                setDrinkMessage(`${chosenPlayer.name}: Finish your drink!`);
 
                 //Resets wronganswer counter of active player
                 const wrongAnswerReset = players.map(obj => {
@@ -189,10 +189,10 @@ export default function GameScreen({ navigation, route }) {
             if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 2 ||
                 chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 4 ||
                 chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 7) {
-                setDrinkMessage('Take a sip!');
+                setDrinkMessage(`${chosenPlayer.name}: Take a sip!`);
             }
             if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 9) {
-                setDrinkMessage('Finish your drink!');
+                setDrinkMessage(`${chosenPlayer.name}: Finish your drink!`);
 
                 //Resets wronganswer counter of active player
                 const wrongAnswerReset = players.map(obj => {
@@ -372,7 +372,7 @@ export default function GameScreen({ navigation, route }) {
                     <Text style={Styles.normalTextCentered}>{message}</Text>
                 </View>
                 
-                <Text style={Styles.question}>{chosenPlayer.name}: {drinkMessage}</Text>
+                <Text style={Styles.question}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
                 <View style={Styles.currentScoreList}>
                 <Text style={Styles.playersTitle}>Current scores:</Text>
