@@ -167,7 +167,7 @@ export default function PartyModeGame({ navigation, route }) {
             setIsPlaying(false);
             let answerText = answer.toString()
             setAnswerMessage("Wrong!");
-            setMessage("You answered: " + answerText + "\n The correct answer was; " + correctAnswer);
+            setMessage("You answered: " + answerText + "\n The correct answer was: " + correctAnswer);
             getDrinks();
         }
     }
@@ -417,7 +417,7 @@ export default function PartyModeGame({ navigation, route }) {
         // if answer button is pressed, show player stats
         return (
             <SafeAreaView style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.answerMessageText}>{answerMessage}</Text>
+                <Text style={Styles.answerMessageText(answerMessage)}>{answerMessage}</Text>
                 <View style={Styles.box}>
                     <Text style={Styles.questionText}>{question}</Text>
                     <Text style={Styles.normalTextCentered}>{message}</Text>

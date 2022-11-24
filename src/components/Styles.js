@@ -132,6 +132,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
 
+<<<<<<< HEAD
   //Answer messages color changes idepending on the correct answer
   answerMessageText(answerMessage) {
     if(answerMessage==="Correct!") {
@@ -140,12 +141,26 @@ export default StyleSheet.create({
       fontSize: 50,
       fontWeight: 'bold',
       color: '#7CFC00',
+=======
+  //Answer messages color changes depending on the correct answer
+  answerMessageText(answerMessage) {
+    if(answerMessage==="Correct!") {
+     return {
+      marginTop: 15,
+      fontSize: 50,
+      fontWeight: 'bold',
+      color: '#42b32e',
+>>>>>>> 961b71daf9258975c8f77499c617eeac3864a36e
       textAlign: 'center',
       marginBottom: 7,
      }
     } else {
       return {
+<<<<<<< HEAD
         marginTop: 25,
+=======
+        marginTop: 15,
+>>>>>>> 961b71daf9258975c8f77499c617eeac3864a36e
         fontSize: 50,
         fontWeight: 'bold',
         color: '#de0202',
@@ -171,6 +186,12 @@ export default StyleSheet.create({
     fontSize: 25,
     color: '#fff',
     fontWeight: 'bold',
+  },
+  resultsHeading: {
+    fontSize: 40,
+    color: '#fff',
+    fontWeight: 'bold',
+    paddingBottom: 25,
   },
 
   //About.js styles
@@ -530,20 +551,29 @@ export default StyleSheet.create({
   PartyModeResultsContainer: {
     flex: 1,
     backgroundColor: '#020d23',
-    paddingTop: 40,
-    alignItems: "center",
+    //paddingTop: 40,
+    alignItems: 'center',
     justifyContent: 'center',
   },
   //For flatlist view & text
   PMResultsFlatlistContainer: {
     alignItems: 'center',
+<<<<<<< HEAD
+=======
+    paddingTop: 50,
+   
+>>>>>>> 961b71daf9258975c8f77499c617eeac3864a36e
   },
   playerFlatlistResults: {
     marginTop: 10,
     marginBottom: 20,
   },
+  resultsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
   flatlistPlayerNameResults: {
-    fontSize: 20,
+    fontSize: 22,
     color: "#fff",
   },
 
