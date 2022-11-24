@@ -12,7 +12,7 @@ export default StyleSheet.create({
 
   //HomeScreen
   homeHeader: {
-    fontSize: 100,
+    fontSize: 70,
     fontWeight: 'bold',
     color: '#98c1d9',
     marginTop: 50,
@@ -23,8 +23,8 @@ export default StyleSheet.create({
     backgroundColor: '#6969B3',
     borderColor: 'transparent',
     borderWidth: 0,
-    borderRadius: 30,
-    marginTop: 10,
+    borderRadius: 25,
+    marginTop: 5,
   },
   homeContainer: {
     width: 250,
@@ -34,7 +34,7 @@ export default StyleSheet.create({
   homeTitle: {
     fontWeight: '800',
     fontFamily: 'VT323_400Regular',
-    fontSize: 30
+    fontSize: 25
   },
 
   //Header style used in multiple js files
