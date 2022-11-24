@@ -8,10 +8,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Styles from './src/components/Styles';
 import PointScreen from './src/components/PointScreen';
 import PartyModeOptions from './src/components/PartyModeOptions';
-import Categories from './src/components/Categories';
 import PartyModeGame from './src/components/PartyModeGame';
 import PartyModeResults from './src/components/PartyModeResults';
-import PartyModeInBetweenResults from './src/components/PartyModeInBetweenResults';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,9 +32,7 @@ export default function App() {
           <Stack.Screen name="Pointscreen" component={PointScreen} style={Styles.title} />
           <Stack.Screen name="Gamescreen" component={GameScreen} style={Styles.title} />
           <Stack.Screen name="PartyModeResults" component={PartyModeResults} style={Styles.title} />
-          <Stack.Screen name="Categories" component={Categories} style={Styles.title} />
           <Stack.Screen name="PartyModeGame" component={PartyModeGame} style={Styles.title} />
-          <Stack.Screen name="PartyModeInBetweenResults" component={PartyModeInBetweenResults} style={Styles.title} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

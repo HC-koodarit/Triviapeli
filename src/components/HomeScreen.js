@@ -2,8 +2,17 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Styles from './Styles';
 import { Button } from 'react-native-elements';
+import { useFonts, VT323_400Regular } from '@expo-google-fonts/vt323';
 
 export default function HomeScreen({ navigation }) {
+
+    let [fontsLoaded] = useFonts({
+        VT323_400Regular,
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
 
     return (
         <View style={Styles.container} >
@@ -13,6 +22,7 @@ export default function HomeScreen({ navigation }) {
                 color: '#98c1d9',
                 marginTop: 50,
                 padding: 10,
+                fontFamily: 'VT323_400Regular',
             }}>Trivia</Text>
 
             <Button
@@ -24,7 +34,7 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800' }}
+                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
                 buttonStyle={{
                     backgroundColor: '#6969B3',
                     borderColor: 'transparent',
@@ -48,7 +58,7 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800' }}
+                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
                 buttonStyle={{
                     backgroundColor: '#6969B3',
                     borderColor: 'transparent',
@@ -71,7 +81,7 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800' }}
+                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
                 buttonStyle={{
                     backgroundColor: '#6969B3',
                     borderColor: 'transparent',
@@ -94,7 +104,7 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800' }}
+                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
                 buttonStyle={{
                     backgroundColor: '#6969B3',
                     borderColor: 'transparent',

@@ -6,7 +6,6 @@ import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 import { DrinkImages } from '../images/DrinkImages';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-
 export default function PartyModeOptions({ route, navigation }) {
 
     // Variables for gameoptions
@@ -63,8 +62,7 @@ export default function PartyModeOptions({ route, navigation }) {
             image: drinkImage,
             points: 0,
             streak: 0,
-            wrongAnswer: 0,
-            powerup: ""
+            wrongAnswer: 0
         }
         ]);
 

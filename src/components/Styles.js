@@ -17,6 +17,7 @@ export default StyleSheet.create({
     marginBottom: 20,
     marginTop: 50,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
 
   //Modal style
@@ -39,8 +40,9 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 50,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
 
   //GameScreen aka quickplay styles
@@ -97,8 +99,9 @@ export default StyleSheet.create({
     marginBottom: 5
   },
   normalText: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
   box: {
     borderStyle: 'solid',
@@ -133,20 +136,20 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
 
-  //Answer messages color changes idepending on the correct answer
+  //Answer messages color changes depending on the correct answer
   answerMessageText(answerMessage) {
     if(answerMessage==="Correct!") {
      return {
-      marginTop: 25,
+      marginTop: 15,
       fontSize: 50,
       fontWeight: 'bold',
-      color: '#7CFC00',
+      color: '#42b32e',
       textAlign: 'center',
       marginBottom: 7,
      }
     } else {
       return {
-        marginTop: 25,
+        marginTop: 15,
         fontSize: 50,
         fontWeight: 'bold',
         color: '#de0202',
@@ -582,8 +585,8 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 40,
-    //justifyContent: 'center',
+    bottom: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 
