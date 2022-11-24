@@ -107,6 +107,11 @@ export default StyleSheet.create({
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
+  hyperlinkText: {
+    fontSize: 20,
+    color: '#98c1d9',
+    fontFamily: 'VT323_400Regular',
+  },
   box: {
     borderStyle: 'solid',
     borderWidth: 1,
