@@ -18,7 +18,7 @@ export default function GameScreen({ navigation, route }) {
     };
 
     // Powerups
-    const [powerUpList, setPowerUpList] = useState(["Do a backflip", "Sprint around the house", "message someone"]);
+    const [powerUpList, setPowerUpList] = useState(["do a backflip", "sprint around the house", "message someone"]);
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -74,14 +74,18 @@ export default function GameScreen({ navigation, route }) {
                 setQuestion(decodeURIComponent(data.results[0].question));
                 setCategory(decodeURIComponent(data.results[0].category));
                 setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
-                let answerArray = [];
+                let incorrectAnswersArray = [];
                 for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
-                    answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
+                    incorrectAnswersArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
                 }
-                setIncorrectAnswers(answerArray);
-                answerArray.push(decodeURIComponent(data.results[0].correct_answer));
-                answerArray = answerArray.sort(() => Math.random() - 0.5);
-                setAllAnswers(answerArray);
+                setIncorrectAnswers(incorrectAnswersArray);
+                let allAnswersArray = [];
+                for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
+                    allAnswersArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
+                }
+                allAnswersArray.push(decodeURIComponent(data.results[0].correct_answer));
+                allAnswersArray = allAnswersArray.sort(() => Math.random() - 0.5);
+                setAllAnswers(allAnswersArray);
                 setIsLoading(false);
                 setIsPlaying(true);  // start timer
                 setMessage('');
@@ -151,7 +155,7 @@ export default function GameScreen({ navigation, route }) {
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
             // if player gets a powerup, message shows in the point screen
-            if (streakCounter === 3 || streakCounter === 4 ) {
+            if (streakCounter === 3 || streakCounter === 4) {
                 setPowerUpMessage(chosenPlayer.name + ' You got a level 1 powerup!')
             } else if (streakCounter >= 5) {
                 setPowerUpMessage(chosenPlayer.name + ' You got a level 2 powerup!')
@@ -177,7 +181,7 @@ export default function GameScreen({ navigation, route }) {
             setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
 
             // drinking logic
-            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer < 10) {
+            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer > 0 && chosenPlayer.wrongAnswer < 10) {
                 setDrinkMessage(`${chosenPlayer.name}: Take a sip!`);
             }
             if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer === 9) {
@@ -256,46 +260,69 @@ export default function GameScreen({ navigation, route }) {
         )
     }
 
-    // Loading screen, when question fetching is not done.  
-    if (isLoading) {
-        return (
-            <View style={[Styles.PartyModeGameContainer, Styles.loading]}>
-                <ActivityIndicator size="large" color="#03bafc" />
-            </View>
-        );
-    }
-
-    // Randomizing powerups
-    const Rand = ()  => {
+    // Stage 1 powerup: give a randomized task for another player
+    const GetStage1Powerup = () => {
         let i = powerUpList.length;
         const j = Math.floor(Math.random() * i);
-        let powerUpString = powerUpList[j];
-        alert(powerUpString);
+        let powerUpString = "Choose another player to " + powerUpList[j] + " or finish their drink";
+        return powerUpString;
+    }
+
+    // Stage 2 powerup: get a hint
+    const GetStage2Powerup = () => {
+        let i = Math.floor(Math.random() * 2);
+        let j = Math.floor(Math.random() * (incorrectAnswers.length));
+        if (i === 0) {
+            return "The correct answer is probably " + correctAnswer + "! Or it might be " + incorrectAnswers[j] + "...";
+        } else {
+            return "The correct answer is probably " + incorrectAnswers[j] + "! Or it might be " + correctAnswer + "...";
+        }
     }
 
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
         let powerUpCounter = chosenPlayer.streak;
-        if (powerUpCounter === 1 || powerUpCounter === 4) {
-            setModalText('You have a powerup!');
+        if (powerUpCounter >= 1 && powerUpCounter <= 4) {
+            setModalText(GetStage1Powerup());
             return (
                 <Button
                     title="Use your stage 1 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                    onPress={() => showModal(item)}
+                    onPress={() => {
+                        showModal(item);
+                        setIsPlaying(false);
+                        const newState = players.map(obj => {
+                            let streakCounter = chosenPlayer.streak = 0;
+                            if (obj.id === chosenPlayer.id) {
+                                return { ...obj, streak: streakCounter };
+                            } else {
+                                return obj;
+                            }
+                        });
+                        setPlayers(newState);
+                    }}
                 />
             );
-        } else if (powerUpCounter === 5 || powerUpCounter > 5) {
+        } else if (powerUpCounter >= 5) {
+            setModalText(GetStage2Powerup());
             return (
                 <Button
                     title="Use your stage 2 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        setModalText('Use your stage 2 powerup');
                         showModal(item)
                         setIsPlaying(false);
+                        const newState = players.map(obj => {
+                            let streakCounter = chosenPlayer.streak = 0;
+                            if (obj.id === chosenPlayer.id) {
+                                return { ...obj, streak: streakCounter };
+                            } else {
+                                return obj;
+                            }
+                        });
+                        setPlayers(newState);
                     }}
                 />
             );
@@ -306,15 +333,20 @@ export default function GameScreen({ navigation, route }) {
                     buttonStyle={Styles.notYetPowerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        setModalText('No powerups available');
-                        showModal(item)
-                        setIsPlaying(false);
                     }}
                 />
             );
         }
     }
 
+    // Loading screen, when question fetching is not done.  
+    if (isLoading) {
+        return (
+            <View style={[Styles.PartyModeGameContainer, Styles.loading]}>
+                <ActivityIndicator size="large" color="#03bafc" />
+            </View>
+        );
+    }
 
     // gameplay screen
     if (message === "") {
@@ -344,15 +376,15 @@ export default function GameScreen({ navigation, route }) {
                     <View>
                         <PowerUpButton />
                     </View>
-                <Button style={Styles.startGamePContainer}
-                    title="End game"
-                    buttonStyle={Styles.backButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
-                    onPress={() => {
-                        setIsPlaying(false);
-                        navigation.navigate('PartyModeResults', { players });
-                    }}
-                />
+                    <Button style={Styles.startGamePContainer}
+                        title="End game"
+                        buttonStyle={Styles.backButton}
+                        titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                        onPress={() => {
+                            setIsPlaying(false);
+                            navigation.navigate('PartyModeResults', { players });
+                        }}
+                    />
                 </View>
                 <Modal
                     style={Styles.modalPowerup}
@@ -406,37 +438,37 @@ export default function GameScreen({ navigation, route }) {
         return (
             <SafeAreaView style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.normalTextCentered}>{question}</Text>
-                <View style={{marginTop: 15}} >
+                <View style={{ marginTop: 15 }} >
                     <Text style={Styles.normalTextCentered}>{message}</Text>
                 </View>
-                
+
                 <Text style={Styles.question}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
                 <View style={Styles.currentScoreList}>
-                <Text style={Styles.playersTitle}>Current scores:</Text>
+                    <Text style={Styles.playersTitle}>Current scores:</Text>
                     <FlatList
                         style={Styles.playerFlatlist}
                         data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
-                        <View style={Styles.statListContainer}>
-                            <Text style={Styles.statsList}>{item.name}</Text>
-                            <View style={Styles.playerContainer}>
-                                <Text style={Styles.statsList}>Points: {item.points} Streak: {item.streak}</Text>
-                                {/*<Text style={Styles.statsList}> Streak: {item.streak} </Text>*/}
-                                <Text style={Styles.statsListWrongAnswers}> Wrong answers: {item.wrongAnswer} </Text>
+                            <View style={Styles.statListContainer}>
+                                <Text style={Styles.statsList}>{item.name}</Text>
+                                <View style={Styles.playerContainer}>
+                                    <Text style={Styles.statsList}>Points: {item.points} Streak: {item.streak}</Text>
+                                    {/*<Text style={Styles.statsList}> Streak: {item.streak} </Text>*/}
+                                    <Text style={Styles.statsListWrongAnswers}> Wrong answers: {item.wrongAnswer} </Text>
+                                </View>
                             </View>
-                        </View>
                         }
                     />
                 </View>
                 <Text style={Styles.infoText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
-                <Button 
+                <Button
                     style={Styles.continueButton}
                     type=""
-                    title="Next question" 
+                    title="Next question"
                     titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
-                    onPress={() => getQuestion()} 
+                    onPress={() => getQuestion()}
                 />
             </SafeAreaView>
         )
