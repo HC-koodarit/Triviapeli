@@ -212,9 +212,9 @@ export default function PartyModeOptions({ route, navigation }) {
             </View>
 
             {/* Select categories */}
+            <Text style={Styles.optionsSubTitle}>Categories</Text>
             <ScrollView style={Styles.categoryContainer}>
                 <View>
-                    <Text style={Styles.optionsSubTitle}>Categories</Text>
                     <MultiSelect
                         style={Styles.dropdown}
                         placeholderStyle={Styles.placeholderStyleDropdown}
@@ -232,6 +232,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         }}
                     />
                 </View>
+                </ScrollView>
                 <View style={Styles.buttonContainer}>
                     <Button
                         title="Select all"
@@ -244,7 +245,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         color="#3c87c2"
                     />
                 </View>
-            </ScrollView>
+
 
 
             {/* Select difficulty */}

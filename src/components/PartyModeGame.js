@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { SafeAreaView, Text, View, Image, FlatList, ActivityIndicator, Modal } from 'react-native';
+import { SafeAreaView, Text, View, Image, FlatList, ActivityIndicator, Modal, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { PowerUps } from './PowerUps.js';
@@ -431,10 +431,10 @@ export default function PartyModeGame({ navigation, route }) {
                 
                 <Text style={Styles.drinkInfo}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
-                <View style={Styles.currentScoreList}>
-                <Text style={Styles.scoresHeader}>Current scores:</Text>
+                <Text style={Styles.scoresHeader}>Current scores:</Text>  
+                <ScrollView style={Styles.currentScoreList}>                 
                     <FlatList
-                        style={Styles.playerFlatlist}
+                        style={Styles.playerFlatlistResults}
                         data={players}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
@@ -446,7 +446,7 @@ export default function PartyModeGame({ navigation, route }) {
                             </View>
                         }
                     />
-                </View>
+                </ScrollView>
                 <Text style={Styles.infoText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <View style={{ flexDirection: "row" }}>
                 <Button style={Styles.startGamePContainer}

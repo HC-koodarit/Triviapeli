@@ -559,8 +559,8 @@ export default StyleSheet.create({
     width: 500,
     height: 270,
     color: '#fff',
-    marginTop: 15,
-    marginBottom: 30
+    marginTop: 1,
+    marginBottom: 1
   },
   playerStats: {
     paddingTop: 10,
@@ -585,6 +585,11 @@ export default StyleSheet.create({
   statsListWrongAnswers: {
     fontSize: 13,
     color: "#fff",
+  },
+  playerFlatlistResult: {
+    flex: 1,
+    border: 2,
+    borderBottomColor: '#020d23'
   },
 
   //Party Mode Results styles
