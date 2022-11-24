@@ -67,7 +67,7 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 50,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
@@ -130,7 +130,7 @@ export default StyleSheet.create({
     marginBottom: 5
   },
   normalText: {
-    fontSize: 20,
+    fontSize: 23,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },

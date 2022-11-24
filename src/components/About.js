@@ -18,7 +18,7 @@ export default function About({ navigation }) {
             <Text style={Styles.normalText}>- Kristian Riihelä</Text>
             <Text style={Styles.normalText}>- Daniel Ristikari</Text>
             <Text> </Text>
-            <Text style={Styles.normalText}>This application uses data from <Text style={Styles.hyperlinkText} onPress={ ()=>{ Linking.openURL('https://opentdb.com/')}}>The Open Trivia Database API</Text> for trivia questions and answers.</Text>
+            <Text style={Styles.normalText}>This application uses data from <Text style={Styles.hyperlinkText} onPress={() => { Linking.openURL('https://opentdb.com/') }}>The Open Trivia Database API</Text> for trivia questions and answers.</Text>
             <Text> </Text>
             <Image source={require('../assets/license.png')} style={
                 {
@@ -28,9 +28,23 @@ export default function About({ navigation }) {
                 }
             } />
             <Text style={Styles.normalText}>This work is licensed under a <Text style={Styles.hyperlinkText} onPress={() => { Linking.openURL('https://creativecommons.org/licenses/by-sa/4.0/') }}>Creative Commons Attribution-ShareAlike 4.0 International License</Text>.</Text>
+            <Text> </Text>
+            <Button
+                title="Github"
+                icon={{
+                    name: 'github',
+                    type: 'font-awesome',
+                    size: 30,
+                    color: 'white',
+                }}
+                onPress={() => { Linking.openURL('https://github.com/HC-koodarit/Triviapeli') }}
+                iconContainerStyle={{ marginRight: 10 }}
+                titleStyle={Styles.homeTitle}
+                buttonStyle={Styles.homeButton}
+            />
             <Button
                 title='Back'
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={Styles.homeTitle}
                 buttonStyle={Styles.backButton}
                 onPress={() => navigation.navigate('Home')}
             />

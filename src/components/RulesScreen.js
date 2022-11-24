@@ -29,7 +29,7 @@ export default function RulesScreen({ navigation }) {
             <Text style={Styles.normalText}>After using the power-up, your streak goes back to 0</Text>
             <Button
                 title='Back'
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={Styles.homeTitle}
                 buttonStyle={Styles.backButton}
                 onPress={() => navigation.navigate('Home')}
             />
