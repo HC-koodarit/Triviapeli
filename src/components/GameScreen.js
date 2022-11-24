@@ -83,14 +83,14 @@ export default function GameScreen({ navigation }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setAnswerMessage("Correct!");
-            setMessage("Your answer was: " + correctAnswer + "\nGood job! :)");
+            setMessage("Your answer was: " + correctAnswer + "\n\nGood job! :)");
 
         } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             let answerText = answer.toString();
             setAnswerMessage("Wrong!");
-            setMessage("Your answer was: " + "\n" + answerText + "\nThe correct answer was: " + "\n" + correctAnswer);
+            setMessage("Your answer was: " + "\n" + answerText + "\n\nThe correct answer was: " + "\n" + correctAnswer);
         }
     }
 
@@ -166,12 +166,23 @@ export default function GameScreen({ navigation }) {
                     </View>
                 
                 <Text style={Styles.normalText}>Points: {points}</Text>
-                <Button 
-                    style={Styles.continueButton}
-                    type=""
-                    title="Next question"
-                    titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
-                    onPress={() => getQuestion()} />
+                <View style={{ flexDirection: "row" }}>
+                    <Button style={Styles.startGamePContainer}
+                        title="End game"
+                        buttonStyle={Styles.backButton}
+                        titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                        onPress={() => {
+                            setIsPlaying(false);
+                            navigation.navigate('Pointscreen', { points: points });
+                        }}
+                    />
+                    <Button 
+                        style={Styles.continueButton}
+                        type=""
+                        title="Next question"
+                        titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
+                        onPress={() => getQuestion()} />
+                </View>
                 </SafeAreaView>
             </View>
         )
