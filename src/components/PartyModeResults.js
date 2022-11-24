@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { SafeAreaView, Text, View, FlatList, Image } from 'react-native';
 import { Button } from 'react-native-elements';
+import { ScrollView } from 'react-native-web';
 import Styles from './Styles.js';
 
 export default function PartyModeResults({ route, navigation, params }) {
@@ -26,13 +27,13 @@ export default function PartyModeResults({ route, navigation, params }) {
                 />
             </View>
             <View style={Styles.PMResultsButtonContainer}>
-            <Image source={require('../assets/podium.png')} style={
-                {
-                    width: 200,
-                    height: 200,
-                    marginBottom: 10,
-                }
-            } />
+                <Image source={require('../assets/podium.png')} style={
+                    {
+                        width: 300,
+                        height: 300,
+                        marginBottom: 10,
+                    }
+                } />
                 <Button
                     title='Home'
                     titleStyle={{ fontWeight: '700' }}

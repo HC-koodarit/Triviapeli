@@ -23,8 +23,11 @@ export default function RulesScreen({ navigation }) {
             <Text style={Styles.normalText}>6. Fail and get wasted</Text>
             <Text> </Text>
             <Text style={Styles.headerRules}>Powerups</Text>
-            <Text style={Styles.normalText}>Powerups are given to players who have a streak higher than x</Text>
-            <Text style={Styles.normalText}>Powerups are random and give the player an advantage when used</Text>
+            <Text style={Styles.normalText}>Powerups are included in Partymode</Text>
+            <Text style={Styles.normalText}>They are random and give player an advantage</Text>
+            <Text style={Styles.normalText}>A streak of 3: Level 1 powerup</Text>
+            <Text style={Styles.normalText}>A streak of 5: Level 2 powerup</Text>
+            <Text style={Styles.normalText}>After using the powerup, streak goes back to 0</Text>
             <Button
                 title='Back'
                 titleStyle={{ fontWeight: '700' }}

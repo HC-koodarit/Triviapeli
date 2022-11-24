@@ -35,16 +35,18 @@ export default function GameScreen({ navigation }) {
                 setQuestion(decodeURIComponent(data.results[0].question));
                 setCategory(decodeURIComponent(data.results[0].category));
                 setCorrectAnswer(decodeURIComponent(data.results[0].correct_answer));
-                let answerArray = [];
+                let incorrectAnswersArray = [];
                 for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
-                    answerArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
+                    incorrectAnswersArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
                 }
-                setIncorrectAnswers(answerArray);
-                answerArray.push(decodeURIComponent(data.results[0].correct_answer));
-
-                answerArray = answerArray.sort(() => Math.random() - 0.5);
-
-                setAllAnswers(answerArray);
+                setIncorrectAnswers(incorrectAnswersArray);
+                let allAnswersArray = [];
+                for (let i = 0; i < data.results[0].incorrect_answers.length; i++) {
+                    allAnswersArray.push(decodeURIComponent(data.results[0].incorrect_answers[i]));
+                }
+                allAnswersArray.push(decodeURIComponent(data.results[0].correct_answer));
+                allAnswersArray = allAnswersArray.sort(() => Math.random() - 0.5);
+                setAllAnswers(allAnswersArray);
                 setIsLoading(false);
                 setIsPlaying(true);  // start timer
                 setMessage('');

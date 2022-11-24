@@ -2,33 +2,38 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Styles from './Styles';
 import { Button } from 'react-native-elements';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
 
 export default function HomeScreen({ navigation }) {
 
     return (
-        <SafeAreaView style={Styles.container}>
-            <Text style={Styles.header}>Trivia</Text>
+        <View style={Styles.container} >
+            <Text style={{
+                fontSize: 100,
+                fontWeight: 'bold',
+                color: '#98c1d9',
+                marginTop: 50,
+                padding: 10,
+            }}>Trivia</Text>
 
             <Button
                 title="Partymode"
                 icon={{
                     name: 'users',
                     type: 'font-awesome',
-                    size: 20,
+                    size: 30,
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={{ fontWeight: '800' }}
                 buttonStyle={{
-                    backgroundColor: 'rgba(80, 154, 230, 1)',
+                    backgroundColor: '#6969B3',
                     borderColor: 'transparent',
                     borderWidth: 0,
                     borderRadius: 30,
+                    marginTop: 10,
                 }}
                 containerStyle={{
-                    width: 200,
+                    width: 250,
                     marginHorizontal: 50,
                     marginVertical: 20,
                 }}
@@ -39,19 +44,19 @@ export default function HomeScreen({ navigation }) {
                 icon={{
                     name: 'user',
                     type: 'font-awesome',
-                    size: 20,
+                    size: 30,
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={{ fontWeight: '800' }}
                 buttonStyle={{
-                    backgroundColor: 'rgba(80, 154, 230, 1)',
+                    backgroundColor: '#6969B3',
                     borderColor: 'transparent',
                     borderWidth: 0,
                     borderRadius: 30,
                 }}
                 containerStyle={{
-                    width: 200,
+                    width: 250,
                     marginHorizontal: 50,
                     marginVertical: 20,
                 }}
@@ -62,19 +67,19 @@ export default function HomeScreen({ navigation }) {
                 icon={{
                     name: 'comment',
                     type: 'font-awesome',
-                    size: 20,
+                    size: 30,
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={{ fontWeight: '800' }}
                 buttonStyle={{
-                    backgroundColor: 'rgba(80, 154, 230, 1)',
+                    backgroundColor: '#6969B3',
                     borderColor: 'transparent',
                     borderWidth: 0,
                     borderRadius: 30,
                 }}
                 containerStyle={{
-                    width: 200,
+                    width: 250,
                     marginHorizontal: 50,
                     marginVertical: 20,
                 }}
@@ -85,33 +90,34 @@ export default function HomeScreen({ navigation }) {
                 icon={{
                     name: 'heart',
                     type: 'font-awesome',
-                    size: 20,
+                    size: 30,
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={{ fontWeight: '800' }}
                 buttonStyle={{
-                    backgroundColor: 'rgba(80, 154, 230, 1)',
+                    backgroundColor: '#6969B3',
                     borderColor: 'transparent',
                     borderWidth: 0,
                     borderRadius: 30,
                 }}
                 containerStyle={{
-                    width: 200,
+                    width: 250,
                     marginHorizontal: 50,
                     marginVertical: 20,
+                    marginBottom: 0
                 }}
                 onPress={() => { navigation.navigate('About') }}
             />
 
             <Image source={require('../assets/people.png')} style={
                 {
-                    width: 200,
-                    height: 200,
-                    marginBottom: 0,
+                    width: 300,
+                    height: 300,
+                    opacity: 0.9,
                 }
             } />
-        </SafeAreaView>
+        </View>
     );
 
 };
