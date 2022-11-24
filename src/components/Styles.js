@@ -47,15 +47,17 @@ export default StyleSheet.create({
 
   //GameScreen aka quickplay styles
   title: {
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
   welcomeTitle: {
-    fontSize: 45,
+    fontSize: 50,
     fontWeight: 'bold',
     color: '#fff',
     paddingBottom: 20,
+    fontFamily: 'VT323_400Regular',
   },
   quickPlayContainer: {
     flex: 1,
@@ -72,14 +74,15 @@ export default StyleSheet.create({
     color: '#fff'
   },
   question: {
-    fontSize: 25,
+    fontSize: 30,
     alignItems: 'center',
     justifyContent: 'center',
     textAlignVertical: 'center',
-    margin: 10,
+    margin: 20,
     color: '#fff',
     fontWeight: 'bold',
-    textDecorationLines: 'underline'
+    textDecorationLines: 'underline',
+    fontFamily: 'VT323_400Regular',
   },
   playerName: {
     fontSize: 15,
@@ -114,12 +117,13 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   questionText: {
-    fontSize: 18,
+    fontSize: 28,
     color: '#fff',
     textAlign: 'center',
     alignSelf: 'stretch',
     padding: 10,
     marginBottom: 10,
+    fontFamily: 'VT323_400Regular',
   },
   drinkInfo: {
     fontSize: 30,
@@ -131,10 +135,11 @@ export default StyleSheet.create({
     fontStyle: '',
   },
   normalTextCentered: {
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 10,
     color: '#fff',
     textAlign: 'center',
+    fontFamily: 'VT323_400Regular',
   },
 
   //Answer messages color changes depending on the correct answer
@@ -165,11 +170,16 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     paddingTop: 10,
+    fontFamily: 'VT323_400Regular',
+    marginBottom: 30,
+
   },
   infoText: {
-    fontSize: 20,
+    fontSize: 30,
     color: '#fff',
     paddingVertical: 12,
+    fontFamily: 'VT323_400Regular',
+
   },
   headingText: {
     fontSize: 25,
@@ -203,11 +213,12 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   optionsSubTitle: {
-    fontSize: 25,
+    fontSize: 30,
     alignSelf: 'center',
     fontWeight: 'bold',
     color: '#fff',
     paddingTop: 10,
+    fontFamily: 'VT323_400Regular',
   },
   playerContainer: {
     flex: 1,
@@ -219,11 +230,12 @@ export default StyleSheet.create({
 
   //View style
   playersTitle: {
-    fontSize: 25,
+    fontSize: 30,
     alignSelf: 'center',
     fontWeight: 'bold',
     color: '#fff',
     paddingTop: 40,
+    fontFamily: 'VT323_400Regular',
   },
   //Flatlist playerNames (PartyModeOptions)
   playerNames: {
@@ -548,7 +560,6 @@ export default StyleSheet.create({
   PMResultsFlatlistContainer: {
     alignItems: 'center',
     paddingTop: 30,
-   
   },
   playerFlatlistResults: {
     marginTop: 10,
