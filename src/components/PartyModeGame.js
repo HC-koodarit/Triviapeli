@@ -125,6 +125,7 @@ export default function PartyModeGame({ navigation, route }) {
         });
         setPlayers(newState);
         setMessage("Time is up! The correct answer was " + correctAnswer);
+        getDrinks();
     }
 
     // check if answer is correct
@@ -145,7 +146,6 @@ export default function PartyModeGame({ navigation, route }) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
-
             // if player gets a powerup, message shows in the point screen
             if (streakCounter === 3) {
                 setPowerUpMessage(chosenPlayer.name + ': You got a level 1 powerup!')
@@ -170,61 +170,7 @@ export default function PartyModeGame({ navigation, route }) {
             setIsPlaying(false);
             let answerText = answer.toString()
             setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
-
-            // drinking logic
-            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer > 0 && chosenPlayer.wrongAnswer < 10) {
-                setDrinkMessage(`${chosenPlayer.name}: Take a sip!`);
-            }
-            if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer === 9) {
-                setDrinkMessage(`${chosenPlayer.name}: Finish your drink!`);
-
-                //Resets wronganswer counter of active player
-                const wrongAnswerReset = players.map(obj => {
-                    if (obj.id === chosenPlayer.id) {
-                        console.log("obj:")
-                        console.log(obj);
-                        return { ...obj, wrongAnswer: 0 };
-                    } else {
-                        return obj;
-                    }
-                });
-                setPlayers(wrongAnswerReset);
-            }
-            if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 2 ||
-                chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 4 ||
-                chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 7) {
-                setDrinkMessage(`${chosenPlayer.name}: Take a sip!`);
-            }
-            if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 9) {
-                setDrinkMessage(`${chosenPlayer.name}: Finish your drink!`);
-
-                //Resets wronganswer counter of active player
-                const wrongAnswerReset = players.map(obj => {
-                    if (obj.id === chosenPlayer.id) {
-                        console.log("obj:")
-                        console.log(obj);
-                        return { ...obj, wrongAnswer: 0 };
-                    } else {
-                        return obj;
-                    }
-                });
-                setPlayers(wrongAnswerReset);
-            }
-            if (chosenPlayer.drink === 'Strong' && chosenPlayer.wrongAnswer === 9) {
-                setDrinkMessage(`${chosenPlayer.name}: Take a shot!`);
-
-                //Resets wronganswer counter of active player
-                const wrongAnswerReset = players.map(obj => {
-                    if (obj.id === chosenPlayer.id) {
-                        console.log("obj:")
-                        console.log(obj);
-                        return { ...obj, wrongAnswer: 0 };
-                    } else {
-                        return obj;
-                    }
-                });
-                setPlayers(wrongAnswerReset);
-            }
+            getDrinks();
         }
     }
 
@@ -306,6 +252,63 @@ export default function PartyModeGame({ navigation, route }) {
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 />
             );
+        }
+    }
+
+    // drinking logic
+    const getDrinks = () => {
+        if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer > 0 && chosenPlayer.wrongAnswer < 10) {
+            setDrinkMessage(`${chosenPlayer.name}: Take a sip!`);
+        }
+        if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer === 9) {
+            setDrinkMessage(`${chosenPlayer.name}: Finish your drink!`);
+
+            //Resets wronganswer counter of active player
+            const wrongAnswerReset = players.map(obj => {
+                if (obj.id === chosenPlayer.id) {
+                    console.log("obj:")
+                    console.log(obj);
+                    return { ...obj, wrongAnswer: 0 };
+                } else {
+                    return obj;
+                }
+            });
+            setPlayers(wrongAnswerReset);
+        }
+        if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 2 ||
+            chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 4 ||
+            chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 7) {
+            setDrinkMessage(`${chosenPlayer.name}: Take a sip!`);
+        }
+        if (chosenPlayer.drink === 'Medium' && chosenPlayer.wrongAnswer === 9) {
+            setDrinkMessage(`${chosenPlayer.name}: Finish your drink!`);
+
+            //Resets wronganswer counter of active player
+            const wrongAnswerReset = players.map(obj => {
+                if (obj.id === chosenPlayer.id) {
+                    console.log("obj:")
+                    console.log(obj);
+                    return { ...obj, wrongAnswer: 0 };
+                } else {
+                    return obj;
+                }
+            });
+            setPlayers(wrongAnswerReset);
+        }
+        if (chosenPlayer.drink === 'Strong' && chosenPlayer.wrongAnswer === 9) {
+            setDrinkMessage(`${chosenPlayer.name}: Take a shot!`);
+
+            //Resets wronganswer counter of active player
+            const wrongAnswerReset = players.map(obj => {
+                if (obj.id === chosenPlayer.id) {
+                    console.log("obj:")
+                    console.log(obj);
+                    return { ...obj, wrongAnswer: 0 };
+                } else {
+                    return obj;
+                }
+            });
+            setPlayers(wrongAnswerReset);
         }
     }
 
@@ -434,7 +437,6 @@ export default function PartyModeGame({ navigation, route }) {
                                 <Text style={Styles.statsList}>{item.name}</Text>
                                 <View style={Styles.playerContainer}>
                                     <Text style={Styles.statsList}>Points: {item.points} Streak: {item.streak}</Text>
-                                    <Text style={Styles.statsListWrongAnswers}> Wrong answers: {item.wrongAnswer} </Text>
                                 </View>
                             </View>
                         }
