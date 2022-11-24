@@ -10,13 +10,23 @@ import PointScreen from './src/components/PointScreen';
 import PartyModeOptions from './src/components/PartyModeOptions';
 import PartyModeGame from './src/components/PartyModeGame';
 import PartyModeResults from './src/components/PartyModeResults';
+import { useFonts, VT323_400Regular } from '@expo-google-fonts/vt323';
+
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
+  let [fontsLoaded] = useFonts({
+    VT323_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName='Home'
@@ -36,6 +46,6 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </View>
-    
+
   );
 }

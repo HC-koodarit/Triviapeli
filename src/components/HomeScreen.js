@@ -2,17 +2,8 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Styles from './Styles';
 import { Button } from 'react-native-elements';
-import { useFonts, VT323_400Regular } from '@expo-google-fonts/vt323';
 
 export default function HomeScreen({ navigation }) {
-
-    let [fontsLoaded] = useFonts({
-        VT323_400Regular,
-    });
-
-    if (!fontsLoaded) {
-        return null;
-    }
 
     return (
         <View style={Styles.container} >
