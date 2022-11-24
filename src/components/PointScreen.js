@@ -20,7 +20,7 @@ export default function PointScreen({ route, navigation }) {
             } />
             <Button
                 title='Home'
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={Styles.homeTitle}
                 buttonStyle={Styles.backButton}
                 onPress={() => navigation.navigate('Home')}
             />
