@@ -22,8 +22,6 @@ export default function PartyModeGame({ navigation, route }) {
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
-    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
-    // const [playersStreak, setPlayersStreak] = useState([]);   // ei käytössä
 
     // variables for questions and answers
     const [question, setQuestion] = useState('');
@@ -35,9 +33,6 @@ export default function PartyModeGame({ navigation, route }) {
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
-
-    // count correct answers for powerups HUOM! Ei laske streakkiä
-    const [correctAnswers, setCorrectAnswers] = useState(0);
 
     // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(false);
@@ -64,7 +59,6 @@ export default function PartyModeGame({ navigation, route }) {
         fetch(`https://opentdb.com/api.php?amount=1&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
-                setCorrectAnswers(correctAnswers + 1);
                 const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id);
                 // Set new index for player, and fallback to 0 if next index larger than player count
                 const nextIndex = (currentPlayerIndex + 1) % players.length;
@@ -95,11 +89,7 @@ export default function PartyModeGame({ navigation, route }) {
             .catch(err => console.error(err));
 
     }, [selectedCategories, chosenPlayer])
-    /*
-        useEffect(() => {
-            getQuestion();
-        }, []);
-    */
+
     // buttons for answers
     const AnswerButtons = () => {
         return (
@@ -156,10 +146,10 @@ export default function PartyModeGame({ navigation, route }) {
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
             // if player gets a powerup, message shows in the point screen
-            if (streakCounter === 3 || streakCounter === 4) {
-                setPowerUpMessage(chosenPlayer.name + ' You got a level 1 powerup!')
-            } else if (streakCounter >= 5) {
-                setPowerUpMessage(chosenPlayer.name + ' You got a level 2 powerup!')
+            if (streakCounter === 3) {
+                setPowerUpMessage(chosenPlayer.name + ': You got a level 1 powerup!')
+            } else if (streakCounter === 5) {
+                setPowerUpMessage(chosenPlayer.name + ': You got a level 2 powerup!')
             };
 
         } else if (answer !== correctAnswer) {
@@ -177,7 +167,6 @@ export default function PartyModeGame({ navigation, route }) {
             setPlayers(newState);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            setCorrectAnswers(0);
             let answerText = answer.toString()
             setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
 
@@ -261,15 +250,15 @@ export default function PartyModeGame({ navigation, route }) {
         )
     }
 
-    // Stage 1 powerup: give a randomized task for another player
-    const GetStage1Powerup = () => {
+    // Level 1 powerup: give a randomized task for another player
+    const GetLevel1Powerup = () => {
         let i = powerUpList.length;
         const j = Math.floor(Math.random() * i);
         setModalText("Choose another player to " + powerUpList[j] + " or finish their drink");
     }
 
-    // Stage 2 powerup: get a hint
-    const GetStage2Powerup = () => {
+    // Level 2 powerup: get a hint
+    const GetLevel2Powerup = () => {
         let i = Math.floor(Math.random() * 2);
         let j = Math.floor(Math.random() * (incorrectAnswers.length));
         if (i === 0) {
@@ -282,14 +271,14 @@ export default function PartyModeGame({ navigation, route }) {
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
         let powerUpCounter = chosenPlayer.streak;
-        if (powerUpCounter >= 1 && powerUpCounter <= 4) {
+        if (powerUpCounter >= 3 && powerUpCounter <= 4) {
             return (
                 <Button
-                    title="Use your stage 1 powerup"
+                    title="Use your level 1 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        GetStage1Powerup();
+                        GetLevel1Powerup();
                         showModal(item);
                         setIsPlaying(false);
                     }}
@@ -298,11 +287,11 @@ export default function PartyModeGame({ navigation, route }) {
         } else if (powerUpCounter >= 5) {
             return (
                 <Button
-                    title="Use your stage 2 powerup"
+                    title="Use your level 2 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        GetStage2Powerup();
+                        GetLevel2Powerup();
                         showModal(item)
                         setIsPlaying(false);
                     }}
@@ -444,7 +433,6 @@ export default function PartyModeGame({ navigation, route }) {
                                 <Text style={Styles.statsList}>{item.name}</Text>
                                 <View style={Styles.playerContainer}>
                                     <Text style={Styles.statsList}>Points: {item.points} Streak: {item.streak}</Text>
-                                    {/*<Text style={Styles.statsList}> Streak: {item.streak} </Text>*/}
                                     <Text style={Styles.statsListWrongAnswers}> Wrong answers: {item.wrongAnswer} </Text>
                                 </View>
                             </View>
