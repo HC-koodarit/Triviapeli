@@ -10,6 +10,33 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
+  //HomeScreen
+  homeHeader: {
+    fontSize: 100,
+    fontWeight: 'bold',
+    color: '#98c1d9',
+    marginTop: 50,
+    padding: 10,
+    fontFamily: 'VT323_400Regular',
+  },
+  homeButton: {
+    backgroundColor: '#6969B3',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 30,
+    marginTop: 10,
+  },
+  homeContainer: {
+    width: 250,
+    marginHorizontal: 50,
+    marginVertical: 20,
+  },
+  homeTitle: {
+    fontWeight: '800',
+    fontFamily: 'VT323_400Regular',
+    fontSize: 30
+  },
+
   //Header style used in multiple js files
   header: {
     fontSize: 70,
