@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, Image, FlatList, ActivityIndicator, Modal } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
+import { PowerUps } from './PowerUps.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { color } from 'react-native-elements/dist/helpers/index.js';
 
@@ -19,7 +20,9 @@ export default function PartyModeGame({ navigation, route }) {
     };
 
     // Powerups
-    const [powerUpList, setPowerUpList] = useState(["do a backflip", "sprint around the house", "message someone"]);
+    const [powerUpMessage, setPowerUpMessage] = useState('');
+    const [powerUpList, setPowerUpList] = useState(PowerUps);
+    
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -33,23 +36,12 @@ export default function PartyModeGame({ navigation, route }) {
     const [message, setMessage] = useState('welcome');
     const [answerMessage, setAnswerMessage] = useState('');
 
-    // variable for the player's score
-    const [points, setPoints] = useState(0);
-
     // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(false);
     const [key, setKey] = useState(0);
 
-    // variables for drinking rules
-
-    /* const [lowAlcohol, setLowAlcohol] = useState(0);
-    const [lowAlcFinished, setLowAlcFinished] = useState(0);
-    const [mediumAlcohol, setMediumAlcohol] = useState(0);
-    const [mediumAlcFinished, setMediumAlcFinished] = useState(0);
-    const [highAlcohol, setHighAlcohol] = useState(0);
-    */
+    // variable for drinking rules
     const [drinkMessage, setDrinkMessage] = useState('');
-    const [powerUpMessage, setPowerUpMessage] = useState('');
 
     // variable for loadingscreen
     const [isLoading, setIsLoading] = useState(false);
@@ -153,9 +145,9 @@ export default function PartyModeGame({ navigation, route }) {
 
             // if player gets a powerup, message shows in the point screen
             if (streakCounter === 3) {
-                setPowerUpMessage(chosenPlayer.name + ': You got a level 1 powerup!')
+                setPowerUpMessage(chosenPlayer.name + ': You got a level 1 power-up!')
             } else if (streakCounter === 5) {
-                setPowerUpMessage(chosenPlayer.name + ': You got a level 2 powerup!')
+                setPowerUpMessage(chosenPlayer.name + ': You got a level 2 power-up!')
             };
 
         } else if (answer !== correctAnswer) {
@@ -204,14 +196,14 @@ export default function PartyModeGame({ navigation, route }) {
     }
 
     // Level 1 powerup: give a randomized task for another player
-    const GetLevel1Powerup = () => {
+    const GetLevel1PowerUp = () => {
         let i = powerUpList.length;
         const j = Math.floor(Math.random() * i);
         setModalText("Choose another player to " + powerUpList[j] + " or finish their drink");
     }
 
     // Level 2 powerup: get a hint
-    const GetLevel2Powerup = () => {
+    const GetLevel2PowerUp = () => {
         let i = Math.floor(Math.random() * 2);
         let j = Math.floor(Math.random() * (incorrectAnswers.length));
         if (i === 0) {
@@ -227,11 +219,11 @@ export default function PartyModeGame({ navigation, route }) {
         if (powerUpCounter >= 3 && powerUpCounter <= 4) {
             return (
                 <Button
-                    title="Use your level 1 powerup"
+                    title="Use your level 1 power-up"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        GetLevel1Powerup();
+                        GetLevel1PowerUp();
                         showModal(item);
                         setIsPlaying(false);
                     }}
@@ -240,11 +232,11 @@ export default function PartyModeGame({ navigation, route }) {
         } else if (powerUpCounter >= 5) {
             return (
                 <Button
-                    title="Use your level 2 powerup"
+                    title="Use your level 2 power-up"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
-                        GetLevel2Powerup();
+                        GetLevel2PowerUp();
                         showModal(item)
                         setIsPlaying(false);
                     }}
@@ -253,7 +245,7 @@ export default function PartyModeGame({ navigation, route }) {
         } else {
             return (
                 <Button
-                    title="No powerup yet"
+                    title="No power-up yet"
                     buttonStyle={Styles.notYetPowerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 />
@@ -366,7 +358,7 @@ export default function PartyModeGame({ navigation, route }) {
                     />
                 </View>
                 <Modal
-                    style={Styles.modalPowerup}
+                    style={Styles.modalPowerUp}
                     animationType="slide"
                     visible={modalVisible}
                     transparent={true}
@@ -374,7 +366,7 @@ export default function PartyModeGame({ navigation, route }) {
                         setModalVisible(!modalVisible);
                     }}
                 >
-                    <View style={Styles.modalPowerup}>
+                    <View style={Styles.modalPowerUp}>
                         <Text style={Styles.modalText}>{modalText}</Text>
                         <Button
                             buttonStyle={{ backgroundColor: 'black', borderColor: 'white', borderWidth: 1, borderRadius: 10 }}
