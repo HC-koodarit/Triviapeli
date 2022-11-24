@@ -99,10 +99,68 @@ export default StyleSheet.create({
     fontSize: 18,
     color: '#fff',
   },
-  normalTextCentered: {
+  box: {
+    borderStyle: 'solid',
+    borderWidth: 1,
+    margin: 7,
+    borderRadius: 7,
+    borderColor: '#544873',
+    marginTop: 15,
+    marginBottom: 10,
+  },
+  questionText: {
     fontSize: 18,
     color: '#fff',
     textAlign: 'center',
+    alignSelf: 'stretch',
+    padding: 10,
+    marginBottom: 10,
+  },
+  drinkInfo: {
+    fontSize: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 7,
+    color: '#fff',
+    fontWeight: 'bold',
+    fontStyle: '',
+  },
+  normalTextCentered: {
+    fontSize: 18,
+    marginBottom: 10,
+    color: '#fff',
+    textAlign: 'center',
+  },
+
+  //Answer messages color changes idepending on the correct answer
+  answerMessageText(answerMessage) {
+    if(answerMessage==="Correct!") {
+     return {
+      marginTop: 25,
+      fontSize: 50,
+      fontWeight: 'bold',
+      color: '#7CFC00',
+      textAlign: 'center',
+      marginBottom: 7,
+     }
+    } else {
+      return {
+        marginTop: 25,
+        fontSize: 50,
+        fontWeight: 'bold',
+        color: '#de0202',
+        textAlign: 'center',
+        marginBottom: 7,
+      }
+    }
+   },
+
+  scoresHeader: {
+    fontSize: 25,
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
+    paddingTop: 10,
   },
   infoText: {
     fontSize: 20,
@@ -317,7 +375,7 @@ export default StyleSheet.create({
   //Difficulty container PartymodeOptions
   difficultyContainer: {
     marginBottom: 1,
-    marginTop: 3
+    marginTop: 2,
   },
 
   //Dropdown Styles for category & difficulty (PartyModeOptions)
@@ -383,16 +441,16 @@ export default StyleSheet.create({
     marginTop: 20,
   },
 
-  // Continue game button style
-  continueButton: {
-    backgroundColor: '#42b32e',
-    borderColor: 'transparent',
-    borderWidth: 0,
-    borderRadius: 30,
-    width: 160,
-    marginHorizontal: 25,
-    marginTop: 20,
-  },
+    // Continue game
+    continueButton: {
+      backgroundColor: '#42b32e',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 30,
+      width: 160,
+      marginHorizontal: 25,
+      marginTop: 20,
+    },
 
   //Button for powerup
   powerUpButton: {
@@ -418,7 +476,7 @@ export default StyleSheet.create({
 
   //Start Game button Partymode
   startGamePContainer: {
-    marginBottom: 20,
+    marginBottom: 30,
     flexDirection: 'row',
   },
 
