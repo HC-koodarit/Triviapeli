@@ -65,15 +65,21 @@ export default function GameScreen({ navigation }) {
     const answerButtons = () => {
         let buttons = [];
         for (let i = 0; i < allAnswers.length; i++) {
-            buttons.push(<Button title={allAnswers[i]} type="outline" onPress={() =>
-                checkAnswer(allAnswers[i])} key={i} />);
+            buttons.push(<Button
+                title={allAnswers[i]}
+                titleStyle={Styles.homeTitle}
+                type="outline"
+                onPress={() =>
+                    checkAnswer(allAnswers[i])} key={i} />);
         }
         return buttons;
     }
 
     // time running out
     const timeIsUp = () => {
+        setIsPlaying(false);
         setAnswerMessage("Time is up!");
+        setMessage("The correct answer was: " + correctAnswer);
     }
 
     // check if answer is correct
@@ -103,6 +109,7 @@ export default function GameScreen({ navigation }) {
                 duration={15}
                 colors={'#004777'}
                 size={60}
+                marginBottom={0}
                 onComplete={() => {
                     setKey(prevKey => prevKey + 1);
                     setIsPlaying(false);
@@ -124,8 +131,7 @@ export default function GameScreen({ navigation }) {
         );
     } else if (message === '') {
         return (
-            <SafeAreaView style={Styles.quickPlayContainer}>
-                <Text style={Styles.title}>Trivia</Text>
+            <View style={Styles.quickPlayContainer}>
                 <Text style={Styles.category}>{category}</Text>
                 <Text style={Styles.question}>{question}</Text>
                 <Text style={Styles.pointsText}>Points: {points}</Text>
@@ -135,7 +141,6 @@ export default function GameScreen({ navigation }) {
                 <View>
                     {TimerForQuestions()}
                 </View>
-                <Text> </Text>
                 <Image source={require('../assets/thinking.gif')} style={
                     {
                         width: 50,
@@ -143,47 +148,46 @@ export default function GameScreen({ navigation }) {
                         marginBottom: 0,
                     }
                 } />
-                <Text> </Text>
                 <Button style={Styles.startGamePContainer}
                     title="End game"
                     buttonStyle={Styles.backButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    titleStyle={Styles.homeTitle}
                     onPress={() => {
                         setIsPlaying(false);
                         navigation.navigate('Pointscreen', { points: points });
                     }}
                 />
-            </SafeAreaView>
+            </View>
         );
     } else {
         return (
             <View style={Styles.quickPlayContainer}>
-                <SafeAreaView style={Styles.PartyModeGameContainer}>
+                <View style={Styles.PartyModeGameContainer}>
                     <Text style={Styles.answerMessageText(answerMessage)}>{answerMessage}</Text>
                     <View style={Styles.box}>
                         <Text style={Styles.questionText}>{question}</Text>
                         <Text style={Styles.normalTextCentered}>{message}</Text>
                     </View>
-                
-                <Text style={Styles.normalText}>Points: {points}</Text>
-                <View style={{ flexDirection: "row" }}>
-                    <Button style={Styles.startGamePContainer}
-                        title="End game"
-                        buttonStyle={Styles.backButton}
-                        titleStyle={{ color: 'white', marginHorizontal: 30 }}
-                        onPress={() => {
-                            setIsPlaying(false);
-                            navigation.navigate('Pointscreen', { points: points });
-                        }}
-                    />
-                    <Button 
-                        buttonStyle={Styles.continueButton}
-                        type=""
-                        title="Next question"
-                        titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
-                        onPress={() => getQuestion()} />
+
+                    <Text style={Styles.normalText}>Points: {points}</Text>
+                    <View style={{ flexDirection: "row" }}>
+                        <Button style={Styles.startGamePContainer}
+                            title="End game"
+                            buttonStyle={Styles.backButton}
+                            titleStyle={Styles.homeTitle}
+                            onPress={() => {
+                                setIsPlaying(false);
+                                navigation.navigate('Pointscreen', { points: points });
+                            }}
+                        />
+                        <Button
+                            buttonStyle={Styles.continueButton}
+                            type=""
+                            title="Next question"
+                            titleStyle={Styles.homeTitle}
+                            onPress={() => getQuestion()} />
+                    </View>
                 </View>
-                </SafeAreaView>
             </View>
         )
     }

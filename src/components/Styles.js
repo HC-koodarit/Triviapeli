@@ -34,7 +34,8 @@ export default StyleSheet.create({
   homeTitle: {
     fontWeight: '800',
     fontFamily: 'VT323_400Regular',
-    fontSize: 25
+    fontSize: 25, 
+    color: '#fff'
   },
 
   //Header style used in multiple js files
@@ -42,7 +43,7 @@ export default StyleSheet.create({
     fontSize: 70,
     fontWeight: 'bold',
     marginBottom: 20,
-    marginTop: 50,
+    marginTop: 20,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
@@ -67,7 +68,7 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginTop: 50,
+    marginTop: 20,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
@@ -96,16 +97,17 @@ export default StyleSheet.create({
 
   //Category also used in PartyModeGame
   category: {
-    fontSize: 14,
-    marginBottom: 10,
-    color: '#fff'
+    fontSize: 16,
+    marginBottom: 5,
+    color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
   question: {
     fontSize: 30,
     alignItems: 'center',
     justifyContent: 'center',
     textAlignVertical: 'center',
-    margin: 20,
+    margin: 5,
     color: '#fff',
     fontWeight: 'bold',
     textDecorationLines: 'underline',
@@ -127,10 +129,12 @@ export default StyleSheet.create({
   //Text styles
   pointsText: {
     color: '#fff',
-    marginBottom: 5
+    marginBottom: 5,
+    fontSize: 16,
+    fontFamily: 'VT323_400Regular',
   },
   normalText: {
-    fontSize: 23,
+    fontSize: 20,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
@@ -184,6 +188,7 @@ export default StyleSheet.create({
       color: '#42b32e',
       textAlign: 'center',
       marginBottom: 7,
+      fontFamily: 'VT323_400Regular',
      }
     } else {
       return {
@@ -193,6 +198,7 @@ export default StyleSheet.create({
         color: '#de0202',
         textAlign: 'center',
         marginBottom: 7,
+        fontFamily: 'VT323_400Regular',
       }
     }
    },
