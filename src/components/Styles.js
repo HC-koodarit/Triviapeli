@@ -90,7 +90,7 @@ export default StyleSheet.create({
     color: '#fff',
   },
 
-  //Text styles used in alot of js files
+  //Text styles
   pointsText: {
     color: '#fff',
     marginBottom: 5
@@ -148,7 +148,8 @@ export default StyleSheet.create({
   otherOptionsContainer: {
     flex: 5,
   },
-  //View Tyyli
+
+  //View style
   playersTitle: {
     fontSize: 25,
     alignSelf: 'center',
@@ -158,7 +159,6 @@ export default StyleSheet.create({
   },
   //Flatlist playerNames (PartyModeOptions)
   playerNames: {
-    //paddingTop: 20,
     width: 500,
     height: 160,
     color: '#fff',
@@ -173,7 +173,7 @@ export default StyleSheet.create({
   playerContainer: {
     marginTop: 1,
     marginBottom: 1,
-      alignItems: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
   },
@@ -197,7 +197,6 @@ export default StyleSheet.create({
     alignItems: "center",
     marginBottom: 40,
   },
-
   addPlayers: {
     fontSize: 18,
     borderBottomWidth: 1.0,
@@ -205,7 +204,6 @@ export default StyleSheet.create({
     marginBottom: 5,
     color: 'black',
   },
-
   modalView: {
     alignItems: "center",
     justifyContent: "center",
@@ -306,6 +304,7 @@ export default StyleSheet.create({
   categoryContainer: {
     marginBottom: 1,
   },
+
   //Categories View Style (PartyModeOptions)
   buttonContainer: {
     flexDirection: 'row',
@@ -315,7 +314,6 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
 
-  //Difficulty settings styles
   //Difficulty container PartymodeOptions
   difficultyContainer: {
     marginBottom: 1,
@@ -385,16 +383,16 @@ export default StyleSheet.create({
     marginTop: 20,
   },
 
-    // Continue game
-    continueButton: {
-      backgroundColor: '#42b32e',
-      borderColor: 'transparent',
-      borderWidth: 0,
-      borderRadius: 30,
-      width: 160,
-      marginHorizontal: 25,
-      marginTop: 20,
-    },
+  // Continue game button style
+  continueButton: {
+    backgroundColor: '#42b32e',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 30,
+    width: 160,
+    marginHorizontal: 25,
+    marginTop: 20,
+  },
 
   //Button for powerup
   powerUpButton: {
@@ -481,7 +479,6 @@ export default StyleSheet.create({
   //For flatlist view & text
   PMResultsFlatlistContainer: {
     alignItems: 'center',
-   
   },
   playerFlatlistResults: {
     marginTop: 10,
@@ -491,6 +488,7 @@ export default StyleSheet.create({
     fontSize: 20,
     color: "#fff",
   },
+
   //Styles for home button (partyModeResults)
   PMResultsButtonContainer: {
     position: 'absolute',
@@ -500,6 +498,7 @@ export default StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
   },
+
   // PartyModeResults Home button style
   backButtonResults: {
     backgroundColor: '#ff3333',
@@ -509,6 +508,7 @@ export default StyleSheet.create({
     width: 100,
   },
 
+  // loading icon
   loading: {
     flex: 1,
     justifyContent: "center",
