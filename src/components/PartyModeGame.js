@@ -1,10 +1,8 @@
-import React, { useCallback } from 'react';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { SafeAreaView, Text, View, Image, FlatList, ActivityIndicator, Modal } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import { color } from 'react-native-elements/dist/helpers/index.js';
 
 export default function PartyModeGame({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
