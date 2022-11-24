@@ -125,15 +125,15 @@ export default function PartyModeOptions({ route, navigation }) {
                     style={[Styles.buttonpopup, Styles.buttonOpen]}
                     onPress={() => setModalVisible(true)}
                 >
-                <Text 
-                    style={Styles.textStyle}>Add player {" "}  
-                    <Icon
-                        name='person-add-outline'
-                        type='ionicon'
-                        color='white'
-                        size={15}
-                    />
-                </Text>
+                    <Text
+                        style={Styles.textStyle}>Add player {" "}
+                        <Icon
+                            name='person-add-outline'
+                            type='ionicon'
+                            color='white'
+                            size={15}
+                        />
+                    </Text>
                 </Pressable>
             </View>
             <View style={Styles.playerNames}>
@@ -236,19 +236,21 @@ export default function PartyModeOptions({ route, navigation }) {
                         }}
                     />
                 </View>
-                </ScrollView>
-                <View style={Styles.buttonContainer}>
-                    <Button
-                        title="Select all"
-                        onPress={selectAll}
-                        buttonStyle={Styles.selectCategoriesButton}
-                    />
-                    <Button
-                        title="Deselect all"
-                        onPress={deselectAll}
-                        buttonStyle={Styles.selectCategoriesButton}
-                    />
-                </View>
+            </ScrollView>
+            <View style={Styles.buttonContainer}>
+                <Button
+                    title="Select all"
+                    onPress={selectAll}
+                    buttonStyle={Styles.selectCategoriesButton}
+                    titleStyle={{ fontFamily: 'VT323_400Regular' }}
+                />
+                <Button
+                    title="Deselect all"
+                    onPress={deselectAll}
+                    buttonStyle={Styles.selectCategoriesButton}
+                    titleStyle={{ fontFamily: 'VT323_400Regular' }}
+                />
+            </View>
 
 
 
