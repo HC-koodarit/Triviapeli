@@ -1,11 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
 import { SafeAreaView, Text, View, FlatList, Image } from 'react-native';
 import { Button } from 'react-native-elements';
-import { ScrollView } from 'react-native-web';
 import Styles from './Styles.js';
 
-export default function PartyModeResults({ route, navigation, params }) {
+export default function PartyModeResults({ route, navigation }) {
     const { players } = route.params;
 
     // sort players by points from highest to lowest 
@@ -14,14 +12,15 @@ export default function PartyModeResults({ route, navigation, params }) {
     return (
         <SafeAreaView style={Styles.PartyModeResultsContainer}>
             <View style={Styles.PMResultsFlatlistContainer}>
-                <Text style={Styles.headingText}>Results:</Text>
+                <Text style={Styles.resultsHeading}>Results</Text>
                 <FlatList
                     style={Styles.playerFlatlistResults}
                     data={playersPoints}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) =>
-                        <View>
-                            <Text style={Styles.flatlistPlayerNameResults}>{item.name} – Points: {item.points}</Text>
+                        <View style={Styles.resultsContainer}>
+                            <Text style={Styles.flatlistPlayerNameResults}>{item.name}    </Text>
+                            <Text style={Styles.flatlistPlayerNameResults}>{item.points} points</Text>
                         </View>
                     }
                 />

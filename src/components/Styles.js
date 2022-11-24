@@ -156,6 +156,12 @@ export default StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+  resultsHeading: {
+    fontSize: 40,
+    color: '#fff',
+    fontWeight: 'bold',
+    paddingBottom: 25,
+  },
 
   //About.js styles
   aboutContainer: {
@@ -518,21 +524,26 @@ export default StyleSheet.create({
   PartyModeResultsContainer: {
     flex: 1,
     backgroundColor: '#020d23',
-    paddingTop: 40,
-    alignItems: "center",
+    //paddingTop: 40,
+    alignItems: 'center',
     justifyContent: 'center',
   },
   //For flatlist view & text
   PMResultsFlatlistContainer: {
     alignItems: 'center',
+    paddingTop: 50,
    
   },
   playerFlatlistResults: {
     marginTop: 10,
     marginBottom: 20,
   },
+  resultsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
   flatlistPlayerNameResults: {
-    fontSize: 20,
+    fontSize: 22,
     color: "#fff",
   },
   //Styles for home button (partyModeResults)
