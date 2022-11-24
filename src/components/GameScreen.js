@@ -75,7 +75,7 @@ export default function GameScreen({ navigation }) {
                 title={allAnswers[i]}
                 titleStyle={Styles.homeTitle}
                 type="outline"
-                onPress={() =>
+                onPress={ () => 
                     checkAnswer(allAnswers[i])} key={i} />);
         }
         return buttons;
@@ -91,6 +91,8 @@ export default function GameScreen({ navigation }) {
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
+            Speech.stop();
+            Speech.speak("Correct!", { language: 'en' });
             setPoints(setPoints => setPoints + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
@@ -98,6 +100,8 @@ export default function GameScreen({ navigation }) {
             setMessage("Your answer was: " + correctAnswer + "\n\nGood job! :)");
 
         } else if (answer !== correctAnswer) {
+            Speech.stop();
+            Speech.speak("Wrong!", { language: 'en' });
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
             let answerText = answer.toString();
@@ -162,6 +166,7 @@ export default function GameScreen({ navigation }) {
                     titleStyle={Styles.homeTitle}
                     onPress={() => {
                         setIsPlaying(false);
+                        Speech.stop();
                         navigation.navigate('Pointscreen', { points: points });
                     }}
                 />

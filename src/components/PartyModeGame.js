@@ -130,6 +130,8 @@ export default function PartyModeGame({ navigation, route }) {
     // check if answer is correct
     const checkAnswer = (answer) => {
         if (answer === correctAnswer) {
+            Speech.stop();
+            Speech.speak("Correct!", { language: 'en' });
             let pointsCounter = chosenPlayer.points + 1;
             let streakCounter = chosenPlayer.streak + 1;
             const newState = players.map(obj => {
@@ -155,6 +157,8 @@ export default function PartyModeGame({ navigation, route }) {
             };
 
         } else if (answer !== correctAnswer) {
+            Speech.stop();
+            Speech.speak("Wrong!", { language: 'en' });
             let streakCounter = chosenPlayer.streak = 0;
             let wrongAnswerCounter = chosenPlayer.wrongAnswer + 1;
 
@@ -354,6 +358,7 @@ export default function PartyModeGame({ navigation, route }) {
                         buttonStyle={Styles.backButton}
                         titleStyle={Styles.homeTitle}
                         onPress={() => {
+                            Speech.stop();
                             setIsPlaying(false);
                             navigation.navigate('PartyModeResults', { players });
                         }}
