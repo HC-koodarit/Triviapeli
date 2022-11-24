@@ -132,20 +132,20 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
 
-  //Answer messages color changes idepending on the correct answer
+  //Answer messages color changes depending on the correct answer
   answerMessageText(answerMessage) {
     if(answerMessage==="Correct!") {
      return {
-      marginTop: 25,
+      marginTop: 15,
       fontSize: 50,
       fontWeight: 'bold',
-      color: '#7CFC00',
+      color: '#42b32e',
       textAlign: 'center',
       marginBottom: 7,
      }
     } else {
       return {
-        marginTop: 25,
+        marginTop: 15,
         fontSize: 50,
         fontWeight: 'bold',
         color: '#de0202',
