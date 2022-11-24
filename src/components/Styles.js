@@ -60,7 +60,8 @@ export default StyleSheet.create({
     margin: 50,
     textAlign: "center",
     fontSize: 30,
-    color: 'black'
+    color: 'black',
+    fontFamily: 'VT323_400Regular',
   },
 
   //Rules.js style

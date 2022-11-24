@@ -41,7 +41,7 @@ export default function PartyModeResults({ route, navigation }) {
                 } />
                 <Button
                     title='Home'
-                    titleStyle={{ fontWeight: '700' }}
+                    titleStyle={Styles.homeTitle}
                     buttonStyle={Styles.backButtonResults}
                     onPress={() => navigation.navigate('Home')}
                 />

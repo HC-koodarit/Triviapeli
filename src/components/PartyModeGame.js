@@ -369,6 +369,7 @@ export default function PartyModeGame({ navigation, route }) {
                         <Text style={Styles.modalText}>{modalText}</Text>
                         <Button
                             buttonStyle={{ backgroundColor: 'black', borderColor: 'white', borderWidth: 1, borderRadius: 10 }}
+                            titleStyle={{ fontFamily: 'VT323_400Regular' }}
                             title="Close"
                             onPress={() => {
                                 const newState = players.map(obj => {
