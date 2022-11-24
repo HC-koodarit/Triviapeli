@@ -132,16 +132,6 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
 
-<<<<<<< HEAD
-  //Answer messages color changes idepending on the correct answer
-  answerMessageText(answerMessage) {
-    if(answerMessage==="Correct!") {
-     return {
-      marginTop: 25,
-      fontSize: 50,
-      fontWeight: 'bold',
-      color: '#7CFC00',
-=======
   //Answer messages color changes depending on the correct answer
   answerMessageText(answerMessage) {
     if(answerMessage==="Correct!") {
@@ -150,17 +140,12 @@ export default StyleSheet.create({
       fontSize: 50,
       fontWeight: 'bold',
       color: '#42b32e',
->>>>>>> 961b71daf9258975c8f77499c617eeac3864a36e
       textAlign: 'center',
       marginBottom: 7,
      }
     } else {
       return {
-<<<<<<< HEAD
-        marginTop: 25,
-=======
         marginTop: 15,
->>>>>>> 961b71daf9258975c8f77499c617eeac3864a36e
         fontSize: 50,
         fontWeight: 'bold',
         color: '#de0202',
@@ -558,11 +543,7 @@ export default StyleSheet.create({
   //For flatlist view & text
   PMResultsFlatlistContainer: {
     alignItems: 'center',
-<<<<<<< HEAD
-=======
-    paddingTop: 50,
-   
->>>>>>> 961b71daf9258975c8f77499c617eeac3864a36e
+    paddingTop: 50
   },
   playerFlatlistResults: {
     marginTop: 10,
