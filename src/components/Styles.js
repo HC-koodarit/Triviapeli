@@ -345,7 +345,7 @@ export default StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#6969B3",
     borderColor: 'transparent',
   },
   buttonClose: {
