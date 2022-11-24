@@ -92,7 +92,8 @@ export default StyleSheet.create({
 
   //Text styles used in alot of js files
   pointsText: {
-    color: '#fff'
+    color: '#fff',
+    marginBottom: 5
   },
   normalText: {
     fontSize: 18,
