@@ -4,6 +4,7 @@ import { SafeAreaView, Text, View, Image, FlatList, ActivityIndicator, Modal } f
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { color } from 'react-native-elements/dist/helpers/index.js';
 
 export default function GameScreen({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
@@ -32,6 +33,7 @@ export default function GameScreen({ navigation, route }) {
     const [incorrectAnswers, setIncorrectAnswers] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
     const [message, setMessage] = useState('welcome');
+    const [answerMessage, setAnswerMessage] = useState('');
 
     // variable for the player's score
     const [points, setPoints] = useState(0);
@@ -128,7 +130,8 @@ export default function GameScreen({ navigation, route }) {
             }
         });
         setPlayers(newState);
-        setMessage("Time is up! The correct answer was " + correctAnswer);
+        setAnswerMessage("Time is up!");
+        setMessage("The correct answer was " + correctAnswer);
     }
 
     // check if answer is correct
@@ -148,7 +151,8 @@ export default function GameScreen({ navigation, route }) {
             setPlayers(newState);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
+            setAnswerMessage("Correct!");
+            setMessage("Your answer was: " + correctAnswer);
 
             // if player gets a powerup, message shows in the point screen
             if (streakCounter === 3 || streakCounter === 4 ) {
@@ -174,7 +178,8 @@ export default function GameScreen({ navigation, route }) {
             setIsPlaying(false);
             setCorrectAnswers(0);
             let answerText = answer.toString()
-            setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
+            setAnswerMessage("Wrong!");
+            setMessage("You answered: " + answerText + "\n The correct answer was; " + correctAnswer);
 
             // drinking logic
             if (chosenPlayer.drink === 'Mild' && chosenPlayer.wrongAnswer < 10) {
@@ -405,15 +410,16 @@ export default function GameScreen({ navigation, route }) {
         // if answer button is pressed, show player stats
         return (
             <SafeAreaView style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.normalTextCentered}>{question}</Text>
-                <View style={{marginTop: 15}} >
+                <Text style={Styles.answerMessageText}>{answerMessage}</Text>
+                <View style={Styles.box}>
+                    <Text style={Styles.questionText}>{question}</Text>
                     <Text style={Styles.normalTextCentered}>{message}</Text>
                 </View>
                 
-                <Text style={Styles.question}>{drinkMessage}</Text>
+                <Text style={Styles.drinkInfo}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
                 <View style={Styles.currentScoreList}>
-                <Text style={Styles.playersTitle}>Current scores:</Text>
+                <Text style={Styles.scoresHeader}>Current scores:</Text>
                     <FlatList
                         style={Styles.playerFlatlist}
                         data={players}
