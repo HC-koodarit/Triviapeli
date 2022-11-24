@@ -175,7 +175,7 @@ export default function PartyModeGame({ navigation, route }) {
             setIsPlaying(false);
             let answerText = answer.toString()
             setAnswerMessage("Wrong!");
-            setMessage("You answered: " + answerText + "\n The correct answer was; " + correctAnswer);
+            setMessage("You answered: " + answerText + "\n The correct answer was: " + correctAnswer);
             getDrinks();
         }
     }
