@@ -66,8 +66,8 @@ export default StyleSheet.create({
   headerRules: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 20,
-    marginTop: 50,
+    marginBottom: 10,
+    marginTop: 20,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
