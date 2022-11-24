@@ -34,7 +34,8 @@ export default StyleSheet.create({
   homeTitle: {
     fontWeight: '800',
     fontFamily: 'VT323_400Regular',
-    fontSize: 25
+    fontSize: 25, 
+    color: '#fff'
   },
 
   //Header style used in multiple js files
@@ -42,7 +43,7 @@ export default StyleSheet.create({
     fontSize: 70,
     fontWeight: 'bold',
     marginBottom: 20,
-    marginTop: 50,
+    marginTop: 20,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
@@ -67,7 +68,7 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginTop: 50,
+    marginTop: 20,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },
@@ -133,7 +134,7 @@ export default StyleSheet.create({
     fontFamily: 'VT323_400Regular',
   },
   normalText: {
-    fontSize: 23,
+    fontSize: 20,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
   },

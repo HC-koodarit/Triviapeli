@@ -67,7 +67,7 @@ export default function GameScreen({ navigation }) {
         for (let i = 0; i < allAnswers.length; i++) {
             buttons.push(<Button
                 title={allAnswers[i]}
-                titleStyle={{ fontFamily: 'VT323_400Regular', fontSize: 20 }}
+                titleStyle={Styles.homeTitle}
                 type="outline"
                 onPress={() =>
                     checkAnswer(allAnswers[i])} key={i} />);
@@ -151,7 +151,7 @@ export default function GameScreen({ navigation }) {
                 <Button style={Styles.startGamePContainer}
                     title="End game"
                     buttonStyle={Styles.backButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 30, fontFamily: 'VT323_400Regular' }}
+                    titleStyle={Styles.homeTitle}
                     onPress={() => {
                         setIsPlaying(false);
                         navigation.navigate('Pointscreen', { points: points });
@@ -174,7 +174,7 @@ export default function GameScreen({ navigation }) {
                         <Button style={Styles.startGamePContainer}
                             title="End game"
                             buttonStyle={Styles.backButton}
-                            titleStyle={{ color: 'white', marginHorizontal: 30, fontFamily: 'VT323_400Regular', }}
+                            titleStyle={Styles.homeTitle}
                             onPress={() => {
                                 setIsPlaying(false);
                                 navigation.navigate('Pointscreen', { points: points });
@@ -184,7 +184,7 @@ export default function GameScreen({ navigation }) {
                             buttonStyle={Styles.continueButton}
                             type=""
                             title="Next question"
-                            titleStyle={{ color: 'white', marginHorizontal: 25, fontFamily: 'VT323_400Regular', }}
+                            titleStyle={Styles.homeTitle}
                             onPress={() => getQuestion()} />
                     </View>
                 </View>
