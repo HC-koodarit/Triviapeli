@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { PowerUps } from './PowerUps.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import { VirtualizedList } from 'react-native-web';
+import * as Speech from 'expo-speech';
 
 export default function PartyModeGame({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
@@ -21,7 +21,7 @@ export default function PartyModeGame({ navigation, route }) {
     // Powerups
     const [powerUpMessage, setPowerUpMessage] = useState('');
     const [powerUpList, setPowerUpList] = useState(PowerUps);
-    
+
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -53,6 +53,11 @@ export default function PartyModeGame({ navigation, route }) {
         fetch(`https://opentdb.com/api.php?amount=1&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
+                const speak = () => {
+                    const thingToSay = decodeURIComponent(data.results[0].question);
+                    Speech.speak(thingToSay, { language: 'en' });
+                };
+                speak(data.results[0].question);
                 const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id);
                 // Set new index for player, and fallback to 0 if next index larger than player count
                 const nextIndex = (currentPlayerIndex + 1) % players.length;
@@ -93,7 +98,7 @@ export default function PartyModeGame({ navigation, route }) {
                         return (
                             <Button
                                 title={answer}
-                                titleStyle={{ color: 'white', marginHorizontal: 20 }}
+                                titleStyle={Styles.homeTitle}
                                 type="outline"
                                 onPress={() => checkAnswer(answer)}
                                 key={answer}
@@ -220,7 +225,7 @@ export default function PartyModeGame({ navigation, route }) {
                 <Button
                     title="Use your level 1 power-up"
                     buttonStyle={Styles.powerUpButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    titleStyle={Styles.homeTitle}
                     onPress={() => {
                         GetLevel1PowerUp();
                         showModal(item);
@@ -233,7 +238,7 @@ export default function PartyModeGame({ navigation, route }) {
                 <Button
                     title="Use your level 2 power-up"
                     buttonStyle={Styles.powerUpButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    titleStyle={Styles.homeTitle}
                     onPress={() => {
                         GetLevel2PowerUp();
                         showModal(item)
@@ -246,7 +251,7 @@ export default function PartyModeGame({ navigation, route }) {
                 <Button
                     title="No powerup yet"
                     buttonStyle={Styles.notYetPowerUpButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 0 }}
+                    titleStyle={Styles.homeTitle}
                 />
             );
         }
@@ -322,7 +327,6 @@ export default function PartyModeGame({ navigation, route }) {
     if (message === "") {
         return (
             <View style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.title}>Trivia</Text>
                 <Text style={Styles.category}>{category}</Text>
                 <View style={Styles.box}>
                     <Text style={Styles.questionText}>{question}</Text>
@@ -348,7 +352,7 @@ export default function PartyModeGame({ navigation, route }) {
                     <Button style={Styles.startGamePContainer}
                         title="End game"
                         buttonStyle={Styles.backButton}
-                        titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                        titleStyle={Styles.homeTitle}
                         onPress={() => {
                             setIsPlaying(false);
                             navigation.navigate('PartyModeResults', { players });
@@ -371,6 +375,7 @@ export default function PartyModeGame({ navigation, route }) {
                         <Text style={Styles.modalText}>{modalText}</Text>
                         <Button
                             buttonStyle={{ backgroundColor: 'black', borderColor: 'white', borderWidth: 1, borderRadius: 10 }}
+                            titleStyle={{ fontFamily: 'VT323_400Regular' }}
                             title="Close"
                             onPress={() => {
                                 const newState = players.map(obj => {
@@ -403,7 +408,7 @@ export default function PartyModeGame({ navigation, route }) {
                 <View style={{ flexDirection: "row" }}>
                 <Button
                     title='Back home'
-                    titleStyle={{ color: 'white', marginHorizontal: 25 }}
+                    titleStyle={Styles.homeTitle}
                     buttonStyle={Styles.backButton}
                     onPress={() => navigation.navigate('Home')}
                 />
@@ -411,7 +416,7 @@ export default function PartyModeGame({ navigation, route }) {
                     buttonStyle={Styles.startButton}
                     title="Start game"
                     type=""
-                    titleStyle={{ color: 'white', marginHorizontal: 25 }}
+                    titleStyle={Styles.homeTitle}
                     onPress={() => {
                         setMessage("");
                         getQuestion();
@@ -431,10 +436,11 @@ export default function PartyModeGame({ navigation, route }) {
                     <Text style={Styles.questionText}>{question}</Text>
                     <Text style={Styles.normalTextCentered}>{message}</Text>
                 </View>
+
                 <Text style={Styles.drinkInfo}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
-                <Text style={Styles.scoresHeader}>Current scores:</Text>  
-                <ScrollView style={Styles.currentScoreList}>                 
+                <Text style={Styles.scoresHeader}>Current scores:</Text>
+                <ScrollView style={Styles.currentScoreList}>
                     <FlatList
                         style={Styles.playerFlatlistResults}
                         data={players}
@@ -454,7 +460,7 @@ export default function PartyModeGame({ navigation, route }) {
                 <Button style={Styles.startGamePContainer}
                     title="End game"
                     buttonStyle={Styles.backButton}
-                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    titleStyle={Styles.homeTitle}
                     onPress={() => {
                         setIsPlaying(false);
                         navigation.navigate('PartyModeResults', { players });
@@ -464,7 +470,7 @@ export default function PartyModeGame({ navigation, route }) {
                     buttonStyle={Styles.continueButton}
                     type=""
                     title="Next question"
-                    titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
+                    titleStyle={Styles.homeTitle}
                     onPress={() => getQuestion()}
                 />
                 </View>              

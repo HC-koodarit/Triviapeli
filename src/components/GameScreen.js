@@ -1,9 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Alert, Platform, Image, ActivityIndicator } from 'react-native';
+import { Text, View, Image, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import * as Speech from 'expo-speech';
 
 export default function GameScreen({ navigation }) {
 
@@ -33,6 +34,11 @@ export default function GameScreen({ navigation }) {
         fetch("https://opentdb.com/api.php?amount=1&encode=url3986")
             .then(response => response.json())
             .then(data => {
+                const speak = () => {
+                    const thingToSay = decodeURIComponent(data.results[0].question);
+                    Speech.speak(thingToSay, { language: 'en' });
+                };
+                speak(data.results[0].question);
                 setAllAnswers(['']);
                 setQuestion(decodeURIComponent(data.results[0].question));
                 setCategory(decodeURIComponent(data.results[0].category));
