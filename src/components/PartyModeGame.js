@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
-export default function GameScreen({ navigation, route }) {
+export default function PartyModeGame({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
 
     // modal for powerups
@@ -22,8 +22,6 @@ export default function GameScreen({ navigation, route }) {
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
-    const [playersCorrectAnswers, setPlayersCorrectAnswers] = useState([0]);
-    // const [playersStreak, setPlayersStreak] = useState([]);   // ei käytössä
 
     // variables for questions and answers
     const [question, setQuestion] = useState('');
@@ -34,10 +32,7 @@ export default function GameScreen({ navigation, route }) {
     const [message, setMessage] = useState('welcome');
 
     // variable for the player's score
-    // const [points, setPoints] = useState(0);
-
-    // count correct answers for powerups HUOM! Ei laske streakkiä
-    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [points, setPoints] = useState(0);
 
     // variables for the countdown timer
     const [isPlaying, setIsPlaying] = useState(false);
@@ -65,7 +60,6 @@ export default function GameScreen({ navigation, route }) {
         fetch(`https://opentdb.com/api.php?amount=1&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
-                setCorrectAnswers(correctAnswers + 1);
                 const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id);
                 // Set new index for player, and fallback to 0 if next index larger than player count
                 const nextIndex = (currentPlayerIndex + 1) % players.length;
@@ -96,11 +90,7 @@ export default function GameScreen({ navigation, route }) {
             .catch(err => console.error(err));
 
     }, [selectedCategories, chosenPlayer])
-    /*
-        useEffect(() => {
-            getQuestion();
-        }, []);
-    */
+
     // buttons for answers
     const AnswerButtons = () => {
         return (
@@ -125,9 +115,10 @@ export default function GameScreen({ navigation, route }) {
     // timer runs out
     const timeIsUp = () => {
         let streakCounter = chosenPlayer.streak = 0;    // reset player's streak
+        let wrongAnswerCounter = chosenPlayer.wrongAnswer + 1;
         const newState = players.map(obj => {
             if (obj.id === chosenPlayer.id) {
-                return { ...obj, streak: streakCounter };
+                return { ...obj, streak: streakCounter, wrongAnswer: wrongAnswerCounter };
             } else {
                 return obj;
             }
@@ -156,10 +147,10 @@ export default function GameScreen({ navigation, route }) {
             setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
 
             // if player gets a powerup, message shows in the point screen
-            if (streakCounter === 3 || streakCounter === 4) {
-                setPowerUpMessage(chosenPlayer.name + ' You got a level 1 powerup!')
-            } else if (streakCounter >= 5) {
-                setPowerUpMessage(chosenPlayer.name + ' You got a level 2 powerup!');
+            if (streakCounter === 3) {
+                setPowerUpMessage(chosenPlayer.name + ': You got a level 1 powerup!')
+            } else if (streakCounter === 5) {
+                setPowerUpMessage(chosenPlayer.name + ': You got a level 2 powerup!')
             };
 
         } else if (answer !== correctAnswer) {
@@ -177,7 +168,6 @@ export default function GameScreen({ navigation, route }) {
             setPlayers(newState);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            setCorrectAnswers(0);
             let answerText = answer.toString()
             setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
 
@@ -261,69 +251,50 @@ export default function GameScreen({ navigation, route }) {
         )
     }
 
-    // Stage 1 powerup: give a randomized task for another player
-    const GetStage1Powerup = () => {
+    // Level 1 powerup: give a randomized task for another player
+    const GetLevel1Powerup = () => {
         let i = powerUpList.length;
         const j = Math.floor(Math.random() * i);
-        let powerUpString = "Choose another player to " + powerUpList[j] + " or finish their drink";
-        return powerUpString;
+        setModalText("Choose another player to " + powerUpList[j] + " or finish their drink");
     }
 
-    // Stage 2 powerup: get a hint
-    const GetStage2Powerup = () => {
+    // Level 2 powerup: get a hint
+    const GetLevel2Powerup = () => {
         let i = Math.floor(Math.random() * 2);
         let j = Math.floor(Math.random() * (incorrectAnswers.length));
         if (i === 0) {
-            return "The correct answer is probably " + correctAnswer + "! Or it might be " + incorrectAnswers[j] + "...";
+            setModalText("The correct answer is probably " + correctAnswer + "! Or it might be " + incorrectAnswers[j] + "...");
         } else {
-            return "The correct answer is probably " + incorrectAnswers[j] + "! Or it might be " + correctAnswer + "...";
+            setModalText("The correct answer is probably " + incorrectAnswers[j] + "! Or it might be " + correctAnswer + "...");
         }
     }
 
     // Powerup appears if streak is long enough
     const PowerUpButton = () => {
         let powerUpCounter = chosenPlayer.streak;
-        if (powerUpCounter >= 1 && powerUpCounter <= 4) {
-            setModalText(GetStage1Powerup());
+        if (powerUpCounter >= 3 && powerUpCounter <= 4) {
             return (
                 <Button
-                    title="Use your stage 1 powerup"
+                    title="Use your level 1 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
+                        GetLevel1Powerup();
                         showModal(item);
                         setIsPlaying(false);
-                        const newState = players.map(obj => {
-                            let streakCounter = chosenPlayer.streak = 0;
-                            if (obj.id === chosenPlayer.id) {
-                                return { ...obj, streak: streakCounter };
-                            } else {
-                                return obj;
-                            }
-                        });
-                        setPlayers(newState);
                     }}
                 />
             );
         } else if (powerUpCounter >= 5) {
-            setModalText(GetStage2Powerup());
             return (
                 <Button
-                    title="Use your stage 2 powerup"
+                    title="Use your level 2 powerup"
                     buttonStyle={Styles.powerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                     onPress={() => {
+                        GetLevel2Powerup();
                         showModal(item)
                         setIsPlaying(false);
-                        const newState = players.map(obj => {
-                            let streakCounter = chosenPlayer.streak = 0;
-                            if (obj.id === chosenPlayer.id) {
-                                return { ...obj, streak: streakCounter };
-                            } else {
-                                return obj;
-                            }
-                        });
-                        setPlayers(newState);
                     }}
                 />
             );
@@ -333,8 +304,6 @@ export default function GameScreen({ navigation, route }) {
                     title="No powerup yet"
                     buttonStyle={Styles.notYetPowerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
-                    onPress={() => {
-                    }}
                 />
             );
         }
@@ -402,6 +371,15 @@ export default function GameScreen({ navigation, route }) {
                             buttonStyle={{ backgroundColor: 'black', borderColor: 'white', borderWidth: 1, borderRadius: 10 }}
                             title="Close"
                             onPress={() => {
+                                const newState = players.map(obj => {
+                                    let streakCounter = chosenPlayer.streak = 0;
+                                    if (obj.id === chosenPlayer.id) {
+                                        return { ...obj, streak: streakCounter };
+                                    } else {
+                                        return obj;
+                                    }
+                                });
+                                setPlayers(newState);
                                 setIsPlaying(true);
                                 setModalText('');
                                 setModalVisible(!modalVisible)
@@ -456,7 +434,6 @@ export default function GameScreen({ navigation, route }) {
                                 <Text style={Styles.statsList}>{item.name}</Text>
                                 <View style={Styles.playerContainer}>
                                     <Text style={Styles.statsList}>Points: {item.points} Streak: {item.streak}</Text>
-                                    {/*<Text style={Styles.statsList}> Streak: {item.streak} </Text>*/}
                                     <Text style={Styles.statsListWrongAnswers}> Wrong answers: {item.wrongAnswer} </Text>
                                 </View>
                             </View>

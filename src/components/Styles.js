@@ -474,11 +474,13 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#020d23',
     paddingTop: 40,
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: 'center',
   },
   //For flatlist view & text
   PMResultsFlatlistContainer: {
     alignItems: 'center',
+   
   },
   playerFlatlistResults: {
     marginTop: 10,
@@ -493,8 +495,8 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 10,
-    justifyContent: 'center',
+    bottom: 40,
+    //justifyContent: 'center',
     alignItems: 'center',
   },
   // PartyModeResults Home button style
