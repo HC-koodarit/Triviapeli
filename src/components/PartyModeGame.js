@@ -124,9 +124,10 @@ export default function GameScreen({ navigation, route }) {
     // timer runs out
     const timeIsUp = () => {
         let streakCounter = chosenPlayer.streak = 0;    // reset player's streak
+        let wrongAnswerCounter = chosenPlayer.wrongAnswer + 1;
         const newState = players.map(obj => {
             if (obj.id === chosenPlayer.id) {
-                return { ...obj, streak: streakCounter };
+                return { ...obj, streak: streakCounter, wrongAnswer: wrongAnswerCounter };
             } else {
                 return obj;
             }
