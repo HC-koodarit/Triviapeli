@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image, Linking } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
 
@@ -11,16 +11,23 @@ export default function About({ navigation }) {
             <Text style={Styles.normalText}>This game is the work of the Ohjelmistoprojekti II (Software Project II) course at Haaga-Helia University of Applied Sciences.</Text>
             <Text> </Text>
             <Text style={Styles.normalText}>The team members in alphabetical order are:</Text>
-            <Text style={Styles.normalText}>- Bergman Sebastian</Text>
-            <Text style={Styles.normalText}>- Haavistola Henni</Text>
-            <Text style={Styles.normalText}>- Lumme Sofia</Text>
-            <Text style={Styles.normalText}>- Paltiala Mari</Text>
-            <Text style={Styles.normalText}>- Riihelä Kristian</Text>
-            <Text style={Styles.normalText}>- Ristikari Daniel</Text>
+            <Text style={Styles.normalText}>- Sebastian Bergman</Text>
+            <Text style={Styles.normalText}>- Henni Haavistola</Text>
+            <Text style={Styles.normalText}>- Sofia Lumme</Text>
+            <Text style={Styles.normalText}>- Mari Paltiala</Text>
+            <Text style={Styles.normalText}>- Kristian Riihelä</Text>
+            <Text style={Styles.normalText}>- Daniel Ristikari</Text>
             <Text> </Text>
-            <Text style={Styles.normalText}>This application uses data from The Open Trivia Database API for trivia questions and answers.</Text>
+            <Text style={Styles.normalText}>This application uses data from <Text style={Styles.normalText} onPress={ ()=>{ Linking.openURL('https://opentdb.com/')}}>The Open Trivia Database API</Text> for trivia questions and answers.</Text>
             <Text> </Text>
-            <Text style={Styles.normalText}>All data provided by the API is available under the Creative Commons Attribution-ShareAlike 4.0 International License.</Text>
+            <Image source={require('../assets/license.png')} style={
+                {
+                    height: 15,
+                    width: 80,
+                    marginBottom: 10,
+                }
+            } />
+            <Text style={Styles.normalText}>This work is licensed under a <Text style={Styles.normalText} onPress={() => { Linking.openURL('https://creativecommons.org/licenses/by-sa/4.0/') }}>Creative Commons Attribution-ShareAlike 4.0 International License</Text>.</Text>
             <Button
                 title='Back'
                 titleStyle={{ fontWeight: '700' }}

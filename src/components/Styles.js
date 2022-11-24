@@ -191,6 +191,7 @@ export default StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     paddingBottom: 25,
+    fontFamily: 'VT323_400Regular'
   },
 
   //About.js styles
