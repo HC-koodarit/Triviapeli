@@ -323,7 +323,9 @@ export default function PartyModeGame({ navigation, route }) {
             <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.title}>Trivia</Text>
                 <Text style={Styles.category}>{category}</Text>
-                <Text style={Styles.question}>{question}</Text>
+                <View style={Styles.box}>
+                    <Text style={Styles.questionText}>{question}</Text>
+                </View>
                 <Text style={Styles.playerName}>{chosenPlayer.name}</Text>
                 <Text style={Styles.pointsText}>
                     Points: {chosenPlayer.points}, Streak: {chosenPlayer.streak}
