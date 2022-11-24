@@ -119,7 +119,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     textAlignVertical: 'center',
     margin: 5,
-    color: '#fff'
+    color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
   buttons: {
     flexDirection: 'column',
@@ -407,7 +408,9 @@ export default StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'VT323_400Regular',
+    fontSize: 16
   },
 
   //Pickers and add number (PartyModeOptions)
@@ -478,6 +481,12 @@ export default StyleSheet.create({
   },
   selectedStyleDropdown: {
     borderRadius: 12,
+  },
+
+  selectButton: {
+    backgroundColor: "#3c87c2",
+    borderColor: 'transparent',
+    borderRadius: 30,
   },
 
   // Back button (Multiple js files)
@@ -581,6 +590,7 @@ export default StyleSheet.create({
   statsList: {
     fontSize: 18,
     color: "#fff",
+    fontFamily: 'VT323_400Regular',
   },
   statsListWrongAnswers: {
     fontSize: 13,
@@ -617,6 +627,7 @@ export default StyleSheet.create({
     fontSize: 22,
     color: "#fff",
     paddingBottom: 10,
+    fontFamily: 'VT323_400Regular',
   },
   // show gold, silver, bronze trophys to winners. NOT WORKING!!!! :(((((
   trophy(playersPoints) {

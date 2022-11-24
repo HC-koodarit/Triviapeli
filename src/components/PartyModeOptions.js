@@ -4,7 +4,7 @@ import { Button, Icon } from 'react-native-elements';
 import Styles from './Styles';
 import { MultiSelect, Dropdown } from 'react-native-element-dropdown';
 import { DrinkImages } from '../images/DrinkImages';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function PartyModeOptions({ route, navigation }) {
 
@@ -130,10 +130,10 @@ export default function PartyModeOptions({ route, navigation }) {
                             <Text style={Styles.flatlistPlayerNames}> - {item.drink} </Text>
                             <Image source={item.image} style={Styles.playerDrinkImage} />
                             <Text style={Styles.flatlistPlayerNames}>    </Text>
-                            <MaterialIcons 
-                                name="cancel" 
-                                size={20} 
-                                color="#990808" 
+                            <MaterialIcons
+                                name="cancel"
+                                size={20}
+                                color="#990808"
                                 onPress={() => deletePlayer(item.id)}
                             />
                         </View>
@@ -146,14 +146,17 @@ export default function PartyModeOptions({ route, navigation }) {
                         visible={modalVisible}
                         onRequestClose={() => setModalVisible(false)}>
                         <Pressable style={Styles.outsideModal}
-                        onPress={(event) => { if (event.target == event.currentTarget) { 
-                            setModalVisible(false); } }} >
+                            onPress={(event) => {
+                                if (event.target == event.currentTarget) {
+                                    setModalVisible(false);
+                                }
+                            }} >
 
                             {/* Add a new player */}
                             <View style={Styles.modal}>
                                 <View style={Styles.modalHeader}>
                                     <View style={Styles.modalHeaderContent}>
-                                        <Text>Add players</Text>
+                                        <Text>Add player</Text>
                                     </View>
                                     <TouchableOpacity onPress={() => setModalVisible(false)}>
                                         <Text style={Styles.modalHeaderCloseText}>X</Text>
@@ -163,7 +166,7 @@ export default function PartyModeOptions({ route, navigation }) {
                                     <TextInput
                                         placeholderTextColor={'grey'}
                                         style={Styles.addPlayers}
-                                        placeholder='player name'
+                                        placeholder='Name'
                                         onChangeText={playerNameTemp => setPlayerNameTemp(playerNameTemp)}
                                         value={playerNameTemp} />
                                     <Dropdown
@@ -185,21 +188,22 @@ export default function PartyModeOptions({ route, navigation }) {
                                     <Pressable
                                         style={[Styles.buttonpopup, Styles.buttonClose]}
                                         onPress={addPlayer} >
-                                    <Text style={Styles.textStyle}>Save player</Text>
+                                        <Text style={Styles.textStyle}>Save player</Text>
                                     </Pressable>
                                 </View>
                             </View>
                         </Pressable>
                     </Modal>
                 </View>
-                    <View style={Styles.AddPlayerButtonContainer}>
-                        <Pressable
-                            title="Add Player"
-                            style={[Styles.buttonpopup, Styles.buttonOpen]}
-                            onPress={() => setModalVisible(true)}
-                        >
-                        <Text 
-                            style={Styles.textStyle}>Add player {" "}  
+                <View style={Styles.AddPlayerButtonContainer}>
+                    <Pressable
+                        title="Add Player"
+                        style={[Styles.buttonpopup, Styles.buttonOpen]}
+                        titleStyle={Styles.homeTitle}
+                        onPress={() => setModalVisible(true)}
+                    >
+                        <Text
+                            style={Styles.textStyle}>Add player {" "}
                             <Icon
                                 name='person-add-outline'
                                 type='ionicon'
@@ -207,8 +211,8 @@ export default function PartyModeOptions({ route, navigation }) {
                                 size={15}
                             />
                         </Text>
-                        </Pressable>
-                    </View>
+                    </Pressable>
+                </View>
             </View>
 
             {/* Select categories */}
@@ -232,19 +236,21 @@ export default function PartyModeOptions({ route, navigation }) {
                         }}
                     />
                 </View>
-                </ScrollView>
-                <View style={Styles.buttonContainer}>
-                    <Button
-                        title="Select all"
-                        onPress={selectAll}
-                        color="#3c87c2"
-                    />
-                    <Button
-                        title="Deselect all"
-                        onPress={deselectAll}
-                        color="#3c87c2"
-                    />
-                </View>
+            </ScrollView>
+            <View style={Styles.buttonContainer}>
+                <Button
+                    buttonStyle={Styles.selectButton}
+                    titleStyle={{ fontFamily: 'VT323_400Regular' }}
+                    title="Select all"
+                    onPress={selectAll}
+                />
+                <Button
+                    buttonStyle={Styles.selectButton}
+                    titleStyle={{ fontFamily: 'VT323_400Regular' }}
+                    title="Deselect all"
+                    onPress={deselectAll}
+                />
+            </View>
 
 
 
@@ -273,7 +279,7 @@ export default function PartyModeOptions({ route, navigation }) {
             <View style={Styles.startGamePContainer}>
                 <Button
                     title='Back'
-                    titleStyle={{ fontWeight: '700' }}
+                    titleStyle={Styles.homeTitle}
                     buttonStyle={Styles.backButton}
                     onPress={() => navigation.navigate('Home')}
                 />
@@ -286,7 +292,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         color: 'white',
                     }}
                     iconContainerStyle={{ marginRight: 10 }}
-                    titleStyle={{ fontWeight: '700' }}
+                    titleStyle={Styles.homeTitle}
                     buttonStyle={Styles.startButton}
                     onPress={startGame}
                 />
