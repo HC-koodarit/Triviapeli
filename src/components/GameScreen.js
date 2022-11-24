@@ -177,7 +177,7 @@ export default function GameScreen({ navigation }) {
                         }}
                     />
                     <Button 
-                        style={Styles.continueButton}
+                        buttonStyle={Styles.continueButton}
                         type=""
                         title="Next question"
                         titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}

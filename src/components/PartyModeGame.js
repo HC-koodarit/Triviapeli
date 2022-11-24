@@ -117,7 +117,7 @@ export default function PartyModeGame({ navigation, route }) {
         });
         setPlayers(newState);
         setAnswerMessage("Time is up!");
-        setMessage("The correct answer was " + correctAnswer);
+        setMessage("The correct answer was: " + correctAnswer);
         getDrinks();
     }
 
@@ -243,7 +243,7 @@ export default function PartyModeGame({ navigation, route }) {
         } else {
             return (
                 <Button
-                    title="No power-up yet"
+                    title="No powerup yet"
                     buttonStyle={Styles.notYetPowerUpButton}
                     titleStyle={{ color: 'white', marginHorizontal: 0 }}
                 />
@@ -399,13 +399,13 @@ export default function PartyModeGame({ navigation, route }) {
                 <Text style={Styles.infoText}>{players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <View style={{ flexDirection: "row" }}>
                 <Button
-                    title='Backome'
+                    title='Back home'
                     titleStyle={{ color: 'white', marginHorizontal: 25 }}
                     buttonStyle={Styles.backButton}
                     onPress={() => navigation.navigate('Home')}
                 />
                 <Button
-                    style={Styles.startButton}
+                    buttonStyle={Styles.startButton}
                     title="Start game"
                     type=""
                     titleStyle={{ color: 'white', marginHorizontal: 25 }}
@@ -459,7 +459,7 @@ export default function PartyModeGame({ navigation, route }) {
                     }}
                 /> 
                 <Button
-                    style={Styles.continueButton}
+                    buttonStyle={Styles.continueButton}
                     type=""
                     title="Next question"
                     titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
