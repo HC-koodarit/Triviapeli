@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { PowerUps } from './PowerUps.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import * as Speech from 'expo-speech';
 
 export default function PartyModeGame({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
@@ -20,7 +21,7 @@ export default function PartyModeGame({ navigation, route }) {
     // Powerups
     const [powerUpMessage, setPowerUpMessage] = useState('');
     const [powerUpList, setPowerUpList] = useState(PowerUps);
-    
+
     // Use first player from route params as the initial value
     const [players, setPlayers] = useState(playerDetails);
     const [chosenPlayer, setChosenPlayer] = useState(players[0]);
@@ -52,6 +53,11 @@ export default function PartyModeGame({ navigation, route }) {
         fetch(`https://opentdb.com/api.php?amount=1&category=${categoryForQuestion}&difficulty=${selectedDifficulty}&encode=url3986`)
             .then(response => response.json())
             .then(data => {
+                const speak = () => {
+                    const thingToSay = decodeURIComponent(data.results[0].question);
+                    Speech.speak(thingToSay, { language: 'en' });
+                };
+                speak(data.results[0].question);
                 const currentPlayerIndex = players.findIndex(p => p.id === chosenPlayer.id);
                 // Set new index for player, and fallback to 0 if next index larger than player count
                 const nextIndex = (currentPlayerIndex + 1) % players.length;
@@ -430,7 +436,7 @@ export default function PartyModeGame({ navigation, route }) {
                     <Text style={Styles.questionText}>{question}</Text>
                     <Text style={Styles.normalTextCentered}>{message}</Text>
                 </View>
-                
+
                 <Text style={Styles.drinkInfo}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
                 <Text style={Styles.scoresHeader}>Current scores:</Text>
