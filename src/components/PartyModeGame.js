@@ -344,9 +344,6 @@ export default function PartyModeGame({ navigation, route }) {
                     }
                 } />
                 <View style={{ flexDirection: "row" }}>
-                    <View>
-                        <PowerUpButton />
-                    </View>
                     <Button style={Styles.startGamePContainer}
                         title="End game"
                         buttonStyle={Styles.backButton}
@@ -356,9 +353,12 @@ export default function PartyModeGame({ navigation, route }) {
                             navigation.navigate('PartyModeResults', { players });
                         }}
                     />
+                    <View>
+                        <PowerUpButton />
+                    </View>
                 </View>
                 <Modal
-                    style={Styles.modalPowerUp}
+                    style={Styles.modalPowerup}
                     animationType="slide"
                     visible={modalVisible}
                     transparent={true}
@@ -366,7 +366,7 @@ export default function PartyModeGame({ navigation, route }) {
                         setModalVisible(!modalVisible);
                     }}
                 >
-                    <View style={Styles.modalPowerUp}>
+                    <View style={Styles.modalPowerup}>
                         <Text style={Styles.modalText}>{modalText}</Text>
                         <Button
                             buttonStyle={{ backgroundColor: 'black', borderColor: 'white', borderWidth: 1, borderRadius: 10 }}
@@ -399,6 +399,13 @@ export default function PartyModeGame({ navigation, route }) {
                 <Text style={Styles.welcomeTitle}>Welcome!</Text>
                 <Text style={Styles.infoText}>The first player is:</Text>
                 <Text style={Styles.infoText}>{players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <View style={{ flexDirection: "row" }}>
+                <Button
+                    title='Back home'
+                    titleStyle={{ color: 'white', marginHorizontal: 25 }}
+                    buttonStyle={Styles.backButton}
+                    onPress={() => navigation.navigate('Home')}
+                />
                 <Button
                     style={Styles.startButton}
                     title="Start game"
@@ -410,6 +417,7 @@ export default function PartyModeGame({ navigation, route }) {
                     }
                     }
                 />
+                </View>
             </View>
         )
 
@@ -442,6 +450,16 @@ export default function PartyModeGame({ navigation, route }) {
                     />
                 </View>
                 <Text style={Styles.infoText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
+                <View style={{ flexDirection: "row" }}>
+                <Button style={Styles.startGamePContainer}
+                    title="End game"
+                    buttonStyle={Styles.backButton}
+                    titleStyle={{ color: 'white', marginHorizontal: 30 }}
+                    onPress={() => {
+                        setIsPlaying(false);
+                        navigation.navigate('PartyModeResults', { players });
+                    }}
+                /> 
                 <Button
                     style={Styles.continueButton}
                     type=""
@@ -449,6 +467,7 @@ export default function PartyModeGame({ navigation, route }) {
                     titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
                     onPress={() => getQuestion()}
                 />
+                </View>              
             </SafeAreaView>
         )
     }
