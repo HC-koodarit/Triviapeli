@@ -10,7 +10,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={{
                 fontSize: 100,
                 fontWeight: 'bold',
-                color: '98c1d9',
+                color: '#98c1d9',
                 marginTop: 50,
                 padding: 10,
             }}>Trivia</Text>
@@ -112,8 +112,8 @@ export default function HomeScreen({ navigation }) {
 
             <Image source={require('../assets/people.png')} style={
                 {
-                    width: 400,
-                    height: 400,
+                    width: 300,
+                    height: 300,
                     opacity: 0.9,
                 }
             } />
