@@ -14,24 +14,22 @@ export default function RulesScreen({ navigation }) {
             <Text style={Styles.normalText}>4. Brag about it</Text>
             <Text> </Text>
             <Text style={Styles.headerRules}>How to play party mode</Text>
-
-            <Text style={Styles.normalText}>1. Add players</Text>
-            <Text style={Styles.normalText}>2. Choose your poison</Text>
+            <Text style={Styles.normalText}>1. Add players and choose drinks</Text>
             <Text style={Styles.normalText}>3. Select categories</Text>
             <Text style={Styles.normalText}>4. Select difficulty</Text>
             <Text style={Styles.normalText}>5. Start the game</Text>
             <Text style={Styles.normalText}>6. Answer the questions</Text>
             <Text style={Styles.normalText}>7. Fail and get wasted</Text>
             <Text> </Text>
-            <Text style={Styles.headerRules}>Powerups</Text>
-            <Text style={Styles.normalText}>Powerups are included in Partymode</Text>
-            <Text style={Styles.normalText}>They are random and give player an advantage</Text>
-            <Text style={Styles.normalText}>A streak of 3: Level 1 powerup</Text>
-            <Text style={Styles.normalText}>A streak of 5: Level 2 powerup</Text>
-            <Text style={Styles.normalText}>After using the powerup, streak goes back to 0</Text>
+            <Text style={Styles.headerRules}>Power-ups</Text>
+            <Text style={Styles.normalText}>Power-ups are included in the party mode</Text>
+            <Text style={Styles.normalText}>They are random and give the player an advantage</Text>
+            <Text style={Styles.normalText}>A streak of 3: Level 1 power-up</Text>
+            <Text style={Styles.normalText}>A streak of 5: Level 2 power-up</Text>
+            <Text style={Styles.normalText}>After using the power-up, your streak goes back to 0</Text>
             <Button
                 title='Back'
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={Styles.homeTitle}
                 buttonStyle={Styles.backButton}
                 onPress={() => navigation.navigate('Home')}
             />

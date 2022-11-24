@@ -10,6 +10,33 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
+  //HomeScreen
+  homeHeader: {
+    fontSize: 70,
+    fontWeight: 'bold',
+    color: '#98c1d9',
+    marginTop: 50,
+    padding: 10,
+    fontFamily: 'VT323_400Regular',
+  },
+  homeButton: {
+    backgroundColor: '#6969B3',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 25,
+    marginTop: 5,
+  },
+  homeContainer: {
+    width: 250,
+    marginHorizontal: 50,
+    marginVertical: 20,
+  },
+  homeTitle: {
+    fontWeight: '800',
+    fontFamily: 'VT323_400Regular',
+    fontSize: 25
+  },
+
   //Header style used in multiple js files
   header: {
     fontSize: 70,
@@ -39,7 +66,7 @@ export default StyleSheet.create({
   headerRules: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
     marginTop: 50,
     color: '#fff',
     fontFamily: 'VT323_400Regular',
@@ -103,8 +130,13 @@ export default StyleSheet.create({
     marginBottom: 5
   },
   normalText: {
-    fontSize: 20,
+    fontSize: 23,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
+  },
+  hyperlinkText: {
+    fontSize: 20,
+    color: '#98c1d9',
     fontFamily: 'VT323_400Regular',
   },
   box: {
@@ -191,6 +223,7 @@ export default StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     paddingBottom: 25,
+    fontFamily: 'VT323_400Regular'
   },
 
   //About.js styles

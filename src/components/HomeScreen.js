@@ -7,14 +7,7 @@ export default function HomeScreen({ navigation }) {
 
     return (
         <View style={Styles.container} >
-            <Text style={{
-                fontSize: 100,
-                fontWeight: 'bold',
-                color: '#98c1d9',
-                marginTop: 50,
-                padding: 10,
-                fontFamily: 'VT323_400Regular',
-            }}>Trivia</Text>
+            <Text style={Styles.homeHeader}>Trivia</Text>
 
             <Button
                 title="Partymode"
@@ -25,19 +18,9 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
-                buttonStyle={{
-                    backgroundColor: '#6969B3',
-                    borderColor: 'transparent',
-                    borderWidth: 0,
-                    borderRadius: 30,
-                    marginTop: 10,
-                }}
-                containerStyle={{
-                    width: 250,
-                    marginHorizontal: 50,
-                    marginVertical: 20,
-                }}
+                titleStyle={Styles.homeTitle}
+                buttonStyle={Styles.homeButton}
+                containerStyle={Styles.homeContainer}
                 onPress={() => { navigation.navigate('Partymode') }}
             />
             <Button
@@ -49,18 +32,9 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
-                buttonStyle={{
-                    backgroundColor: '#6969B3',
-                    borderColor: 'transparent',
-                    borderWidth: 0,
-                    borderRadius: 30,
-                }}
-                containerStyle={{
-                    width: 250,
-                    marginHorizontal: 50,
-                    marginVertical: 20,
-                }}
+                titleStyle={Styles.homeTitle}
+                buttonStyle={Styles.homeButton}
+                containerStyle={Styles.homeContainer}
                 onPress={() => { navigation.navigate('Quickplay') }}
             />
             <Button
@@ -72,18 +46,9 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
-                buttonStyle={{
-                    backgroundColor: '#6969B3',
-                    borderColor: 'transparent',
-                    borderWidth: 0,
-                    borderRadius: 30,
-                }}
-                containerStyle={{
-                    width: 250,
-                    marginHorizontal: 50,
-                    marginVertical: 20,
-                }}
+                titleStyle={Styles.homeTitle}
+                buttonStyle={Styles.homeButton}
+                containerStyle={Styles.homeContainer}
                 onPress={() => { navigation.navigate('Rules') }}
             />
             <Button
@@ -95,26 +60,16 @@ export default function HomeScreen({ navigation }) {
                     color: 'white',
                 }}
                 iconContainerStyle={{ marginRight: 10 }}
-                titleStyle={{ fontWeight: '800', fontFamily: 'VT323_400Regular', fontSize: 30 }}
-                buttonStyle={{
-                    backgroundColor: '#6969B3',
-                    borderColor: 'transparent',
-                    borderWidth: 0,
-                    borderRadius: 30,
-                }}
-                containerStyle={{
-                    width: 250,
-                    marginHorizontal: 50,
-                    marginVertical: 20,
-                    marginBottom: 0
-                }}
+                titleStyle={Styles.homeTitle}
+                buttonStyle={Styles.homeButton}
+                containerStyle={Styles.homeContainer}
                 onPress={() => { navigation.navigate('About') }}
             />
 
             <Image source={require('../assets/people.png')} style={
                 {
-                    width: 300,
-                    height: 300,
+                    width: 200,
+                    height: 200,
                     opacity: 0.9,
                 }
             } />
