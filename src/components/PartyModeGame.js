@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { PowerUps } from './PowerUps.js';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { VirtualizedList } from 'react-native-web';
 
 export default function PartyModeGame({ navigation, route }) {
     const { playerDetails, selectedDifficulty, selectedCategories } = route.params;
@@ -430,7 +431,6 @@ export default function PartyModeGame({ navigation, route }) {
                     <Text style={Styles.questionText}>{question}</Text>
                     <Text style={Styles.normalTextCentered}>{message}</Text>
                 </View>
-                
                 <Text style={Styles.drinkInfo}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
                 <Text style={Styles.scoresHeader}>Current scores:</Text>  

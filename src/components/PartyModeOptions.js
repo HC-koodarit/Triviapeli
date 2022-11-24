@@ -119,6 +119,23 @@ export default function PartyModeOptions({ route, navigation }) {
         <SafeAreaView style={Styles.partyOptionsContainer}>
             {/* List of players */}
             <Text style={Styles.playersTitle}>Players</Text>
+            <View style={Styles.AddPlayerButtonContainer}>
+                <Pressable
+                    title="Add Player"
+                    style={[Styles.buttonpopup, Styles.buttonOpen]}
+                    onPress={() => setModalVisible(true)}
+                >
+                <Text 
+                    style={Styles.textStyle}>Add player {" "}  
+                    <Icon
+                        name='person-add-outline'
+                        type='ionicon'
+                        color='white'
+                        size={15}
+                    />
+                </Text>
+                </Pressable>
+            </View>
             <View style={Styles.playerNames}>
                 <FlatList
                     style={Styles.playerFlatlist}
@@ -192,23 +209,7 @@ export default function PartyModeOptions({ route, navigation }) {
                         </Pressable>
                     </Modal>
                 </View>
-                    <View style={Styles.AddPlayerButtonContainer}>
-                        <Pressable
-                            title="Add Player"
-                            style={[Styles.buttonpopup, Styles.buttonOpen]}
-                            onPress={() => setModalVisible(true)}
-                        >
-                        <Text 
-                            style={Styles.textStyle}>Add player {" "}  
-                            <Icon
-                                name='person-add-outline'
-                                type='ionicon'
-                                color='white'
-                                size={15}
-                            />
-                        </Text>
-                        </Pressable>
-                    </View>
+
             </View>
 
             {/* Select categories */}
@@ -237,12 +238,12 @@ export default function PartyModeOptions({ route, navigation }) {
                     <Button
                         title="Select all"
                         onPress={selectAll}
-                        color="#3c87c2"
+                        buttonStyle={Styles.selectCategoriesButton}
                     />
                     <Button
                         title="Deselect all"
                         onPress={deselectAll}
-                        color="#3c87c2"
+                        buttonStyle={Styles.selectCategoriesButton}
                     />
                 </View>
 

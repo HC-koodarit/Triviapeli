@@ -207,7 +207,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
     color: '#fff',
-    paddingTop: 10,
+    //paddingTop: 10,
     fontFamily: 'VT323_400Regular',
     marginBottom: 30,
 
@@ -265,6 +265,13 @@ export default StyleSheet.create({
   },
   otherOptionsContainer: {
     flex: 5,
+  },
+  selectCategoriesButton: {
+    backgroundColor: '#6969B3',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 25,
+    marginTop: 5,
   },
 
   //View style
