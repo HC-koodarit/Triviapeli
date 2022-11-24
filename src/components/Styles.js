@@ -54,11 +54,12 @@ export default StyleSheet.create({
     color: '#fff',
     paddingBottom: 20,
   },
-  QuickPlaycontainer: {
+  quickPlayContainer: {
     flex: 1,
     backgroundColor: '#020d23',
     alignItems: 'center',
-    paddingTop: 40,
+    justifyContent: 'center',
+    paddingTop: 10,
   },
 
   //Category also used in PartyModeGame

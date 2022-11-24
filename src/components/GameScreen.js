@@ -15,6 +15,8 @@ export default function GameScreen({ navigation }) {
     const [allAnswers, setAllAnswers] = useState([]);
     const [message, setMessage] = useState('');
 
+    const [answerMessage, setAnswerMessage] = useState('');
+
     // variable for the player's score
     const [points, setPoints] = useState(0);
 
@@ -71,7 +73,7 @@ export default function GameScreen({ navigation }) {
 
     // time running out
     const timeIsUp = () => {
-        setMessage("Time is up! The correct answer was " + correctAnswer);
+        setAnswerMessage("Time is up!");
     }
 
     // check if answer is correct
@@ -80,13 +82,15 @@ export default function GameScreen({ navigation }) {
             setPoints(setPoints => setPoints + 1);
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            setMessage("Your answer was: " + correctAnswer + "\nCorrect! Good job! :)");
+            setAnswerMessage("Correct!");
+            setMessage("Your answer was: " + correctAnswer + "\nGood job! :)");
 
         } else if (answer !== correctAnswer) {
             setKey(prevKey => prevKey + 1);
             setIsPlaying(false);
-            let answerText = answer.toString()
-            setMessage("Your answer was: " + answerText + "\nWrong! The correct answer was " + correctAnswer);
+            let answerText = answer.toString();
+            setAnswerMessage("Wrong!");
+            setMessage("Your answer was: " + "\n" + answerText + "\nThe correct answer was: " + "\n" + correctAnswer);
         }
     }
 
@@ -120,7 +124,7 @@ export default function GameScreen({ navigation }) {
         );
     } else if (message === '') {
         return (
-            <SafeAreaView style={Styles.QuickPlaycontainer}>
+            <SafeAreaView style={Styles.quickPlayContainer}>
                 <Text style={Styles.title}>Trivia</Text>
                 <Text style={Styles.category}>{category}</Text>
                 <Text style={Styles.question}>{question}</Text>
@@ -153,11 +157,22 @@ export default function GameScreen({ navigation }) {
         );
     } else {
         return (
-            <View style={Styles.PartyModeGameContainer}>
-                <Text style={Styles.normalText}>{question}</Text>
-                <Text style={Styles.normalText}>{message}</Text>
+            <View style={Styles.quickPlayContainer}>
+                <SafeAreaView style={Styles.PartyModeGameContainer}>
+                    <Text style={Styles.answerMessageText(answerMessage)}>{answerMessage}</Text>
+                    <View style={Styles.box}>
+                        <Text style={Styles.questionText}>{question}</Text>
+                        <Text style={Styles.normalTextCentered}>{message}</Text>
+                    </View>
+                
                 <Text style={Styles.normalText}>Points: {points}</Text>
-                <Button title="Next question" onPress={() => getQuestion()} />
+                <Button 
+                    style={Styles.continueButton}
+                    type=""
+                    title="Next question"
+                    titleStyle={{ color: 'white', marginHorizontal: 25, fontWeight: 'bold' }}
+                    onPress={() => getQuestion()} />
+                </SafeAreaView>
             </View>
         )
     }

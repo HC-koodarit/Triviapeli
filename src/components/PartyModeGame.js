@@ -401,7 +401,7 @@ export default function PartyModeGame({ navigation, route }) {
                 <Text style={Styles.infoText}>{players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <View style={{ flexDirection: "row" }}>
                 <Button
-                    title='Back home'
+                    title='Backome'
                     titleStyle={{ color: 'white', marginHorizontal: 25 }}
                     buttonStyle={Styles.backButton}
                     onPress={() => navigation.navigate('Home')}
