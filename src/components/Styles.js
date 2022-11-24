@@ -16,6 +16,7 @@ export default StyleSheet.create({
     marginBottom: 20,
     marginTop: 50,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
 
   //Modal style
@@ -38,8 +39,9 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 50,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
 
   //GameScreen aka quickplay styles
@@ -96,8 +98,9 @@ export default StyleSheet.create({
     marginBottom: 5
   },
   normalText: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
   box: {
     borderStyle: 'solid',
@@ -564,8 +567,8 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 40,
-    //justifyContent: 'center',
+    bottom: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 

@@ -2,8 +2,17 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles';
+import { useFonts, VT323_400Regular } from '@expo-google-fonts/vt323';
 
 export default function About({ navigation }) {
+
+    let [fontsLoaded] = useFonts({
+        VT323_400Regular,
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
 
     return (
         <View style={Styles.aboutContainer}>
