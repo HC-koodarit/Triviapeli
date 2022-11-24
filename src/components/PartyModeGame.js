@@ -320,10 +320,12 @@ export default function PartyModeGame({ navigation, route }) {
     // gameplay screen
     if (message === "") {
         return (
-            <SafeAreaView style={Styles.PartyModeGameContainer}>
+            <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.title}>Trivia</Text>
                 <Text style={Styles.category}>{category}</Text>
-                <Text style={Styles.question}>{question}</Text>
+                <View style={Styles.box}>
+                    <Text style={Styles.questionText}>{question}</Text>
+                </View>
                 <Text style={Styles.playerName}>{chosenPlayer.name}</Text>
                 <Text style={Styles.pointsText}>
                     Points: {chosenPlayer.points}, Streak: {chosenPlayer.streak}
@@ -387,7 +389,7 @@ export default function PartyModeGame({ navigation, route }) {
                     </View>
                 </Modal>
 
-            </SafeAreaView>
+            </View>
         );
 
     } else if (message === "welcome") {
@@ -422,7 +424,7 @@ export default function PartyModeGame({ navigation, route }) {
     } else {
         // if answer button is pressed, show player stats
         return (
-            <SafeAreaView style={Styles.PartyModeGameContainer}>
+            <View style={Styles.PartyModeGameContainer}>
                 <Text style={Styles.answerMessageText(answerMessage)}>{answerMessage}</Text>
                 <View style={Styles.box}>
                     <Text style={Styles.questionText}>{question}</Text>
@@ -466,7 +468,7 @@ export default function PartyModeGame({ navigation, route }) {
                     onPress={() => getQuestion()}
                 />
                 </View>              
-            </SafeAreaView>
+            </View>
         )
     }
 }

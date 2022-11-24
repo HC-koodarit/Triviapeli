@@ -133,7 +133,9 @@ export default function GameScreen({ navigation }) {
         return (
             <View style={Styles.quickPlayContainer}>
                 <Text style={Styles.category}>{category}</Text>
-                <Text style={Styles.question}>{question}</Text>
+                <View style={Styles.box}>
+                    <Text style={Styles.questionText}>{question}</Text>
+                </View>
                 <Text style={Styles.pointsText}>Points: {points}</Text>
                 <View style={Styles.buttons}>
                     {answerButtons()}
