@@ -90,7 +90,7 @@ export default StyleSheet.create({
     color: '#fff',
   },
 
-  //Text styles used in alot of js files
+  //Text styles
   pointsText: {
     color: '#fff',
     marginBottom: 5
@@ -131,14 +131,30 @@ export default StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
   },
-  answerMessageText: {
-    marginTop: 25,
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: '#de0202',
-    textAlign: 'center',
-    marginBottom: 7,
-  },
+
+  //Answer messages color changes idepending on the correct answer
+  answerMessageText(answerMessage) {
+    if(answerMessage==="Correct!") {
+     return {
+      marginTop: 25,
+      fontSize: 50,
+      fontWeight: 'bold',
+      color: '#7CFC00',
+      textAlign: 'center',
+      marginBottom: 7,
+     }
+    } else {
+      return {
+        marginTop: 25,
+        fontSize: 50,
+        fontWeight: 'bold',
+        color: '#de0202',
+        textAlign: 'center',
+        marginBottom: 7,
+      }
+    }
+   },
+
   scoresHeader: {
     fontSize: 25,
     alignSelf: 'center',
@@ -196,7 +212,8 @@ export default StyleSheet.create({
   otherOptionsContainer: {
     flex: 5,
   },
-  //View Tyyli
+
+  //View style
   playersTitle: {
     fontSize: 25,
     alignSelf: 'center',
@@ -206,7 +223,6 @@ export default StyleSheet.create({
   },
   //Flatlist playerNames (PartyModeOptions)
   playerNames: {
-    //paddingTop: 20,
     width: 500,
     height: 160,
     color: '#fff',
@@ -221,7 +237,7 @@ export default StyleSheet.create({
   playerContainer: {
     marginTop: 1,
     marginBottom: 1,
-      alignItems: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
   },
@@ -245,7 +261,6 @@ export default StyleSheet.create({
     alignItems: "center",
     marginBottom: 40,
   },
-
   addPlayers: {
     fontSize: 18,
     borderBottomWidth: 1.0,
@@ -253,7 +268,6 @@ export default StyleSheet.create({
     marginBottom: 5,
     color: 'black',
   },
-
   modalView: {
     alignItems: "center",
     justifyContent: "center",
@@ -364,7 +378,6 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
 
-  //Difficulty settings styles
   //Difficulty container PartymodeOptions
   difficultyContainer: {
     marginBottom: 1,
@@ -443,7 +456,6 @@ export default StyleSheet.create({
       width: 160,
       marginHorizontal: 25,
       marginTop: 20,
-      marginBottom: 29,
     },
 
   //Button for powerup
@@ -546,6 +558,7 @@ export default StyleSheet.create({
     fontSize: 22,
     color: "#fff",
   },
+
   //Styles for home button (partyModeResults)
   PMResultsButtonContainer: {
     position: 'absolute',
@@ -555,6 +568,7 @@ export default StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
   },
+
   // PartyModeResults Home button style
   backButtonResults: {
     backgroundColor: '#ff3333',
@@ -564,6 +578,7 @@ export default StyleSheet.create({
     width: 100,
   },
 
+  // loading icon
   loading: {
     flex: 1,
     justifyContent: "center",
