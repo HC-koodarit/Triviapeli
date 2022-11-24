@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { color } from "react-native-elements/dist/helpers";
 
 export default StyleSheet.create({
 
@@ -16,6 +17,7 @@ export default StyleSheet.create({
     marginBottom: 20,
     marginTop: 50,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
 
   //Modal style
@@ -38,8 +40,9 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 50,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
 
   //GameScreen aka quickplay styles
@@ -97,8 +100,9 @@ export default StyleSheet.create({
     marginBottom: 5
   },
   normalText: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#fff',
+    fontFamily: 'VT323_400Regular',
   },
   box: {
     borderStyle: 'solid',
@@ -155,7 +159,6 @@ export default StyleSheet.create({
       }
     }
    },
-
   scoresHeader: {
     fontSize: 25,
     alignSelf: 'center',
@@ -544,7 +547,7 @@ export default StyleSheet.create({
   //For flatlist view & text
   PMResultsFlatlistContainer: {
     alignItems: 'center',
-    paddingTop: 50,
+    paddingTop: 30,
    
   },
   playerFlatlistResults: {
@@ -558,6 +561,24 @@ export default StyleSheet.create({
   flatlistPlayerNameResults: {
     fontSize: 22,
     color: "#fff",
+    paddingBottom: 10,
+  },
+  // show gold, silver, bronze trophys to winners. NOT WORKING!!!! :(((((
+  trophy(playersPoints) {
+    if (playersPoints[0]) {
+      return{
+        color: '#f7db02'
+      }
+    } else if (playersPoints[1]) {
+      return{
+        color: '#919191'
+      }
+    }
+    else if (playersPoints[2]) {
+      return{
+        color: '#6b4614'
+      }
+    }
   },
 
   //Styles for home button (partyModeResults)
@@ -565,8 +586,8 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 40,
-    //justifyContent: 'center',
+    bottom: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 
@@ -577,6 +598,7 @@ export default StyleSheet.create({
     borderWidth: 0,
     borderRadius: 30,
     width: 100,
+    marginVertical: 15,
   },
 
   // loading icon
