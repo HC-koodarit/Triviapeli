@@ -211,7 +211,7 @@ export default StyleSheet.create({
     color: '#fff',
     //paddingTop: 10,
     fontFamily: 'VT323_400Regular',
-    marginBottom: 30,
+    marginBottom: 10,
 
   },
   infoText: {
@@ -574,7 +574,7 @@ export default StyleSheet.create({
   },
   currentScoreList: {
     width: 500,
-    height: 270,
+    height: 150,
     color: '#fff',
     marginTop: 1,
     marginBottom: 1
