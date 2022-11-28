@@ -1,8 +1,7 @@
 import React from 'react';
-import { SafeAreaView, Text, View, FlatList, Image } from 'react-native';
+import { Text, View, FlatList, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
-import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function PartyModeResults({ route, navigation }) {
     const { players } = route.params;
@@ -11,7 +10,6 @@ export default function PartyModeResults({ route, navigation }) {
     const playersPoints = [...players].sort((a, b) => b.points - a.points);
 
     return (
-
         <View style={Styles.container}>
             <Text style={Styles.header}>Results</Text>
             <FlatList
@@ -21,12 +19,7 @@ export default function PartyModeResults({ route, navigation }) {
                 renderItem={({ item }) =>
                     <View style={Styles.resultsContainer}>
                         <Text style={Styles.flatlistPlayerNameResults}>{item.name}    </Text>
-                        <Text style={Styles.flatlistPlayerNameResults}>{item.points} points     </Text>
-                        <FontAwesome5
-                            name="trophy"
-                            size={24}
-                            style={Styles.trophy}
-                        />
+                        <Text style={Styles.flatlistPlayerNameResults}>{item.points} points</Text>
                     </View>
                 }
             />

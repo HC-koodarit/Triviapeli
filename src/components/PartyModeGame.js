@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { SafeAreaView, Text, View, Image, FlatList, ActivityIndicator, Modal, ScrollView } from 'react-native';
+import { Text, View, Image, FlatList, ActivityIndicator, Modal, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import Styles from './Styles.js';
 import { PowerUps } from './PowerUps.js';
