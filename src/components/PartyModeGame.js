@@ -445,7 +445,7 @@ export default function PartyModeGame({ navigation, route }) {
                 <Text style={Styles.drinkInfo}>{drinkMessage}</Text>
                 <Text style={Styles.question}>{powerUpMessage}</Text>
                 <Text style={Styles.scoresHeader}>Current scores:</Text>
-                <ScrollView style={Styles.currentScoreList}>
+                <View style={Styles.currentScoreList}>
                     <FlatList
                         style={Styles.playerFlatlistResults}
                         data={players}
@@ -459,7 +459,7 @@ export default function PartyModeGame({ navigation, route }) {
                             </View>
                         }
                     />
-                </ScrollView>
+                </View>
                 <Text style={Styles.infoText}>Next player: {players[(players.findIndex(p => p.id === chosenPlayer.id) + 1) % players.length].name}</Text>
                 <View style={{ flexDirection: "row" }}>
                 <Button style={Styles.startGamePContainer}
