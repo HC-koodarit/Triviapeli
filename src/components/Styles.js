@@ -171,6 +171,7 @@ export default StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontStyle: '',
+    fontFamily: 'VT323_400Regular',
   },
   normalTextCentered: {
     fontSize: 20,
